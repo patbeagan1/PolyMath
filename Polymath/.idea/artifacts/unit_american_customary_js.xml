@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="unit-american-customary-js">
+    <output-path>$PROJECT_DIR$/unit-american-customary/build/libs</output-path>
+    <root id="archive" name="unit-american-customary-js.jar" />
+  </artifact>
+</component>

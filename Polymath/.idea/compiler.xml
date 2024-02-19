@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="1.8">
+      <module name="t-builder.main" target="8" />
+      <module name="t-builder.test" target="8" />
+      <module name="tex-builder.lib-graph.main" target="17" />
+      <module name="tex-builder.lib-graph.test" target="17" />
+      <module name="tex-builder.math-algebra.main" target="17" />
+      <module name="tex-builder.math-algebra.test" target="17" />
+      <module name="tex-builder.math-geometry.main" target="17" />
+      <module name="tex-builder.math-geometry.math-geometry.main" target="17" />
+      <module name="tex-builder.math-geometry.math-geometry.test" target="17" />
+      <module name="tex-builder.math-geometry.test" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

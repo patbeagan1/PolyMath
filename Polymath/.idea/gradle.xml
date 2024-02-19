@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/buildSrc" name="buildSrc">
+                <projects>
+                  <project path="$PROJECT_DIR$/buildSrc" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
+        <option name="distributionType" value="WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/buildSrc" />
+            <option value="$PROJECT_DIR$/latex-builder" />
+            <option value="$PROJECT_DIR$/lib-graph" />
+            <option value="$PROJECT_DIR$/math-algebra" />
+            <option value="$PROJECT_DIR$/math-base" />
+            <option value="$PROJECT_DIR$/math-geometry" />
+            <option value="$PROJECT_DIR$/physics-classical" />
+            <option value="$PROJECT_DIR$/unit-american-customary" />
+            <option value="$PROJECT_DIR$/unit-base" />
+            <option value="$PROJECT_DIR$/unit-english-imperial" />
+            <option value="$PROJECT_DIR$/unit-english-international" />
+            <option value="$PROJECT_DIR$/unit-metric" />
+            <option value="$PROJECT_DIR$/unit-weight-avoirdupois" />
+            <option value="$PROJECT_DIR$/unit-weight-troy" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

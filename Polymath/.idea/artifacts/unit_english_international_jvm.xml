@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="unit-english-international-jvm">
+    <output-path>$PROJECT_DIR$/unit-english-international/build/libs</output-path>
+    <root id="archive" name="unit-english-international-jvm.jar" />
+  </artifact>
+</component>

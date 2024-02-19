@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="physics-classical-jvm">
+    <output-path>$PROJECT_DIR$/physics-classical/build/libs</output-path>
+    <root id="archive" name="physics-classical-jvm.jar" />
+  </artifact>
+</component>

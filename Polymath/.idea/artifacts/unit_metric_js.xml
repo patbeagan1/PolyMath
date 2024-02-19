@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="unit-metric-js">
+    <output-path>$PROJECT_DIR$/unit-metric/build/libs</output-path>
+    <root id="archive" name="unit-metric-js.jar" />
+  </artifact>
+</component>

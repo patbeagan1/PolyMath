@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="math-geometry-js">
+    <output-path>$PROJECT_DIR$/math-geometry/build/libs</output-path>
+    <root id="archive" name="math-geometry-js.jar" />
+  </artifact>
+</component>

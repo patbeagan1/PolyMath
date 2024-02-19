@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="unit-weight-troy-jvm">
+    <output-path>$PROJECT_DIR$/unit-weight-troy/build/libs</output-path>
+    <root id="archive" name="unit-weight-troy-jvm.jar" />
+  </artifact>
+</component>

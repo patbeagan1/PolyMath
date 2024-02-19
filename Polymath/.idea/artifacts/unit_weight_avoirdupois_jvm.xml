@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="unit-weight-avoirdupois-jvm">
+    <output-path>$PROJECT_DIR$/unit-weight-avoirdupois/build/libs</output-path>
+    <root id="archive" name="unit-weight-avoirdupois-jvm.jar" />
+  </artifact>
+</component>

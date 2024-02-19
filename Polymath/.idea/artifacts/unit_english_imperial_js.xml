@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="unit-english-imperial-js">
+    <output-path>$PROJECT_DIR$/unit-english-imperial/build/libs</output-path>
+    <root id="archive" name="unit-english-imperial-js.jar" />
+  </artifact>
+</component>
