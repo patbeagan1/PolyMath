@@ -434,9 +434,34 @@ yields (-0.6973133301810529, -0.6973133301810529)""", expr.explain()
         val f = MathFunction(x * y.squared(), "f", "myFunction")
         println(f.toLatex())
 
-        val g = MathFunction((x + 2.num()) / y.squared())
+        val g = MathFunction((x + 2) / y.squared())
         println(g.toLatex())
 
         println(f.assignVariables("x" to 2.0, "y" to 2.0).equate("z").explain())
+    }
+
+    @Test
+    fun double_superscript() {
+        val x = Variable("X", 2.0)
+        val expr = 7.num().pow(x.pow(2.0).cubed() + 7)
+        // todo:
+        //   7^{X^{2}^{3} + 7}
+        //   KaTeX parse error: Double superscript at position 10: 7^{(X^{2}^̲{3} + 7}
+        assertEquals("7^{(X^{2})^{3} + 7}", expr.toLatex())
+    }
+
+    @Test
+    fun graphviz() {
+        val x = Variable("X", 2.0)
+        val expr = 7.num().pow(x.pow(2.0).cubed() + 7)
+        println(expr.toGraphviz())
+
+        val a = Variable("a", 1)
+        val b = Variable("b", 2)
+        val c = Variable("c", 3)
+        val n = Variable("n", 4)
+        val expr2 = (a pow n) / Cos(5) * (Log(b, n) + Cos(5)) * (c pow n)
+        println(expr2.toGraphviz())
+        println(expr2.toLatex())
     }
 }

@@ -3,6 +3,7 @@ package main.dsl.mathnum
 import main.dsl.expressions.ScalarAlgebra
 import main.dsl.expressions.ScalarExpression
 import main.dsl.mathnum.Scalar.*
+import kotlin.random.Random
 
 fun Int.num() = mathNum(this)
 fun Long.num() = mathNum(this)

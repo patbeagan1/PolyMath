@@ -28,6 +28,7 @@ class ApplyCommonKMPSettings : Plugin<Project> {
     }
 }
 
+
 //fun KotlinMultiplatformExtension.getNativeTarget(): KotlinNativeTargetWithHostTests {
 //    val hostOs = System.getProperty("os.name")
 //    val isMingwX64 = hostOs.startsWith("Windows")

@@ -19,7 +19,7 @@ application {
 
 publishing {
     publications {
-        create<MavenPublication>("regex-builder") {
+        create<MavenPublication>("polymath") {
             from(components["java"])
         }
     }

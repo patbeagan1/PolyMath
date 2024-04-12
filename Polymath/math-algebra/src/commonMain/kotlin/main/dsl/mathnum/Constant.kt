@@ -1,6 +1,8 @@
 package main.dsl.mathnum
 
 import main.dsl.CanDisplay
+import main.dsl.expressions.GraphvizNode
+import kotlin.random.Random
 
 data class Constant(
     override val glyph: String,
@@ -12,6 +14,8 @@ data class Constant(
     constructor(glyph: String, value: Int, longName: String? = null) : this(glyph, mathNum(value), longName)
 
     override fun toLatex() = glyph
+    override fun toGraphvizNode(): GraphvizNode =
+        GraphvizNode("\"Constant ${Scalar.Undefined.evaluate()} (${Random.nextInt()})\"")
 
     override fun evaluate(): Double = value.evaluate()
 

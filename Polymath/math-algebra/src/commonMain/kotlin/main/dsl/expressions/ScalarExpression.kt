@@ -2,14 +2,35 @@ package main.dsl.expressions
 
 import dev.patbeagan.math.base.GenericSymbols
 import main.dsl.CanDisplay
-import main.dsl.LinearAlgebra
 import main.dsl.expressions.ScalarExpression.EquateDirection.*
 import main.dsl.mathnum.*
+import kotlin.jvm.JvmInline
+import kotlin.random.Random
+
+class GraphvizNode(val value: String) {
+    override fun toString(): String = value
+    val identifier: Int = Random.nextInt()
+}
 
 interface ScalarExpression : GenericSymbols {
     val priority: ScalarAlgebra.Priority
     fun evaluate(): Double
     fun toLatex(): String
+    fun toGraphvizNode(): GraphvizNode
+    fun toGraphvizFragment(): String
+    fun toGraphviz() = buildString {
+        walk { appendLine(it.toGraphvizFragment()) }
+    }.let {
+        """
+            digraph {
+            
+            rankdir = "RL"
+           
+            $it
+
+            }            
+        """.trimIndent()
+    }
 
     fun toMathFunction(glyph: String?, name: String?) = MathFunction(this, glyph, name)
 
@@ -65,13 +86,27 @@ interface ScalarExpression : GenericSymbols {
     infix fun isGreaterThanOrEqualTo(other: ScalarExpression) = ScalarRelation.GreaterThanOrEqual(this, other)
     infix fun isEqualTo(other: ScalarExpression) = ScalarRelation.Equation(this, other)
 
+    infix operator fun plus(other: Number) = ScalarAlgebra.Add(this, other.toDouble().num())
     infix operator fun plus(other: ScalarExpression) = ScalarAlgebra.Add(this, other)
+
+    infix operator fun minus(other: Number) = ScalarAlgebra.Subtract(this, other.toDouble().num())
     infix operator fun minus(other: ScalarExpression) = ScalarAlgebra.Subtract(this, other)
+
+    infix operator fun times(other: Number) = ScalarAlgebra.Multiply(this, other.toDouble().num())
     infix operator fun times(other: ScalarExpression) = ScalarAlgebra.Multiply(this, other)
+
+    infix operator fun div(other: Number) = ScalarAlgebra.Divide(this, other.toDouble().num())
     infix operator fun div(other: ScalarExpression) = ScalarAlgebra.Divide(this, other)
+
+    infix operator fun rem(other: Number) = mod(other)
     infix operator fun rem(other: ScalarExpression) = mod(other)
+
+    infix fun mod(other: Number) = ScalarAlgebra.Modulo(this, other.toDouble().num())
     infix fun mod(other: ScalarExpression) = ScalarAlgebra.Modulo(this, other)
+
+    infix fun pow(other: Number) = ScalarAlgebra.Exponent(this, other.toDouble().num())
     infix fun pow(other: ScalarExpression) = ScalarAlgebra.Exponent(this, other)
+
     fun squared() = ScalarAlgebra.Exponent(this, mathNum(2.0))
     fun cubed() = ScalarAlgebra.Exponent(this, mathNum(3.0))
 
@@ -134,7 +169,7 @@ interface ScalarExpression : GenericSymbols {
         }
 
         when (expression) {
-            is Scalar, /*is LinearAlgebra.Tensor*/ -> Unit
+            is Scalar /*is LinearAlgebra.Tensor*/ -> Unit
 
             is ScalarAlgebra.UnaryOperation -> {
                 walk(expression.operand, depthMax, depth + 1, shouldSkip, action)

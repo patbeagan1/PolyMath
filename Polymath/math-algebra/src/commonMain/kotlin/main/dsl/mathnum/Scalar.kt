@@ -1,13 +1,17 @@
 package main.dsl.mathnum
 
+import main.dsl.expressions.GraphvizNode
 import kotlin.jvm.JvmInline
 import kotlin.math.abs
+import kotlin.random.Random
 
 sealed interface Scalar : MathNum {
+    override fun toGraphvizFragment(): String = toGraphvizNode().value
 
     data object Undefined : Scalar {
         override fun evaluate(): Double = Double.NaN
         override fun toLatex(): String = "Undefined"
+        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"Undefined ${evaluate()} (${Random.nextInt()})\"")
     }
 
     @JvmInline
@@ -15,6 +19,7 @@ sealed interface Scalar : MathNum {
         override fun evaluate(): Double = value
         override fun toLatex(): String = if (value.toString().endsWith(".0")) "${value.toInt()}" else "$value"
         override fun toString(): String = value.toString()
+        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"RealNum ${evaluate()} (${Random.nextInt()})\"")
     }
 
     data class RationalNum(val numerator: Long, val denominator: Long) : Scalar {
@@ -58,6 +63,8 @@ sealed interface Scalar : MathNum {
         override fun evaluate(): Double = numerator.toDouble() / denominator
         override fun toLatex(): String = if (denominator == 1L) "$numerator" else "\\frac{$numerator}{$denominator}"
         fun toLatexSimple(): String = if (denominator == 1L) "$numerator" else "$numerator/$denominator"
+        override fun toGraphvizNode(): GraphvizNode =
+            GraphvizNode("\"RationalNum ${evaluate()} (${Random.nextInt()})\"")
 
         override fun equals(other: Any?): Boolean = when (other) {
             is Scalar -> {
@@ -87,5 +94,6 @@ sealed interface Scalar : MathNum {
         override fun evaluate(): Double = value.toDouble()
         override fun toLatex(): String = value.toString()
         override fun toString(): String = value.toString()
+        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"IntegerNum ${evaluate()} (${Random.nextInt()})\"")
     }
 }
