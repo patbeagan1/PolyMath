@@ -5,6 +5,8 @@ import dev.patbeagan.latexbuilder.TextScope.FormatType.Italic
 import dev.patbeagan.latexbuilder.TextScope.InlineMathFormat.Paren
 import dev.patbeagan.math.base.Dictionary
 import dev.patbeagan.math.geometry.geometryScope
+import dev.patbeagan.physics.classical.PhysicsOptics
+import main.dsl.expressions.toGraphviz
 import main.dsl.mathnum.Variable
 import physicsAcousticsScope
 import physicsOpticsScope
@@ -661,6 +663,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             }
         }
         println(document)
+    }
+
+    @Test
+    fun test_lens_formula_graphviz() {
+        PhysicsOptics.lensFormula(50.0)
+            .also {
+                it.toGraphviz().also { println(it) }
+            }.also {
+                it.toLatex().also { println(it) }
+            }
     }
 }
 

@@ -4,6 +4,22 @@ import main.dsl.expressions.ScalarAlgebra.*
 import main.dsl.orderCanonically
 import kotlin.math.abs
 
+fun ScalarRelation<*>.toGraphviz(): String {
+    val eqLeft = left.toGraphviz()
+        .replace("digraph", "subgraph")
+
+
+    val eqRight = right.toGraphviz()
+        .replace("digraph", "subgraph")
+
+    return """
+        digraph {
+        $eqLeft
+        $eqRight
+        }
+    """.trimIndent()
+}
+
 sealed interface ScalarRelation<T> {
     val left: ScalarExpression
     val right: ScalarExpression

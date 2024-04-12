@@ -36,6 +36,11 @@ interface ScalarExpression : GenericSymbols {
                     append("\"")
                 }
             }
+        }.also {
+            when (value) {
+                is Variable -> this@buildString.appendLine("$it [style=diagonals, color=\"#ff0000\"]")
+                is MathNum -> this@buildString.appendLine("$it [style=diagonals, color=\"#0b008c\"]")
+            }
         }
 
         fun graphvizWalk(expression: ScalarExpression) {
@@ -55,8 +60,8 @@ interface ScalarExpression : GenericSymbols {
                 }
 
                 is ScalarAlgebra.Product -> {
-                    appendLine("${asNode(expression)} -> ${asNode(expression.lower)} [ label=\"upper\" ]")
-                    appendLine("${asNode(expression)} -> ${asNode(expression.upper)} [ label=\"lower\" ]")
+                    appendLine("${asNode(expression)} -> ${asNode(expression.lower)} [ label=\"lower\" ]")
+                    appendLine("${asNode(expression)} -> ${asNode(expression.upper)} [ label=\"upper\" ]")
                     appendLine("${asNode(expression)} -> ${asNode(expression.variable)} [ label=\"var\" ]")
                     graphvizWalk(expression.lower)
                     graphvizWalk(expression.upper)
@@ -64,8 +69,8 @@ interface ScalarExpression : GenericSymbols {
                 }
 
                 is ScalarAlgebra.Sum -> {
-                    appendLine("${asNode(expression)} -> ${asNode(expression.lower)} [ label=\"upper\" ]")
-                    appendLine("${asNode(expression)} -> ${asNode(expression.upper)} [ label=\"lower\" ]")
+                    appendLine("${asNode(expression)} -> ${asNode(expression.lower)} [ label=\"lower\" ]")
+                    appendLine("${asNode(expression)} -> ${asNode(expression.upper)} [ label=\"upper\" ]")
                     appendLine("${asNode(expression)} -> ${asNode(expression.variable)} [ label=\"var\" ]")
                     graphvizWalk(expression.lower)
                     graphvizWalk(expression.upper)
