@@ -10,9 +10,9 @@ import main.dsl.mathnum.num
 import main.formulas.MathConstants
 
 data class PointCartesian(
-    val x: Variable = Variable(symX, 0.0),
-    val y: Variable = Variable(symY, 0.0),
-    val z: Variable = Variable(symZ, 0.0)
+    val x: Variable = Variable(symX).setTo(0.0),
+    val y: Variable = Variable(symY).setTo(0.0),
+    val z: Variable = Variable(symZ).setTo(0.0)
 ) : Point, MathConstants {
 
     private val distance = Distance()
@@ -74,11 +74,11 @@ data class PointCartesian(
 
     private inner class Distance {
         private val x1 = Variable("x_1", x)
-        private val x2 = Variable("x_2", 0.0)
+        private val x2 = Variable("x_2", 0.0.num())
         private val y1 = Variable("y_1", y)
-        private val y2 = Variable("y_2", 0.0)
+        private val y2 = Variable("y_2", 0.0.num())
         private val z1 = Variable("z_1", z)
-        private val z2 = Variable("z_2", 0.0)
+        private val z2 = Variable("z_2", 0.0.num())
 
         val formula = ScalarAlgebra.Sqrt(
             (z2 - z1).squared() +
@@ -106,9 +106,9 @@ data class PointCartesian(
             y: ScalarExpression = Scalar.RealNum(0.0),
             z: ScalarExpression = Scalar.RealNum(0.0)
         ) = PointCartesian(
-            Variable(symX, x.evaluate()),
-            Variable(symY, y.evaluate()),
-            Variable(symZ, z.evaluate()),
+            Variable(symX).setTo(x.evaluate()),
+            Variable(symY).setTo(y.evaluate()),
+            Variable(symZ).setTo(z.evaluate()),
         )
     }
 }

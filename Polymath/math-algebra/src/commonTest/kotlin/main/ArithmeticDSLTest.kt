@@ -64,8 +64,8 @@ class ArithmeticDSLTest : ColorPlaceholders {
 
     @Test
     fun sums_evaluate_correctly() {
-        val k = Variable("k", 6.0)
-        val n = Variable("n", 5)
+        val k = Variable("k").setTo(6.0)
+        val n = Variable("n").setTo(5)
         val sumExpr = Sum(k, mathNum(1), n) { k } // Represents: Σ from k=1 to n of k
 
         // LaTeX for the summation
@@ -235,10 +235,10 @@ class ArithmeticDSLTest : ColorPlaceholders {
 
     @Test
     fun solving_math_function_questions() {
-        val a = Variable("a", 1)
-        val b = Variable("b", 2)
-        val c = Variable("c", 3)
-        val n = Variable("n", 4)
+        val a = Variable("a").setTo(1)
+        val b = Variable("b").setTo(2)
+        val c = Variable("c").setTo(3)
+        val n = Variable("n").setTo(4)
         val expr = (a pow n) * (Log(b, n) + Cos(mathNum(5))) * (c pow n)
         val equation = expr.equate()
         assertEquals(true, equation.isValid())
@@ -248,10 +248,10 @@ class ArithmeticDSLTest : ColorPlaceholders {
 
     @Test
     fun solving_an_expression_with_a_set_of_variables___plug_and_play() {
-        val a = Variable("a", 1)
-        val b = Variable("b", 2)
-        val c = Variable("c", 3)
-        val n = Variable("n", 4)
+        val a = Variable("a").setTo(1)
+        val b = Variable("b").setTo(2)
+        val c = Variable("c").setTo(3)
+        val n = Variable("n").setTo(4)
         val expr = (a pow n) * (b pow n) * (c pow n)
         val equation = expr.equate()
         assertEquals(true, equation.isValid())
@@ -271,8 +271,8 @@ yields (1296.0, 1296.0)""", equation.explain()
 
     @Test
     fun solving_a_pythagorean_equation() {
-        val a = Variable("a", 5)
-        val b = Variable("b", 12.1)
+        val a = Variable("a").setTo(5)
+        val b = Variable("b").setTo(12.1)
         val expr = Sqrt((a pow mathNum(2)) + (b pow mathNum(2)))
         val equation = expr.equate()
         println(equation.explain())
@@ -375,7 +375,7 @@ yields (200.0, 200.0)""", s.equate().explain()
 
     @Test
     fun complex_equation_rendering() {
-        val x = Variable("x", 5)
+        val x = Variable("x").setTo(5)
         val e = Equation(
             (1.num() + x) pow 3.0.num(),
             mathNum(1) + mathNum(3) * x + mathNum(3) * x.squared() + x.pow(mathNum(3.0))
@@ -393,7 +393,7 @@ yields (216.0, 216.0)""", e.explain()
 
     @Test
     fun complex_equation_rendering_2() {
-        val phi = Variable("\\phi", 3)
+        val phi = Variable("\\phi").setTo(3)
         val e = Constant("e", 2.71)
         val pi = Constant("\\pi", 3.14)
 
@@ -442,7 +442,7 @@ yields (-0.6973133301810529, -0.6973133301810529)""", expr.explain()
 
     @Test
     fun double_superscript() {
-        val x = Variable("X", 2.0)
+        val x = Variable("X").setTo(2.0)
         val expr = 7.num().pow(x.pow(2.0).cubed() + 7)
         // todo:
         //   7^{X^{2}^{3} + 7}
@@ -452,14 +452,14 @@ yields (-0.6973133301810529, -0.6973133301810529)""", expr.explain()
 
     @Test
     fun graphviz() {
-        val x = Variable("X", 2.0)
+        val x = Variable("X").setTo(2.0)
         val expr = 7.num().pow(x.pow(2.0).cubed() + 7)
         println(expr.toGraphviz())
 
-        val a = Variable("a", 1)
-        val b = Variable("b", 2)
-        val c = Variable("c", 3)
-        val n = Variable("n", 4)
+        val a = Variable("a").setTo(1)
+        val b = Variable("b").setTo(2)
+        val c = Variable("c").setTo(3)
+        val n = Variable("n").setTo(4)
         val expr2 = (a pow n) / Cos(5) * (Log(b, n) + Cos(5)) * (c pow n)
         println(expr2.toGraphviz())
         println(expr2.toLatex())

@@ -31,7 +31,6 @@ data class MathFunction(
     private fun getCurrentVariablesForDisplay() = expression
         .getOperandsExcept { it is MathFunction }
         .filterIsInstance<Variable>()
-        .also { println(it) }
         .orderCanonically()
         .joinToString(",") { it.toLatex() }
 }

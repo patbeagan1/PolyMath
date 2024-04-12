@@ -10,9 +10,10 @@ data class Variable(
     var instance: String? = null,
     private val isBound: Boolean = false // determines whether it shows up in fn signature
 ) : Scalar, CanDisplay {
-    constructor(glyph: String, value: Long, longName: String? = null) : this(glyph, mathNum(value), longName)
-    constructor(glyph: String, value: Double, longName: String? = null) : this(glyph, mathNum(value), longName)
-    constructor(glyph: String, value: Int, longName: String? = null) : this(glyph, mathNum(value), longName)
+    constructor(glyph: String, longName: String? = null) : this(
+        glyph = glyph,
+        name = longName
+    )
 
     fun setTo(value: Double) = apply { this.value = mathNum(value) }
     fun setTo(value: Int) = apply { this.value = mathNum(value) }

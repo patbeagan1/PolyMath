@@ -193,7 +193,7 @@ interface ScalarExpression : GenericSymbols {
         val e = if (glyph == null) {
             Scalar.RealNum(this.evaluate())
         } else {
-            Variable(glyph = glyph, this.evaluate())
+            Variable(glyph = glyph).setTo(this.evaluate())
         }
 
         return when (direction) {
