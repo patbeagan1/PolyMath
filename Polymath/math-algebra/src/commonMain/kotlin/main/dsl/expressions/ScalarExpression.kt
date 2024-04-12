@@ -152,25 +152,39 @@ interface ScalarExpression : GenericSymbols {
     infix fun isGreaterThanOrEqualTo(other: ScalarExpression) = ScalarRelation.GreaterThanOrEqual(this, other)
     infix fun isEqualTo(other: ScalarExpression) = ScalarRelation.Equation(this, other)
 
-    infix operator fun plus(other: Number) = ScalarAlgebra.Add(this, other.toDouble().num())
+    infix operator fun plus(other: Int) = ScalarAlgebra.Add(this, other.num())
+    infix operator fun plus(other: Long) = ScalarAlgebra.Add(this, other.num())
+    infix operator fun plus(other: Double) = ScalarAlgebra.Add(this, other.num())
     infix operator fun plus(other: ScalarExpression) = ScalarAlgebra.Add(this, other)
 
-    infix operator fun minus(other: Number) = ScalarAlgebra.Subtract(this, other.toDouble().num())
+    infix operator fun minus(other: Int) = ScalarAlgebra.Subtract(this, other.num())
+    infix operator fun minus(other: Long) = ScalarAlgebra.Subtract(this, other.num())
+    infix operator fun minus(other: Double) = ScalarAlgebra.Subtract(this, other.num())
     infix operator fun minus(other: ScalarExpression) = ScalarAlgebra.Subtract(this, other)
 
-    infix operator fun times(other: Number) = ScalarAlgebra.Multiply(this, other.toDouble().num())
+    infix operator fun times(other: Int) = ScalarAlgebra.Multiply(this, other.num())
+    infix operator fun times(other: Long) = ScalarAlgebra.Multiply(this, other.num())
+    infix operator fun times(other: Double) = ScalarAlgebra.Multiply(this, other.num())
     infix operator fun times(other: ScalarExpression) = ScalarAlgebra.Multiply(this, other)
 
-    infix operator fun div(other: Number) = ScalarAlgebra.Divide(this, other.toDouble().num())
+    infix operator fun div(other: Int) = ScalarAlgebra.Divide(this, other.num())
+    infix operator fun div(other: Long) = ScalarAlgebra.Divide(this, other.num())
+    infix operator fun div(other: Double) = ScalarAlgebra.Divide(this, other.num())
     infix operator fun div(other: ScalarExpression) = ScalarAlgebra.Divide(this, other)
 
-    infix operator fun rem(other: Number) = mod(other)
+    infix operator fun rem(other: Int) = mod(other)
+    infix operator fun rem(other: Long) = mod(other)
+    infix operator fun rem(other: Double) = mod(other)
     infix operator fun rem(other: ScalarExpression) = mod(other)
 
-    infix fun mod(other: Number) = ScalarAlgebra.Modulo(this, other.toDouble().num())
+    infix fun mod(other: Int) = ScalarAlgebra.Modulo(this, other.num())
+    infix fun mod(other: Long) = ScalarAlgebra.Modulo(this, other.num())
+    infix fun mod(other: Double) = ScalarAlgebra.Modulo(this, other.num())
     infix fun mod(other: ScalarExpression) = ScalarAlgebra.Modulo(this, other)
 
-    infix fun pow(other: Number) = ScalarAlgebra.Exponent(this, other.toDouble().num())
+    infix fun pow(other: Int) = ScalarAlgebra.Exponent(this, other.num())
+    infix fun pow(other: Long) = ScalarAlgebra.Exponent(this, other.num())
+    infix fun pow(other: Double) = ScalarAlgebra.Exponent(this, other.num())
     infix fun pow(other: ScalarExpression) = ScalarAlgebra.Exponent(this, other)
 
     fun squared() = ScalarAlgebra.Exponent(this, mathNum(2.0))

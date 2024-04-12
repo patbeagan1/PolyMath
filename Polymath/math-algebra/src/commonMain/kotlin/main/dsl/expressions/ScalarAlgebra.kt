@@ -200,8 +200,17 @@ interface ScalarAlgebra {
             }
         }
 
-        override fun toLatex() =
-            "\\sum_{${variable.toLatex()}=${lower.toLatex()}}^{${upper.toLatex()}}{${expression(variable).toLatex()}}"
+        override fun toLatex() = buildString {
+            append("\\sum_{")
+            append(variable.toLatex())
+            append("=")
+            append(lower.toLatex())
+            append("}^{")
+            append(upper.toLatex())
+            append("}{")
+            append(expression(variable).toLatex())
+            append("}")
+        }
     }
 
     data class Product(
@@ -221,8 +230,17 @@ interface ScalarAlgebra {
             }
         }
 
-        override fun toLatex() =
-            "\\prod_{${variable.toLatex()}=${lower.toLatex()}}^{${upper.toLatex()}}{${expression(variable).toLatex()}}"
+        override fun toLatex() = buildString {
+            append("\\prod_{")
+            append(variable.toLatex())
+            append("=")
+            append(lower.toLatex())
+            append("}^{")
+            append(upper.toLatex())
+            append("}{")
+            append(expression(variable).toLatex())
+            append("}")
+        }
     }
 
     data class Factorial(override val operand: ScalarExpression) : UnaryOperation {
