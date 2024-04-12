@@ -7,19 +7,80 @@ import main.dsl.mathnum.*
 import kotlin.jvm.JvmInline
 import kotlin.random.Random
 
-class GraphvizNode(val value: String) {
-    override fun toString(): String = value
-    val identifier: Int = Random.nextInt()
-}
-
 interface ScalarExpression : GenericSymbols {
     val priority: ScalarAlgebra.Priority
     fun evaluate(): Double
     fun toLatex(): String
-    fun toGraphvizNode(): GraphvizNode
-    fun toGraphvizFragment(): String
     fun toGraphviz() = buildString {
-        walk { appendLine(it.toGraphvizFragment()) }
+        fun asNode(value: ScalarExpression): String = buildString {
+            append("\"")
+            append(value::class.simpleName)
+            append("\\n")
+            when (value) {
+                is Variable -> {
+                    append("'${value.toLatex()}' (${value.evaluate()})")
+                    append("\\n")
+                    append(Random.nextInt())
+                    append("\"")
+                }
+
+                is MathNum -> {
+                    append("(${value.evaluate()})")
+                    append("\\n")
+                    append(Random.nextInt())
+                    append("\"")
+                }
+
+                else -> {
+                    append(value.hashCode())
+                    append("\"")
+                }
+            }
+        }
+
+        fun graphvizWalk(expression: ScalarExpression) {
+            when (expression) {
+                is Scalar /*is LinearAlgebra.Tensor*/ -> Unit
+
+                is ScalarAlgebra.UnaryOperation -> {
+                    appendLine("${asNode(expression)} -> ${asNode(expression.operand)}")
+                    graphvizWalk(expression.operand)
+                }
+
+                is ScalarAlgebra.BinaryOperation -> {
+                    appendLine("${asNode(expression)} -> ${asNode(expression.left)} [ label=\"1\" ]")
+                    appendLine("${asNode(expression)} -> ${asNode(expression.right)} [ label=\"2\" ]")
+                    graphvizWalk(expression.left)
+                    graphvizWalk(expression.right)
+                }
+
+                is ScalarAlgebra.Product -> {
+                    appendLine("${asNode(expression)} -> ${asNode(expression.lower)} [ label=\"upper\" ]")
+                    appendLine("${asNode(expression)} -> ${asNode(expression.upper)} [ label=\"lower\" ]")
+                    appendLine("${asNode(expression)} -> ${asNode(expression.variable)} [ label=\"var\" ]")
+                    graphvizWalk(expression.lower)
+                    graphvizWalk(expression.upper)
+                    graphvizWalk(expression.variable)
+                }
+
+                is ScalarAlgebra.Sum -> {
+                    appendLine("${asNode(expression)} -> ${asNode(expression.lower)} [ label=\"upper\" ]")
+                    appendLine("${asNode(expression)} -> ${asNode(expression.upper)} [ label=\"lower\" ]")
+                    appendLine("${asNode(expression)} -> ${asNode(expression.variable)} [ label=\"var\" ]")
+                    graphvizWalk(expression.lower)
+                    graphvizWalk(expression.upper)
+                    graphvizWalk(expression.variable)
+                }
+
+                is MathFunction -> {
+                    appendLine("${asNode(expression)} -> ${asNode(expression.expression)}")
+                    graphvizWalk(expression.expression)
+                }
+            }
+        }
+
+        graphvizWalk(this@ScalarExpression)
+
     }.let {
         """
             digraph {

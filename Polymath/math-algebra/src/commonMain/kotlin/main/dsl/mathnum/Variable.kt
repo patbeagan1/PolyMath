@@ -1,9 +1,7 @@
 package main.dsl.mathnum
 
 import main.dsl.CanDisplay
-import main.dsl.expressions.GraphvizNode
 import main.dsl.expressions.ScalarExpression
-import kotlin.random.Random
 
 data class Variable(
     override val glyph: String,
@@ -23,13 +21,6 @@ data class Variable(
     fun standsFor(expression: ScalarExpression) = setTo(expression.evaluate()) isEqualTo expression
 
     override fun toLatex() = if (instance == null) glyph else "${glyph}_${instance}"
-    override fun toGraphvizNode(): GraphvizNode = GraphvizNode(buildString {
-        append("\"Variable (${if (instance == null) glyph else "${glyph}_${instance}"}) ")
-        append("${evaluate()} ")
-        append("\\n")
-        append("(${Random.nextInt()})\"")
-    })
-
     override fun evaluate(): Double = value.evaluate()
 
     override fun display() = buildString {

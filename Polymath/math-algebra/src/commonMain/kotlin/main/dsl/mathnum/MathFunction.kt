@@ -1,8 +1,7 @@
 package main.dsl.mathnum
 
-import main.dsl.expressions.ScalarAlgebra
 import main.dsl.CanDisplay
-import main.dsl.expressions.GraphvizNode
+import main.dsl.expressions.ScalarAlgebra
 import main.dsl.expressions.ScalarExpression
 import main.dsl.orderCanonically
 
@@ -17,14 +16,6 @@ data class MathFunction(
         glyph != null -> asGlyphSyntax()
         name != null -> asNamedFunctionSyntax()
         else -> asAnonymousFunctionSyntax()
-    }
-
-    override fun toGraphvizNode(): GraphvizNode {
-        TODO("Not yet implemented")
-    }
-
-    override fun toGraphvizFragment(): String {
-        TODO("Not yet implemented")
     }
 
     override fun display(): String = listOfNotNull(

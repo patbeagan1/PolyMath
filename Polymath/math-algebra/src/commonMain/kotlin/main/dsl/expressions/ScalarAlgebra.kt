@@ -34,40 +34,28 @@ interface ScalarAlgebra {
     interface BinaryOperation : ScalarExpression {
         val left: ScalarExpression
         val right: ScalarExpression
-
-        override fun toGraphvizFragment(): String = """
-            |${this.toGraphvizNode().value}->${left.toGraphvizNode().value}
-            |${this.toGraphvizNode().value}->${right.toGraphvizNode().value}
-        """.trimMargin()
     }
 
     interface UnaryOperation : ScalarExpression {
         val operand: ScalarExpression
-
-        override fun toGraphvizFragment(): String = """
-            |${this.toGraphvizNode().value}->${operand.toGraphvizNode().value}
-        """.trimMargin()
     }
 
     data class Add(override val left: ScalarExpression, override val right: ScalarExpression) : BinaryOperation {
         override val priority: Priority = Priority.Add
         override fun evaluate() = left.evaluate() + right.evaluate()
         override fun toLatex() = "${left.toLatexPriority(this)} + ${right.toLatexPriority(this)}"
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"Add\\n(${this.hashCode()})\"")
     }
 
     data class Subtract(override val left: ScalarExpression, override val right: ScalarExpression) : BinaryOperation {
         override val priority: Priority = Priority.Subtract
         override fun evaluate() = left.evaluate() - right.evaluate()
         override fun toLatex() = "${left.toLatexPriority(this)} - ${right.toLatexPriority(this)}"
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"Subtract\\n(${this.hashCode()})\"")
     }
 
     data class Multiply(override val left: ScalarExpression, override val right: ScalarExpression) : BinaryOperation {
         override val priority: Priority = Priority.Multiply
         override fun evaluate() = left.evaluate() * right.evaluate()
         override fun toLatex() = "${left.toLatexPriority(this)} $symCdot ${right.toLatexPriority(this)}"
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"Multiply\\n(${this.hashCode()})\"")
     }
 
     data class Divide(override val left: ScalarExpression, override val right: ScalarExpression) : BinaryOperation {
@@ -78,7 +66,6 @@ interface ScalarAlgebra {
         }
 
         override fun toLatex() = "\\frac{${left.toLatexPriority(this)}}{${right.toLatexPriority(this)}}"
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"Divide\\n(${this.hashCode()})\"")
     }
 
     data class Modulo(override val left: ScalarExpression, override val right: ScalarExpression) : BinaryOperation {
@@ -89,7 +76,6 @@ interface ScalarAlgebra {
         }
 
         override fun toLatex() = "${left.toLatexPriority(this)} mod ${right.toLatexPriority(this)}"
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"Modulo\\n(${this.hashCode()})\"")
     }
 
     data class Negate(override val operand: ScalarExpression) : UnaryOperation {
@@ -98,7 +84,6 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.Subtract
         override fun evaluate() = -operand.evaluate()
         override fun toLatex() = "-${operand.toLatexPriority(this)}"
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"Negate\\n(${this.hashCode()})\"")
     }
 
     data class Exponent(override val left: ScalarExpression, override val right: ScalarExpression) : BinaryOperation {
@@ -110,7 +95,6 @@ interface ScalarAlgebra {
             right.toLatexPriority(this, Position.Power)
         }}"
 
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"Exponent\\n(${this.hashCode()})\"")
     }
 
     data class Sqrt(override val operand: ScalarExpression) : UnaryOperation {
@@ -119,7 +103,6 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.Root
         override fun evaluate() = sqrt(operand.evaluate())
         override fun toLatex() = "\\sqrt{${operand.toLatexPriority(this)}}"
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"Sqrt\\n(${this.hashCode()})\"")
     }
 
     data class Sin(override val operand: ScalarExpression) : UnaryOperation {
@@ -128,7 +111,6 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate() = sin(operand.evaluate())
         override fun toLatex() = "\\sin(${operand.toLatexPriority(this)})"
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"Sin\\n(${this.hashCode()})\"")
     }
 
     data class Cos(override val operand: ScalarExpression) : UnaryOperation {
@@ -137,7 +119,6 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate() = cos(operand.evaluate())
         override fun toLatex() = "\\cos(${operand.toLatexPriority(this)})"
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"Cos\\n(${this.hashCode()})\"")
     }
 
     data class Tan(override val operand: ScalarExpression) : UnaryOperation {
@@ -146,14 +127,12 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate() = tan(operand.evaluate())
         override fun toLatex() = "\\tan(${operand.toLatexPriority(this)})"
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"Tan\\n(${this.hashCode()})\"")
     }
 
     data class Log(override val left: ScalarExpression, override val right: ScalarExpression) : BinaryOperation {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate() = log(right.evaluate(), left.evaluate())
         override fun toLatex() = "\\log_{${left.toLatexPriority(this)}}(${right.toLatexPriority(this)})"
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"Log\\n(${this.hashCode()})\"")
     }
 
     data class Ln(override val operand: ScalarExpression) : UnaryOperation {
@@ -162,7 +141,6 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate() = ln(operand.evaluate())
         override fun toLatex() = "\\ln(${operand.toLatexPriority(this)})"
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"Ln\\n(${this.hashCode()})\"")
     }
 
     data class Exp(override val operand: ScalarExpression) : UnaryOperation {
@@ -171,7 +149,6 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate() = exp(operand.evaluate())
         override fun toLatex() = "e^{${operand.toLatexPriority(this)}}"
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"Exp\\n(${this.hashCode()})\"")
     }
 
     data class Abs(override val operand: ScalarExpression) : UnaryOperation {
@@ -180,7 +157,6 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate() = abs(operand.evaluate())
         override fun toLatex() = "|${operand.toLatexPriority(this)}|"
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"Abs\\n(${this.hashCode()})\"")
     }
 
     data class ArcSin(override val operand: ScalarExpression) : UnaryOperation {
@@ -189,7 +165,6 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate() = asin(operand.evaluate())
         override fun toLatex() = "\\sin^{-1}(${operand.toLatexPriority(this)})"
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"ArcSin\\n(${this.hashCode()})\"")
     }
 
     data class ArcCos(override val operand: ScalarExpression) : UnaryOperation {
@@ -198,7 +173,6 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate() = acos(operand.evaluate())
         override fun toLatex() = "\\cos^{-1}(${operand.toLatexPriority(this)})"
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"ArcCos\\n(${this.hashCode()})\"")
     }
 
     data class ArcTan(override val operand: ScalarExpression) : UnaryOperation {
@@ -207,7 +181,6 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate() = atan(operand.evaluate())
         override fun toLatex() = "\\tan^{-1}(${operand.toLatexPriority(this)})"
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"ArcTan\\n(${this.hashCode()})\"")
     }
 
     data class Sum(
@@ -229,11 +202,6 @@ interface ScalarAlgebra {
 
         override fun toLatex() =
             "\\sum_{${variable.toLatex()}=${lower.toLatex()}}^{${upper.toLatex()}}{${expression(variable).toLatex()}}"
-
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"Sum\\n(${this.hashCode()})\"")
-        override fun toGraphvizFragment(): String {
-            TODO("Not yet implemented")
-        }
     }
 
     data class Product(
@@ -255,11 +223,6 @@ interface ScalarAlgebra {
 
         override fun toLatex() =
             "\\prod_{${variable.toLatex()}=${lower.toLatex()}}^{${upper.toLatex()}}{${expression(variable).toLatex()}}"
-
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"Product\\n(${this.hashCode()})\"")
-        override fun toGraphvizFragment(): String {
-            TODO("Not yet implemented")
-        }
     }
 
     data class Factorial(override val operand: ScalarExpression) : UnaryOperation {
@@ -268,7 +231,6 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate(): Double = factorial(operand.evaluate().toInt())
         override fun toLatex() = "${operand.toLatexPriority(this)}!"
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"Factorial\\n(${this.hashCode()})\"")
 
         private fun factorial(n: Int): Double {
             require(n >= 0) { "Factorial is not defined for negative numbers." }
@@ -294,8 +256,8 @@ interface ScalarAlgebra {
         }
 
         override fun toLatex() = "{}^{${left.toLatexPriority(this)}}P_{${right.toLatexPriority(this)}}"
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"Permutation\\n(${this.hashCode()})\"")
     }
+
 
     data class Combination(override val left: ScalarExpression, override val right: ScalarExpression) :
         BinaryOperation {
@@ -318,6 +280,5 @@ interface ScalarAlgebra {
         }
 
         override fun toLatex() = "{}^{${left.toLatexPriority(this)}}C_{${right.toLatexPriority(this)}}"
-        override fun toGraphvizNode(): GraphvizNode = GraphvizNode("\"Combination\\n(${this.hashCode()})\"")
     }
 }
