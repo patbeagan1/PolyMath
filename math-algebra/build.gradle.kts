@@ -21,6 +21,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(kotlin("stdlib"))
             implementation(kotlin("test"))
             api(projects.mathBase)
         }

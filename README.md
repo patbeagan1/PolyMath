@@ -5,9 +5,6 @@ A comprehensive mathematical DSL (Domain Specific Language) for Kotlin that lets
 ## 🚀 Quick Start
 
 ```kotlin
-import main.dsl.mathnum.*
-import main.dsl.expressions.ScalarAlgebra.*
-
 // Basic arithmetic with proper order of operations
 val result = (5.num() + 3.num()) * 2.num()
 println(result.evaluate()) // 16.0
