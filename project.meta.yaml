@@ -48,7 +48,7 @@ scripts:
   publish:
     command: ./gradlew publishToMavenLocal
   subtree-push:
-    command: ../../__monorepo/tools/monorepo subtree push git@github.com:patbeagan1/PolyMath.git PolyMath --branch develop
+    command: ../monorepo subtree push git@github.com:patbeagan1/PolyMath.git PolyMath --branch develop
 
 roadmap:
   todo:
