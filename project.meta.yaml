@@ -40,13 +40,13 @@ subtree:
 
 scripts:
   build:
-    command: ./gradlew build
+    command: bash -c "cd Polymath && ./gradlew build"
   test:
-    command: ./gradlew test
+    command: bash -c "cd Polymath && ./gradlew test"
   run:
-    command: ./gradlew run
+    command: bash -c "cd Polymath && ./gradlew run"
   publish:
-    command: ./gradlew publishToMavenLocal
+    command: bash -c "cd Polymath && ./gradlew publishToMavenLocal"
 
 roadmap:
   todo:
