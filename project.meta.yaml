@@ -40,13 +40,15 @@ subtree:
 
 scripts:
   build:
-    command: bash -c "cd Polymath && ./gradlew build"
+    command: ./gradlew build
   test:
-    command: bash -c "cd Polymath && ./gradlew test"
+    command: ./gradlew test
   run:
-    command: bash -c "cd Polymath && ./gradlew run"
+    command: ./gradlew run
   publish:
-    command: bash -c "cd Polymath && ./gradlew publishToMavenLocal"
+    command: ./gradlew publishToMavenLocal
+  subtree-push:
+    command: m subtree push git@github.com:patbeagan1/PolyMath.git PolyMath --branch develop
 
 roadmap:
   todo:
