@@ -8,3 +8,5 @@ value class Meter(override val value: Double) : UnitDistance<Meter>, BaseUnit {
     override fun asType(d: Double) = Meter(d)
     override fun asBaseUnit() = this
 }
+
+fun UnitDistance<*>.toMeter() = this.asBaseUnit()
