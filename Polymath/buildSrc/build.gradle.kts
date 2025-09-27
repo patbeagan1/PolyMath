@@ -12,6 +12,10 @@ dependencies {
     testImplementation("junit:junit:4.13.1")
 }
 
+kotlin {
+    jvmToolchain(17)
+}
+
 gradlePlugin {
     plugins {
         create("simplePlugin") {

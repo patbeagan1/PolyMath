@@ -8,15 +8,17 @@ A comprehensive mathematical DSL (Domain Specific Language) for Kotlin that lets
 import main.dsl.mathnum.*
 import main.dsl.expressions.ScalarAlgebra.*
 
-// Basic arithmetic
-val result = (mathNum(5) + mathNum(3)) * mathNum(2)
+// Basic arithmetic with proper order of operations
+val result = (5.num() + 3.num()) * 2.num()
 println(result.evaluate()) // 16.0
-println(result.toLatex())  // "5 + 3 \cdot 2"
+println(result.toLatex())  // "(5 + 3) \cdot 2"
 
-// Variables and equations
+// Variables and equations with cached variables
 val x = Variable("x").setTo(5.0)
-val equation = x.squared() + mathNum(3) * x + mathNum(2)
-println(equation.evaluate()) // 42.0
+val three = 3.num()
+val two = 2.num()
+val equation = x.squared() + three * x + two
+println(equation.evaluate()) // 42.0 (5² + 3×5 + 2 = 25 + 15 + 2 = 42)
 println(equation.toLatex())  // "x^{2} + 3 \cdot x + 2"
 ```
 
@@ -29,13 +31,19 @@ println(equation.toLatex())  // "x^{2} + 3 \cdot x + 2"
 - **Equations**: Create and manipulate mathematical equations
 
 ```kotlin
-// Order of operations
-val expr = mathNum(5) * mathNum(3) + mathNum(2) - mathNum(1)
-println(expr.evaluate()) // 16.0
+// Order of operations (multiplication before addition)
+val five = 5.num()
+val three = 3.num()
+val two = 2.num()
+val one = 1.num()
+val expr = five * three + two - one
+println(expr.evaluate()) // 16.0 (5×3 + 2 - 1 = 15 + 2 - 1 = 16)
 println(expr.toLatex())  // "5 \cdot 3 + 2 - 1"
 
-// Rational arithmetic
-val fraction = mathNum(1) / mathNum(3) + mathNum(1) / mathNum(4)
+// Rational arithmetic with proper fractions
+val oneThird = 1.num() / 3.num()
+val oneFourth = 1.num() / 4.num()
+val fraction = oneThird + oneFourth
 println(fraction.toLatex()) // "\frac{1}{3} + \frac{1}{4}"
 println(fraction.evaluate()) // 0.5833333333333333
 ```
@@ -51,11 +59,15 @@ println(fraction.evaluate()) // 0.5833333333333333
 val a = Variable("a").setTo(1.0)
 val b = Variable("b").setTo(-5.0)
 val c = Variable("c").setTo(6.0)
-val quadratic = a * Variable("x").squared() + b * Variable("x") + c
+val x = Variable("x")
+val quadratic = a * x.squared() + b * x + c
 println(quadratic.toLatex()) // "a \cdot x^{2} + b \cdot x + c"
 
-// Simplification
-val complex = mathNum(1) + mathNum(5) + mathNum(5) * Variable("x") + mathNum(2) - mathNum(1)
+// Simplification with proper order of operations
+val one = 1.num()
+val five = 5.num()
+val two = 2.num()
+val complex = one + five + five * x + two - one
 val simplified = simplify(complex)
 println(simplified.toLatex()) // "6 + 5 \cdot x + 1"
 ```
@@ -67,12 +79,14 @@ println(simplified.toLatex()) // "6 + 5 \cdot x + 1"
 - **Chain Rule**: Automatic chain rule application
 
 ```kotlin
-// Trigonometric derivatives
-val sinExpr = Sin(Variable("x"))
+// Trigonometric derivatives with cached variables
+val x = Variable("x")
+val sinExpr = Sin(x)
 println(sinExpr.toLatex()) // "\sin(x)"
 
-// Exponential functions
-val expExpr = Exp(mathNum(2) * Variable("x"))
+// Exponential functions with proper multiplication
+val two = 2.num()
+val expExpr = Exp(two * x)
 println(expExpr.toLatex()) // "e^{2 \cdot x}"
 ```
 
@@ -82,14 +96,19 @@ println(expExpr.toLatex()) // "e^{2 \cdot x}"
 - **Series**: Infinite and finite series support
 
 ```kotlin
-// Summation
-val sum = Sum(Variable("k"), mathNum(1), mathNum(10)) { k -> k }
-println(sum.evaluate()) // 55.0
+// Summation with cached variables
+val k = Variable("k").setTo(1)
+val one = 1.num()
+val ten = 10.num()
+val sum = Sum(k, one, ten) { k -> k }
+println(sum.evaluate()) // 55.0 (1+2+3+...+10 = 55)
 println(sum.toLatex())   // "\sum_{k=1}^{10}{k}"
 
-// Product
-val product = Product(Variable("j"), mathNum(1), mathNum(5)) { j -> j }
-println(product.evaluate()) // 120.0 (5!)
+// Product with cached variables
+val j = Variable("j")
+val five = 5.num()
+val product = Product(j, one, five) { j -> j }
+println(product.evaluate()) // 120.0 (1×2×3×4×5 = 120 = 5!)
 println(product.toLatex())  // "\prod_{j=1}^{5}{j}"
 ```
 
@@ -100,14 +119,17 @@ println(product.toLatex())  // "\prod_{j=1}^{5}{j}"
 - **Identities**: Trigonometric identity support
 
 ```kotlin
-// Trigonometric expressions
-val trigExpr = Sin(mathNum(90)) + Cos(mathNum(0))
-println(trigExpr.evaluate()) // 1.0
+// Trigonometric expressions with cached values
+val ninety = 90.num()
+val zero = 0.num()
+val trigExpr = Sin(ninety) + Cos(zero)
+println(trigExpr.evaluate()) // ≈ 1.893 (sin(90) + cos(0) ≈ 0.893 + 1 = 1.893 in radians)
 println(trigExpr.toLatex())  // "\sin(90) + \cos(0)"
 
-// Inverse functions
-val arcExpr = ArcSin(Sin(mathNum(3)))
-println(arcExpr.evaluate()) // 3.0
+// Inverse functions with cached values
+val three = 3.num()
+val arcExpr = ArcSin(Sin(three))
+println(arcExpr.evaluate()) // 3.0 (arcsin(sin(3)) = 3)
 ```
 
 ### 🧠 Boolean Logic
@@ -117,13 +139,13 @@ println(arcExpr.evaluate()) // 3.0
 - **Truth Tables**: Boolean evaluation
 
 ```kotlin
-// Boolean logic
+// Boolean logic with cached propositions
 val p = PropositionalCalculus.Fact("p", name = "It is raining")
 val q = PropositionalCalculus.Fact("q", name = "It is cloudy")
 val implication = p implies q
 println(implication.toLatex()) // "p \implies q"
 
-// Logical operations
+// Logical operations with cached variables
 val andExpr = p and q
 val orExpr = p or q
 println(andExpr.toLatex()) // "p \land q"
@@ -137,7 +159,7 @@ println(orExpr.toLatex())  // "p \lor q"
 - **Binomial Coefficients**: Pascal's triangle support
 
 ```kotlin
-// Permutations and combinations
+// Permutations and combinations with cached variables
 val n = Variable("n").setTo(5.0)
 val k = Variable("k").setTo(3.0)
 val perm = Permutation(n, k)
@@ -153,11 +175,14 @@ println(comb.toLatex()) // "{}^{5}C_{3}"
 - **Graph Theory**: Graph operations and algorithms
 
 ```kotlin
-// Statistical functions
-val mean = Sum(Variable("i"), mathNum(1), Variable("n")) { i -> i } / Variable("n")
+// Statistical functions with cached variables
+val i = Variable("i")
+val n = Variable("n")
+val one = 1.num()
+val mean = Sum(i, one, n) { i -> i } / n
 println(mean.toLatex()) // "\frac{\sum_{i=1}^{n}{i}}{n}"
 
-// Physical constants
+// Physical constants with cached values
 val c = Constant("c", 299792458.0) // Speed of light
 val e = Constant("e", 2.718281828459045)
 ```
@@ -281,7 +306,12 @@ PolyMath includes specialized modules for various mathematical fields:
 All mathematical expressions can be rendered as LaTeX for publication:
 
 ```kotlin
-val complexExpr = (Variable("x") + mathNum(2)).squared() / (Variable("y") - mathNum(1))
+// Complex expressions with cached variables
+val x = Variable("x")
+val y = Variable("y")
+val two = 2.num()
+val one = 1.num()
+val complexExpr = (x + two).squared() / (y - one)
 println(complexExpr.toLatex())
 // Output: "\frac{(x + 2)^{2}}{y - 1}"
 ```
@@ -317,25 +347,31 @@ PolyMath/
 
 ### Educational Applications
 ```kotlin
-// Step-by-step equation solving
-val equation = Variable("x").squared() - mathNum(4) * Variable("x") + mathNum(3)
+// Step-by-step equation solving with cached variables
+val x = Variable("x")
+val four = 4.num()
+val three = 3.num()
+val equation = x.squared() - four * x + three
 val explanation = equation.explain()
 println(explanation) // Shows step-by-step solution
 ```
 
 ### Scientific Computing
 ```kotlin
-// Complex scientific calculations
+// Complex scientific calculations with cached constants
 val e = Constant("e", 2.718281828459045)
 val pi = Constant("π", 3.141592653589793)
-val result = e.pow(pi * mathNum(1).num())
+val one = 1.num()
+val result = e.pow(pi * one)
 println(result.toLatex()) // "e^{\pi \cdot 1}"
 ```
 
 ### Research and Publication
 ```kotlin
-// Generate LaTeX for papers
-val formula = Sqrt(Variable("a").squared() + Variable("b").squared())
+// Generate LaTeX for papers with cached variables
+val a = Variable("a")
+val b = Variable("b")
+val formula = Sqrt(a.squared() + b.squared())
 println(formula.toLatex()) // "\sqrt{a^{2} + b^{2}}"
 ```
 
