@@ -1,4 +1,4 @@
-package com.measures.other
+package com.measures.misc
 
 import com.measures.distance.UnitDistance
 import com.measures.volume.Liter
