@@ -7,9 +7,9 @@ import com.measures.current.UnitCurrent
 import com.measures.time.UnitTime
 import kotlin.jvm.JvmInline
 
-typealias UnitCharge<T> = UnitChargeType<T>
-
-interface UnitChargeType<T : DoubleBase> : UnitType<T, Coulomb>
+interface UnitCharge<T : DoubleBase> : UnitType<T, Coulomb> {
+    fun asUnitCharge(): UnitCharge<T> = this
+}
 
 @JvmInline
 value class Coulomb(override val value: Double) : UnitCharge<Coulomb>, BaseUnit {
@@ -56,7 +56,7 @@ value class Kilocoulomb(override val value: Double) : UnitCharge<Kilocoulomb> {
 }
 
 @JvmInline
-value class AmpereHour(override val value: Double) : UnitCharge<AmpereHour> {
+    value class AmpereHour(override val value: Double) : UnitCharge<AmpereHour> {
     override fun asType(d: Double) = AmpereHour(d)
     override fun asBaseUnit() = Coulomb(this.value * 3600.0)
 }
@@ -67,10 +67,10 @@ value class MilliampereHour(override val value: Double) : UnitCharge<Milliampere
     override fun asBaseUnit() = Coulomb(this.value * 3.6)
 }
 
-operator fun UnitChargeType<*>.plus(other: UnitChargeType<*>): Coulomb =
+operator fun UnitCharge<*>.plus(other: UnitCharge<*>): Coulomb =
     Coulomb(this.asBaseUnit().value + other.asBaseUnit().value)
 
-operator fun UnitChargeType<*>.minus(other: UnitChargeType<*>): Coulomb =
+operator fun UnitCharge<*>.minus(other: UnitCharge<*>): Coulomb =
     Coulomb(this.asBaseUnit().value - other.asBaseUnit().value)
 
 // Conversion functions using toUnit

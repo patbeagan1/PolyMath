@@ -4,6 +4,7 @@ import com.measures.BaseUnit
 import com.measures.DoubleBase
 import com.measures.UnitType
 import com.measures.current.UnitCurrent
+import com.measures.distance.UnitDistance
 import com.measures.time.UnitTime
 import com.measures.weight.UnitWeight
 import kotlin.jvm.JvmInline
