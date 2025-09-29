@@ -20,7 +20,7 @@ operator fun UnitVolumeType<*>.minus(other: UnitVolumeType<*>): Liter =
 operator fun UnitVolumeType<*>.div(other: UnitArea<*>): Meter =
     Meter(this.asBaseUnit().value / other.asBaseUnit().value)
 
-operator fun UnitVolumeType<*>.div(other: com.measures.distance.UnitDistanceType<*>): SquareMeter =
+operator fun UnitVolumeType<*>.div(other: com.measures.distance.UnitDistance<*>): SquareMeter =
     SquareMeter(this.asBaseUnit().value / other.asBaseUnit().value)
 
 

@@ -137,7 +137,7 @@ class UnitConversionTests {
         val height = Meter(4.0)
 
         // Calculate volume
-        val volume: Liter = length.times(width).times(height)
+        val volume = length * width * height
 
         assertEquals(24_000.0, volume.value, 0.1)
     }

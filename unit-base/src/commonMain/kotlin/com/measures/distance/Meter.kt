@@ -1,7 +1,6 @@
 package com.measures.distance
 
 import com.measures.BaseUnit
-import com.measures.area.SquareMeter
 import kotlin.jvm.JvmInline
 
 @JvmInline

@@ -6,7 +6,6 @@ import com.measures.UnitType
 import com.measures.current.UnitCurrent
 import com.measures.time.UnitTime
 import com.measures.weight.UnitWeight
-import com.measures.distance.UnitDistance
 import kotlin.jvm.JvmInline
 
 typealias UnitCapacitance<T> = UnitCapacitanceType<T>
