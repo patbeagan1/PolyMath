@@ -23,7 +23,7 @@ value class TroyPennyweight(override val value: Double) : UnitWeight<TroyPennywe
 @JvmInline
 value class TroyOunce(override val value: Double) : UnitWeight<TroyOunce> {
     override fun asType(d: Double) = TroyOunce(d)
-    override fun asBaseUnit() = Gram(value * 31.1034768)
+    override fun asBaseUnit() = Gram(value * 31.1034768).asBaseUnit()
 }
 
 @JvmInline

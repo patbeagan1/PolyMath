@@ -48,7 +48,7 @@ value class Ounce(override val value: Double) : UnitWeight<Ounce> {
 @JvmInline
 value class Pound(override val value: Double) : UnitWeight<Pound> {
     override fun asType(d: Double) = Pound(d)
-    override fun asBaseUnit() = Gram(value * 28.35)
+    override fun asBaseUnit() = Gram(value * 28.35).asBaseUnit()
 }
 
 @JvmInline

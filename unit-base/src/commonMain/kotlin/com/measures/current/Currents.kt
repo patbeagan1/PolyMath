@@ -4,6 +4,8 @@ import com.measures.BaseUnit
 import com.measures.Consts
 import com.measures.DoubleBase
 import com.measures.UnitType
+import com.measures.charge.Coulomb
+import com.measures.time.UnitTime
 import kotlin.jvm.JvmInline
 
 typealias UnitCurrent<T> = UnitCurrentType<T>
@@ -16,6 +18,10 @@ operator fun UnitCurrentType<*>.plus(other: UnitCurrentType<*>): Ampere =
 operator fun UnitCurrentType<*>.minus(other: UnitCurrentType<*>): Ampere =
     Ampere(this.asBaseUnit().value - other.asBaseUnit().value)
 
+// Current × Time = Charge
+operator fun UnitCurrentType<*>.times(other: UnitTime<*>): Coulomb =
+    Coulomb(this.asBaseUnit().value * other.asBaseUnit().value)
+
 @JvmInline
 value class Ampere(override val value: Double) : UnitCurrent<Ampere>, BaseUnit {
     override fun asType(d: Double) = Ampere(d)
@@ -23,6 +29,7 @@ value class Ampere(override val value: Double) : UnitCurrent<Ampere>, BaseUnit {
 
     operator fun plus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).plus(other)
     operator fun minus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).minus(other)
+    operator fun times(other: UnitTime<*>) = (this as UnitCurrent<*>).times(other)
 }
 
 @JvmInline
@@ -32,6 +39,7 @@ value class Milliampere(override val value: Double) : UnitCurrent<Milliampere> {
 
     operator fun plus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).plus(other)
     operator fun minus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).minus(other)
+    operator fun times(other: UnitTime<*>) = (this as UnitCurrent<*>).times(other)
 }
 
 @JvmInline
@@ -41,6 +49,7 @@ value class Microampere(override val value: Double) : UnitCurrent<Microampere> {
 
     operator fun plus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).plus(other)
     operator fun minus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).minus(other)
+    operator fun times(other: UnitTime<*>) = (this as UnitCurrent<*>).times(other)
 }
 
 @JvmInline
@@ -50,6 +59,7 @@ value class Kiloampere(override val value: Double) : UnitCurrent<Kiloampere> {
 
     operator fun plus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).plus(other)
     operator fun minus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).minus(other)
+    operator fun times(other: UnitTime<*>) = (this as UnitCurrent<*>).times(other)
 }
 
 @JvmInline
@@ -59,6 +69,7 @@ value class Megaampere(override val value: Double) : UnitCurrent<Megaampere> {
 
     operator fun plus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).plus(other)
     operator fun minus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).minus(other)
+    operator fun times(other: UnitTime<*>) = (this as UnitCurrent<*>).times(other)
 }
 
 

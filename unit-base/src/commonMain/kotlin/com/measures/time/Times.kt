@@ -3,6 +3,7 @@ package com.measures.time
 import com.measures.BaseUnit
 import com.measures.DoubleBase
 import com.measures.UnitType
+import com.measures.frequency.Hertz
 import kotlin.jvm.JvmInline
 
 typealias UnitTime<T> = UnitTimeType<T>
@@ -17,6 +18,7 @@ value class Second(override val value: Double) : UnitTime<Second>, BaseUnit {
     operator fun plus(other: UnitTime<*>) = (this as UnitTime<*>).plus(other)
     operator fun minus(other: UnitTime<*>) = (this as UnitTime<*>).minus(other)
     operator fun div(other: UnitTime<*>) = (this as UnitTime<*>).div(other)
+    operator fun inv() = (this as UnitTime<*>).inv()
 }
 
 @JvmInline
@@ -26,6 +28,8 @@ value class Minute(override val value: Double) : UnitTime<Minute> {
 
     operator fun plus(other: UnitTime<*>) = (this as UnitTime<*>).plus(other)
     operator fun minus(other: UnitTime<*>) = (this as UnitTime<*>).minus(other)
+    operator fun div(other: UnitTime<*>) = (this as UnitTime<*>).div(other)
+    operator fun inv() = (this as UnitTime<*>).inv()
 }
 
 @JvmInline
@@ -35,6 +39,8 @@ value class Hour(override val value: Double) : UnitTime<Hour> {
 
     operator fun plus(other: UnitTime<*>) = (this as UnitTime<*>).plus(other)
     operator fun minus(other: UnitTime<*>) = (this as UnitTime<*>).minus(other)
+    operator fun div(other: UnitTime<*>) = (this as UnitTime<*>).div(other)
+    operator fun inv() = (this as UnitTime<*>).inv()
 }
 
 @JvmInline
@@ -44,6 +50,8 @@ value class Day(override val value: Double) : UnitTime<Day> {
 
     operator fun plus(other: UnitTime<*>) = (this as UnitTime<*>).plus(other)
     operator fun minus(other: UnitTime<*>) = (this as UnitTime<*>).minus(other)
+    operator fun div(other: UnitTime<*>) = (this as UnitTime<*>).div(other)
+    operator fun inv() = (this as UnitTime<*>).inv()
 }
 
 @JvmInline
@@ -53,6 +61,8 @@ value class Week(override val value: Double) : UnitTime<Week> {
 
     operator fun plus(other: UnitTime<*>) = (this as UnitTime<*>).plus(other)
     operator fun minus(other: UnitTime<*>) = (this as UnitTime<*>).minus(other)
+    operator fun div(other: UnitTime<*>) = (this as UnitTime<*>).div(other)
+    operator fun inv() = (this as UnitTime<*>).inv()
 }
 
 @JvmInline
@@ -63,6 +73,7 @@ value class Millisecond(override val value: Double) : UnitTime<Millisecond> {
     operator fun plus(other: UnitTime<*>) = (this as UnitTime<*>).plus(other)
     operator fun minus(other: UnitTime<*>) = (this as UnitTime<*>).minus(other)
     operator fun div(other: UnitTime<*>) = (this as UnitTime<*>).div(other)
+    operator fun inv() = (this as UnitTime<*>).inv()
 }
 
 @JvmInline
@@ -73,6 +84,7 @@ value class Microsecond(override val value: Double) : UnitTime<Microsecond> {
     operator fun plus(other: UnitTime<*>) = (this as UnitTime<*>).plus(other)
     operator fun minus(other: UnitTime<*>) = (this as UnitTime<*>).minus(other)
     operator fun div(other: UnitTime<*>) = (this as UnitTime<*>).div(other)
+    operator fun inv() = (this as UnitTime<*>).inv()
 }
 
 @JvmInline
@@ -83,6 +95,7 @@ value class Nanosecond(override val value: Double) : UnitTime<Nanosecond> {
     operator fun plus(other: UnitTime<*>) = (this as UnitTime<*>).plus(other)
     operator fun minus(other: UnitTime<*>) = (this as UnitTime<*>).minus(other)
     operator fun div(other: UnitTime<*>) = (this as UnitTime<*>).div(other)
+    operator fun inv() = (this as UnitTime<*>).inv()
 }
 
 operator fun UnitTimeType<*>.plus(other: UnitTimeType<*>): Second =
@@ -93,6 +106,10 @@ operator fun UnitTimeType<*>.minus(other: UnitTimeType<*>): Second =
 
 operator fun UnitTimeType<*>.div(other: UnitTimeType<*>): Double =
     this.asBaseUnit().value / other.asBaseUnit().value
+
+// Time to Frequency conversion: 1/time = frequency
+operator fun UnitTimeType<*>.inv(): Hertz =
+    Hertz(1.0 / this.asBaseUnit().value)
 
 // Conversion functions using toUnit
 fun UnitTime<*>.toSecond() = this.asBaseUnit()

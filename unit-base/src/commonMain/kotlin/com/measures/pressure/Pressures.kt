@@ -6,6 +6,8 @@ import com.measures.UnitType
 import com.measures.distance.UnitDistance
 import com.measures.weight.UnitWeight
 import com.measures.time.UnitTime
+import com.measures.area.UnitArea
+import com.measures.force.Newton
 import kotlin.jvm.JvmInline
 
 typealias UnitPressure<T> = UnitPressureType<T>
@@ -19,6 +21,7 @@ value class Pascal(override val value: Double) : UnitPressure<Pascal>, BaseUnit 
 
     operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plus(other)
     operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minus(other)
+    operator fun times(other: UnitArea<*>) = (this as UnitPressure<*>).times(other)
     
     companion object {
         fun from(mass: UnitWeight<*>, distance: UnitDistance<*>, time: UnitTime<*>): Pascal {
@@ -37,6 +40,7 @@ value class Bar(override val value: Double) : UnitPressure<Bar> {
 
     operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plus(other)
     operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minus(other)
+    operator fun times(other: UnitArea<*>) = (this as UnitPressure<*>).times(other)
 }
 
 @JvmInline
@@ -46,6 +50,7 @@ value class Atmosphere(override val value: Double) : UnitPressure<Atmosphere> {
 
     operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plus(other)
     operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minus(other)
+    operator fun times(other: UnitArea<*>) = (this as UnitPressure<*>).times(other)
 }
 
 @JvmInline
@@ -55,6 +60,7 @@ value class Torr(override val value: Double) : UnitPressure<Torr> {
 
     operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plus(other)
     operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minus(other)
+    operator fun times(other: UnitArea<*>) = (this as UnitPressure<*>).times(other)
 }
 
 @JvmInline
@@ -64,6 +70,7 @@ value class MillimeterOfMercury(override val value: Double) : UnitPressure<Milli
 
     operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plus(other)
     operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minus(other)
+    operator fun times(other: UnitArea<*>) = (this as UnitPressure<*>).times(other)
 }
 
 @JvmInline
@@ -73,6 +80,7 @@ value class PoundPerSquareInch(override val value: Double) : UnitPressure<PoundP
 
     operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plus(other)
     operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minus(other)
+    operator fun times(other: UnitArea<*>) = (this as UnitPressure<*>).times(other)
 }
 
 @JvmInline
@@ -82,6 +90,7 @@ value class Kilopascal(override val value: Double) : UnitPressure<Kilopascal> {
 
     operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plus(other)
     operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minus(other)
+    operator fun times(other: UnitArea<*>) = (this as UnitPressure<*>).times(other)
 }
 
 @JvmInline
@@ -91,6 +100,7 @@ value class Megapascal(override val value: Double) : UnitPressure<Megapascal> {
 
     operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plus(other)
     operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minus(other)
+    operator fun times(other: UnitArea<*>) = (this as UnitPressure<*>).times(other)
 }
 
 @JvmInline
@@ -100,6 +110,7 @@ value class Millibar(override val value: Double) : UnitPressure<Millibar> {
 
     operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plus(other)
     operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minus(other)
+    operator fun times(other: UnitArea<*>) = (this as UnitPressure<*>).times(other)
 }
 
 operator fun UnitPressureType<*>.plus(other: UnitPressureType<*>): Pascal =
@@ -107,6 +118,10 @@ operator fun UnitPressureType<*>.plus(other: UnitPressureType<*>): Pascal =
 
 operator fun UnitPressureType<*>.minus(other: UnitPressureType<*>): Pascal =
     Pascal(this.asBaseUnit().value - other.asBaseUnit().value)
+
+// Pressure × Area = Force
+operator fun UnitPressureType<*>.times(other: UnitArea<*>): Newton =
+    Newton(this.asBaseUnit().value * other.asBaseUnit().value)
 
 // Conversion functions using toUnit
 fun UnitPressure<*>.toPascal() = this.asBaseUnit()
