@@ -2,21 +2,15 @@ package com.measures.power
 
 import com.measures.BaseUnit
 import com.measures.DoubleBase
-import com.measures.UnitTypedFull
+import com.measures.UnitType
 import com.measures.weight.UnitWeight
 import com.measures.distance.UnitDistance
 import com.measures.time.UnitTime
 import kotlin.jvm.JvmInline
 
-typealias UnitPower<T> = UnitPowerTypedFull<T>
+typealias UnitPower<T> = UnitPowerType<T>
 
-interface UnitPowerTypedFull<T : DoubleBase> : UnitTypedFull<T, Watt> {
-    operator fun plus(other: UnitPowerTypedFull<*>) =
-        Watt(this.asBaseUnit().value + other.asBaseUnit().value)
-
-    operator fun minus(other: UnitPowerTypedFull<*>) =
-        Watt(this.asBaseUnit().value - other.asBaseUnit().value)
-}
+interface UnitPowerType<T : DoubleBase> : UnitType<T, Watt>
 
 @JvmInline
 value class Watt(override val value: Double) : UnitPower<Watt>, BaseUnit {
@@ -56,6 +50,12 @@ value class Gigawatt(override val value: Double) : UnitPower<Gigawatt> {
     override fun asType(d: Double) = Gigawatt(d)
     override fun asBaseUnit() = Watt(this.value * 1E9)
 }
+
+operator fun UnitPowerType<*>.plus(other: UnitPowerType<*>): Watt =
+    Watt(this.asBaseUnit().value + other.asBaseUnit().value)
+
+operator fun UnitPowerType<*>.minus(other: UnitPowerType<*>): Watt =
+    Watt(this.asBaseUnit().value - other.asBaseUnit().value)
 
 @JvmInline
 value class Horsepower(override val value: Double) : UnitPower<Horsepower> {

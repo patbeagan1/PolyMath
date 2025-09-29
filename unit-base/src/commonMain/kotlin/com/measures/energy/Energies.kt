@@ -2,21 +2,15 @@ package com.measures.energy
 
 import com.measures.BaseUnit
 import com.measures.DoubleBase
-import com.measures.UnitTypedFull
+import com.measures.UnitType
 import com.measures.weight.UnitWeight
 import com.measures.distance.UnitDistance
 import com.measures.time.UnitTime
 import kotlin.jvm.JvmInline
 
-typealias UnitEnergy<T> = UnitEnergyTypedFull<T>
+typealias UnitEnergy<T> = UnitEnergyType<T>
 
-interface UnitEnergyTypedFull<T : DoubleBase> : UnitTypedFull<T, Joule> {
-    operator fun plus(other: UnitEnergyTypedFull<*>) =
-        Joule(this.asBaseUnit().value + other.asBaseUnit().value)
-
-    operator fun minus(other: UnitEnergyTypedFull<*>) =
-        Joule(this.asBaseUnit().value - other.asBaseUnit().value)
-}
+interface UnitEnergyType<T : DoubleBase> : UnitType<T, Joule>
 
 @JvmInline
 value class Joule(override val value: Double) : UnitEnergy<Joule>, BaseUnit {
@@ -80,6 +74,12 @@ value class Megajoule(override val value: Double) : UnitEnergy<Megajoule> {
     override fun asType(d: Double) = Megajoule(d)
     override fun asBaseUnit() = Joule(this.value * 1E6)
 }
+
+operator fun UnitEnergyType<*>.plus(other: UnitEnergyType<*>): Joule =
+    Joule(this.asBaseUnit().value + other.asBaseUnit().value)
+
+operator fun UnitEnergyType<*>.minus(other: UnitEnergyType<*>): Joule =
+    Joule(this.asBaseUnit().value - other.asBaseUnit().value)
 
 // Conversion functions using toUnit
 fun UnitEnergy<*>.toJoule() = this.asBaseUnit()

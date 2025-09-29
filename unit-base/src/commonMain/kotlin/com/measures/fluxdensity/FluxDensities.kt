@@ -2,21 +2,15 @@ package com.measures.fluxdensity
 
 import com.measures.BaseUnit
 import com.measures.DoubleBase
-import com.measures.UnitTypedFull
+import com.measures.UnitType
 import com.measures.weight.UnitWeight
 import com.measures.current.UnitCurrent
 import com.measures.time.UnitTime
 import kotlin.jvm.JvmInline
 
-typealias UnitFluxDensity<T> = UnitFluxDensityTypedFull<T>
+typealias UnitFluxDensity<T> = UnitFluxDensityType<T>
 
-interface UnitFluxDensityTypedFull<T : DoubleBase> : UnitTypedFull<T, Tesla> {
-    operator fun plus(other: UnitFluxDensityTypedFull<*>) =
-        Tesla(this.asBaseUnit().value + other.asBaseUnit().value)
-
-    operator fun minus(other: UnitFluxDensityTypedFull<*>) =
-        Tesla(this.asBaseUnit().value - other.asBaseUnit().value)
-}
+interface UnitFluxDensityType<T : DoubleBase> : UnitType<T, Tesla>
 
 @JvmInline
 value class Tesla(override val value: Double) : UnitFluxDensity<Tesla>, BaseUnit {
@@ -32,6 +26,12 @@ value class Tesla(override val value: Double) : UnitFluxDensity<Tesla>, BaseUnit
         }
     }
 }
+
+operator fun UnitFluxDensityType<*>.plus(other: UnitFluxDensityType<*>): Tesla =
+    Tesla(this.asBaseUnit().value + other.asBaseUnit().value)
+
+operator fun UnitFluxDensityType<*>.minus(other: UnitFluxDensityType<*>): Tesla =
+    Tesla(this.asBaseUnit().value - other.asBaseUnit().value)
 
 fun UnitFluxDensity<*>.toTesla() = this.asBaseUnit()
 

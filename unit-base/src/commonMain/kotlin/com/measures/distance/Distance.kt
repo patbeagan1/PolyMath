@@ -1,24 +1,24 @@
 package com.measures.distance
 
 import com.measures.DoubleBase
-import com.measures.UnitTypedFull
+import com.measures.UnitType
 import com.measures.area.SquareMeter
-import com.measures.area.UnitAreaTypedFull
+import com.measures.area.UnitArea
 import com.measures.volume.Liter
 
-typealias UnitDistance<T> = UnitDistanceTypedFull<T>
+typealias UnitDistance<T> = UnitDistanceType<T>
 
-interface UnitDistanceTypedFull<T : DoubleBase> : UnitTypedFull<T, Meter> {
-    operator fun plus(other: UnitDistanceTypedFull<*>) =
-        Meter(this.asBaseUnit().value + other.asBaseUnit().value)
+interface UnitDistanceType<T : DoubleBase> : UnitType<T, Meter>
 
-    operator fun minus(other: UnitDistanceTypedFull<*>) =
-        Meter(this.asBaseUnit().value - other.asBaseUnit().value)
 
-    operator fun times(other: UnitDistanceTypedFull<*>) =
-        SquareMeter(this.asBaseUnit().value * other.asBaseUnit().value)
+operator fun UnitDistanceType<*>.plus(other: UnitDistanceType<*>): Meter =
+    Meter(this.asBaseUnit().value + other.asBaseUnit().value)
 
-    operator fun times(other: UnitAreaTypedFull<*>) =
-        Liter(this.asBaseUnit().value * other.asBaseUnit().value * 1000)
-}
+operator fun UnitDistanceType<*>.minus(other: UnitDistanceType<*>): Meter =
+    Meter(this.asBaseUnit().value - other.asBaseUnit().value)
 
+operator fun UnitDistanceType<*>.times(other: UnitDistanceType<*>): SquareMeter =
+    SquareMeter(this.asBaseUnit().value * other.asBaseUnit().value)
+
+operator fun UnitDistanceType<*>.times(other: UnitArea<*>): Liter =
+    Liter(this.asBaseUnit().value * other.asBaseUnit().value * 1000)

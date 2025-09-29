@@ -2,21 +2,15 @@ package com.measures.force
 
 import com.measures.BaseUnit
 import com.measures.DoubleBase
-import com.measures.UnitTypedFull
+import com.measures.UnitType
 import com.measures.weight.UnitWeight
 import com.measures.distance.UnitDistance
 import com.measures.time.UnitTime
 import kotlin.jvm.JvmInline
 
-typealias UnitForce<T> = UnitForceTypedFull<T>
+typealias UnitForce<T> = UnitForceType<T>
 
-interface UnitForceTypedFull<T : DoubleBase> : UnitTypedFull<T, Newton> {
-    operator fun plus(other: UnitForceTypedFull<*>) =
-        Newton(this.asBaseUnit().value + other.asBaseUnit().value)
-
-    operator fun minus(other: UnitForceTypedFull<*>) =
-        Newton(this.asBaseUnit().value - other.asBaseUnit().value)
-}
+interface UnitForceType<T : DoubleBase> : UnitType<T, Newton>
 
 @JvmInline
 value class Newton(override val value: Double) : UnitForce<Newton>, BaseUnit {
@@ -62,6 +56,12 @@ value class Meganewton(override val value: Double) : UnitForce<Meganewton> {
     override fun asType(d: Double) = Meganewton(d)
     override fun asBaseUnit() = Newton(this.value * 1E6)
 }
+
+operator fun UnitForceType<*>.plus(other: UnitForceType<*>): Newton =
+    Newton(this.asBaseUnit().value + other.asBaseUnit().value)
+
+operator fun UnitForceType<*>.minus(other: UnitForceType<*>): Newton =
+    Newton(this.asBaseUnit().value - other.asBaseUnit().value)
 
 // Conversion functions using toUnit
 fun UnitForce<*>.toNewton() = this.asBaseUnit()

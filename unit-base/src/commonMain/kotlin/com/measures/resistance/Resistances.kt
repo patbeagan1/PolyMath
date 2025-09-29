@@ -2,22 +2,16 @@ package com.measures.resistance
 
 import com.measures.BaseUnit
 import com.measures.DoubleBase
-import com.measures.UnitTypedFull
+import com.measures.UnitType
 import com.measures.weight.UnitWeight
 import com.measures.distance.UnitDistance
 import com.measures.current.UnitCurrent
 import com.measures.time.UnitTime
 import kotlin.jvm.JvmInline
 
-typealias UnitResistance<T> = UnitResistanceTypedFull<T>
+typealias UnitResistance<T> = UnitResistanceType<T>
 
-interface UnitResistanceTypedFull<T : DoubleBase> : UnitTypedFull<T, Ohm> {
-    operator fun plus(other: UnitResistanceTypedFull<*>) =
-        Ohm(this.asBaseUnit().value + other.asBaseUnit().value)
-
-    operator fun minus(other: UnitResistanceTypedFull<*>) =
-        Ohm(this.asBaseUnit().value - other.asBaseUnit().value)
-}
+interface UnitResistanceType<T : DoubleBase> : UnitType<T, Ohm>
 
 @JvmInline
 value class Ohm(override val value: Double) : UnitResistance<Ohm>, BaseUnit {
@@ -34,6 +28,12 @@ value class Ohm(override val value: Double) : UnitResistance<Ohm>, BaseUnit {
         }
     }
 }
+
+operator fun UnitResistanceType<*>.plus(other: UnitResistanceType<*>): Ohm =
+    Ohm(this.asBaseUnit().value + other.asBaseUnit().value)
+
+operator fun UnitResistanceType<*>.minus(other: UnitResistanceType<*>): Ohm =
+    Ohm(this.asBaseUnit().value - other.asBaseUnit().value)
 
 fun UnitResistance<*>.toOhm() = this.asBaseUnit()
 

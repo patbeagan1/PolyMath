@@ -2,23 +2,23 @@ package com.measures.weight
 
 import com.measures.BaseUnit
 import com.measures.DoubleBase
-import com.measures.UnitTypedFull
+import com.measures.UnitType
 import kotlin.jvm.JvmInline
 
-typealias UnitWeight<T> = UnitWeightTypedFull<T>
+typealias UnitWeight<T> = UnitWeightType<T>
 
-interface UnitWeightTypedFull<T : DoubleBase> : UnitTypedFull<T, Gram> {
-    operator fun plus(other: UnitWeightTypedFull<*>) =
-        Gram(this.asBaseUnit().value + other.asBaseUnit().value)
-
-    operator fun minus(other: UnitWeightTypedFull<*>) =
-        Gram(this.asBaseUnit().value - other.asBaseUnit().value)
-}
+interface UnitWeightType<T : DoubleBase> : UnitType<T, Gram>
 
 @JvmInline
 value class Gram(override val value: Double) : UnitWeight<Gram>, BaseUnit {
     override fun asType(d: Double) = Gram(d)
     override fun asBaseUnit() = this
 }
+
+operator fun UnitWeightType<*>.plus(other: UnitWeightType<*>): Gram =
+    Gram(this.asBaseUnit().value + other.asBaseUnit().value)
+
+operator fun UnitWeightType<*>.minus(other: UnitWeightType<*>): Gram =
+    Gram(this.asBaseUnit().value - other.asBaseUnit().value)
 
 fun UnitWeight<*>.toGram() = this.asBaseUnit()

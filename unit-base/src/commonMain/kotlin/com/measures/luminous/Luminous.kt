@@ -2,18 +2,12 @@ package com.measures.luminous
 
 import com.measures.BaseUnit
 import com.measures.DoubleBase
-import com.measures.UnitTypedFull
+import com.measures.UnitType
 import kotlin.jvm.JvmInline
 
-typealias UnitLuminous<T> = UnitLuminousTypedFull<T>
+typealias UnitLuminous<T> = UnitLuminousType<T>
 
-interface UnitLuminousTypedFull<T : DoubleBase> : UnitTypedFull<T, Candela> {
-    operator fun plus(other: UnitLuminousTypedFull<*>) =
-        Candela(this.asBaseUnit().value + other.asBaseUnit().value)
-
-    operator fun minus(other: UnitLuminousTypedFull<*>) =
-        Candela(this.asBaseUnit().value - other.asBaseUnit().value)
-}
+interface UnitLuminousType<T : DoubleBase> : UnitType<T, Candela>
 
 @JvmInline
 value class Candela(override val value: Double) : UnitLuminous<Candela>, BaseUnit {
@@ -38,6 +32,12 @@ value class Megacandela(override val value: Double) : UnitLuminous<Megacandela> 
     override fun asType(d: Double) = Megacandela(d)
     override fun asBaseUnit() = Candela(this.value * 1E6)
 }
+
+operator fun UnitLuminousType<*>.plus(other: UnitLuminousType<*>): Candela =
+    Candela(this.asBaseUnit().value + other.asBaseUnit().value)
+
+operator fun UnitLuminousType<*>.minus(other: UnitLuminousType<*>): Candela =
+    Candela(this.asBaseUnit().value - other.asBaseUnit().value)
 
 // Conversion functions using toUnit
 fun UnitLuminous<*>.toCandela() = this.asBaseUnit()

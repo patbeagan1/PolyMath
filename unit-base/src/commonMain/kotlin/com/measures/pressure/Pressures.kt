@@ -2,21 +2,15 @@ package com.measures.pressure
 
 import com.measures.BaseUnit
 import com.measures.DoubleBase
-import com.measures.UnitTypedFull
+import com.measures.UnitType
 import com.measures.weight.UnitWeight
 import com.measures.distance.UnitDistance
 import com.measures.time.UnitTime
 import kotlin.jvm.JvmInline
 
-typealias UnitPressure<T> = UnitPressureTypedFull<T>
+typealias UnitPressure<T> = UnitPressureType<T>
 
-interface UnitPressureTypedFull<T : DoubleBase> : UnitTypedFull<T, Pascal> {
-    operator fun plus(other: UnitPressureTypedFull<*>) =
-        Pascal(this.asBaseUnit().value + other.asBaseUnit().value)
-
-    operator fun minus(other: UnitPressureTypedFull<*>) =
-        Pascal(this.asBaseUnit().value - other.asBaseUnit().value)
-}
+interface UnitPressureType<T : DoubleBase> : UnitType<T, Pascal>
 
 @JvmInline
 value class Pascal(override val value: Double) : UnitPressure<Pascal>, BaseUnit {
@@ -80,6 +74,12 @@ value class Millibar(override val value: Double) : UnitPressure<Millibar> {
     override fun asType(d: Double) = Millibar(d)
     override fun asBaseUnit() = Pascal(this.value * 100.0)
 }
+
+operator fun UnitPressureType<*>.plus(other: UnitPressureType<*>): Pascal =
+    Pascal(this.asBaseUnit().value + other.asBaseUnit().value)
+
+operator fun UnitPressureType<*>.minus(other: UnitPressureType<*>): Pascal =
+    Pascal(this.asBaseUnit().value - other.asBaseUnit().value)
 
 // Conversion functions using toUnit
 fun UnitPressure<*>.toPascal() = this.asBaseUnit()

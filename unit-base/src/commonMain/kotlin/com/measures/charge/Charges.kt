@@ -2,20 +2,14 @@ package com.measures.charge
 
 import com.measures.BaseUnit
 import com.measures.DoubleBase
-import com.measures.UnitTypedFull
+import com.measures.UnitType
 import com.measures.current.UnitCurrent
 import com.measures.time.UnitTime
 import kotlin.jvm.JvmInline
 
-typealias UnitCharge<T> = UnitChargeTypedFull<T>
+typealias UnitCharge<T> = UnitChargeType<T>
 
-interface UnitChargeTypedFull<T : DoubleBase> : UnitTypedFull<T, Coulomb> {
-    operator fun plus(other: UnitChargeTypedFull<*>) =
-        Coulomb(this.asBaseUnit().value + other.asBaseUnit().value)
-
-    operator fun minus(other: UnitChargeTypedFull<*>) =
-        Coulomb(this.asBaseUnit().value - other.asBaseUnit().value)
-}
+interface UnitChargeType<T : DoubleBase> : UnitType<T, Coulomb>
 
 @JvmInline
 value class Coulomb(override val value: Double) : UnitCharge<Coulomb>, BaseUnit {
@@ -72,6 +66,12 @@ value class MilliampereHour(override val value: Double) : UnitCharge<Milliampere
     override fun asType(d: Double) = MilliampereHour(d)
     override fun asBaseUnit() = Coulomb(this.value * 3.6)
 }
+
+operator fun UnitChargeType<*>.plus(other: UnitChargeType<*>): Coulomb =
+    Coulomb(this.asBaseUnit().value + other.asBaseUnit().value)
+
+operator fun UnitChargeType<*>.minus(other: UnitChargeType<*>): Coulomb =
+    Coulomb(this.asBaseUnit().value - other.asBaseUnit().value)
 
 // Conversion functions using toUnit
 fun UnitCharge<*>.toCoulomb() = this.asBaseUnit()

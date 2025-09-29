@@ -2,18 +2,12 @@ package com.measures.time
 
 import com.measures.BaseUnit
 import com.measures.DoubleBase
-import com.measures.UnitTypedFull
+import com.measures.UnitType
 import kotlin.jvm.JvmInline
 
-typealias UnitTime<T> = UnitTimeTypedFull<T>
+typealias UnitTime<T> = UnitTimeType<T>
 
-interface UnitTimeTypedFull<T : DoubleBase> : UnitTypedFull<T, Second> {
-    operator fun plus(other: UnitTimeTypedFull<*>) =
-        Second(this.asBaseUnit().value + other.asBaseUnit().value)
-
-    operator fun minus(other: UnitTimeTypedFull<*>) =
-        Second(this.asBaseUnit().value - other.asBaseUnit().value)
-}
+interface UnitTimeType<T : DoubleBase> : UnitType<T, Second>
 
 @JvmInline
 value class Second(override val value: Double) : UnitTime<Second>, BaseUnit {
@@ -62,6 +56,12 @@ value class Nanosecond(override val value: Double) : UnitTime<Nanosecond> {
     override fun asType(d: Double) = Nanosecond(d)
     override fun asBaseUnit() = Second(this.value * 1E-9)
 }
+
+operator fun UnitTimeType<*>.plus(other: UnitTimeType<*>): Second =
+    Second(this.asBaseUnit().value + other.asBaseUnit().value)
+
+operator fun UnitTimeType<*>.minus(other: UnitTimeType<*>): Second =
+    Second(this.asBaseUnit().value - other.asBaseUnit().value)
 
 // Conversion functions using toUnit
 fun UnitTime<*>.toSecond() = this.asBaseUnit()

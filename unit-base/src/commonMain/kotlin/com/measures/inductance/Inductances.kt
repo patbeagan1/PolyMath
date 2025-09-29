@@ -2,22 +2,16 @@ package com.measures.inductance
 
 import com.measures.BaseUnit
 import com.measures.DoubleBase
-import com.measures.UnitTypedFull
+import com.measures.UnitType
 import com.measures.weight.UnitWeight
 import com.measures.distance.UnitDistance
 import com.measures.current.UnitCurrent
 import com.measures.time.UnitTime
 import kotlin.jvm.JvmInline
 
-typealias UnitInductance<T> = UnitInductanceTypedFull<T>
+typealias UnitInductance<T> = UnitInductanceType<T>
 
-interface UnitInductanceTypedFull<T : DoubleBase> : UnitTypedFull<T, Henry> {
-    operator fun plus(other: UnitInductanceTypedFull<*>) =
-        Henry(this.asBaseUnit().value + other.asBaseUnit().value)
-
-    operator fun minus(other: UnitInductanceTypedFull<*>) =
-        Henry(this.asBaseUnit().value - other.asBaseUnit().value)
-}
+interface UnitInductanceType<T : DoubleBase> : UnitType<T, Henry>
 
 @JvmInline
 value class Henry(override val value: Double) : UnitInductance<Henry>, BaseUnit {
@@ -34,6 +28,12 @@ value class Henry(override val value: Double) : UnitInductance<Henry>, BaseUnit 
         }
     }
 }
+
+operator fun UnitInductanceType<*>.plus(other: UnitInductanceType<*>): Henry =
+    Henry(this.asBaseUnit().value + other.asBaseUnit().value)
+
+operator fun UnitInductanceType<*>.minus(other: UnitInductanceType<*>): Henry =
+    Henry(this.asBaseUnit().value - other.asBaseUnit().value)
 
 fun UnitInductance<*>.toHenry() = this.asBaseUnit()
 

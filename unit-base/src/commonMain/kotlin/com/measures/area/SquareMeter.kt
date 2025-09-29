@@ -8,3 +8,5 @@ value class SquareMeter(override val value: Double) : UnitArea<SquareMeter>, Bas
     override fun asType(d: Double): SquareMeter = SquareMeter(d)
     override fun asBaseUnit(): SquareMeter = this
 }
+
+fun UnitArea<*>.toSquareMeter() = this.asBaseUnit()

@@ -2,19 +2,13 @@ package com.measures.frequency
 
 import com.measures.BaseUnit
 import com.measures.DoubleBase
-import com.measures.UnitTypedFull
+import com.measures.UnitType
 import com.measures.time.UnitTime
 import kotlin.jvm.JvmInline
 
-typealias UnitFrequency<T> = UnitFrequencyTypedFull<T>
+typealias UnitFrequency<T> = UnitFrequencyType<T>
 
-interface UnitFrequencyTypedFull<T : DoubleBase> : UnitTypedFull<T, Hertz> {
-    operator fun plus(other: UnitFrequencyTypedFull<*>) =
-        Hertz(this.asBaseUnit().value + other.asBaseUnit().value)
-
-    operator fun minus(other: UnitFrequencyTypedFull<*>) =
-        Hertz(this.asBaseUnit().value - other.asBaseUnit().value)
-}
+interface UnitFrequencyType<T : DoubleBase> : UnitType<T, Hertz>
 
 @JvmInline
 value class Hertz(override val value: Double) : UnitFrequency<Hertz>, BaseUnit {
@@ -28,6 +22,12 @@ value class Hertz(override val value: Double) : UnitFrequency<Hertz>, BaseUnit {
         }
     }
 }
+
+operator fun UnitFrequencyType<*>.plus(other: UnitFrequencyType<*>): Hertz =
+    Hertz(this.asBaseUnit().value + other.asBaseUnit().value)
+
+operator fun UnitFrequencyType<*>.minus(other: UnitFrequencyType<*>): Hertz =
+    Hertz(this.asBaseUnit().value - other.asBaseUnit().value)
 
 fun UnitFrequency<*>.toHertz() = this.asBaseUnit()
 

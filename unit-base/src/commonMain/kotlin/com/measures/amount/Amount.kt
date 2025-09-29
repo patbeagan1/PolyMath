@@ -2,18 +2,12 @@ package com.measures.amount
 
 import com.measures.BaseUnit
 import com.measures.DoubleBase
-import com.measures.UnitTypedFull
+import com.measures.UnitType
 import kotlin.jvm.JvmInline
 
-typealias UnitAmount<T> = UnitAmountTypedFull<T>
+typealias UnitAmount<T> = UnitAmountType<T>
 
-interface UnitAmountTypedFull<T : DoubleBase> : UnitTypedFull<T, Mole> {
-    operator fun plus(other: UnitAmountTypedFull<*>) =
-        Mole(this.asBaseUnit().value + other.asBaseUnit().value)
-
-    operator fun minus(other: UnitAmountTypedFull<*>) =
-        Mole(this.asBaseUnit().value - other.asBaseUnit().value)
-}
+interface UnitAmountType<T : DoubleBase> : UnitType<T, Mole>
 
 @JvmInline
 value class Mole(override val value: Double) : UnitAmount<Mole>, BaseUnit {
@@ -50,6 +44,12 @@ value class Kilomole(override val value: Double) : UnitAmount<Kilomole> {
     override fun asType(d: Double) = Kilomole(d)
     override fun asBaseUnit() = Mole(this.value * 1000.0)
 }
+
+operator fun UnitAmountType<*>.plus(other: UnitAmountType<*>): Mole =
+    Mole(this.asBaseUnit().value + other.asBaseUnit().value)
+
+operator fun UnitAmountType<*>.minus(other: UnitAmountType<*>): Mole =
+    Mole(this.asBaseUnit().value - other.asBaseUnit().value)
 
 // Conversion functions using toUnit
 fun UnitAmount<*>.toMole() = this.asBaseUnit()

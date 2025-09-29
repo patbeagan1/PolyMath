@@ -5,19 +5,22 @@ interface DoubleBase {
 }
 
 interface BaseUnit : DoubleBase {
-    fun <D1 : DoubleBase, D2 : DoubleBase, U : UnitTypedFull<D1, D2>> toUnitInternal(unit: U): D1 =
+    fun <D1 : DoubleBase, D2 : DoubleBase, U : UnitType<D1, D2>> toUnitInternal(unit: U): D1 =
         unit.asType(this.value / unit.asBaseUnit().value)
 }
 
-interface UnitTypedFull<T : DoubleBase, S : BaseUnit> : DoubleBase {
-    operator fun plus(other: T) = asType(this.value + other.value)
-    operator fun minus(other: T) = asType(this.value - other.value)
-    operator fun times(other: Double) = asType(this.value * other)
-    operator fun div(other: Double) = asType(this.value / other)
+interface UnitType<T : DoubleBase, S : BaseUnit> : DoubleBase {
+    infix fun plusUnit(other: T) = asType(this.value + other.value)
+    infix fun minusUnit(other: T) = asType(this.value - other.value)
+    infix fun times(other: Double) = asType(this.value * other)
+    infix fun div(other: Double) = asType(this.value / other)
     fun asBaseUnit(): S
     fun asType(d: Double): T
-    fun <D1 : DoubleBase, D2 : DoubleBase, U : UnitTypedFull<D1, D2>> toUnit(unit: U): D1 =
-        asBaseUnit().toUnitInternal(unit)
+    fun <
+            D1 : DoubleBase,
+            D2 : DoubleBase,
+            U : UnitType<D1, D2>
+            > toUnit(unit: U): D1 = asBaseUnit().toUnitInternal(unit)
 }
 
 object Consts {

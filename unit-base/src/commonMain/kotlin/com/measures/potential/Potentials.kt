@@ -2,22 +2,16 @@ package com.measures.potential
 
 import com.measures.BaseUnit
 import com.measures.DoubleBase
-import com.measures.UnitTypedFull
+import com.measures.UnitType
 import com.measures.weight.UnitWeight
 import com.measures.distance.UnitDistance
 import com.measures.current.UnitCurrent
 import com.measures.time.UnitTime
 import kotlin.jvm.JvmInline
 
-typealias UnitPotential<T> = UnitPotentialTypedFull<T>
+typealias UnitPotential<T> = UnitPotentialType<T>
 
-interface UnitPotentialTypedFull<T : DoubleBase> : UnitTypedFull<T, Volt> {
-    operator fun plus(other: UnitPotentialTypedFull<*>) =
-        Volt(this.asBaseUnit().value + other.asBaseUnit().value)
-
-    operator fun minus(other: UnitPotentialTypedFull<*>) =
-        Volt(this.asBaseUnit().value - other.asBaseUnit().value)
-}
+interface UnitPotentialType<T : DoubleBase> : UnitType<T, Volt>
 
 @JvmInline
 value class Volt(override val value: Double) : UnitPotential<Volt>, BaseUnit {
@@ -64,6 +58,12 @@ value class Gigavolt(override val value: Double) : UnitPotential<Gigavolt> {
     override fun asType(d: Double) = Gigavolt(d)
     override fun asBaseUnit() = Volt(this.value * 1E9)
 }
+
+operator fun UnitPotentialType<*>.plus(other: UnitPotentialType<*>): Volt =
+    Volt(this.asBaseUnit().value + other.asBaseUnit().value)
+
+operator fun UnitPotentialType<*>.minus(other: UnitPotentialType<*>): Volt =
+    Volt(this.asBaseUnit().value - other.asBaseUnit().value)
 
 // Conversion functions using toUnit
 fun UnitPotential<*>.toVolt() = this.asBaseUnit()

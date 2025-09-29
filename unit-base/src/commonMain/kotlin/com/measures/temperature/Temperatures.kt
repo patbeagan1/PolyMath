@@ -2,18 +2,12 @@ package com.measures.temperature
 
 import com.measures.BaseUnit
 import com.measures.DoubleBase
-import com.measures.UnitTypedFull
+import com.measures.UnitType
 import kotlin.jvm.JvmInline
 
-typealias UnitTemperature<T> = UnitTemperatureTypedFull<T>
+typealias UnitTemperature<T> = UnitTemperatureType<T>
 
-interface UnitTemperatureTypedFull<T : DoubleBase> : UnitTypedFull<T, Kelvin> {
-    operator fun plus(other: UnitTemperatureTypedFull<*>) =
-        Kelvin(this.asBaseUnit().value + other.asBaseUnit().value)
-
-    operator fun minus(other: UnitTemperatureTypedFull<*>) =
-        Kelvin(this.asBaseUnit().value - other.asBaseUnit().value)
-}
+interface UnitTemperatureType<T : DoubleBase> : UnitType<T, Kelvin>
 
 @JvmInline
 value class Kelvin(override val value: Double) : UnitTemperature<Kelvin>, BaseUnit {
@@ -38,6 +32,12 @@ value class Rankine(override val value: Double) : UnitTemperature<Rankine> {
     override fun asType(d: Double) = Rankine(d)
     override fun asBaseUnit() = Kelvin(this.value * 5.0 / 9.0)
 }
+
+operator fun UnitTemperatureType<*>.plus(other: UnitTemperatureType<*>): Kelvin =
+    Kelvin(this.asBaseUnit().value + other.asBaseUnit().value)
+
+operator fun UnitTemperatureType<*>.minus(other: UnitTemperatureType<*>): Kelvin =
+    Kelvin(this.asBaseUnit().value - other.asBaseUnit().value)
 
 // Conversion functions using toUnit
 fun UnitTemperature<*>.toKelvin() = this.asBaseUnit()

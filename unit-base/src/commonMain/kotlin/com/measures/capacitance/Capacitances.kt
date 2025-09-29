@@ -2,22 +2,16 @@ package com.measures.capacitance
 
 import com.measures.BaseUnit
 import com.measures.DoubleBase
-import com.measures.UnitTypedFull
+import com.measures.UnitType
 import com.measures.current.UnitCurrent
 import com.measures.time.UnitTime
 import com.measures.weight.UnitWeight
 import com.measures.distance.UnitDistance
 import kotlin.jvm.JvmInline
 
-typealias UnitCapacitance<T> = UnitCapacitanceTypedFull<T>
+typealias UnitCapacitance<T> = UnitCapacitanceType<T>
 
-interface UnitCapacitanceTypedFull<T : DoubleBase> : UnitTypedFull<T, Farad> {
-    operator fun plus(other: UnitCapacitanceTypedFull<*>) =
-        Farad(this.asBaseUnit().value + other.asBaseUnit().value)
-
-    operator fun minus(other: UnitCapacitanceTypedFull<*>) =
-        Farad(this.asBaseUnit().value - other.asBaseUnit().value)
-}
+interface UnitCapacitanceType<T : DoubleBase> : UnitType<T, Farad>
 
 @JvmInline
 value class Farad(override val value: Double) : UnitCapacitance<Farad>, BaseUnit {
@@ -34,5 +28,11 @@ value class Farad(override val value: Double) : UnitCapacitance<Farad>, BaseUnit
         }
     }
 }
+
+operator fun UnitCapacitanceType<*>.plus(other: UnitCapacitanceType<*>): Farad =
+    Farad(this.asBaseUnit().value + other.asBaseUnit().value)
+
+operator fun UnitCapacitanceType<*>.minus(other: UnitCapacitanceType<*>): Farad =
+    Farad(this.asBaseUnit().value - other.asBaseUnit().value)
 
 fun UnitCapacitance<*>.toFarad() = this.asBaseUnit()

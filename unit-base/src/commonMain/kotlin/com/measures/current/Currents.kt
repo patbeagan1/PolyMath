@@ -1,19 +1,20 @@
 package com.measures.current
 
 import com.measures.BaseUnit
+import com.measures.Consts
 import com.measures.DoubleBase
-import com.measures.UnitTypedFull
+import com.measures.UnitType
 import kotlin.jvm.JvmInline
 
-typealias UnitCurrent<T> = UnitCurrentTypedFull<T>
+typealias UnitCurrent<T> = UnitCurrentType<T>
 
-interface UnitCurrentTypedFull<T : DoubleBase> : UnitTypedFull<T, Ampere> {
-    operator fun plus(other: UnitCurrentTypedFull<*>) =
-        Ampere(this.asBaseUnit().value + other.asBaseUnit().value)
+interface UnitCurrentType<T : DoubleBase> : UnitType<T, Ampere>
 
-    operator fun minus(other: UnitCurrentTypedFull<*>) =
-        Ampere(this.asBaseUnit().value - other.asBaseUnit().value)
-}
+operator fun UnitCurrentType<*>.plus(other: UnitCurrentType<*>): Ampere =
+    Ampere(this.asBaseUnit().value + other.asBaseUnit().value)
+
+operator fun UnitCurrentType<*>.minus(other: UnitCurrentType<*>): Ampere =
+    Ampere(this.asBaseUnit().value - other.asBaseUnit().value)
 
 @JvmInline
 value class Ampere(override val value: Double) : UnitCurrent<Ampere>, BaseUnit {
@@ -24,26 +25,27 @@ value class Ampere(override val value: Double) : UnitCurrent<Ampere>, BaseUnit {
 @JvmInline
 value class Milliampere(override val value: Double) : UnitCurrent<Milliampere> {
     override fun asType(d: Double) = Milliampere(d)
-    override fun asBaseUnit() = Ampere(this.value * 0.001)
+    override fun asBaseUnit() = Ampere(this.value * Consts.MILLI)
 }
 
 @JvmInline
 value class Microampere(override val value: Double) : UnitCurrent<Microampere> {
     override fun asType(d: Double) = Microampere(d)
-    override fun asBaseUnit() = Ampere(this.value * 1E-6)
+    override fun asBaseUnit() = Ampere(this.value * Consts.MICRO)
 }
 
 @JvmInline
 value class Kiloampere(override val value: Double) : UnitCurrent<Kiloampere> {
     override fun asType(d: Double) = Kiloampere(d)
-    override fun asBaseUnit() = Ampere(this.value * 1000.0)
+    override fun asBaseUnit() = Ampere(this.value * Consts.KILO)
 }
 
 @JvmInline
 value class Megaampere(override val value: Double) : UnitCurrent<Megaampere> {
     override fun asType(d: Double) = Megaampere(d)
-    override fun asBaseUnit() = Ampere(this.value * 1E6)
+    override fun asBaseUnit() = Ampere(this.value * Consts.MEGA)
 }
+
 
 // Conversion functions using toUnit
 fun UnitCurrent<*>.toAmpere() = this.asBaseUnit()
