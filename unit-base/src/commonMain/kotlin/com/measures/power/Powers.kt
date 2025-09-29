@@ -16,6 +16,9 @@ interface UnitPowerType<T : DoubleBase> : UnitType<T, Watt>
 value class Watt(override val value: Double) : UnitPower<Watt>, BaseUnit {
     override fun asType(d: Double) = Watt(d)
     override fun asBaseUnit() = this
+
+    operator fun plus(other: UnitPower<*>) = (this as UnitPower<*>).plus(other)
+    operator fun minus(other: UnitPower<*>) = (this as UnitPower<*>).minus(other)
     
     companion object {
         fun from(mass: UnitWeight<*>, distance: UnitDistance<*>, time: UnitTime<*>): Watt {
@@ -31,24 +34,36 @@ value class Watt(override val value: Double) : UnitPower<Watt>, BaseUnit {
 value class Milliwatt(override val value: Double) : UnitPower<Milliwatt> {
     override fun asType(d: Double) = Milliwatt(d)
     override fun asBaseUnit() = Watt(this.value * 0.001)
+
+    operator fun plus(other: UnitPower<*>) = (this as UnitPower<*>).plus(other)
+    operator fun minus(other: UnitPower<*>) = (this as UnitPower<*>).minus(other)
 }
 
 @JvmInline
 value class Kilowatt(override val value: Double) : UnitPower<Kilowatt> {
     override fun asType(d: Double) = Kilowatt(d)
     override fun asBaseUnit() = Watt(this.value * 1000.0)
+
+    operator fun plus(other: UnitPower<*>) = (this as UnitPower<*>).plus(other)
+    operator fun minus(other: UnitPower<*>) = (this as UnitPower<*>).minus(other)
 }
 
 @JvmInline
 value class Megawatt(override val value: Double) : UnitPower<Megawatt> {
     override fun asType(d: Double) = Megawatt(d)
     override fun asBaseUnit() = Watt(this.value * 1E6)
+
+    operator fun plus(other: UnitPower<*>) = (this as UnitPower<*>).plus(other)
+    operator fun minus(other: UnitPower<*>) = (this as UnitPower<*>).minus(other)
 }
 
 @JvmInline
 value class Gigawatt(override val value: Double) : UnitPower<Gigawatt> {
     override fun asType(d: Double) = Gigawatt(d)
     override fun asBaseUnit() = Watt(this.value * 1E9)
+
+    operator fun plus(other: UnitPower<*>) = (this as UnitPower<*>).plus(other)
+    operator fun minus(other: UnitPower<*>) = (this as UnitPower<*>).minus(other)
 }
 
 operator fun UnitPowerType<*>.plus(other: UnitPowerType<*>): Watt =
@@ -61,18 +76,27 @@ operator fun UnitPowerType<*>.minus(other: UnitPowerType<*>): Watt =
 value class Horsepower(override val value: Double) : UnitPower<Horsepower> {
     override fun asType(d: Double) = Horsepower(d)
     override fun asBaseUnit() = Watt(this.value * 745.7)
+
+    operator fun plus(other: UnitPower<*>) = (this as UnitPower<*>).plus(other)
+    operator fun minus(other: UnitPower<*>) = (this as UnitPower<*>).minus(other)
 }
 
 @JvmInline
 value class ErgPerSecond(override val value: Double) : UnitPower<ErgPerSecond> {
     override fun asType(d: Double) = ErgPerSecond(d)
     override fun asBaseUnit() = Watt(this.value * 1E-7)
+
+    operator fun plus(other: UnitPower<*>) = (this as UnitPower<*>).plus(other)
+    operator fun minus(other: UnitPower<*>) = (this as UnitPower<*>).minus(other)
 }
 
 @JvmInline
 value class FootPoundPerSecond(override val value: Double) : UnitPower<FootPoundPerSecond> {
     override fun asType(d: Double) = FootPoundPerSecond(d)
     override fun asBaseUnit() = Watt(this.value * 1.355818)
+
+    operator fun plus(other: UnitPower<*>) = (this as UnitPower<*>).plus(other)
+    operator fun minus(other: UnitPower<*>) = (this as UnitPower<*>).minus(other)
 }
 
 // Conversion functions using toUnit

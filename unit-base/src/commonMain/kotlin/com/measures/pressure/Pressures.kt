@@ -16,6 +16,9 @@ interface UnitPressureType<T : DoubleBase> : UnitType<T, Pascal>
 value class Pascal(override val value: Double) : UnitPressure<Pascal>, BaseUnit {
     override fun asType(d: Double) = Pascal(d)
     override fun asBaseUnit() = this
+
+    operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plus(other)
+    operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minus(other)
     
     companion object {
         fun from(mass: UnitWeight<*>, distance: UnitDistance<*>, time: UnitTime<*>): Pascal {
@@ -31,48 +34,72 @@ value class Pascal(override val value: Double) : UnitPressure<Pascal>, BaseUnit 
 value class Bar(override val value: Double) : UnitPressure<Bar> {
     override fun asType(d: Double) = Bar(d)
     override fun asBaseUnit() = Pascal(this.value * 100000.0)
+
+    operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plus(other)
+    operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minus(other)
 }
 
 @JvmInline
 value class Atmosphere(override val value: Double) : UnitPressure<Atmosphere> {
     override fun asType(d: Double) = Atmosphere(d)
     override fun asBaseUnit() = Pascal(this.value * 101325.0)
+
+    operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plus(other)
+    operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minus(other)
 }
 
 @JvmInline
 value class Torr(override val value: Double) : UnitPressure<Torr> {
     override fun asType(d: Double) = Torr(d)
     override fun asBaseUnit() = Pascal(this.value * 133.322)
+
+    operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plus(other)
+    operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minus(other)
 }
 
 @JvmInline
 value class MillimeterOfMercury(override val value: Double) : UnitPressure<MillimeterOfMercury> {
     override fun asType(d: Double) = MillimeterOfMercury(d)
     override fun asBaseUnit() = Pascal(this.value * 133.322)
+
+    operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plus(other)
+    operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minus(other)
 }
 
 @JvmInline
 value class PoundPerSquareInch(override val value: Double) : UnitPressure<PoundPerSquareInch> {
     override fun asType(d: Double) = PoundPerSquareInch(d)
     override fun asBaseUnit() = Pascal(this.value * 6894.757)
+
+    operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plus(other)
+    operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minus(other)
 }
 
 @JvmInline
 value class Kilopascal(override val value: Double) : UnitPressure<Kilopascal> {
     override fun asType(d: Double) = Kilopascal(d)
     override fun asBaseUnit() = Pascal(this.value * 1000.0)
+
+    operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plus(other)
+    operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minus(other)
 }
 
 @JvmInline
 value class Megapascal(override val value: Double) : UnitPressure<Megapascal> {
     override fun asType(d: Double) = Megapascal(d)
     override fun asBaseUnit() = Pascal(this.value * 1E6)
+
+    operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plus(other)
+    operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minus(other)
 }
 
 @JvmInline
 value class Millibar(override val value: Double) : UnitPressure<Millibar> {
     override fun asType(d: Double) = Millibar(d)
     override fun asBaseUnit() = Pascal(this.value * 100.0)
+
+    operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plus(other)
+    operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minus(other)
 }
 
 operator fun UnitPressureType<*>.plus(other: UnitPressureType<*>): Pascal =

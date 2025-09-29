@@ -17,6 +17,9 @@ interface UnitCapacitanceType<T : DoubleBase> : UnitType<T, Farad>
 value class Farad(override val value: Double) : UnitCapacitance<Farad>, BaseUnit {
     override fun asType(d: Double) = Farad(d)
     override fun asBaseUnit() = this
+
+    operator fun plus(other: UnitCapacitance<*>) = (this as UnitCapacitance<*>).plus(other)
+    operator fun minus(other: UnitCapacitance<*>) = (this as UnitCapacitance<*>).minus(other)
     
     companion object {
         fun from(current: UnitCurrent<*>, time: UnitTime<*>, mass: UnitWeight<*>, distance: UnitDistance<*>): Farad {

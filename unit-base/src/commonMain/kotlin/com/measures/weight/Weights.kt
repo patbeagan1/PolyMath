@@ -13,6 +13,9 @@ interface UnitWeightType<T : DoubleBase> : UnitType<T, Gram>
 value class Gram(override val value: Double) : UnitWeight<Gram>, BaseUnit {
     override fun asType(d: Double) = Gram(d)
     override fun asBaseUnit() = this
+
+    operator fun plus(other: UnitWeight<*>) = (this as UnitWeight<*>).plus(other)
+    operator fun minus(other: UnitWeight<*>) = (this as UnitWeight<*>).minus(other)
 }
 
 operator fun UnitWeightType<*>.plus(other: UnitWeightType<*>): Gram =

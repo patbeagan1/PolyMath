@@ -14,12 +14,18 @@ interface UnitAngleType<T : DoubleBase> : UnitType<T, Radian>
 value class Radian(override val value: Double) : UnitAngle<Radian>, BaseUnit {
     override fun asType(d: Double) = Radian(d)
     override fun asBaseUnit() = this
+
+    operator fun plus(other: UnitAngle<*>) = (this as UnitAngle<*>).plus(other)
+    operator fun minus(other: UnitAngle<*>) = (this as UnitAngle<*>).minus(other)
 }
 
 @JvmInline
 value class Degree(override val value: Double) : UnitAngle<Degree> {
     override fun asType(d: Double) = Degree(d)
     override fun asBaseUnit() = Radian(this.value * PI / 180.0)
+
+    operator fun plus(other: UnitAngle<*>) = (this as UnitAngle<*>).plus(other)
+    operator fun minus(other: UnitAngle<*>) = (this as UnitAngle<*>).minus(other)
 }
 
 operator fun UnitAngleType<*>.plus(other: UnitAngleType<*>): Radian =

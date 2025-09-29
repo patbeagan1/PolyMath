@@ -20,30 +20,45 @@ operator fun UnitCurrentType<*>.minus(other: UnitCurrentType<*>): Ampere =
 value class Ampere(override val value: Double) : UnitCurrent<Ampere>, BaseUnit {
     override fun asType(d: Double) = Ampere(d)
     override fun asBaseUnit() = this
+
+    operator fun plus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).plus(other)
+    operator fun minus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).minus(other)
 }
 
 @JvmInline
 value class Milliampere(override val value: Double) : UnitCurrent<Milliampere> {
     override fun asType(d: Double) = Milliampere(d)
     override fun asBaseUnit() = Ampere(this.value * Consts.MILLI)
+
+    operator fun plus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).plus(other)
+    operator fun minus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).minus(other)
 }
 
 @JvmInline
 value class Microampere(override val value: Double) : UnitCurrent<Microampere> {
     override fun asType(d: Double) = Microampere(d)
     override fun asBaseUnit() = Ampere(this.value * Consts.MICRO)
+
+    operator fun plus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).plus(other)
+    operator fun minus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).minus(other)
 }
 
 @JvmInline
 value class Kiloampere(override val value: Double) : UnitCurrent<Kiloampere> {
     override fun asType(d: Double) = Kiloampere(d)
     override fun asBaseUnit() = Ampere(this.value * Consts.KILO)
+
+    operator fun plus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).plus(other)
+    operator fun minus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).minus(other)
 }
 
 @JvmInline
 value class Megaampere(override val value: Double) : UnitCurrent<Megaampere> {
     override fun asType(d: Double) = Megaampere(d)
     override fun asBaseUnit() = Ampere(this.value * Consts.MEGA)
+
+    operator fun plus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).plus(other)
+    operator fun minus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).minus(other)
 }
 
 

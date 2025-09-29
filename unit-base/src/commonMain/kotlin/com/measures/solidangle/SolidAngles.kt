@@ -13,6 +13,9 @@ interface UnitSolidAngleType<T : DoubleBase> : UnitType<T, Steradian>
 value class Steradian(override val value: Double) : UnitSolidAngle<Steradian>, BaseUnit {
     override fun asType(d: Double) = Steradian(d)
     override fun asBaseUnit() = this
+
+    operator fun plus(other: UnitSolidAngle<*>) = (this as UnitSolidAngle<*>).plus(other)
+    operator fun minus(other: UnitSolidAngle<*>) = (this as UnitSolidAngle<*>).minus(other)
 }
 
 operator fun UnitSolidAngleType<*>.plus(other: UnitSolidAngleType<*>): Steradian =

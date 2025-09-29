@@ -16,6 +16,9 @@ interface UnitFluxDensityType<T : DoubleBase> : UnitType<T, Tesla>
 value class Tesla(override val value: Double) : UnitFluxDensity<Tesla>, BaseUnit {
     override fun asType(d: Double) = Tesla(d)
     override fun asBaseUnit() = this
+
+    operator fun plus(other: UnitFluxDensity<*>) = (this as UnitFluxDensity<*>).plus(other)
+    operator fun minus(other: UnitFluxDensity<*>) = (this as UnitFluxDensity<*>).minus(other)
     
     companion object {
         fun from(mass: UnitWeight<*>, current: UnitCurrent<*>, time: UnitTime<*>): Tesla {

@@ -17,6 +17,9 @@ interface UnitInductanceType<T : DoubleBase> : UnitType<T, Henry>
 value class Henry(override val value: Double) : UnitInductance<Henry>, BaseUnit {
     override fun asType(d: Double) = Henry(d)
     override fun asBaseUnit() = this
+
+    operator fun plus(other: UnitInductance<*>) = (this as UnitInductance<*>).plus(other)
+    operator fun minus(other: UnitInductance<*>) = (this as UnitInductance<*>).minus(other)
     
     companion object {
         fun from(mass: UnitWeight<*>, distance: UnitDistance<*>, current: UnitCurrent<*>, time: UnitTime<*>): Henry {

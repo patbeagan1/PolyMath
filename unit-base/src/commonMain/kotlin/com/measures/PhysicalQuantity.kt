@@ -1,9 +1,7 @@
-package dev.patbeagan.physics.classical
-
-import main.dsl.mathnum.Scalar
+package com.measures
 
 data class PhysicalQuantity(
-    val magnitude: Scalar,
+    val magnitude: Double,
     val dimension: PhysicalDimension
 ) {
     fun isCommensurableTo(other: PhysicalQuantity) = dimension == other.dimension

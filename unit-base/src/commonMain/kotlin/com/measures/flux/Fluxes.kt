@@ -17,6 +17,9 @@ interface UnitFluxType<T : DoubleBase> : UnitType<T, Weber>
 value class Weber(override val value: Double) : UnitFlux<Weber>, BaseUnit {
     override fun asType(d: Double) = Weber(d)
     override fun asBaseUnit() = this
+
+    operator fun plus(other: UnitFlux<*>) = (this as UnitFlux<*>).plus(other)
+    operator fun minus(other: UnitFlux<*>) = (this as UnitFlux<*>).minus(other)
     
     companion object {
         fun from(mass: UnitWeight<*>, distance: UnitDistance<*>, current: UnitCurrent<*>, time: UnitTime<*>): Weber {

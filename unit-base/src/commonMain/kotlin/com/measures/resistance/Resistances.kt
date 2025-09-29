@@ -17,6 +17,9 @@ interface UnitResistanceType<T : DoubleBase> : UnitType<T, Ohm>
 value class Ohm(override val value: Double) : UnitResistance<Ohm>, BaseUnit {
     override fun asType(d: Double) = Ohm(d)
     override fun asBaseUnit() = this
+
+    operator fun plus(other: UnitResistance<*>) = (this as UnitResistance<*>).plus(other)
+    operator fun minus(other: UnitResistance<*>) = (this as UnitResistance<*>).minus(other)
     
     companion object {
         fun from(mass: UnitWeight<*>, distance: UnitDistance<*>, current: UnitCurrent<*>, time: UnitTime<*>): Ohm {

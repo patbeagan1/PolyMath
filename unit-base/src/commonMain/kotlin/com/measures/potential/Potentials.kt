@@ -17,6 +17,9 @@ interface UnitPotentialType<T : DoubleBase> : UnitType<T, Volt>
 value class Volt(override val value: Double) : UnitPotential<Volt>, BaseUnit {
     override fun asType(d: Double) = Volt(d)
     override fun asBaseUnit() = this
+
+    operator fun plus(other: UnitPotential<*>) = (this as UnitPotential<*>).plus(other)
+    operator fun minus(other: UnitPotential<*>) = (this as UnitPotential<*>).minus(other)
     
     companion object {
         fun from(mass: UnitWeight<*>, distance: UnitDistance<*>, current: UnitCurrent<*>, time: UnitTime<*>): Volt {
@@ -33,30 +36,45 @@ value class Volt(override val value: Double) : UnitPotential<Volt>, BaseUnit {
 value class Millivolt(override val value: Double) : UnitPotential<Millivolt> {
     override fun asType(d: Double) = Millivolt(d)
     override fun asBaseUnit() = Volt(this.value * 0.001)
+
+    operator fun plus(other: UnitPotential<*>) = (this as UnitPotential<*>).plus(other)
+    operator fun minus(other: UnitPotential<*>) = (this as UnitPotential<*>).minus(other)
 }
 
 @JvmInline
 value class Microvolt(override val value: Double) : UnitPotential<Microvolt> {
     override fun asType(d: Double) = Microvolt(d)
     override fun asBaseUnit() = Volt(this.value * 1E-6)
+
+    operator fun plus(other: UnitPotential<*>) = (this as UnitPotential<*>).plus(other)
+    operator fun minus(other: UnitPotential<*>) = (this as UnitPotential<*>).minus(other)
 }
 
 @JvmInline
 value class Kilovolt(override val value: Double) : UnitPotential<Kilovolt> {
     override fun asType(d: Double) = Kilovolt(d)
     override fun asBaseUnit() = Volt(this.value * 1000.0)
+
+    operator fun plus(other: UnitPotential<*>) = (this as UnitPotential<*>).plus(other)
+    operator fun minus(other: UnitPotential<*>) = (this as UnitPotential<*>).minus(other)
 }
 
 @JvmInline
 value class Megavolt(override val value: Double) : UnitPotential<Megavolt> {
     override fun asType(d: Double) = Megavolt(d)
     override fun asBaseUnit() = Volt(this.value * 1E6)
+
+    operator fun plus(other: UnitPotential<*>) = (this as UnitPotential<*>).plus(other)
+    operator fun minus(other: UnitPotential<*>) = (this as UnitPotential<*>).minus(other)
 }
 
 @JvmInline
 value class Gigavolt(override val value: Double) : UnitPotential<Gigavolt> {
     override fun asType(d: Double) = Gigavolt(d)
     override fun asBaseUnit() = Volt(this.value * 1E9)
+
+    operator fun plus(other: UnitPotential<*>) = (this as UnitPotential<*>).plus(other)
+    operator fun minus(other: UnitPotential<*>) = (this as UnitPotential<*>).minus(other)
 }
 
 operator fun UnitPotentialType<*>.plus(other: UnitPotentialType<*>): Volt =

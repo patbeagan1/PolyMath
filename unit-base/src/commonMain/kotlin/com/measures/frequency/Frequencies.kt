@@ -14,6 +14,9 @@ interface UnitFrequencyType<T : DoubleBase> : UnitType<T, Hertz>
 value class Hertz(override val value: Double) : UnitFrequency<Hertz>, BaseUnit {
     override fun asType(d: Double) = Hertz(d)
     override fun asBaseUnit() = this
+
+    operator fun plus(other: UnitFrequency<*>) = (this as UnitFrequency<*>).plus(other)
+    operator fun minus(other: UnitFrequency<*>) = (this as UnitFrequency<*>).minus(other)
     
     companion object {
         fun from(time: UnitTime<*>): Hertz {
