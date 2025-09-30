@@ -9,6 +9,11 @@ typealias UnitTemperature<T> = UnitTemperatureType<T>
 
 interface UnitTemperatureType<T : DoubleBase> : UnitType<T, Kelvin>
 
+/**
+ * The Kelvin scale, proposed by William Thomson (Lord Kelvin) in 1848,
+ * is the SI base unit for thermodynamic temperature and starts at absolute zero,
+ * the theoretical point where all molecular motions cease.
+ */
 @JvmInline
 value class Kelvin(override val value: Double) : UnitTemperature<Kelvin>, BaseUnit {
     override fun asType(d: Double) = Kelvin(d)
@@ -18,6 +23,10 @@ value class Kelvin(override val value: Double) : UnitTemperature<Kelvin>, BaseUn
     operator fun minus(other: UnitTemperature<*>) = (this as UnitTemperature<*>).minus(other)
 }
 
+/**
+ * The Celsius scale (originally called centigrade) was introduced by Anders Celsius in 1742,
+ * defining 0°C as the freezing point and 100°C as the boiling point of water.
+ */
 @JvmInline
 value class Celsius(override val value: Double) : UnitTemperature<Celsius> {
     override fun asType(d: Double) = Celsius(d)
@@ -27,6 +36,9 @@ value class Celsius(override val value: Double) : UnitTemperature<Celsius> {
     operator fun minus(other: UnitTemperature<*>) = (this as UnitTemperature<*>).minus(other)
 }
 
+/**
+ * The Fahrenheit scale was created in 1724, by Daniel Gabriel Fahrenheit, and is still used in some countries today.
+ */
 @JvmInline
 value class Fahrenheit(override val value: Double) : UnitTemperature<Fahrenheit> {
     override fun asType(d: Double) = Fahrenheit(d)
@@ -36,6 +48,10 @@ value class Fahrenheit(override val value: Double) : UnitTemperature<Fahrenheit>
     operator fun minus(other: UnitTemperature<*>) = (this as UnitTemperature<*>).minus(other)
 }
 
+/**
+ * The Rankine scale, introduced by William John Macquorn Rankine in 1859,
+ * is an absolute temperature scale used primarily in engineering fields in the United States.
+ */
 @JvmInline
 value class Rankine(override val value: Double) : UnitTemperature<Rankine> {
     override fun asType(d: Double) = Rankine(d)
