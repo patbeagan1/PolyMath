@@ -11,10 +11,10 @@ value class Meter(override val value: Double) : UnitDistance<Meter>, BaseUnit {
     override fun asType(d: Double) = Meter(d)
     override fun asBaseUnit() = this
 
-    operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plus(other)
-    operator fun minus(other: UnitDistance<*>): Meter = (this as UnitDistance<*>).minus(other)
-    operator fun times(other: UnitDistance<*>): SquareMeter = (this as UnitDistance<*>).times(other)
-    operator fun times(other: UnitArea<*>): Liter = (this as UnitDistance<*>).times(other)
+    override operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plusUnit(other)
+    override operator fun minus(other: UnitDistance<*>) = (this as UnitDistance<*>).minusUnit(other)
+    override operator fun times(other: UnitDistance<*>) = (this as UnitDistance<*>).timesUnit(other)
+    override operator fun times(other: UnitArea<*>) = (this as UnitDistance<*>).timesUnit(other)
 }
 
 fun UnitDistance<*>.toMeter() = this.asBaseUnit()

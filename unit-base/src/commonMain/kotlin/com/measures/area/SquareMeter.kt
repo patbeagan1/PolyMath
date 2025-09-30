@@ -9,10 +9,10 @@ value class SquareMeter(override val value: Double) : UnitArea<SquareMeter>, Bas
     override fun asType(d: Double): SquareMeter = SquareMeter(d)
     override fun asBaseUnit(): SquareMeter = this
 
-    operator fun plus(other: UnitArea<*>) = (this as UnitArea<*>).plus(other)
-    operator fun minus(other: UnitArea<*>) = (this as UnitArea<*>).minus(other)
-    operator fun div(other: UnitDistance<*>) = (this as UnitArea<*>).div(other)
-    operator fun times(other: UnitDistance<*>) = (this as UnitArea<*>).times(other)
+    override operator fun plus(other: UnitArea<*>) = (this as UnitArea<*>).plusUnit(other)
+    override operator fun minus(other: UnitArea<*>) = (this as UnitArea<*>).minusUnit(other)
+    override operator fun div(other: UnitDistance<*>) = (this as UnitArea<*>).divUnit(other)
+    override operator fun times(other: UnitDistance<*>) = (this as UnitArea<*>).timesUnit(other)
 }
 
 fun UnitArea<*>.toSquareMeter() = this.asBaseUnit()

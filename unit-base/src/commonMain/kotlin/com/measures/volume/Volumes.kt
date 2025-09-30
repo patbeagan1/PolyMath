@@ -5,22 +5,25 @@ import com.measures.UnitType
 import com.measures.area.SquareMeter
 import com.measures.area.UnitArea
 import com.measures.distance.Meter
+import com.measures.distance.UnitDistance
 
-typealias UnitVolume<T> = UnitVolumeType<T>
+interface UnitVolume<T : DoubleBase> : UnitType<T, Liter> {
+    operator fun plus(other: UnitVolume<*>): Liter
+    operator fun minus(other: UnitVolume<*>): Liter
+    operator fun div(other: UnitArea<*>): Meter
+    operator fun div(other: UnitDistance<*>): SquareMeter
+}
 
-interface UnitVolumeType<T : DoubleBase> : UnitType<T, Liter>
-
-
-operator fun UnitVolumeType<*>.plus(other: UnitVolumeType<*>): Liter =
+fun UnitVolume<*>.plusUnit(other: UnitVolume<*>): Liter =
     Liter(this.asBaseUnit().value + other.asBaseUnit().value)
 
-operator fun UnitVolumeType<*>.minus(other: UnitVolumeType<*>): Liter =
+fun UnitVolume<*>.minusUnit(other: UnitVolume<*>): Liter =
     Liter(this.asBaseUnit().value - other.asBaseUnit().value)
 
-operator fun UnitVolumeType<*>.div(other: UnitArea<*>): Meter =
+fun UnitVolume<*>.divUnit(other: UnitArea<*>): Meter =
     Meter(this.asBaseUnit().value / other.asBaseUnit().value)
 
-operator fun UnitVolumeType<*>.div(other: com.measures.distance.UnitDistance<*>): SquareMeter =
+fun UnitVolume<*>.divUnit(other: UnitDistance<*>): SquareMeter =
     SquareMeter(this.asBaseUnit().value / other.asBaseUnit().value)
 
 

@@ -10,10 +10,10 @@ value class Liter(override val value: Double) : UnitVolume<Liter>, BaseUnit {
     override fun asType(d: Double) = Liter(d)
     override fun asBaseUnit() = this
 
-    operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plus(other)
-    operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minus(other)
-    operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).div(other)
-    operator fun div(other: UnitDistance<*>) = (this as UnitVolume<*>).div(other)
+    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plus(other)
+    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minus(other)
+    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).div(other)
+    override operator fun div(other: UnitDistance<*>) = (this as UnitVolume<*>).div(other)
 }
 
 fun UnitVolume<*>.toLiter() = this.asBaseUnit()

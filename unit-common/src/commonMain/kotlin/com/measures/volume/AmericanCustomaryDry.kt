@@ -1,5 +1,7 @@
 package com.measures.volume
 
+import com.measures.area.UnitArea
+import com.measures.distance.UnitDistance
 import kotlin.jvm.JvmInline
 
 // American Customary Dry Volume Units
@@ -14,34 +16,64 @@ fun UnitVolume<*>.toUSDryQuart() = toUnit(USDryQuart(1.0))
 value class USDryBarrel(override val value: Double) : UnitVolume<USDryBarrel> {
     override fun asType(d: Double) = USDryBarrel(d)
     override fun asBaseUnit() = Liter(value * 0.115628199 * 1000)
+
+    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
+    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
+    override operator fun div(other: UnitDistance<*>) = (this as UnitVolume<*>).divUnit(other)
+    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
 }
 
 @JvmInline
 value class USDryBushel(override val value: Double) : UnitVolume<USDryBushel> {
     override fun asType(d: Double) = USDryBushel(d)
     override fun asBaseUnit() = Liter(value * 0.03523907 * 1000)
+
+    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
+    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
+    override operator fun div(other: UnitDistance<*>) = (this as UnitVolume<*>).divUnit(other)
+    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
 }
 
 @JvmInline
 value class USDryGallon(override val value: Double) : UnitVolume<USDryGallon> {
     override fun asType(d: Double) = USDryGallon(d)
     override fun asBaseUnit() = Liter(value * 0.004404884 * 1000)
+
+    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
+    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
+    override operator fun div(other: UnitDistance<*>) = (this as UnitVolume<*>).divUnit(other)
+    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
 }
 
 @JvmInline
 value class USDryPeck(override val value: Double) : UnitVolume<USDryPeck> {
     override fun asType(d: Double) = USDryPeck(d)
     override fun asBaseUnit() = Liter(value * 0.008809768 * 1000)
+
+    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
+    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
+    override operator fun div(other: UnitDistance<*>) = (this as UnitVolume<*>).divUnit(other)
+    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
 }
 
 @JvmInline
 value class USDryPint(override val value: Double) : UnitVolume<USDryPint> {
     override fun asType(d: Double) = USDryPint(d)
     override fun asBaseUnit() = Liter(value * 0.00055061 * 1000)
+
+    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
+    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
+    override operator fun div(other: UnitDistance<*>) = (this as UnitVolume<*>).divUnit(other)
+    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
 }
 
 @JvmInline
 value class USDryQuart(override val value: Double) : UnitVolume<USDryQuart> {
     override fun asType(d: Double) = USDryQuart(d)
     override fun asBaseUnit() = Liter(value * 0.001101221 * 1000)
+
+    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
+    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
+    override operator fun div(other: UnitDistance<*>) = (this as UnitVolume<*>).divUnit(other)
+    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
 }

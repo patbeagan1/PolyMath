@@ -1,5 +1,7 @@
 package com.measures.weight
 
+import com.measures.acceleration.UnitAcceleration
+import com.measures.force.Newton
 import kotlin.jvm.JvmInline
 
 // Avoirdupois Weight Units
@@ -19,64 +21,108 @@ fun UnitMass<*>.toShortTon() = toUnit(ShortTon(1.0))
 value class Dram(override val value: Double) : UnitMass<Dram> {
     override fun asType(d: Double) = Dram(d)
     override fun asBaseUnit() = Pound(value / 256).asBaseUnit()
+
+    override fun plus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).plusUnit(other)
+    override fun minus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).minusUnit(other)
+    override fun times(other: UnitAcceleration<*>): Newton = (this as UnitMass<*>).timesUnit(other)
 }
 
 @JvmInline
 value class Grain(override val value: Double) : UnitMass<Grain> {
     override fun asType(d: Double) = Grain(d)
     override fun asBaseUnit() = Pound(value / 7000).asBaseUnit()
+
+    override fun plus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).plusUnit(other)
+    override fun minus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).minusUnit(other)
+    override fun times(other: UnitAcceleration<*>): Newton = (this as UnitMass<*>).timesUnit(other)
 }
 
 @JvmInline
 value class LongHundredWeight(override val value: Double) : UnitMass<LongHundredWeight> {
     override fun asType(d: Double) = LongHundredWeight(d)
     override fun asBaseUnit() = Pound(value * 112).asBaseUnit()
+
+    override fun plus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).plusUnit(other)
+    override fun minus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).minusUnit(other)
+    override fun times(other: UnitAcceleration<*>): Newton = (this as UnitMass<*>).timesUnit(other)
 }
 
 @JvmInline
 value class LongTon(override val value: Double) : UnitMass<LongTon> {
     override fun asType(d: Double) = LongTon(d)
     override fun asBaseUnit() = Pound(value * 2240).asBaseUnit()
+
+    override fun plus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).plusUnit(other)
+    override fun minus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).minusUnit(other)
+    override fun times(other: UnitAcceleration<*>): Newton = (this as UnitMass<*>).timesUnit(other)
 }
 
 @JvmInline
 value class Ounce(override val value: Double) : UnitMass<Ounce> {
     override fun asType(d: Double) = Ounce(d)
     override fun asBaseUnit() = Pound(value / 16.0).asBaseUnit()
+
+    override fun plus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).plusUnit(other)
+    override fun minus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).minusUnit(other)
+    override fun times(other: UnitAcceleration<*>): Newton = (this as UnitMass<*>).timesUnit(other)
 }
 
 @JvmInline
 value class Pound(override val value: Double) : UnitMass<Pound> {
     override fun asType(d: Double) = Pound(d)
     override fun asBaseUnit() = Gram(value * 28.35).asBaseUnit()
+
+    override fun plus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).plusUnit(other)
+    override fun minus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).minusUnit(other)
+    override fun times(other: UnitAcceleration<*>): Newton = (this as UnitMass<*>).timesUnit(other)
 }
 
 @JvmInline
 value class ShortQuarter(override val value: Double) : UnitMass<ShortQuarter> {
     override fun asType(d: Double) = ShortQuarter(d)
     override fun asBaseUnit() = Pound(value * 25).asBaseUnit()
+
+    override fun plus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).plusUnit(other)
+    override fun minus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).minusUnit(other)
+    override fun times(other: UnitAcceleration<*>): Newton = (this as UnitMass<*>).timesUnit(other)
 }
 
 @JvmInline
 value class LongQuarter(override val value: Double) : UnitMass<LongQuarter> {
     override fun asType(d: Double) = LongQuarter(d)
     override fun asBaseUnit() = Pound(value * 28).asBaseUnit()
+
+    override fun plus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).plusUnit(other)
+    override fun minus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).minusUnit(other)
+    override fun times(other: UnitAcceleration<*>): Newton = (this as UnitMass<*>).timesUnit(other)
 }
 
 @JvmInline
 value class ShortHundredWeight(override val value: Double) : UnitMass<ShortHundredWeight> {
     override fun asType(d: Double) = ShortHundredWeight(d)
     override fun asBaseUnit() = Pound(value * 100).asBaseUnit()
+
+    override fun plus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).plusUnit(other)
+    override fun minus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).minusUnit(other)
+    override fun times(other: UnitAcceleration<*>): Newton = (this as UnitMass<*>).timesUnit(other)
 }
 
 @JvmInline
 value class Stone(override val value: Double) : UnitMass<Stone> {
     override fun asType(d: Double) = Stone(d)
     override fun asBaseUnit() = Pound(value * 14).asBaseUnit()
+
+    override fun plus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).plusUnit(other)
+    override fun minus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).minusUnit(other)
+    override fun times(other: UnitAcceleration<*>): Newton = (this as UnitMass<*>).timesUnit(other)
 }
 
 @JvmInline
 value class ShortTon(override val value: Double) : UnitMass<ShortTon> {
     override fun asType(d: Double) = ShortTon(d)
     override fun asBaseUnit() = Pound(value * 2000).asBaseUnit()
+
+    override fun plus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).plusUnit(other)
+    override fun minus(other: UnitMass<*>): KiloGram = (this as UnitMass<*>).minusUnit(other)
+    override fun times(other: UnitAcceleration<*>): Newton = (this as UnitMass<*>).timesUnit(other)
 }

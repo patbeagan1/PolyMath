@@ -1,5 +1,6 @@
 package com.measures.distance
 
+import com.measures.area.UnitArea
 import kotlin.jvm.JvmInline
 
 // English Imperial Distance Units
@@ -18,58 +19,108 @@ fun UnitDistance<*>.toImperialLeague() = toUnit(ImperialLeague(1.0))
 value class ImperialThou(override val value: Double) : UnitDistance<ImperialThou> {
     override fun asType(d: Double) = ImperialThou(d)
     override fun asBaseUnit() = ImperialFoot(this.value / 12000.0).asBaseUnit()
+
+    override operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plusUnit(other)
+    override operator fun minus(other: UnitDistance<*>) = (this as UnitDistance<*>).minusUnit(other)
+    override operator fun times(other: UnitDistance<*>) = (this as UnitDistance<*>).timesUnit(other)
+    override operator fun times(other: UnitArea<*>) = (this as UnitDistance<*>).timesUnit(other)
 }
 
 @JvmInline
 value class ImperialBarleycorn(override val value: Double) : UnitDistance<ImperialBarleycorn> {
     override fun asType(d: Double) = ImperialBarleycorn(d)
     override fun asBaseUnit() = ImperialFoot(this.value / 36.0).asBaseUnit()
+
+    override operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plusUnit(other)
+    override operator fun minus(other: UnitDistance<*>) = (this as UnitDistance<*>).minusUnit(other)
+    override operator fun times(other: UnitDistance<*>) = (this as UnitDistance<*>).timesUnit(other)
+    override operator fun times(other: UnitArea<*>) = (this as UnitDistance<*>).timesUnit(other)
 }
 
 @JvmInline
 value class ImperialInch(override val value: Double) : UnitDistance<ImperialInch> {
     override fun asType(d: Double) = ImperialInch(d)
     override fun asBaseUnit() = ImperialFoot(this.value / 12.0).asBaseUnit()
+
+    override operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plusUnit(other)
+    override operator fun minus(other: UnitDistance<*>) = (this as UnitDistance<*>).minusUnit(other)
+    override operator fun times(other: UnitDistance<*>) = (this as UnitDistance<*>).timesUnit(other)
+    override operator fun times(other: UnitArea<*>) = (this as UnitDistance<*>).timesUnit(other)
 }
 
 @JvmInline
 value class ImperialHand(override val value: Double) : UnitDistance<ImperialHand> {
     override fun asType(d: Double) = ImperialHand(d)
     override fun asBaseUnit() = ImperialFoot(this.value / 3.0).asBaseUnit()
+
+    override operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plusUnit(other)
+    override operator fun minus(other: UnitDistance<*>) = (this as UnitDistance<*>).minusUnit(other)
+    override operator fun times(other: UnitDistance<*>) = (this as UnitDistance<*>).timesUnit(other)
+    override operator fun times(other: UnitArea<*>) = (this as UnitDistance<*>).timesUnit(other)
 }
 
 @JvmInline
 value class ImperialFoot(override val value: Double) : UnitDistance<ImperialFoot> {
     override fun asType(d: Double) = ImperialFoot(d)
     override fun asBaseUnit() = Meter(this.value * 0.3048).asBaseUnit()
+
+    override operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plusUnit(other)
+    override operator fun minus(other: UnitDistance<*>) = (this as UnitDistance<*>).minusUnit(other)
+    override operator fun times(other: UnitDistance<*>) = (this as UnitDistance<*>).timesUnit(other)
+    override operator fun times(other: UnitArea<*>) = (this as UnitDistance<*>).timesUnit(other)
 }
 
 @JvmInline
 value class ImperialYard(override val value: Double) : UnitDistance<ImperialYard> {
     override fun asType(d: Double) = ImperialYard(d)
     override fun asBaseUnit() = ImperialFoot(this.value * 3.0).asBaseUnit()
+
+    override operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plusUnit(other)
+    override operator fun minus(other: UnitDistance<*>) = (this as UnitDistance<*>).minusUnit(other)
+    override operator fun times(other: UnitDistance<*>) = (this as UnitDistance<*>).timesUnit(other)
+    override operator fun times(other: UnitArea<*>) = (this as UnitDistance<*>).timesUnit(other)
 }
 
 @JvmInline
 value class ImperialChain(override val value: Double) : UnitDistance<ImperialChain> {
     override fun asType(d: Double) = ImperialChain(d)
     override fun asBaseUnit() = ImperialFoot(this.value * 66.0).asBaseUnit()
+
+    override operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plusUnit(other)
+    override operator fun minus(other: UnitDistance<*>) = (this as UnitDistance<*>).minusUnit(other)
+    override operator fun times(other: UnitDistance<*>) = (this as UnitDistance<*>).timesUnit(other)
+    override operator fun times(other: UnitArea<*>) = (this as UnitDistance<*>).timesUnit(other)
 }
 
 @JvmInline
 value class ImperialFurlong(override val value: Double) : UnitDistance<ImperialFurlong> {
     override fun asType(d: Double) = ImperialFurlong(d)
     override fun asBaseUnit() = ImperialFoot(this.value * 660.0).asBaseUnit()
+
+    override operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plusUnit(other)
+    override operator fun minus(other: UnitDistance<*>) = (this as UnitDistance<*>).minusUnit(other)
+    override operator fun times(other: UnitDistance<*>) = (this as UnitDistance<*>).timesUnit(other)
+    override operator fun times(other: UnitArea<*>) = (this as UnitDistance<*>).timesUnit(other)
 }
 
 @JvmInline
 value class ImperialMile(override val value: Double) : UnitDistance<ImperialMile> {
     override fun asType(d: Double) = ImperialMile(d)
     override fun asBaseUnit() = ImperialFoot(this.value * 5280).asBaseUnit()
+
+    override operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plusUnit(other)
+    override operator fun minus(other: UnitDistance<*>) = (this as UnitDistance<*>).minusUnit(other)
+    override operator fun times(other: UnitDistance<*>) = (this as UnitDistance<*>).timesUnit(other)
+    override operator fun times(other: UnitArea<*>) = (this as UnitDistance<*>).timesUnit(other)
 }
 
 @JvmInline
 value class ImperialLeague(override val value: Double) : UnitDistance<ImperialLeague> {
     override fun asType(d: Double) = ImperialLeague(d)
     override fun asBaseUnit() = ImperialFoot(this.value * 15840).asBaseUnit()
+
+    override operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plusUnit(other)
+    override operator fun minus(other: UnitDistance<*>) = (this as UnitDistance<*>).minusUnit(other)
+    override operator fun times(other: UnitDistance<*>) = (this as UnitDistance<*>).timesUnit(other)
+    override operator fun times(other: UnitArea<*>) = (this as UnitDistance<*>).timesUnit(other)
 }

@@ -1,8 +1,6 @@
 package com.measures
 
 import com.measures.area.SquareMeter
-import com.measures.area.div
-import com.measures.area.times
 import com.measures.distance.*
 import com.measures.misc.Angstroms
 import com.measures.misc.Capefeet
