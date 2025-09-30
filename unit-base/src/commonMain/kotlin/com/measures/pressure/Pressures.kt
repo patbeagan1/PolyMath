@@ -37,8 +37,6 @@ value class Pascal(override val value: Double) : UnitPressure<Pascal>, BaseUnit 
     }
 }
 
-// Non-SI pressure units have been moved to units-common module
-
 @JvmInline
 value class Kilopascal(override val value: Double) : UnitPressure<Kilopascal> {
     override fun asType(d: Double) = Kilopascal(d)
