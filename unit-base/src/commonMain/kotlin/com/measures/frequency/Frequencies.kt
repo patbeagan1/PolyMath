@@ -21,10 +21,7 @@ value class Hertz(override val value: Double) : UnitFrequency<Hertz>, BaseUnit {
     operator fun inv() = (this as UnitFrequency<*>).inv()
     
     companion object {
-        fun from(time: UnitTime<*>): Hertz {
-            val timeBase = time.asBaseUnit()
-            return Hertz(1.0 / timeBase.value)
-        }
+        fun from(time: UnitTime<*>): Hertz = Hertz(1.0 / time.asBaseUnit().value)
     }
 }
 

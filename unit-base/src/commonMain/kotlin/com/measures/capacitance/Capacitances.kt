@@ -6,7 +6,7 @@ import com.measures.UnitType
 import com.measures.current.UnitCurrent
 import com.measures.distance.UnitDistance
 import com.measures.time.UnitTime
-import com.measures.weight.UnitWeight
+import com.measures.weight.UnitMass
 import kotlin.jvm.JvmInline
 
 typealias UnitCapacitance<T> = UnitCapacitanceType<T>
@@ -22,12 +22,16 @@ value class Farad(override val value: Double) : UnitCapacitance<Farad>, BaseUnit
     operator fun minus(other: UnitCapacitance<*>) = (this as UnitCapacitance<*>).minus(other)
     
     companion object {
-        fun from(current: UnitCurrent<*>, time: UnitTime<*>, mass: UnitWeight<*>, distance: UnitDistance<*>): Farad {
-            val currentBase = current.asBaseUnit()
-            val timeBase = time.asBaseUnit()
-            val massBase = mass.asBaseUnit()
-            val distanceBase = distance.asBaseUnit()
-            return Farad(currentBase.value * currentBase.value * timeBase.value * timeBase.value * timeBase.value * timeBase.value / (massBase.value * distanceBase.value * distanceBase.value))
+        fun from(current: UnitCurrent<*>, time: UnitTime<*>, mass: UnitMass<*>, distance: UnitDistance<*>): Farad {
+            // Capacitance = Charge / Potential
+            // Charge = current × time
+            // Potential = Energy / Charge = (mass × distance² / time²) / (current × time) = mass × distance² / (current × time³)
+            // Capacitance = (current × time) / (mass × distance² / (current × time³)) = current² × time⁴ / (mass × distance²)
+            val currentValue = current.asBaseUnit().value
+            val timeValue = time.asBaseUnit().value
+            val massValue = mass.asBaseUnit().value
+            val distanceValue = distance.asBaseUnit().value
+            return Farad(currentValue * currentValue * timeValue * timeValue * timeValue * timeValue / (massValue * distanceValue * distanceValue))
         }
     }
 }

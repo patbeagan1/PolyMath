@@ -4,7 +4,7 @@ import com.measures.BaseUnit
 import com.measures.DoubleBase
 import com.measures.UnitType
 import com.measures.distance.UnitDistance
-import com.measures.weight.UnitWeight
+import com.measures.weight.UnitMass
 import com.measures.time.UnitTime
 import com.measures.energy.Joule
 import kotlin.jvm.JvmInline
@@ -22,12 +22,8 @@ value class Watt(override val value: Double) : UnitPower<Watt>, BaseUnit {
     operator fun minus(other: UnitPower<*>) = (this as UnitPower<*>).minus(other)
     
     companion object {
-        fun from(mass: UnitWeight<*>, distance: UnitDistance<*>, time: UnitTime<*>): Watt {
-            val massBase = mass.asBaseUnit()
-            val distanceBase = distance.asBaseUnit()
-            val timeBase = time.asBaseUnit()
-            return Watt(massBase.value * distanceBase.value * distanceBase.value / (timeBase.value * timeBase.value * timeBase.value))
-        }
+        fun from(mass: UnitMass<*>, distance: UnitDistance<*>, time: UnitTime<*>): Watt =
+            Joule.from(mass, distance, time) / time
     }
 }
 

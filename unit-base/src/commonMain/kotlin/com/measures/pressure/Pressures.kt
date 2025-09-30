@@ -4,7 +4,7 @@ import com.measures.BaseUnit
 import com.measures.DoubleBase
 import com.measures.UnitType
 import com.measures.distance.UnitDistance
-import com.measures.weight.UnitWeight
+import com.measures.weight.UnitMass
 import com.measures.time.UnitTime
 import com.measures.area.UnitArea
 import com.measures.force.Newton
@@ -24,11 +24,15 @@ value class Pascal(override val value: Double) : UnitPressure<Pascal>, BaseUnit 
     operator fun times(other: UnitArea<*>) = (this as UnitPressure<*>).times(other)
     
     companion object {
-        fun from(mass: UnitWeight<*>, distance: UnitDistance<*>, time: UnitTime<*>): Pascal {
-            val massBase = mass.asBaseUnit()
-            val distanceBase = distance.asBaseUnit()
-            val timeBase = time.asBaseUnit()
-            return Pascal(massBase.value / (distanceBase.value * timeBase.value * timeBase.value))
+        fun from(mass: UnitMass<*>, distance: UnitDistance<*>, time: UnitTime<*>): Pascal {
+            // Pressure = Force / Area
+            // Force = mass × acceleration = mass × distance / time²
+            // Area = distance²
+            // Pressure = (mass × distance / time²) / distance² = mass / (distance × time²)
+            val massValue = mass.asBaseUnit().value
+            val distanceValue = distance.asBaseUnit().value
+            val timeValue = time.asBaseUnit().value
+            return Pascal(massValue / (distanceValue * timeValue * timeValue))
         }
     }
 }

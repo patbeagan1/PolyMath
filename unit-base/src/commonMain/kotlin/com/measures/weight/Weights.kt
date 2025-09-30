@@ -3,34 +3,44 @@ package com.measures.weight
 import com.measures.BaseUnit
 import com.measures.DoubleBase
 import com.measures.UnitType
+import com.measures.acceleration.UnitAcceleration
+import com.measures.force.Newton
 import kotlin.jvm.JvmInline
 
-typealias UnitWeight<T> = UnitWeightType<T>
-
-interface UnitWeightType<T : DoubleBase> : UnitType<T, KiloGram>
+interface UnitMass<T : DoubleBase> : UnitType<T, KiloGram> {
+    operator fun plus(other: UnitMass<*>): KiloGram
+    operator fun minus(other: UnitMass<*>): KiloGram
+    operator fun times(other: UnitAcceleration<*>): Newton
+}
 
 @JvmInline
-value class KiloGram(override val value: Double) : UnitWeight<KiloGram>, BaseUnit {
+value class KiloGram(override val value: Double) : UnitMass<KiloGram>, BaseUnit {
     override fun asType(d: Double) = KiloGram(d)
     override fun asBaseUnit() = this
 
-    operator fun plus(other: UnitWeight<*>) = (this as UnitWeight<*>).plus(other)
-    operator fun minus(other: UnitWeight<*>) = (this as UnitWeight<*>).minus(other)
+    override operator fun plus(other: UnitMass<*>) = (this as UnitMass<*>).plusUnit(other)
+    override operator fun minus(other: UnitMass<*>) = (this as UnitMass<*>).minusUnit(other)
+    override operator fun times(other: UnitAcceleration<*>) = (this as UnitMass<*>).timesUnit(other)
 }
 
 @JvmInline
-value class Gram(override val value: Double) : UnitWeight<KiloGram>, BaseUnit {
+value class Gram(override val value: Double) : UnitMass<KiloGram>, BaseUnit {
     override fun asType(d: Double) = KiloGram(d)
     override fun asBaseUnit() = KiloGram(this.value / 1000.0)
 
-    operator fun plus(other: UnitWeight<*>) = (this as UnitWeight<*>).plus(other)
-    operator fun minus(other: UnitWeight<*>) = (this as UnitWeight<*>).minus(other)
+    override operator fun plus(other: UnitMass<*>) = (this as UnitMass<*>).plusUnit(other)
+    override operator fun minus(other: UnitMass<*>) = (this as UnitMass<*>).minusUnit(other)
+    override operator fun times(other: UnitAcceleration<*>) = (this as UnitMass<*>).timesUnit(other)
 }
 
-operator fun UnitWeightType<*>.plus(other: UnitWeightType<*>): KiloGram =
+fun UnitMass<*>.plusUnit(other: UnitMass<*>): KiloGram =
     KiloGram(this.asBaseUnit().value + other.asBaseUnit().value)
 
-operator fun UnitWeightType<*>.minus(other: UnitWeightType<*>): KiloGram =
+fun UnitMass<*>.minusUnit(other: UnitMass<*>): KiloGram =
     KiloGram(this.asBaseUnit().value - other.asBaseUnit().value)
 
-fun UnitWeight<*>.toGram() = this.asBaseUnit()
+// Weight × Acceleration = Force (mass × acceleration = force)
+fun UnitMass<*>.timesUnit(other: UnitAcceleration<*>): Newton =
+    Newton(this.asBaseUnit().value * other.asBaseUnit().value)
+
+fun UnitMass<*>.toGram() = this.asBaseUnit()

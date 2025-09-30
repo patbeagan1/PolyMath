@@ -3,7 +3,7 @@ package com.measures.inductance
 import com.measures.BaseUnit
 import com.measures.DoubleBase
 import com.measures.UnitType
-import com.measures.weight.UnitWeight
+import com.measures.weight.UnitMass
 import com.measures.current.UnitCurrent
 import com.measures.distance.UnitDistance
 import com.measures.time.UnitTime
@@ -22,7 +22,7 @@ value class Henry(override val value: Double) : UnitInductance<Henry>, BaseUnit 
     operator fun minus(other: UnitInductance<*>) = (this as UnitInductance<*>).minus(other)
     
     companion object {
-        fun from(mass: UnitWeight<*>, distance: UnitDistance<*>, current: UnitCurrent<*>, time: UnitTime<*>): Henry {
+        fun from(mass: UnitMass<*>, distance: UnitDistance<*>, current: UnitCurrent<*>, time: UnitTime<*>): Henry {
             val massBase = mass.asBaseUnit()
             val distanceBase = distance.asBaseUnit()
             val currentBase = current.asBaseUnit()

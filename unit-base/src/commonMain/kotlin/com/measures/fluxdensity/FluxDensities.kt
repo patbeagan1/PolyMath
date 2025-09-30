@@ -3,7 +3,7 @@ package com.measures.fluxdensity
 import com.measures.BaseUnit
 import com.measures.DoubleBase
 import com.measures.UnitType
-import com.measures.weight.UnitWeight
+import com.measures.weight.UnitMass
 import com.measures.current.UnitCurrent
 import com.measures.time.UnitTime
 import kotlin.jvm.JvmInline
@@ -21,7 +21,7 @@ value class Tesla(override val value: Double) : UnitFluxDensity<Tesla>, BaseUnit
     operator fun minus(other: UnitFluxDensity<*>) = (this as UnitFluxDensity<*>).minus(other)
     
     companion object {
-        fun from(mass: UnitWeight<*>, current: UnitCurrent<*>, time: UnitTime<*>): Tesla {
+        fun from(mass: UnitMass<*>, current: UnitCurrent<*>, time: UnitTime<*>): Tesla {
             val massBase = mass.asBaseUnit()
             val currentBase = current.asBaseUnit()
             val timeBase = time.asBaseUnit()

@@ -3,7 +3,7 @@ package com.measures.potential
 import com.measures.BaseUnit
 import com.measures.DoubleBase
 import com.measures.UnitType
-import com.measures.weight.UnitWeight
+import com.measures.weight.UnitMass
 import com.measures.current.UnitCurrent
 import com.measures.distance.UnitDistance
 import com.measures.time.UnitTime
@@ -24,12 +24,16 @@ value class Volt(override val value: Double) : UnitPotential<Volt>, BaseUnit {
     operator fun minus(other: UnitPotential<*>) = (this as UnitPotential<*>).minus(other)
     
     companion object {
-        fun from(mass: UnitWeight<*>, distance: UnitDistance<*>, current: UnitCurrent<*>, time: UnitTime<*>): Volt {
-            val massBase = mass.asBaseUnit()
-            val distanceBase = distance.asBaseUnit()
-            val currentBase = current.asBaseUnit()
-            val timeBase = time.asBaseUnit()
-            return Volt(massBase.value * distanceBase.value * distanceBase.value / (currentBase.value * timeBase.value * timeBase.value * timeBase.value))
+        fun from(mass: UnitMass<*>, distance: UnitDistance<*>, current: UnitCurrent<*>, time: UnitTime<*>): Volt {
+            // Potential = Energy / Charge
+            // Energy = mass × distance² / time²
+            // Charge = current × time
+            // Potential = (mass × distance² / time²) / (current × time) = mass × distance² / (current × time³)
+            val massValue = mass.asBaseUnit().value
+            val distanceValue = distance.asBaseUnit().value
+            val currentValue = current.asBaseUnit().value
+            val timeValue = time.asBaseUnit().value
+            return Volt(massValue * distanceValue * distanceValue / (currentValue * timeValue * timeValue * timeValue))
         }
     }
 }
