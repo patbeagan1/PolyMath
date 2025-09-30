@@ -3,6 +3,13 @@ package com.measures.charge
 import com.measures.energy.Joule
 import com.measures.power.Watt
 import com.measures.time.Second
+import com.measures.charge.Millicoulomb
+import com.measures.charge.Microcoulomb
+import com.measures.charge.Nanocoulomb
+import com.measures.charge.Picocoulomb
+import com.measures.charge.Kilocoulomb
+import com.measures.charge.AmpereHour
+import com.measures.charge.MilliampereHour
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

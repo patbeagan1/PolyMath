@@ -77,6 +77,28 @@ value class ElectronVolt(override val value: Double) : UnitEnergy<ElectronVolt> 
     operator fun div(other: UnitCharge<*>) = (this as UnitEnergy<*>).divUnit(other)
 }
 
+@JvmInline
+value class Kilojoule(override val value: Double) : UnitEnergy<Kilojoule> {
+    override fun asType(d: Double) = Kilojoule(d)
+    override fun asBaseUnit() = com.measures.energy.Joule(this.value * 1000.0)
+
+    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plusUnit(other)
+    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minusUnit(other)
+    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).divUnit(other)
+    operator fun div(other: UnitCharge<*>) = (this as UnitEnergy<*>).divUnit(other)
+}
+
+@JvmInline
+value class Megajoule(override val value: Double) : UnitEnergy<Megajoule> {
+    override fun asType(d: Double) = Megajoule(d)
+    override fun asBaseUnit() = com.measures.energy.Joule(this.value * 1E6)
+
+    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plusUnit(other)
+    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minusUnit(other)
+    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).divUnit(other)
+    operator fun div(other: UnitCharge<*>) = (this as UnitEnergy<*>).divUnit(other)
+}
+
 // Conversion functions for non-SI energy units
 fun UnitEnergy<*>.toErg() = toUnit(Erg(1.0))
 fun UnitEnergy<*>.toCalorie() = toUnit(Calorie(1.0))
@@ -84,3 +106,5 @@ fun UnitEnergy<*>.toKilocalorie() = toUnit(Kilocalorie(1.0))
 fun UnitEnergy<*>.toBritishThermalUnit() = toUnit(BritishThermalUnit(1.0))
 fun UnitEnergy<*>.toKilowattHour() = toUnit(KilowattHour(1.0))
 fun UnitEnergy<*>.toElectronVolt() = toUnit(ElectronVolt(1.0))
+fun UnitEnergy<*>.toKilojoule() = toUnit(Kilojoule(1.0))
+fun UnitEnergy<*>.toMegajoule() = toUnit(Megajoule(1.0))

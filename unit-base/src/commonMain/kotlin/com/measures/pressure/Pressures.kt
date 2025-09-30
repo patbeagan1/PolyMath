@@ -37,27 +37,6 @@ value class Pascal(override val value: Double) : UnitPressure<Pascal>, BaseUnit 
     }
 }
 
-@JvmInline
-value class Kilopascal(override val value: Double) : UnitPressure<Kilopascal> {
-    override fun asType(d: Double) = Kilopascal(d)
-    override fun asBaseUnit() = Pascal(this.value * 1000.0)
-
-    operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plusUnit(other)
-    operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minusUnit(other)
-    operator fun times(other: UnitArea<*>) = (this as UnitPressure<*>).timesUnit(other)
-}
-
-@JvmInline
-value class Megapascal(override val value: Double) : UnitPressure<Megapascal> {
-    override fun asType(d: Double) = Megapascal(d)
-    override fun asBaseUnit() = Pascal(this.value * 1E6)
-
-    operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plusUnit(other)
-    operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minusUnit(other)
-    operator fun times(other: UnitArea<*>) = (this as UnitPressure<*>).timesUnit(other)
-}
-
-
  fun UnitPressureType<*>.plusUnit(other: UnitPressureType<*>): Pascal =
     Pascal(this.asBaseUnit().value + other.asBaseUnit().value)
 
@@ -68,8 +47,8 @@ value class Megapascal(override val value: Double) : UnitPressure<Megapascal> {
  fun UnitPressureType<*>.timesUnit(other: UnitArea<*>): Newton =
     Newton(this.asBaseUnit().value * other.asBaseUnit().value)
 
+// Non-SI pressure units have been moved to unit-common module
+
 // Conversion functions using toUnit
 fun UnitPressure<*>.toPascal() = this.asBaseUnit()
-fun UnitPressure<*>.toKilopascal() = toUnit(Kilopascal(1.0))
-fun UnitPressure<*>.toMegapascal() = toUnit(Megapascal(1.0))
 

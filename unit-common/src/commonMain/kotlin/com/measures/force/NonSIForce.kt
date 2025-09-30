@@ -54,7 +54,35 @@ value class KilogramForce(override val value: Double) : UnitForce<KilogramForce>
     override operator fun div(other: UnitAcceleration<*>) = (this as UnitForce<*>).divUnit(other)
 }
 
+@JvmInline
+value class Kilonewton(override val value: Double) : UnitForce<Kilonewton> {
+    override fun asType(d: Double) = Kilonewton(d)
+    override fun asBaseUnit() = com.measures.force.Newton(this.value * 1000.0)
+
+    override operator fun plus(other: UnitForce<*>) = (this as UnitForce<*>).plusUnit(other)
+    override operator fun minus(other: UnitForce<*>) = (this as UnitForce<*>).minusUnit(other)
+    override operator fun div(other: UnitArea<*>) = (this as UnitForce<*>).divUnit(other)
+    override operator fun times(other: UnitDistance<*>) = (this as UnitForce<*>).timesUnit(other)
+    override operator fun div(other: UnitMass<*>) = (this as UnitForce<*>).divUnit(other)
+    override operator fun div(other: UnitAcceleration<*>) = (this as UnitForce<*>).divUnit(other)
+}
+
+@JvmInline
+value class Meganewton(override val value: Double) : UnitForce<Meganewton> {
+    override fun asType(d: Double) = Meganewton(d)
+    override fun asBaseUnit() = com.measures.force.Newton(this.value * 1E6)
+
+    override operator fun plus(other: UnitForce<*>) = (this as UnitForce<*>).plusUnit(other)
+    override operator fun minus(other: UnitForce<*>) = (this as UnitForce<*>).minusUnit(other)
+    override operator fun div(other: UnitArea<*>) = (this as UnitForce<*>).divUnit(other)
+    override operator fun times(other: UnitDistance<*>) = (this as UnitForce<*>).timesUnit(other)
+    override operator fun div(other: UnitMass<*>) = (this as UnitForce<*>).divUnit(other)
+    override operator fun div(other: UnitAcceleration<*>) = (this as UnitForce<*>).divUnit(other)
+}
+
 // Conversion functions for non-SI force units
 fun UnitForce<*>.toDyne() = toUnit(Dyne(1.0))
 fun UnitForce<*>.toPoundForce() = toUnit(PoundForce(1.0))
 fun UnitForce<*>.toKilogramForce() = toUnit(KilogramForce(1.0))
+fun UnitForce<*>.toKilonewton() = toUnit(Kilonewton(1.0))
+fun UnitForce<*>.toMeganewton() = toUnit(Meganewton(1.0))

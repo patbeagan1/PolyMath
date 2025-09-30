@@ -1,0 +1,53 @@
+package com.measures.current
+
+import com.measures.Consts
+import com.measures.current.Ampere
+import com.measures.current.UnitCurrent
+import com.measures.time.UnitTime
+import kotlin.jvm.JvmInline
+
+@JvmInline
+value class Milliampere(override val value: Double) : UnitCurrent<Milliampere> {
+    override fun asType(d: Double) = Milliampere(d)
+    override fun asBaseUnit() = Ampere(this.value * Consts.MILLI)
+
+    operator fun plus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).plusUnit(other)
+    operator fun minus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).minusUnit(other)
+    operator fun times(other: UnitTime<*>) = (this as UnitCurrent<*>).timesUnit(other)
+}
+
+@JvmInline
+value class Microampere(override val value: Double) : UnitCurrent<Microampere> {
+    override fun asType(d: Double) = Microampere(d)
+    override fun asBaseUnit() = Ampere(this.value * Consts.MICRO)
+
+    operator fun plus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).plusUnit(other)
+    operator fun minus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).minusUnit(other)
+    operator fun times(other: UnitTime<*>) = (this as UnitCurrent<*>).timesUnit(other)
+}
+
+@JvmInline
+value class Kiloampere(override val value: Double) : UnitCurrent<Kiloampere> {
+    override fun asType(d: Double) = Kiloampere(d)
+    override fun asBaseUnit() = Ampere(this.value * Consts.KILO)
+
+    operator fun plus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).plusUnit(other)
+    operator fun minus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).minusUnit(other)
+    operator fun times(other: UnitTime<*>) = (this as UnitCurrent<*>).timesUnit(other)
+}
+
+@JvmInline
+value class Megaampere(override val value: Double) : UnitCurrent<Megaampere> {
+    override fun asType(d: Double) = Megaampere(d)
+    override fun asBaseUnit() = Ampere(this.value * Consts.MEGA)
+
+    operator fun plus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).plusUnit(other)
+    operator fun minus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).minusUnit(other)
+    operator fun times(other: UnitTime<*>) = (this as UnitCurrent<*>).timesUnit(other)
+}
+
+// Conversion functions using toUnit
+fun UnitCurrent<*>.toMilliampere() = toUnit(Milliampere(1.0))
+fun UnitCurrent<*>.toMicroampere() = toUnit(Microampere(1.0))
+fun UnitCurrent<*>.toKiloampere() = toUnit(Kiloampere(1.0))
+fun UnitCurrent<*>.toMegaampere() = toUnit(Megaampere(1.0))

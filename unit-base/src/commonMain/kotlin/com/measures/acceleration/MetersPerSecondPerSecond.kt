@@ -23,36 +23,9 @@ value class MetersPerSecondPerSecond(override val value: Double) : UnitAccelerat
     }
 }
 
-@JvmInline
-value class CentimetersPerSecondSquared(override val value: Double) : UnitAcceleration<CentimetersPerSecondSquared> {
-    override fun asType(d: Double) = CentimetersPerSecondSquared(d)
-    override fun asBaseUnit() = MetersPerSecondPerSecond(this.value * 0.01)
-
-    operator fun plus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).plusUnit(other)
-    operator fun minus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).minusUnit(other)
-    operator fun times(other: UnitTime<*>) = (this as UnitAcceleration<*>).timesUnit(other)
-}
-
 fun UnitAcceleration<*>.toMetersPerSecondPerSecond() = this.asBaseUnit()
 
-fun UnitAcceleration<*>.toCentimetersPerSecondSquared() =
-    CentimetersPerSecondSquared(this.asBaseUnit().value / 0.01)
-
-
-// Non-SI acceleration units have been moved to units-common module
-
-@JvmInline
-value class KilometersPerSecondPerSecond(override val value: Double) : UnitAcceleration<KilometersPerSecondPerSecond> {
-    override fun asType(d: Double) = KilometersPerSecondPerSecond(d)
-    override fun asBaseUnit() = MetersPerSecondPerSecond(this.value * 1000.0)
-
-    operator fun plus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).plusUnit(other)
-    operator fun minus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).minusUnit(other)
-    operator fun times(other: UnitTime<*>) = (this as UnitAcceleration<*>).timesUnit(other)
-}
-
-
-fun UnitAcceleration<*>.toKilometersPerSecondPerSecond() = toUnit(KilometersPerSecondPerSecond(1.0))
+// Non-SI acceleration units have been moved to unit-common module
 
 
 

@@ -34,5 +34,8 @@ kotlin {
         commonMain.dependencies {
             implementation(kotlin("test"))
         }
+        commonTest.dependencies {
+            implementation(project(":unit-common"))
+        }
     }
 }

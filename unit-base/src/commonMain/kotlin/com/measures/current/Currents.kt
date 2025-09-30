@@ -32,50 +32,7 @@ value class Ampere(override val value: Double) : UnitCurrent<Ampere>, BaseUnit {
     operator fun times(other: UnitTime<*>) = (this as UnitCurrent<*>).timesUnit(other)
 }
 
-@JvmInline
-value class Milliampere(override val value: Double) : UnitCurrent<Milliampere> {
-    override fun asType(d: Double) = Milliampere(d)
-    override fun asBaseUnit() = Ampere(this.value * Consts.MILLI)
-
-    operator fun plus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).plusUnit(other)
-    operator fun minus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).minusUnit(other)
-    operator fun times(other: UnitTime<*>) = (this as UnitCurrent<*>).timesUnit(other)
-}
-
-@JvmInline
-value class Microampere(override val value: Double) : UnitCurrent<Microampere> {
-    override fun asType(d: Double) = Microampere(d)
-    override fun asBaseUnit() = Ampere(this.value * Consts.MICRO)
-
-    operator fun plus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).plusUnit(other)
-    operator fun minus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).minusUnit(other)
-    operator fun times(other: UnitTime<*>) = (this as UnitCurrent<*>).timesUnit(other)
-}
-
-@JvmInline
-value class Kiloampere(override val value: Double) : UnitCurrent<Kiloampere> {
-    override fun asType(d: Double) = Kiloampere(d)
-    override fun asBaseUnit() = Ampere(this.value * Consts.KILO)
-
-    operator fun plus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).plusUnit(other)
-    operator fun minus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).minusUnit(other)
-    operator fun times(other: UnitTime<*>) = (this as UnitCurrent<*>).timesUnit(other)
-}
-
-@JvmInline
-value class Megaampere(override val value: Double) : UnitCurrent<Megaampere> {
-    override fun asType(d: Double) = Megaampere(d)
-    override fun asBaseUnit() = Ampere(this.value * Consts.MEGA)
-
-    operator fun plus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).plusUnit(other)
-    operator fun minus(other: UnitCurrent<*>) = (this as UnitCurrent<*>).minusUnit(other)
-    operator fun times(other: UnitTime<*>) = (this as UnitCurrent<*>).timesUnit(other)
-}
-
+// Non-SI current units have been moved to unit-common module
 
 // Conversion functions using toUnit
 fun UnitCurrent<*>.toAmpere() = this.asBaseUnit()
-fun UnitCurrent<*>.toMilliampere() = toUnit(Milliampere(1.0))
-fun UnitCurrent<*>.toMicroampere() = toUnit(Microampere(1.0))
-fun UnitCurrent<*>.toKiloampere() = toUnit(Kiloampere(1.0))
-fun UnitCurrent<*>.toMegaampere() = toUnit(Megaampere(1.0))

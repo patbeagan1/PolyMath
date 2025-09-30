@@ -17,20 +17,4 @@ value class MetersPerSecond(override val value: Double) : UnitVelocity<MetersPer
 
 fun UnitVelocity<*>.toMetersPerSecond() = this.asBaseUnit()
 
-// Non-SI velocity units have been moved to units-common module
-
-@JvmInline
-value class CentimetersPerSecond(override val value: Double) : UnitVelocity<CentimetersPerSecond> {
-    override fun asType(d: Double) = CentimetersPerSecond(d)
-    override fun asBaseUnit() = MetersPerSecond(this.value * 0.01)
-
-    override operator fun plus(other: UnitVelocity<*>) = (this as UnitVelocity<*>).plusUnit(other)
-    override operator fun minus(other: UnitVelocity<*>) = (this as UnitVelocity<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitVelocity<*>).timesUnit(other)
-    override operator fun div(other: UnitTime<*>) = (this as UnitVelocity<*>).divUnit(other)
-}
-
-
-// Extension functions for conversion
-fun UnitVelocity<*>.toCentimetersPerSecond() =
-    CentimetersPerSecond(this.asBaseUnit().value / 0.01)
+// Non-SI velocity units have been moved to unit-common module

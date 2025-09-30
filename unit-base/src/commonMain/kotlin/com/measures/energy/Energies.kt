@@ -37,30 +37,6 @@ value class Joule(override val value: Double) : UnitEnergy<Joule>, BaseUnit {
     }
 }
 
-// Non-SI energy units have been moved to units-common module
-
-@JvmInline
-value class Kilojoule(override val value: Double) : UnitEnergy<Kilojoule> {
-    override fun asType(d: Double) = Kilojoule(d)
-    override fun asBaseUnit() = Joule(this.value * 1000.0)
-
-    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plusUnit(other)
-    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minusUnit(other)
-    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).divUnit(other)
-    operator fun div(other: UnitCharge<*>) = (this as UnitEnergy<*>).divUnit(other)
-}
-
-@JvmInline
-value class Megajoule(override val value: Double) : UnitEnergy<Megajoule> {
-    override fun asType(d: Double) = Megajoule(d)
-    override fun asBaseUnit() = Joule(this.value * 1E6)
-
-    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plusUnit(other)
-    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minusUnit(other)
-    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).divUnit(other)
-    operator fun div(other: UnitCharge<*>) = (this as UnitEnergy<*>).divUnit(other)
-}
-
  fun UnitEnergyType<*>.plusUnit(other: UnitEnergyType<*>): Joule =
     Joule(this.asBaseUnit().value + other.asBaseUnit().value)
 
@@ -74,8 +50,8 @@ value class Megajoule(override val value: Double) : UnitEnergy<Megajoule> {
  fun UnitEnergyType<*>.divUnit(other: UnitCharge<*>): Volt =
     Volt(this.asBaseUnit().value / other.asBaseUnit().value)
 
+// Non-SI energy units have been moved to unit-common module
+
 // Conversion functions using toUnit
 fun UnitEnergy<*>.toJoule() = this.asBaseUnit()
-fun UnitEnergy<*>.toKilojoule() = toUnit(Kilojoule(1.0))
-fun UnitEnergy<*>.toMegajoule() = toUnit(Megajoule(1.0))
 

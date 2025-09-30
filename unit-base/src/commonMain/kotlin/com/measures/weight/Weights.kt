@@ -23,16 +23,6 @@ value class KiloGram(override val value: Double) : UnitMass<KiloGram>, BaseUnit 
     override operator fun times(other: UnitAcceleration<*>) = (this as UnitMass<*>).timesUnit(other)
 }
 
-@JvmInline
-value class Gram(override val value: Double) : UnitMass<KiloGram>, BaseUnit {
-    override fun asType(d: Double) = KiloGram(d)
-    override fun asBaseUnit() = KiloGram(this.value / 1000.0)
-
-    override operator fun plus(other: UnitMass<*>) = (this as UnitMass<*>).plusUnit(other)
-    override operator fun minus(other: UnitMass<*>) = (this as UnitMass<*>).minusUnit(other)
-    override operator fun times(other: UnitAcceleration<*>) = (this as UnitMass<*>).timesUnit(other)
-}
-
 fun UnitMass<*>.plusUnit(other: UnitMass<*>): KiloGram =
     KiloGram(this.asBaseUnit().value + other.asBaseUnit().value)
 
@@ -43,4 +33,4 @@ fun UnitMass<*>.minusUnit(other: UnitMass<*>): KiloGram =
 fun UnitMass<*>.timesUnit(other: UnitAcceleration<*>): Newton =
     Newton(this.asBaseUnit().value * other.asBaseUnit().value)
 
-fun UnitMass<*>.toGram() = this.asBaseUnit()
+// Non-SI weight units have been moved to unit-common module

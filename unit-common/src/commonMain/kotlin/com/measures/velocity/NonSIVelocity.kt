@@ -54,8 +54,20 @@ value class Knots(override val value: Double) : UnitVelocity<Knots> {
     override operator fun div(other: UnitTime<*>) = (this as UnitVelocity<*>).divUnit(other)
 }
 
+@JvmInline
+value class CentimetersPerSecond(override val value: Double) : UnitVelocity<CentimetersPerSecond> {
+    override fun asType(d: Double) = CentimetersPerSecond(d)
+    override fun asBaseUnit() = com.measures.velocity.MetersPerSecond(this.value * 0.01)
+
+    override operator fun plus(other: UnitVelocity<*>) = (this as UnitVelocity<*>).plusUnit(other)
+    override operator fun minus(other: UnitVelocity<*>) = (this as UnitVelocity<*>).minusUnit(other)
+    override operator fun times(other: UnitTime<*>) = (this as UnitVelocity<*>).timesUnit(other)
+    override operator fun div(other: UnitTime<*>) = (this as UnitVelocity<*>).divUnit(other)
+}
+
 // Conversion functions for non-SI velocity units
 fun UnitVelocity<*>.toKilometersPerHour() = toUnit(KilometersPerHour(1.0))
 fun UnitVelocity<*>.toMilesPerHour() = toUnit(MilesPerHour(1.0))
 fun UnitVelocity<*>.toFeetPerSecond() = toUnit(FeetPerSecond(1.0))
 fun UnitVelocity<*>.toKnots() = toUnit(Knots(1.0))
+fun UnitVelocity<*>.toCentimetersPerSecond() = toUnit(CentimetersPerSecond(1.0))

@@ -69,6 +69,26 @@ value class Millibar(override val value: Double) : UnitPressure<Millibar> {
     operator fun times(other: UnitArea<*>) = (this as UnitPressure<*>).timesUnit(other)
 }
 
+@JvmInline
+value class Kilopascal(override val value: Double) : UnitPressure<Kilopascal> {
+    override fun asType(d: Double) = Kilopascal(d)
+    override fun asBaseUnit() = com.measures.pressure.Pascal(this.value * 1000.0)
+
+    operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plusUnit(other)
+    operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minusUnit(other)
+    operator fun times(other: UnitArea<*>) = (this as UnitPressure<*>).timesUnit(other)
+}
+
+@JvmInline
+value class Megapascal(override val value: Double) : UnitPressure<Megapascal> {
+    override fun asType(d: Double) = Megapascal(d)
+    override fun asBaseUnit() = com.measures.pressure.Pascal(this.value * 1E6)
+
+    operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plusUnit(other)
+    operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minusUnit(other)
+    operator fun times(other: UnitArea<*>) = (this as UnitPressure<*>).timesUnit(other)
+}
+
 // Conversion functions for non-SI pressure units
 fun UnitPressure<*>.toBar() = toUnit(Bar(1.0))
 fun UnitPressure<*>.toAtmosphere() = toUnit(Atmosphere(1.0))
@@ -76,3 +96,5 @@ fun UnitPressure<*>.toTorr() = toUnit(Torr(1.0))
 fun UnitPressure<*>.toMillimeterOfMercury() = toUnit(MillimeterOfMercury(1.0))
 fun UnitPressure<*>.toPoundPerSquareInch() = toUnit(PoundPerSquareInch(1.0))
 fun UnitPressure<*>.toMillibar() = toUnit(Millibar(1.0))
+fun UnitPressure<*>.toKilopascal() = toUnit(Kilopascal(1.0))
+fun UnitPressure<*>.toMegapascal() = toUnit(Megapascal(1.0))
