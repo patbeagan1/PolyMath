@@ -79,25 +79,7 @@ value class Kilocoulomb(override val value: Double) : UnitCharge<Kilocoulomb> {
     operator fun div(other: UnitTime<*>) = (this as UnitCharge<*>).divUnit(other)
 }
 
-@JvmInline
-value class AmpereHour(override val value: Double) : UnitCharge<AmpereHour> {
-    override fun asType(d: Double) = AmpereHour(d)
-    override fun asBaseUnit() = Coulomb(this.value * 3600.0)
-
-    operator fun plus(other: UnitCharge<*>) = (this as UnitCharge<*>).plusUnit(other)
-    operator fun minus(other: UnitCharge<*>) = (this as UnitCharge<*>).minusUnit(other)
-    operator fun div(other: UnitTime<*>) = (this as UnitCharge<*>).divUnit(other)
-}
-
-@JvmInline
-value class MilliampereHour(override val value: Double) : UnitCharge<MilliampereHour> {
-    override fun asType(d: Double) = MilliampereHour(d)
-    override fun asBaseUnit() = Coulomb(this.value * 3.6)
-
-    operator fun plus(other: UnitCharge<*>) = (this as UnitCharge<*>).plusUnit(other)
-    operator fun minus(other: UnitCharge<*>) = (this as UnitCharge<*>).minusUnit(other)
-    operator fun div(other: UnitTime<*>) = (this as UnitCharge<*>).divUnit(other)
-}
+// Non-SI charge units have been moved to units-common module
 
 fun UnitCharge<*>.plusUnit(other: UnitCharge<*>): Coulomb =
     Coulomb(this.asBaseUnit().value + other.asBaseUnit().value)
@@ -116,6 +98,4 @@ fun UnitCharge<*>.toMicrocoulomb() = toUnit(Microcoulomb(1.0))
 fun UnitCharge<*>.toNanocoulomb() = toUnit(Nanocoulomb(1.0))
 fun UnitCharge<*>.toPicocoulomb() = toUnit(Picocoulomb(1.0))
 fun UnitCharge<*>.toKilocoulomb() = toUnit(Kilocoulomb(1.0))
-fun UnitCharge<*>.toAmpereHour() = toUnit(AmpereHour(1.0))
-fun UnitCharge<*>.toMilliampereHour() = toUnit(MilliampereHour(1.0))
 
