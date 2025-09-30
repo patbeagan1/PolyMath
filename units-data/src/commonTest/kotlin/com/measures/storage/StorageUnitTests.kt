@@ -129,23 +129,6 @@ class StorageUnitTests {
     }
 
     @Test
-    fun testSmallStorageUnits() {
-        // Test small storage units
-        val millibyte = Millibyte(1000.0)
-        val microbyte = Microbyte(1000000.0)
-        val nanobyte = Nanobyte(1000000000.0)
-
-        // Test that conversions work
-        val mbToByte = millibyte.toByte()
-        val ubToByte = microbyte.toByte()
-        val nbToByte = nanobyte.toByte()
-
-        assertEquals(1.0, mbToByte.value, 0.01)
-        assertEquals(1.0, ubToByte.value, 0.01)
-        assertEquals(1.0, nbToByte.value, 0.01)
-    }
-
-    @Test
     fun testBinaryVsDecimalDifference() {
         // Test the difference between binary and decimal units
         val kibibyte = Kibibyte(1.0)

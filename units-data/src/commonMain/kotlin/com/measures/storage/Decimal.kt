@@ -19,16 +19,6 @@ fun UnitStorage<*>.toYottabyte() = toUnit(Yottabyte(1.0))
 // Smaller decimal units
 fun UnitStorage<*>.toDecabyte() = toUnit(Decabyte(1.0))
 fun UnitStorage<*>.toHectobyte() = toUnit(Hectobyte(1.0))
-fun UnitStorage<*>.toDecibyte() = toUnit(Decibyte(1.0))
-fun UnitStorage<*>.toCentibyte() = toUnit(Centibyte(1.0))
-fun UnitStorage<*>.toMillibyte() = toUnit(Millibyte(1.0))
-fun UnitStorage<*>.toMicrobyte() = toUnit(Microbyte(1.0))
-fun UnitStorage<*>.toNanobyte() = toUnit(Nanobyte(1.0))
-fun UnitStorage<*>.toPicobyte() = toUnit(Picobyte(1.0))
-fun UnitStorage<*>.toFemtobyte() = toUnit(Femtobyte(1.0))
-fun UnitStorage<*>.toAttobyte() = toUnit(Attobyte(1.0))
-fun UnitStorage<*>.toZeptobyte() = toUnit(Zeptobyte(1.0))
-fun UnitStorage<*>.toYoctobyte() = toUnit(Yoctobyte(1.0))
 
 @JvmInline
 value class Decabyte(override val value: Double) : UnitStorage<Decabyte> {
@@ -115,97 +105,6 @@ value class Zettabyte(override val value: Double) : UnitStorage<Zettabyte> {
 value class Yottabyte(override val value: Double) : UnitStorage<Yottabyte> {
     override fun asType(d: Double) = Yottabyte(d)
     override fun asBaseUnit() = Byte(value * Consts.YOTTA)
-
-    override operator fun plus(other: UnitStorage<*>) = (this as UnitStorage<*>).plusUnit(other)
-    override operator fun minus(other: UnitStorage<*>) = (this as UnitStorage<*>).minusUnit(other)
-}
-
-// Smaller decimal units
-@JvmInline
-value class Decibyte(override val value: Double) : UnitStorage<Decibyte> {
-    override fun asType(d: Double) = Decibyte(d)
-    override fun asBaseUnit() = Byte(value * Consts.DECI)
-
-    override operator fun plus(other: UnitStorage<*>) = (this as UnitStorage<*>).plusUnit(other)
-    override operator fun minus(other: UnitStorage<*>) = (this as UnitStorage<*>).minusUnit(other)
-}
-
-@JvmInline
-value class Centibyte(override val value: Double) : UnitStorage<Centibyte> {
-    override fun asType(d: Double) = Centibyte(d)
-    override fun asBaseUnit() = Byte(value * Consts.CENTI)
-
-    override operator fun plus(other: UnitStorage<*>) = (this as UnitStorage<*>).plusUnit(other)
-    override operator fun minus(other: UnitStorage<*>) = (this as UnitStorage<*>).minusUnit(other)
-}
-
-@JvmInline
-value class Millibyte(override val value: Double) : UnitStorage<Millibyte> {
-    override fun asType(d: Double) = Millibyte(d)
-    override fun asBaseUnit() = Byte(value * Consts.MILLI)
-
-    override operator fun plus(other: UnitStorage<*>) = (this as UnitStorage<*>).plusUnit(other)
-    override operator fun minus(other: UnitStorage<*>) = (this as UnitStorage<*>).minusUnit(other)
-}
-
-@JvmInline
-value class Microbyte(override val value: Double) : UnitStorage<Microbyte> {
-    override fun asType(d: Double) = Microbyte(d)
-    override fun asBaseUnit() = Byte(value * Consts.MICRO)
-
-    override operator fun plus(other: UnitStorage<*>) = (this as UnitStorage<*>).plusUnit(other)
-    override operator fun minus(other: UnitStorage<*>) = (this as UnitStorage<*>).minusUnit(other)
-}
-
-@JvmInline
-value class Nanobyte(override val value: Double) : UnitStorage<Nanobyte> {
-    override fun asType(d: Double) = Nanobyte(d)
-    override fun asBaseUnit() = Byte(value * Consts.NANO)
-
-    override operator fun plus(other: UnitStorage<*>) = (this as UnitStorage<*>).plusUnit(other)
-    override operator fun minus(other: UnitStorage<*>) = (this as UnitStorage<*>).minusUnit(other)
-}
-
-@JvmInline
-value class Picobyte(override val value: Double) : UnitStorage<Picobyte> {
-    override fun asType(d: Double) = Picobyte(d)
-    override fun asBaseUnit() = Byte(value * Consts.PICO)
-
-    override operator fun plus(other: UnitStorage<*>) = (this as UnitStorage<*>).plusUnit(other)
-    override operator fun minus(other: UnitStorage<*>) = (this as UnitStorage<*>).minusUnit(other)
-}
-
-@JvmInline
-value class Femtobyte(override val value: Double) : UnitStorage<Femtobyte> {
-    override fun asType(d: Double) = Femtobyte(d)
-    override fun asBaseUnit() = Byte(value * Consts.FEMTO)
-
-    override operator fun plus(other: UnitStorage<*>) = (this as UnitStorage<*>).plusUnit(other)
-    override operator fun minus(other: UnitStorage<*>) = (this as UnitStorage<*>).minusUnit(other)
-}
-
-@JvmInline
-value class Attobyte(override val value: Double) : UnitStorage<Attobyte> {
-    override fun asType(d: Double) = Attobyte(d)
-    override fun asBaseUnit() = Byte(value * Consts.ATTO)
-
-    override operator fun plus(other: UnitStorage<*>) = (this as UnitStorage<*>).plusUnit(other)
-    override operator fun minus(other: UnitStorage<*>) = (this as UnitStorage<*>).minusUnit(other)
-}
-
-@JvmInline
-value class Zeptobyte(override val value: Double) : UnitStorage<Zeptobyte> {
-    override fun asType(d: Double) = Zeptobyte(d)
-    override fun asBaseUnit() = Byte(value * Consts.ZEPTO)
-
-    override operator fun plus(other: UnitStorage<*>) = (this as UnitStorage<*>).plusUnit(other)
-    override operator fun minus(other: UnitStorage<*>) = (this as UnitStorage<*>).minusUnit(other)
-}
-
-@JvmInline
-value class Yoctobyte(override val value: Double) : UnitStorage<Yoctobyte> {
-    override fun asType(d: Double) = Yoctobyte(d)
-    override fun asBaseUnit() = Byte(value * Consts.YOCTO)
 
     override operator fun plus(other: UnitStorage<*>) = (this as UnitStorage<*>).plusUnit(other)
     override operator fun minus(other: UnitStorage<*>) = (this as UnitStorage<*>).minusUnit(other)

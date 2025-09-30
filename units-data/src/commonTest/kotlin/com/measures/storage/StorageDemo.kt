@@ -97,17 +97,6 @@ class StorageDemo {
         println("1 YB = ${yottabyte.toByte().value} bytes")
         println()
 
-        // Small storage units
-        println("9. Small Storage Units:")
-        val millibyte = Millibyte(1000.0)
-        val microbyte = Microbyte(1000000.0)
-        val nanobyte = Nanobyte(1000000000.0)
-
-        println("1000 mB = ${millibyte.toByte().value} bytes")
-        println("1,000,000 μB = ${microbyte.toByte().value} bytes")
-        println("1,000,000,000 nB = ${nanobyte.toByte().value} bytes")
-        println()
-
         // Data storage units
         println("10. Data Storage Units:")
         val nibble = Nibble(2.0)
