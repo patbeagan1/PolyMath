@@ -20,8 +20,8 @@ value class Volt(override val value: Double) : UnitPotential<Volt>, BaseUnit {
     override fun asType(d: Double) = Volt(d)
     override fun asBaseUnit() = this
 
-    operator fun plus(other: UnitPotential<*>) = (this as UnitPotential<*>).plus(other)
-    operator fun minus(other: UnitPotential<*>) = (this as UnitPotential<*>).minus(other)
+    operator fun plus(other: UnitPotential<*>) = (this as UnitPotential<*>).plusUnit(other)
+    operator fun minus(other: UnitPotential<*>) = (this as UnitPotential<*>).minusUnit(other)
     
     companion object {
         fun from(mass: UnitMass<*>, distance: UnitDistance<*>, current: UnitCurrent<*>, time: UnitTime<*>): Volt {
@@ -43,9 +43,9 @@ value class Millivolt(override val value: Double) : UnitPotential<Millivolt> {
     override fun asType(d: Double) = Millivolt(d)
     override fun asBaseUnit() = Volt(this.value * 0.001)
 
-    operator fun plus(other: UnitPotential<*>) = (this as UnitPotential<*>).plus(other)
-    operator fun minus(other: UnitPotential<*>) = (this as UnitPotential<*>).minus(other)
-    operator fun times(other: UnitCharge<*>) = (this as UnitPotential<*>).times(other)
+    operator fun plus(other: UnitPotential<*>) = (this as UnitPotential<*>).plusUnit(other)
+    operator fun minus(other: UnitPotential<*>) = (this as UnitPotential<*>).minusUnit(other)
+    operator fun times(other: UnitCharge<*>) = (this as UnitPotential<*>).timesUnit(other)
 }
 
 @JvmInline
@@ -53,9 +53,9 @@ value class Microvolt(override val value: Double) : UnitPotential<Microvolt> {
     override fun asType(d: Double) = Microvolt(d)
     override fun asBaseUnit() = Volt(this.value * 1E-6)
 
-    operator fun plus(other: UnitPotential<*>) = (this as UnitPotential<*>).plus(other)
-    operator fun minus(other: UnitPotential<*>) = (this as UnitPotential<*>).minus(other)
-    operator fun times(other: UnitCharge<*>) = (this as UnitPotential<*>).times(other)
+    operator fun plus(other: UnitPotential<*>) = (this as UnitPotential<*>).plusUnit(other)
+    operator fun minus(other: UnitPotential<*>) = (this as UnitPotential<*>).minusUnit(other)
+    operator fun times(other: UnitCharge<*>) = (this as UnitPotential<*>).timesUnit(other)
 }
 
 @JvmInline
@@ -63,9 +63,9 @@ value class Kilovolt(override val value: Double) : UnitPotential<Kilovolt> {
     override fun asType(d: Double) = Kilovolt(d)
     override fun asBaseUnit() = Volt(this.value * 1000.0)
 
-    operator fun plus(other: UnitPotential<*>) = (this as UnitPotential<*>).plus(other)
-    operator fun minus(other: UnitPotential<*>) = (this as UnitPotential<*>).minus(other)
-    operator fun times(other: UnitCharge<*>) = (this as UnitPotential<*>).times(other)
+    operator fun plus(other: UnitPotential<*>) = (this as UnitPotential<*>).plusUnit(other)
+    operator fun minus(other: UnitPotential<*>) = (this as UnitPotential<*>).minusUnit(other)
+    operator fun times(other: UnitCharge<*>) = (this as UnitPotential<*>).timesUnit(other)
 }
 
 @JvmInline
@@ -73,9 +73,9 @@ value class Megavolt(override val value: Double) : UnitPotential<Megavolt> {
     override fun asType(d: Double) = Megavolt(d)
     override fun asBaseUnit() = Volt(this.value * 1E6)
 
-    operator fun plus(other: UnitPotential<*>) = (this as UnitPotential<*>).plus(other)
-    operator fun minus(other: UnitPotential<*>) = (this as UnitPotential<*>).minus(other)
-    operator fun times(other: UnitCharge<*>) = (this as UnitPotential<*>).times(other)
+    operator fun plus(other: UnitPotential<*>) = (this as UnitPotential<*>).plusUnit(other)
+    operator fun minus(other: UnitPotential<*>) = (this as UnitPotential<*>).minusUnit(other)
+    operator fun times(other: UnitCharge<*>) = (this as UnitPotential<*>).timesUnit(other)
 }
 
 @JvmInline
@@ -83,19 +83,19 @@ value class Gigavolt(override val value: Double) : UnitPotential<Gigavolt> {
     override fun asType(d: Double) = Gigavolt(d)
     override fun asBaseUnit() = Volt(this.value * 1E9)
 
-    operator fun plus(other: UnitPotential<*>) = (this as UnitPotential<*>).plus(other)
-    operator fun minus(other: UnitPotential<*>) = (this as UnitPotential<*>).minus(other)
-    operator fun times(other: UnitCharge<*>) = (this as UnitPotential<*>).times(other)
+    operator fun plus(other: UnitPotential<*>) = (this as UnitPotential<*>).plusUnit(other)
+    operator fun minus(other: UnitPotential<*>) = (this as UnitPotential<*>).minusUnit(other)
+    operator fun times(other: UnitCharge<*>) = (this as UnitPotential<*>).timesUnit(other)
 }
 
-operator fun UnitPotentialType<*>.plus(other: UnitPotentialType<*>): Volt =
+fun UnitPotentialType<*>.plusUnit(other: UnitPotentialType<*>): Volt =
     Volt(this.asBaseUnit().value + other.asBaseUnit().value)
 
-operator fun UnitPotentialType<*>.minus(other: UnitPotentialType<*>): Volt =
+fun UnitPotentialType<*>.minusUnit(other: UnitPotentialType<*>): Volt =
     Volt(this.asBaseUnit().value - other.asBaseUnit().value)
 
 // Potential × Charge = Energy
-operator fun UnitPotentialType<*>.times(other: UnitCharge<*>): Joule =
+fun UnitPotentialType<*>.timesUnit(other: UnitCharge<*>): Joule =
     Joule(this.asBaseUnit().value * other.asBaseUnit().value)
 
 // Conversion functions using toUnit

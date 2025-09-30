@@ -3,6 +3,7 @@ package com.measures.charge
 import com.measures.energy.Joule
 import com.measures.power.Watt
 import com.measures.power.times
+import com.measures.power.timesUnit
 import com.measures.time.Second
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -12,7 +13,7 @@ class UnitChargeTests {
     @Test
     fun testWatt() {
         val w = Watt(6.0)
-        val joules: Joule = w * Second(2.0)
+        val joules: Joule = w.times(Second(2.0))
 
         // The result of multiplying 6.0 W * 2.0 s should be 12.0 J
         assertEquals(12.0, joules.value, 0.0001)

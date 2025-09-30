@@ -10,10 +10,6 @@ interface BaseUnit : DoubleBase {
 }
 
 interface UnitType<T : DoubleBase, S : BaseUnit> : DoubleBase {
-    infix fun plus(other: T) = asType(this.value + other.value)
-    infix fun minus(other: T) = asType(this.value - other.value)
-    infix fun times(other: Double) = asType(this.value * other)
-    infix fun div(other: Double) = asType(this.value / other)
     fun asBaseUnit(): S
     fun asType(d: Double): T
     fun <

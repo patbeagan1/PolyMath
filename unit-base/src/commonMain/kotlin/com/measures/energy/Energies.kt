@@ -20,9 +20,9 @@ value class Joule(override val value: Double) : UnitEnergy<Joule>, BaseUnit {
     override fun asType(d: Double) = Joule(d)
     override fun asBaseUnit() = this
 
-    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plus(other)
-    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minus(other)
-    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).div(other)
+    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plusUnit(other)
+    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minusUnit(other)
+    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).divUnit(other)
 
     companion object {
         fun from(mass: UnitMass<*>, distance: UnitDistance<*>, time: UnitTime<*>): Joule {
@@ -42,10 +42,10 @@ value class Erg(override val value: Double) : UnitEnergy<Erg> {
     override fun asType(d: Double) = Erg(d)
     override fun asBaseUnit() = Joule(this.value * 1E-7)
 
-    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plus(other)
-    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minus(other)
-    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).div(other)
-    operator fun div(other: UnitCharge<*>) = (this as UnitEnergy<*>).div(other)
+    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plusUnit(other)
+    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minusUnit(other)
+    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).divUnit(other)
+    operator fun div(other: UnitCharge<*>) = (this as UnitEnergy<*>).divUnit(other)
 }
 
 @JvmInline
@@ -53,10 +53,10 @@ value class Calorie(override val value: Double) : UnitEnergy<Calorie> {
     override fun asType(d: Double) = Calorie(d)
     override fun asBaseUnit() = Joule(this.value * 4.184)
 
-    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plus(other)
-    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minus(other)
-    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).div(other)
-    operator fun div(other: UnitCharge<*>) = (this as UnitEnergy<*>).div(other)
+    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plusUnit(other)
+    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minusUnit(other)
+    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).divUnit(other)
+    operator fun div(other: UnitCharge<*>) = (this as UnitEnergy<*>).divUnit(other)
 }
 
 @JvmInline
@@ -64,10 +64,10 @@ value class Kilocalorie(override val value: Double) : UnitEnergy<Kilocalorie> {
     override fun asType(d: Double) = Kilocalorie(d)
     override fun asBaseUnit() = Joule(this.value * 4184.0)
 
-    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plus(other)
-    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minus(other)
-    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).div(other)
-    operator fun div(other: UnitCharge<*>) = (this as UnitEnergy<*>).div(other)
+    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plusUnit(other)
+    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minusUnit(other)
+    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).divUnit(other)
+    operator fun div(other: UnitCharge<*>) = (this as UnitEnergy<*>).divUnit(other)
 }
 
 @JvmInline
@@ -75,10 +75,10 @@ value class BritishThermalUnit(override val value: Double) : UnitEnergy<BritishT
     override fun asType(d: Double) = BritishThermalUnit(d)
     override fun asBaseUnit() = Joule(this.value * 1055.056)
 
-    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plus(other)
-    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minus(other)
-    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).div(other)
-    operator fun div(other: UnitCharge<*>) = (this as UnitEnergy<*>).div(other)
+    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plusUnit(other)
+    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minusUnit(other)
+    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).divUnit(other)
+    operator fun div(other: UnitCharge<*>) = (this as UnitEnergy<*>).divUnit(other)
 }
 
 @JvmInline
@@ -86,10 +86,10 @@ value class KilowattHour(override val value: Double) : UnitEnergy<KilowattHour> 
     override fun asType(d: Double) = KilowattHour(d)
     override fun asBaseUnit() = Joule(this.value * 3.6E6)
 
-    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plus(other)
-    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minus(other)
-    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).div(other)
-    operator fun div(other: UnitCharge<*>) = (this as UnitEnergy<*>).div(other)
+    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plusUnit(other)
+    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minusUnit(other)
+    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).divUnit(other)
+    operator fun div(other: UnitCharge<*>) = (this as UnitEnergy<*>).divUnit(other)
 }
 
 @JvmInline
@@ -97,10 +97,10 @@ value class ElectronVolt(override val value: Double) : UnitEnergy<ElectronVolt> 
     override fun asType(d: Double) = ElectronVolt(d)
     override fun asBaseUnit() = Joule(this.value * 1.602176634E-19)
 
-    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plus(other)
-    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minus(other)
-    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).div(other)
-    operator fun div(other: UnitCharge<*>) = (this as UnitEnergy<*>).div(other)
+    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plusUnit(other)
+    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minusUnit(other)
+    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).divUnit(other)
+    operator fun div(other: UnitCharge<*>) = (this as UnitEnergy<*>).divUnit(other)
 }
 
 @JvmInline
@@ -108,10 +108,10 @@ value class Kilojoule(override val value: Double) : UnitEnergy<Kilojoule> {
     override fun asType(d: Double) = Kilojoule(d)
     override fun asBaseUnit() = Joule(this.value * 1000.0)
 
-    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plus(other)
-    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minus(other)
-    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).div(other)
-    operator fun div(other: UnitCharge<*>) = (this as UnitEnergy<*>).div(other)
+    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plusUnit(other)
+    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minusUnit(other)
+    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).divUnit(other)
+    operator fun div(other: UnitCharge<*>) = (this as UnitEnergy<*>).divUnit(other)
 }
 
 @JvmInline
@@ -119,23 +119,23 @@ value class Megajoule(override val value: Double) : UnitEnergy<Megajoule> {
     override fun asType(d: Double) = Megajoule(d)
     override fun asBaseUnit() = Joule(this.value * 1E6)
 
-    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plus(other)
-    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minus(other)
-    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).div(other)
-    operator fun div(other: UnitCharge<*>) = (this as UnitEnergy<*>).div(other)
+    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plusUnit(other)
+    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minusUnit(other)
+    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).divUnit(other)
+    operator fun div(other: UnitCharge<*>) = (this as UnitEnergy<*>).divUnit(other)
 }
 
-operator fun UnitEnergyType<*>.plus(other: UnitEnergyType<*>): Joule =
+ fun UnitEnergyType<*>.plusUnit(other: UnitEnergyType<*>): Joule =
     Joule(this.asBaseUnit().value + other.asBaseUnit().value)
 
-operator fun UnitEnergyType<*>.minus(other: UnitEnergyType<*>): Joule =
+ fun UnitEnergyType<*>.minusUnit(other: UnitEnergyType<*>): Joule =
     Joule(this.asBaseUnit().value - other.asBaseUnit().value)
 
-operator fun UnitEnergyType<*>.div(other: UnitTime<*>): Watt =
+ fun UnitEnergyType<*>.divUnit(other: UnitTime<*>): Watt =
     Watt(this.asBaseUnit().value / other.asBaseUnit().value)
 
 // Energy ÷ Charge = Potential
-operator fun UnitEnergyType<*>.div(other: UnitCharge<*>): Volt =
+ fun UnitEnergyType<*>.divUnit(other: UnitCharge<*>): Volt =
     Volt(this.asBaseUnit().value / other.asBaseUnit().value)
 
 // Conversion functions using toUnit

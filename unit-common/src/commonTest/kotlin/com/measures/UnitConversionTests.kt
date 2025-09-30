@@ -5,6 +5,7 @@ import com.measures.distance.*
 import com.measures.misc.Angstroms
 import com.measures.misc.Capefeet
 import com.measures.misc.Microns
+import com.measures.time.Second
 import com.measures.volume.Liter
 import com.measures.volume.Milliliter
 import com.measures.volume.toLiter
@@ -175,6 +176,8 @@ class UnitConversionTests {
         val m1 = Meter(3.0)
         val m2 = Meter(2.0)
         val sum = m1 + m2
+        val second = m2 / Second(5.00)
+        val velo = second / Second(4.0)
 
         assertEquals(5.0, sum.value, 0.0001)
     }

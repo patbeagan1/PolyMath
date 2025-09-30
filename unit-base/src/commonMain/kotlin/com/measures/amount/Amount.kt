@@ -14,8 +14,8 @@ value class Mole(override val value: Double) : UnitAmount<Mole>, BaseUnit {
     override fun asType(d: Double) = Mole(d)
     override fun asBaseUnit() = this
 
-    operator fun plus(other: UnitAmount<*>) = (this as UnitAmount<*>).plus(other)
-    operator fun minus(other: UnitAmount<*>) = (this as UnitAmount<*>).minus(other)
+    operator fun plus(other: UnitAmount<*>) = (this as UnitAmount<*>).plusUnit(other)
+    operator fun minus(other: UnitAmount<*>) = (this as UnitAmount<*>).minusUnit(other)
 }
 
 @JvmInline
@@ -23,8 +23,8 @@ value class Millimole(override val value: Double) : UnitAmount<Millimole> {
     override fun asType(d: Double) = Millimole(d)
     override fun asBaseUnit() = Mole(this.value * 0.001)
 
-    operator fun plus(other: UnitAmount<*>) = (this as UnitAmount<*>).plus(other)
-    operator fun minus(other: UnitAmount<*>) = (this as UnitAmount<*>).minus(other)
+    operator fun plus(other: UnitAmount<*>) = (this as UnitAmount<*>).plusUnit(other)
+    operator fun minus(other: UnitAmount<*>) = (this as UnitAmount<*>).minusUnit(other)
 }
 
 @JvmInline
@@ -32,8 +32,8 @@ value class Micromole(override val value: Double) : UnitAmount<Micromole> {
     override fun asType(d: Double) = Micromole(d)
     override fun asBaseUnit() = Mole(this.value * 1E-6)
 
-    operator fun plus(other: UnitAmount<*>) = (this as UnitAmount<*>).plus(other)
-    operator fun minus(other: UnitAmount<*>) = (this as UnitAmount<*>).minus(other)
+    operator fun plus(other: UnitAmount<*>) = (this as UnitAmount<*>).plusUnit(other)
+    operator fun minus(other: UnitAmount<*>) = (this as UnitAmount<*>).minusUnit(other)
 }
 
 @JvmInline
@@ -41,8 +41,8 @@ value class Nanomole(override val value: Double) : UnitAmount<Nanomole> {
     override fun asType(d: Double) = Nanomole(d)
     override fun asBaseUnit() = Mole(this.value * 1E-9)
 
-    operator fun plus(other: UnitAmount<*>) = (this as UnitAmount<*>).plus(other)
-    operator fun minus(other: UnitAmount<*>) = (this as UnitAmount<*>).minus(other)
+    operator fun plus(other: UnitAmount<*>) = (this as UnitAmount<*>).plusUnit(other)
+    operator fun minus(other: UnitAmount<*>) = (this as UnitAmount<*>).minusUnit(other)
 }
 
 @JvmInline
@@ -50,8 +50,8 @@ value class Picomole(override val value: Double) : UnitAmount<Picomole> {
     override fun asType(d: Double) = Picomole(d)
     override fun asBaseUnit() = Mole(this.value * 1E-12)
 
-    operator fun plus(other: UnitAmount<*>) = (this as UnitAmount<*>).plus(other)
-    operator fun minus(other: UnitAmount<*>) = (this as UnitAmount<*>).minus(other)
+    operator fun plus(other: UnitAmount<*>) = (this as UnitAmount<*>).plusUnit(other)
+    operator fun minus(other: UnitAmount<*>) = (this as UnitAmount<*>).minusUnit(other)
 }
 
 @JvmInline
@@ -59,14 +59,14 @@ value class Kilomole(override val value: Double) : UnitAmount<Kilomole> {
     override fun asType(d: Double) = Kilomole(d)
     override fun asBaseUnit() = Mole(this.value * 1000.0)
 
-    operator fun plus(other: UnitAmount<*>) = (this as UnitAmount<*>).plus(other)
-    operator fun minus(other: UnitAmount<*>) = (this as UnitAmount<*>).minus(other)
+    operator fun plus(other: UnitAmount<*>) = (this as UnitAmount<*>).plusUnit(other)
+    operator fun minus(other: UnitAmount<*>) = (this as UnitAmount<*>).minusUnit(other)
 }
 
-operator fun UnitAmountType<*>.plus(other: UnitAmountType<*>): Mole =
+ fun UnitAmountType<*>.plusUnit(other: UnitAmountType<*>): Mole =
     Mole(this.asBaseUnit().value + other.asBaseUnit().value)
 
-operator fun UnitAmountType<*>.minus(other: UnitAmountType<*>): Mole =
+ fun UnitAmountType<*>.minusUnit(other: UnitAmountType<*>): Mole =
     Mole(this.asBaseUnit().value - other.asBaseUnit().value)
 
 // Conversion functions using toUnit

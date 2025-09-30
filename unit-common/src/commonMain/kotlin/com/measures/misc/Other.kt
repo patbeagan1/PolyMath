@@ -3,6 +3,8 @@ package com.measures.misc
 import com.measures.area.SquareMeter
 import com.measures.area.UnitArea
 import com.measures.distance.*
+import com.measures.time.UnitTime
+import com.measures.velocity.MetersPerSecond
 import com.measures.volume.*
 import kotlin.jvm.JvmInline
 
@@ -25,6 +27,7 @@ value class Angstroms(override val value: Double) : UnitDistance<Angstroms> {
     override fun minus(other: UnitDistance<*>): Meter = (this as UnitDistance<*>).minusUnit(other)
     override fun times(other: UnitDistance<*>): SquareMeter = (this as UnitDistance<*>).timesUnit(other)
     override fun times(other: UnitArea<*>): Liter = (this as UnitDistance<*>).timesUnit(other)
+    override fun div(other: UnitTime<*>): MetersPerSecond = (this as UnitDistance<*>).divUnit(other)
 }
 
 @JvmInline
@@ -36,6 +39,7 @@ value class Capefeet(override val value: Double) : UnitDistance<Capefeet> {
     override fun minus(other: UnitDistance<*>): Meter = (this as UnitDistance<*>).minusUnit(other)
     override fun times(other: UnitDistance<*>): SquareMeter = (this as UnitDistance<*>).timesUnit(other)
     override fun times(other: UnitArea<*>): Liter = (this as UnitDistance<*>).timesUnit(other)
+    override fun div(other: UnitTime<*>): MetersPerSecond = (this as UnitDistance<*>).divUnit(other)
 }
 
 @JvmInline
@@ -69,6 +73,7 @@ value class Microns(override val value: Double) : UnitDistance<Microns> {
     override fun minus(other: UnitDistance<*>): Meter = (this as UnitDistance<*>).minusUnit(other)
     override fun times(other: UnitDistance<*>): SquareMeter = (this as UnitDistance<*>).timesUnit(other)
     override fun times(other: UnitArea<*>): Liter = (this as UnitDistance<*>).timesUnit(other)
+    override fun div(other: UnitTime<*>): MetersPerSecond = (this as UnitDistance<*>).divUnit(other)
 }
 
 @JvmInline
@@ -80,6 +85,7 @@ value class Mils(override val value: Double) : UnitDistance<Mils> {
     override fun minus(other: UnitDistance<*>): Meter = (this as UnitDistance<*>).minusUnit(other)
     override fun times(other: UnitDistance<*>): SquareMeter = (this as UnitDistance<*>).timesUnit(other)
     override fun times(other: UnitArea<*>): Liter = (this as UnitDistance<*>).timesUnit(other)
+    override fun div(other: UnitTime<*>): MetersPerSecond = (this as UnitDistance<*>).divUnit(other)
 }
 
 @JvmInline

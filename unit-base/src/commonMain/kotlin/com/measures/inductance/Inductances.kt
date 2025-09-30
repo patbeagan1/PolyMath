@@ -3,10 +3,10 @@ package com.measures.inductance
 import com.measures.BaseUnit
 import com.measures.DoubleBase
 import com.measures.UnitType
-import com.measures.weight.UnitMass
 import com.measures.current.UnitCurrent
 import com.measures.distance.UnitDistance
 import com.measures.time.UnitTime
+import com.measures.weight.UnitMass
 import kotlin.jvm.JvmInline
 
 typealias UnitInductance<T> = UnitInductanceType<T>
@@ -18,9 +18,9 @@ value class Henry(override val value: Double) : UnitInductance<Henry>, BaseUnit 
     override fun asType(d: Double) = Henry(d)
     override fun asBaseUnit() = this
 
-    operator fun plus(other: UnitInductance<*>) = (this as UnitInductance<*>).plus(other)
-    operator fun minus(other: UnitInductance<*>) = (this as UnitInductance<*>).minus(other)
-    
+    operator fun plus(other: UnitInductance<*>) = (this as UnitInductance<*>).minusUnit(other)
+    operator fun minus(other: UnitInductance<*>) = (this as UnitInductance<*>).minusUnit(other)
+
     companion object {
         fun from(mass: UnitMass<*>, distance: UnitDistance<*>, current: UnitCurrent<*>, time: UnitTime<*>): Henry {
             val massBase = mass.asBaseUnit()
@@ -32,10 +32,10 @@ value class Henry(override val value: Double) : UnitInductance<Henry>, BaseUnit 
     }
 }
 
-operator fun UnitInductanceType<*>.plus(other: UnitInductanceType<*>): Henry =
+fun UnitInductanceType<*>.plusUnit(other: UnitInductanceType<*>): Henry =
     Henry(this.asBaseUnit().value + other.asBaseUnit().value)
 
-operator fun UnitInductanceType<*>.minus(other: UnitInductanceType<*>): Henry =
+fun UnitInductanceType<*>.minusUnit(other: UnitInductanceType<*>): Henry =
     Henry(this.asBaseUnit().value - other.asBaseUnit().value)
 
 fun UnitInductance<*>.toHenry() = this.asBaseUnit()

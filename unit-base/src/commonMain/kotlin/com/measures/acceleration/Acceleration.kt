@@ -11,19 +11,19 @@ import com.measures.weight.UnitMass
 
 interface UnitAcceleration<T : DoubleBase> : UnitType<T, MetersPerSecondPerSecond> 
 
-operator fun UnitAcceleration<*>.plus(other: UnitAcceleration<*>): MetersPerSecondPerSecond =
+ fun UnitAcceleration<*>.plusUnit(other: UnitAcceleration<*>): MetersPerSecondPerSecond =
     MetersPerSecondPerSecond(this.asBaseUnit().value + other.asBaseUnit().value)
 
-operator fun UnitAcceleration<*>.minus(other: UnitAcceleration<*>): MetersPerSecondPerSecond =
+ fun UnitAcceleration<*>.minusUnit(other: UnitAcceleration<*>): MetersPerSecondPerSecond =
     MetersPerSecondPerSecond(this.asBaseUnit().value - other.asBaseUnit().value)
 
 // Acceleration × Time = Velocity
-operator fun UnitAcceleration<*>.times(other: UnitTime<*>): MetersPerSecond =
+ fun UnitAcceleration<*>.timesUnit(other: UnitTime<*>): MetersPerSecond =
     MetersPerSecond(this.asBaseUnit().value * other.asBaseUnit().value)
 
 // Velocity ÷ Time = Acceleration
-operator fun UnitVelocity<*>.div(other: UnitTime<*>): MetersPerSecondPerSecond =
+ fun UnitVelocity<*>.divUnit(other: UnitTime<*>): MetersPerSecondPerSecond =
     MetersPerSecondPerSecond(this.asBaseUnit().value / other.asBaseUnit().value)
 
-operator fun UnitAcceleration<*>.times(other: UnitMass<*>): Newton =
+ fun UnitAcceleration<*>.timesUnit(other: UnitMass<*>): Newton =
     Newton(this.asBaseUnit().value * other.asBaseUnit().value)

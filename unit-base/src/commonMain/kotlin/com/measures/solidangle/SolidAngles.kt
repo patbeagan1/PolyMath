@@ -14,14 +14,14 @@ value class Steradian(override val value: Double) : UnitSolidAngle<Steradian>, B
     override fun asType(d: Double) = Steradian(d)
     override fun asBaseUnit() = this
 
-    operator fun plus(other: UnitSolidAngle<*>) = (this as UnitSolidAngle<*>).plus(other)
-    operator fun minus(other: UnitSolidAngle<*>) = (this as UnitSolidAngle<*>).minus(other)
+    operator fun plus(other: UnitSolidAngle<*>) = (this as UnitSolidAngle<*>).minusUnit(other)
+    operator fun minus(other: UnitSolidAngle<*>) = (this as UnitSolidAngle<*>).minusUnit(other)
 }
 
-operator fun UnitSolidAngleType<*>.plus(other: UnitSolidAngleType<*>): Steradian =
+fun UnitSolidAngleType<*>.plusUnit(other: UnitSolidAngleType<*>): Steradian =
     Steradian(this.asBaseUnit().value + other.asBaseUnit().value)
 
-operator fun UnitSolidAngleType<*>.minus(other: UnitSolidAngleType<*>): Steradian =
+fun UnitSolidAngleType<*>.minusUnit(other: UnitSolidAngleType<*>): Steradian =
     Steradian(this.asBaseUnit().value - other.asBaseUnit().value)
 
 fun UnitSolidAngle<*>.toSteradian() = this.asBaseUnit()
