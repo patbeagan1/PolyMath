@@ -33,7 +33,6 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             api(project(":unit-base"))
-            api(project(":units-data"))
             implementation(kotlin("test"))
         }
     }
