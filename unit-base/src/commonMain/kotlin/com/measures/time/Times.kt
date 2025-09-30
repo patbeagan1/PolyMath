@@ -6,22 +6,20 @@ import com.measures.UnitType
 import com.measures.frequency.Hertz
 import kotlin.jvm.JvmInline
 
-typealias UnitTime<T> = UnitTimeType<T>
-
-interface UnitTimeType<T : DoubleBase> : UnitType<T, Second> {
+interface UnitTime<T : DoubleBase> : UnitType<T, Second> {
     operator fun plus(other: UnitTime<*>): Second
     operator fun minus(other: UnitTime<*>): Second
     operator fun inv(): Hertz
 }
 
-fun UnitTimeType<*>.plusUnit(other: UnitTimeType<*>): Second =
+internal fun UnitTime<*>.plusUnit(other: UnitTime<*>): Second =
     Second(this.asBaseUnit().value + other.asBaseUnit().value)
 
-fun UnitTimeType<*>.minusUnit(other: UnitTimeType<*>): Second =
+internal fun UnitTime<*>.minusUnit(other: UnitTime<*>): Second =
     Second(this.asBaseUnit().value - other.asBaseUnit().value)
 
 // Time to Frequency conversion: 1/time = frequency
-fun UnitTimeType<*>.invUnit(): Hertz =
+internal fun UnitTime<*>.invUnit(): Hertz =
     Hertz(1.0 / this.asBaseUnit().value)
 
 @JvmInline
@@ -104,8 +102,6 @@ value class Nanosecond(override val value: Double) : UnitTime<Nanosecond> {
     override operator fun inv() = (this as UnitTime<*>).invUnit()
 }
 
-// Conversion functions using toUnit
-fun UnitTime<*>.toSecond() = this.asBaseUnit()
 fun UnitTime<*>.toMinute() = toUnit(Minute(1.0))
 fun UnitTime<*>.toHour() = toUnit(Hour(1.0))
 fun UnitTime<*>.toDay() = toUnit(Day(1.0))
@@ -113,3 +109,6 @@ fun UnitTime<*>.toWeek() = toUnit(Week(1.0))
 fun UnitTime<*>.toMillisecond() = toUnit(Millisecond(1.0))
 fun UnitTime<*>.toMicrosecond() = toUnit(Microsecond(1.0))
 fun UnitTime<*>.toNanosecond() = toUnit(Nanosecond(1.0))
+
+// Conversion functions using toUnit
+fun UnitTime<*>.toSecond() = this.asBaseUnit()

@@ -2,8 +2,6 @@ package com.measures.charge
 
 import com.measures.energy.Joule
 import com.measures.power.Watt
-import com.measures.power.times
-import com.measures.power.timesUnit
 import com.measures.time.Second
 import kotlin.test.Test
 import kotlin.test.assertEquals
