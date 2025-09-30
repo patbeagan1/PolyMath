@@ -19,14 +19,7 @@ value class Radian(override val value: Double) : UnitAngle<Radian>, BaseUnit {
     operator fun minus(other: UnitAngle<*>) = (this as UnitAngle<*>).minusUnit(other)
 }
 
-@JvmInline
-value class Degree(override val value: Double) : UnitAngle<Degree> {
-    override fun asType(d: Double) = Degree(d)
-    override fun asBaseUnit() = Radian(this.value * PI / 180.0)
-
-    operator fun plus(other: UnitAngle<*>) = (this as UnitAngle<*>).plusUnit(other)
-    operator fun minus(other: UnitAngle<*>) = (this as UnitAngle<*>).minusUnit(other)
-}
+// Non-SI angle units have been moved to units-common module
 
  fun UnitAngleType<*>.plusUnit(other: UnitAngleType<*>): Radian =
     Radian(this.asBaseUnit().value + other.asBaseUnit().value)
@@ -35,4 +28,3 @@ value class Degree(override val value: Double) : UnitAngle<Degree> {
     Radian(this.asBaseUnit().value - other.asBaseUnit().value)
 
 fun UnitAngle<*>.toRadian() = this.asBaseUnit()
-fun UnitAngle<*>.toDegree() = Degree(this.asBaseUnit().value * 180.0 / PI)
