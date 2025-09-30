@@ -82,35 +82,7 @@ fun UnitPowerType<*>.minusUnit(other: UnitPowerType<*>): Watt =
 fun UnitPowerType<*>.timesUnit(other: UnitTime<*>): Joule =
     Joule(this.asBaseUnit().value * other.asBaseUnit().value)
 
-@JvmInline
-value class Horsepower(override val value: Double) : UnitPower<Horsepower> {
-    override fun asType(d: Double) = Horsepower(d)
-    override fun asBaseUnit() = Watt(this.value * 745.7)
-
-    override operator fun plus(other: UnitPower<*>) = (this as UnitPower<*>).plusUnit(other)
-    override operator fun minus(other: UnitPower<*>) = (this as UnitPower<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitPower<*>).timesUnit(other)
-}
-
-@JvmInline
-value class ErgPerSecond(override val value: Double) : UnitPower<ErgPerSecond> {
-    override fun asType(d: Double) = ErgPerSecond(d)
-    override fun asBaseUnit() = Watt(this.value * 1E-7)
-
-    override operator fun plus(other: UnitPower<*>) = (this as UnitPower<*>).plusUnit(other)
-    override operator fun minus(other: UnitPower<*>) = (this as UnitPower<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitPower<*>).timesUnit(other)
-}
-
-@JvmInline
-value class FootPoundPerSecond(override val value: Double) : UnitPower<FootPoundPerSecond> {
-    override fun asType(d: Double) = FootPoundPerSecond(d)
-    override fun asBaseUnit() = Watt(this.value * 1.355818)
-
-    override operator fun plus(other: UnitPower<*>) = (this as UnitPower<*>).plusUnit(other)
-    override operator fun minus(other: UnitPower<*>) = (this as UnitPower<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitPower<*>).timesUnit(other)
-}
+// Non-SI power units have been moved to units-common module
 
 // Conversion functions using toUnit
 fun UnitPower<*>.toWatt() = this.asBaseUnit()
@@ -118,7 +90,4 @@ fun UnitPower<*>.toMilliwatt() = toUnit(Milliwatt(1.0))
 fun UnitPower<*>.toKilowatt() = toUnit(Kilowatt(1.0))
 fun UnitPower<*>.toMegawatt() = toUnit(Megawatt(1.0))
 fun UnitPower<*>.toGigawatt() = toUnit(Gigawatt(1.0))
-fun UnitPower<*>.toHorsepower() = toUnit(Horsepower(1.0))
-fun UnitPower<*>.toErgPerSecond() = toUnit(ErgPerSecond(1.0))
-fun UnitPower<*>.toFootPoundPerSecond() = toUnit(FootPoundPerSecond(1.0))
 
