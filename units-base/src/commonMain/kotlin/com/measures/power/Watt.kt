@@ -21,3 +21,5 @@ value class Watt(override val value: Double) : UnitPower<Watt>, BaseUnit {
             Joule.Companion.from(mass, distance, time) / time
     }
 }
+
+fun UnitPower<*>.toWatt() = this.asBaseUnit()

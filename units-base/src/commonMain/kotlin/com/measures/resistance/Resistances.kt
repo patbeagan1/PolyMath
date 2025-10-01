@@ -1,45 +1,15 @@
 package com.measures.resistance
 
-import com.measures.BaseUnit
 import com.measures.DoubleBase
 import com.measures.UnitType
-import com.measures.weight.UnitMass
-import com.measures.current.UnitCurrent
-import com.measures.distance.UnitDistance
-import com.measures.time.UnitTime
-import kotlin.jvm.JvmInline
 
-typealias UnitResistance<T> = UnitResistanceType<T>
-
-interface UnitResistanceType<T : DoubleBase> : UnitType<T, Ohm>
-
-@JvmInline
-value class Ohm(override val value: Double) : UnitResistance<Ohm>, BaseUnit {
-    override fun asType(d: Double) = Ohm(d)
-    override fun asBaseUnit() = this
-
-    operator fun plus(other: UnitResistance<*>) = (this as UnitResistance<*>).plusUnit(other)
-    operator fun minus(other: UnitResistance<*>) = (this as UnitResistance<*>).minusUnit(other)
-    
-    companion object {
-        fun from(mass: UnitMass<*>, distance: UnitDistance<*>, current: UnitCurrent<*>, time: UnitTime<*>): Ohm {
-            // Resistance = Potential / Current
-            // Potential = Energy / Charge = (mass × distance² / time²) / (current × time) = mass × distance² / (current × time³)
-            // Resistance = (mass × distance² / (current × time³)) / current = mass × distance² / (current² × time³)
-            val massValue = mass.asBaseUnit().value
-            val distanceValue = distance.asBaseUnit().value
-            val currentValue = current.asBaseUnit().value
-            val timeValue = time.asBaseUnit().value
-            return Ohm(massValue * distanceValue * distanceValue / (currentValue * currentValue * timeValue * timeValue * timeValue))
-        }
-    }
+interface UnitResistance<T : DoubleBase> : UnitType<T, Ohm> {
+    operator fun plus(other: UnitResistance<*>): Ohm
+    operator fun minus(other: UnitResistance<*>): Ohm
 }
 
- fun UnitResistanceType<*>.plusUnit(other: UnitResistanceType<*>): Ohm =
+ fun UnitResistance<*>.plusUnit(other: UnitResistance<*>): Ohm =
     Ohm(this.asBaseUnit().value + other.asBaseUnit().value)
 
- fun UnitResistanceType<*>.minusUnit(other: UnitResistanceType<*>): Ohm =
+ fun UnitResistance<*>.minusUnit(other: UnitResistance<*>): Ohm =
     Ohm(this.asBaseUnit().value - other.asBaseUnit().value)
-
-fun UnitResistance<*>.toOhm() = this.asBaseUnit()
-

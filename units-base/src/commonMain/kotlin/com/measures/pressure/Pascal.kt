@@ -12,9 +12,9 @@ value class Pascal(override val value: Double) : UnitPressure<Pascal>, BaseUnit 
     override fun asType(d: Double) = Pascal(d)
     override fun asBaseUnit() = this
 
-    operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plusUnit(other)
-    operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minusUnit(other)
-    operator fun times(other: UnitArea<*>) = (this as UnitPressure<*>).timesUnit(other)
+    override operator fun plus(other: UnitPressure<*>) = (this as UnitPressure<*>).plusUnit(other)
+    override operator fun minus(other: UnitPressure<*>) = (this as UnitPressure<*>).minusUnit(other)
+    override operator fun times(other: UnitArea<*>) = (this as UnitPressure<*>).timesUnit(other)
 
     companion object {
         fun from(mass: UnitMass<*>, distance: UnitDistance<*>, time: UnitTime<*>): Pascal {
@@ -29,3 +29,5 @@ value class Pascal(override val value: Double) : UnitPressure<Pascal>, BaseUnit 
         }
     }
 }
+
+fun UnitPressure<*>.toPascal() = this.asBaseUnit()

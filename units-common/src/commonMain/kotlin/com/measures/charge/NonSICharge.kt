@@ -1,8 +1,5 @@
 package com.measures.charge
 
-import com.measures.DoubleBase
-import com.measures.UnitType
-import com.measures.current.Ampere
 import com.measures.time.UnitTime
 import kotlin.jvm.JvmInline
 
@@ -12,71 +9,71 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class AmpereHour(override val value: Double) : UnitCharge<AmpereHour> {
     override fun asType(d: Double) = AmpereHour(d)
-    override fun asBaseUnit() = com.measures.charge.Coulomb(this.value * 3600.0)
+    override fun asBaseUnit() = Coulomb(this.value * 3600.0)
 
-    operator fun plus(other: UnitCharge<*>) = (this as UnitCharge<*>).plusUnit(other)
-    operator fun minus(other: UnitCharge<*>) = (this as UnitCharge<*>).minusUnit(other)
-    operator fun div(other: UnitTime<*>) = (this as UnitCharge<*>).divUnit(other)
+    override operator fun plus(other: UnitCharge<*>) = (this as UnitCharge<*>).plusUnit(other)
+    override operator fun minus(other: UnitCharge<*>) = (this as UnitCharge<*>).minusUnit(other)
+    override operator fun div(other: UnitTime<*>) = (this as UnitCharge<*>).divUnit(other)
 }
 
 @JvmInline
 value class MilliampereHour(override val value: Double) : UnitCharge<MilliampereHour> {
     override fun asType(d: Double) = MilliampereHour(d)
-    override fun asBaseUnit() = com.measures.charge.Coulomb(this.value * 3.6)
+    override fun asBaseUnit() = Coulomb(this.value * 3.6)
 
-    operator fun plus(other: UnitCharge<*>) = (this as UnitCharge<*>).plusUnit(other)
-    operator fun minus(other: UnitCharge<*>) = (this as UnitCharge<*>).minusUnit(other)
-    operator fun div(other: UnitTime<*>) = (this as UnitCharge<*>).divUnit(other)
+    override operator fun plus(other: UnitCharge<*>) = (this as UnitCharge<*>).plusUnit(other)
+    override operator fun minus(other: UnitCharge<*>) = (this as UnitCharge<*>).minusUnit(other)
+    override operator fun div(other: UnitTime<*>) = (this as UnitCharge<*>).divUnit(other)
 }
 
 @JvmInline
 value class Millicoulomb(override val value: Double) : UnitCharge<Millicoulomb> {
     override fun asType(d: Double) = Millicoulomb(d)
-    override fun asBaseUnit() = com.measures.charge.Coulomb(this.value * 0.001)
+    override fun asBaseUnit() = Coulomb(this.value * 0.001)
 
-    operator fun plus(other: UnitCharge<*>) = (this as UnitCharge<*>).plusUnit(other)
-    operator fun minus(other: UnitCharge<*>) = (this as UnitCharge<*>).minusUnit(other)
-    operator fun div(other: UnitTime<*>) = (this as UnitCharge<*>).divUnit(other)
+    override operator fun plus(other: UnitCharge<*>) = (this as UnitCharge<*>).plusUnit(other)
+    override operator fun minus(other: UnitCharge<*>) = (this as UnitCharge<*>).minusUnit(other)
+    override operator fun div(other: UnitTime<*>) = (this as UnitCharge<*>).divUnit(other)
 }
 
 @JvmInline
 value class Microcoulomb(override val value: Double) : UnitCharge<Microcoulomb> {
     override fun asType(d: Double) = Microcoulomb(d)
-    override fun asBaseUnit() = com.measures.charge.Coulomb(this.value * 1E-6)
+    override fun asBaseUnit() = Coulomb(this.value * 1E-6)
 
-    operator fun plus(other: UnitCharge<*>) = (this as UnitCharge<*>).plusUnit(other)
-    operator fun minus(other: UnitCharge<*>) = (this as UnitCharge<*>).minusUnit(other)
-    operator fun div(other: UnitTime<*>) = (this as UnitCharge<*>).divUnit(other)
+    override operator fun plus(other: UnitCharge<*>) = (this as UnitCharge<*>).plusUnit(other)
+    override operator fun minus(other: UnitCharge<*>) = (this as UnitCharge<*>).minusUnit(other)
+    override operator fun div(other: UnitTime<*>) = (this as UnitCharge<*>).divUnit(other)
 }
 
 @JvmInline
 value class Nanocoulomb(override val value: Double) : UnitCharge<Nanocoulomb> {
     override fun asType(d: Double) = Nanocoulomb(d)
-    override fun asBaseUnit() = com.measures.charge.Coulomb(this.value * 1E-9)
+    override fun asBaseUnit() = Coulomb(this.value * 1E-9)
 
-    operator fun plus(other: UnitCharge<*>) = (this as UnitCharge<*>).plusUnit(other)
-    operator fun minus(other: UnitCharge<*>) = (this as UnitCharge<*>).minusUnit(other)
-    operator fun div(other: UnitTime<*>) = (this as UnitCharge<*>).divUnit(other)
+    override operator fun plus(other: UnitCharge<*>) = (this as UnitCharge<*>).plusUnit(other)
+    override operator fun minus(other: UnitCharge<*>) = (this as UnitCharge<*>).minusUnit(other)
+    override operator fun div(other: UnitTime<*>) = (this as UnitCharge<*>).divUnit(other)
 }
 
 @JvmInline
 value class Picocoulomb(override val value: Double) : UnitCharge<Picocoulomb> {
     override fun asType(d: Double) = Picocoulomb(d)
-    override fun asBaseUnit() = com.measures.charge.Coulomb(this.value * 1E-12)
+    override fun asBaseUnit() = Coulomb(this.value * 1E-12)
 
-    operator fun plus(other: UnitCharge<*>) = (this as UnitCharge<*>).plusUnit(other)
-    operator fun minus(other: UnitCharge<*>) = (this as UnitCharge<*>).minusUnit(other)
-    operator fun div(other: UnitTime<*>) = (this as UnitCharge<*>).divUnit(other)
+    override operator fun plus(other: UnitCharge<*>) = (this as UnitCharge<*>).plusUnit(other)
+    override operator fun minus(other: UnitCharge<*>) = (this as UnitCharge<*>).minusUnit(other)
+    override operator fun div(other: UnitTime<*>) = (this as UnitCharge<*>).divUnit(other)
 }
 
 @JvmInline
 value class Kilocoulomb(override val value: Double) : UnitCharge<Kilocoulomb> {
     override fun asType(d: Double) = Kilocoulomb(d)
-    override fun asBaseUnit() = com.measures.charge.Coulomb(this.value * 1000.0)
+    override fun asBaseUnit() = Coulomb(this.value * 1000.0)
 
-    operator fun plus(other: UnitCharge<*>) = (this as UnitCharge<*>).plusUnit(other)
-    operator fun minus(other: UnitCharge<*>) = (this as UnitCharge<*>).minusUnit(other)
-    operator fun div(other: UnitTime<*>) = (this as UnitCharge<*>).divUnit(other)
+    override operator fun plus(other: UnitCharge<*>) = (this as UnitCharge<*>).plusUnit(other)
+    override operator fun minus(other: UnitCharge<*>) = (this as UnitCharge<*>).minusUnit(other)
+    override operator fun div(other: UnitTime<*>) = (this as UnitCharge<*>).divUnit(other)
 }
 
 // Conversion functions for non-SI charge units

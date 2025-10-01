@@ -1,8 +1,5 @@
 package com.measures.time
 
-import com.measures.DoubleBase
-import com.measures.time.Second
-import com.measures.time.UnitTime
 import kotlin.jvm.JvmInline
 
 @JvmInline

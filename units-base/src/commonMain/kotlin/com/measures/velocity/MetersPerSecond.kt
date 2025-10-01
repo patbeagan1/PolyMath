@@ -16,5 +16,3 @@ value class MetersPerSecond(override val value: Double) : UnitVelocity<MetersPer
 }
 
 fun UnitVelocity<*>.toMetersPerSecond() = this.asBaseUnit()
-
-// Non-SI velocity units have been moved to unit-common module

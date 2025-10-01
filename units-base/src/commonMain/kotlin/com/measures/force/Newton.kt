@@ -24,3 +24,5 @@ value class Newton(override val value: Double) : UnitForce<Newton>, BaseUnit {
         fun from(mass: UnitMass<*>, acceleration: UnitAcceleration<*>): Newton = mass * acceleration
     }
 }
+
+fun UnitForce<*>.toNewton() = this.asBaseUnit()

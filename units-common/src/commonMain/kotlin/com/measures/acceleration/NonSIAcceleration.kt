@@ -1,9 +1,8 @@
 package com.measures.acceleration
 
-import com.measures.DoubleBase
-import com.measures.UnitType
+import com.measures.force.Newton
 import com.measures.time.UnitTime
-import com.measures.velocity.MetersPerSecond
+import com.measures.weight.UnitMass
 import kotlin.jvm.JvmInline
 
 // Non-SI Acceleration Units
@@ -12,51 +11,56 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class FeetPerSecondPerSecond(override val value: Double) : UnitAcceleration<FeetPerSecondPerSecond> {
     override fun asType(d: Double) = FeetPerSecondPerSecond(d)
-    override fun asBaseUnit() = com.measures.acceleration.MetersPerSecondPerSecond(this.value * 0.3048)
+    override fun asBaseUnit() = MetersPerSecondPerSecond(this.value * 0.3048)
 
-    operator fun plus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).plusUnit(other)
-    operator fun minus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).minusUnit(other)
-    operator fun times(other: UnitTime<*>) = (this as UnitAcceleration<*>).timesUnit(other)
+    override operator fun plus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).plusUnit(other)
+    override operator fun minus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).minusUnit(other)
+    override operator fun times(other: UnitTime<*>) = (this as UnitAcceleration<*>).timesUnit(other)
+    override operator fun times(other: UnitMass<*>): Newton = Newton(this.asBaseUnit().value * other.asBaseUnit().value * 100)
 }
 
 @JvmInline
 value class Gal(override val value: Double) : UnitAcceleration<Gal> {
     override fun asType(d: Double) = Gal(d)
-    override fun asBaseUnit() = com.measures.acceleration.MetersPerSecondPerSecond(this.value * 0.01)
+    override fun asBaseUnit() = MetersPerSecondPerSecond(this.value * 0.01)
 
-    operator fun plus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).plusUnit(other)
-    operator fun minus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).minusUnit(other)
-    operator fun times(other: UnitTime<*>) = (this as UnitAcceleration<*>).timesUnit(other)
+    override operator fun plus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).plusUnit(other)
+    override operator fun minus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).minusUnit(other)
+    override operator fun times(other: UnitTime<*>) = (this as UnitAcceleration<*>).timesUnit(other)
+    override operator fun times(other: UnitMass<*>): Newton = Newton(this.asBaseUnit().value * other.asBaseUnit().value * 100)
 }
 
 @JvmInline
 value class GForce(override val value: Double) : UnitAcceleration<GForce> {
     override fun asType(d: Double) = GForce(d)
-    override fun asBaseUnit() = com.measures.acceleration.MetersPerSecondPerSecond(this.value * 9.80665)
+    override fun asBaseUnit() = MetersPerSecondPerSecond(this.value * 9.80665)
 
-    operator fun plus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).plusUnit(other)
-    operator fun minus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).minusUnit(other)
-    operator fun times(other: UnitTime<*>) = (this as UnitAcceleration<*>).timesUnit(other)
+    override operator fun plus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).plusUnit(other)
+    override operator fun minus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).minusUnit(other)
+    override operator fun times(other: UnitTime<*>) = (this as UnitAcceleration<*>).timesUnit(other)
+    override operator fun times(other: UnitMass<*>): Newton = Newton(this.asBaseUnit().value * other.asBaseUnit().value * 100)
 }
 
 @JvmInline
 value class CentimetersPerSecondSquared(override val value: Double) : UnitAcceleration<CentimetersPerSecondSquared> {
     override fun asType(d: Double) = CentimetersPerSecondSquared(d)
-    override fun asBaseUnit() = com.measures.acceleration.MetersPerSecondPerSecond(this.value * 0.01)
+    override fun asBaseUnit() = MetersPerSecondPerSecond(this.value * 0.01)
 
-    operator fun plus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).plusUnit(other)
-    operator fun minus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).minusUnit(other)
-    operator fun times(other: UnitTime<*>) = (this as UnitAcceleration<*>).timesUnit(other)
+    override operator fun plus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).plusUnit(other)
+    override operator fun minus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).minusUnit(other)
+    override operator fun times(other: UnitTime<*>) = (this as UnitAcceleration<*>).timesUnit(other)
+    override operator fun times(other: UnitMass<*>): Newton = Newton(this.asBaseUnit().value * other.asBaseUnit().value * 100)
 }
 
 @JvmInline
 value class KilometersPerSecondPerSecond(override val value: Double) : UnitAcceleration<KilometersPerSecondPerSecond> {
     override fun asType(d: Double) = KilometersPerSecondPerSecond(d)
-    override fun asBaseUnit() = com.measures.acceleration.MetersPerSecondPerSecond(this.value * 1000.0)
+    override fun asBaseUnit() = MetersPerSecondPerSecond(this.value * 1000.0)
 
-    operator fun plus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).plusUnit(other)
-    operator fun minus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).minusUnit(other)
-    operator fun times(other: UnitTime<*>) = (this as UnitAcceleration<*>).timesUnit(other)
+    override operator fun plus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).plusUnit(other)
+    override operator fun minus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).minusUnit(other)
+    override operator fun times(other: UnitTime<*>) = (this as UnitAcceleration<*>).timesUnit(other)
+    override operator fun times(other: UnitMass<*>): Newton = Newton(this.asBaseUnit().value * other.asBaseUnit().value * 100)
 }
 
 // Conversion functions for non-SI acceleration units

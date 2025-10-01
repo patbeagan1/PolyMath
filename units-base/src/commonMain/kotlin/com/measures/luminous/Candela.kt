@@ -8,6 +8,8 @@ value class Candela(override val value: Double) : UnitLuminous<Candela>, BaseUni
     override fun asType(d: Double) = Candela(d)
     override fun asBaseUnit() = this
 
-    operator fun plus(other: UnitLuminous<*>) = (this as UnitLuminous<*>).plusUnit(other)
-    operator fun minus(other: UnitLuminous<*>) = (this as UnitLuminous<*>).minusUnit(other)
+    override operator fun plus(other: UnitLuminous<*>) = (this as UnitLuminous<*>).plusUnit(other)
+    override operator fun minus(other: UnitLuminous<*>) = (this as UnitLuminous<*>).minusUnit(other)
 }
+
+fun UnitLuminous<*>.toCandela() = this.asBaseUnit()

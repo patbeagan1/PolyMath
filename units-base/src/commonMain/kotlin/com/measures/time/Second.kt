@@ -12,3 +12,5 @@ value class Second(override val value: Double) : UnitTime<Second>, BaseUnit {
     override operator fun minus(other: UnitTime<*>) = (this as UnitTime<*>).minusUnit(other)
     override operator fun inv() = (this as UnitTime<*>).invUnit()
 }
+
+fun UnitTime<*>.toSecond() = this.asBaseUnit()

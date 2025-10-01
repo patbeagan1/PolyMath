@@ -1,30 +1,15 @@
 package com.measures.luminous
 
-import com.measures.BaseUnit
 import com.measures.DoubleBase
 import com.measures.UnitType
-import kotlin.jvm.JvmInline
 
-typealias UnitLuminous<T> = UnitLuminousType<T>
-
-interface UnitLuminousType<T : DoubleBase> : UnitType<T, Candela>
-
-@JvmInline
-value class Candela(override val value: Double) : UnitLuminous<Candela>, BaseUnit {
-    override fun asType(d: Double) = Candela(d)
-    override fun asBaseUnit() = this
-
-    operator fun plus(other: UnitLuminous<*>) = (this as UnitLuminous<*>).plusUnit(other)
-    operator fun minus(other: UnitLuminous<*>) = (this as UnitLuminous<*>).minusUnit(other)
+interface UnitLuminous<T : DoubleBase> : UnitType<T, Candela> {
+    operator fun plus(other: UnitLuminous<*>): Candela
+    operator fun minus(other: UnitLuminous<*>): Candela
 }
 
-fun UnitLuminousType<*>.plusUnit(other: UnitLuminousType<*>): Candela =
+fun UnitLuminous<*>.plusUnit(other: UnitLuminous<*>): Candela =
     Candela(this.asBaseUnit().value + other.asBaseUnit().value)
 
-fun UnitLuminousType<*>.minusUnit(other: UnitLuminousType<*>): Candela =
+fun UnitLuminous<*>.minusUnit(other: UnitLuminous<*>): Candela =
     Candela(this.asBaseUnit().value - other.asBaseUnit().value)
-
-// Non-SI luminous units have been moved to unit-common module
-
-// Conversion functions using toUnit
-fun UnitLuminous<*>.toCandela() = this.asBaseUnit()

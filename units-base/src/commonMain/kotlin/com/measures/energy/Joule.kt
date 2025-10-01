@@ -1,7 +1,9 @@
 package com.measures.energy
 
 import com.measures.BaseUnit
+import com.measures.charge.UnitCharge
 import com.measures.distance.UnitDistance
+import com.measures.potential.Volt
 import com.measures.time.UnitTime
 import com.measures.weight.UnitMass
 import kotlin.jvm.JvmInline
@@ -11,9 +13,10 @@ value class Joule(override val value: Double) : UnitEnergy<Joule>, BaseUnit {
     override fun asType(d: Double) = Joule(d)
     override fun asBaseUnit() = this
 
-    operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plusUnit(other)
-    operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minusUnit(other)
-    operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).divUnit(other)
+    override operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plusUnit(other)
+    override operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minusUnit(other)
+    override operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).divUnit(other)
+    override operator fun div(other: UnitCharge<*>): Volt = (this as UnitEnergy<*>).divUnit(other)
 
     companion object {
         fun from(mass: UnitMass<*>, distance: UnitDistance<*>, time: UnitTime<*>): Joule {
@@ -27,3 +30,5 @@ value class Joule(override val value: Double) : UnitEnergy<Joule>, BaseUnit {
         }
     }
 }
+
+fun UnitEnergy<*>.toJoule() = this.asBaseUnit()

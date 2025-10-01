@@ -11,3 +11,5 @@ value class Steradian(override val value: Double) : UnitSolidAngle<Steradian>, B
     override operator fun plus(other: UnitSolidAngle<*>) = (this as UnitSolidAngle<*>).minusUnit(other)
     override operator fun minus(other: UnitSolidAngle<*>) = (this as UnitSolidAngle<*>).minusUnit(other)
 }
+
+fun UnitSolidAngle<*>.toSteradian() = this.asBaseUnit()

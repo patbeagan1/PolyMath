@@ -9,11 +9,13 @@ value class Hertz(override val value: Double) : UnitFrequency<Hertz>, BaseUnit {
     override fun asType(d: Double) = Hertz(d)
     override fun asBaseUnit() = this
 
-    operator fun plus(other: UnitFrequency<*>) = (this as UnitFrequency<*>).minusUnit(other)
-    operator fun minus(other: UnitFrequency<*>) = (this as UnitFrequency<*>).minusUnit(other)
-    operator fun inv() = (this as UnitFrequency<*>).inv()
+    override operator fun plus(other: UnitFrequency<*>) = (this as UnitFrequency<*>).minusUnit(other)
+    override operator fun minus(other: UnitFrequency<*>) = (this as UnitFrequency<*>).minusUnit(other)
+    override operator fun inv() = (this as UnitFrequency<*>).invUnit()
 
     companion object {
         fun from(time: UnitTime<*>): Hertz = Hertz(1.0 / time.asBaseUnit().value)
     }
 }
+
+fun UnitFrequency<*>.toHertz() = this.asBaseUnit()
