@@ -32,7 +32,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(project(":unit-base"))
+            api(project(":units-base"))
             implementation(kotlin("test"))
         }
     }

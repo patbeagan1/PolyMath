@@ -24,7 +24,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(kotlin("test"))
-            implementation(projects.unitBase)
+            implementation(projects.unitsBase)
             implementation(projects.mathAlgebra)
         }
     }

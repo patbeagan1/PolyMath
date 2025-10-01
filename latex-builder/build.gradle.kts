@@ -23,7 +23,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(kotlin("test"))
-            api(projects.unitBase)
+            api(projects.unitsBase)
             api(projects.mathAlgebra)
             api(projects.mathGeometry)
             api(projects.physicsClassical)
