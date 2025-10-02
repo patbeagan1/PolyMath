@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    kotlin("multiplatform") version "2.2.20"
+    kotlin("multiplatform")
 }
 
 repositories {
@@ -19,6 +19,7 @@ kotlin {
         }
     }
     js(IR).nodejs()
+    linuxX64()
 
     sourceSets {
         commonMain.dependencies {

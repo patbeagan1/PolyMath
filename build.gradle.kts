@@ -1,9 +1,14 @@
-//import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-//import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+// import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+// import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     `maven-publish`
     application
+    id("com.github.ben-manes.versions") version "0.53.0"
+    id("org.jlleitschuh.gradle.ktlint") version "13.1.0"
+    id("io.gitlab.arturbosch.detekt") version "1.23.8"
+    id("org.jetbrains.kotlin.multiplatform") version "2.2.20" apply false
+    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.18.1" apply false
 }
 
 group = "dev.patbeagan"
@@ -31,7 +36,27 @@ publishing {
     }
 }
 
-//fun KotlinMultiplatformExtension.getNativeTarget(): KotlinNativeTarget {
+// Binary compatibility validator is now applied to individual modules
+
+// Ktlint configuration
+ktlint {
+    version.set("1.7.1")
+    android.set(false)
+    ignoreFailures.set(false)
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+    }
+}
+
+// Detekt configuration
+detekt {
+    buildUponDefaultConfig = true
+    allRules = false
+    config.setFrom("$projectDir/detekt.yml")
+}
+
+// fun KotlinMultiplatformExtension.getNativeTarget(): KotlinNativeTarget {
 //    val hostOs = System.getProperty("os.name")
 //    val isArm64 = System.getProperty("os.arch") == "aarch64"
 //    val isMingwX64 = hostOs.startsWith("Windows")
@@ -44,9 +69,9 @@ publishing {
 //        else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
 //    }
 //    return nativeTarget
-//}
+// }
 
-//subprojects {
+// subprojects {
 //    if (hasProperty("multiplatform")) {
 //        kotlin {
 //            jvm {
@@ -84,4 +109,4 @@ publishing {
 //            }
 //        }
 //    }
-//}
+// }
