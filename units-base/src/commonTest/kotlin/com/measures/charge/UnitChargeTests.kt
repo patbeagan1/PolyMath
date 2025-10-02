@@ -100,7 +100,7 @@ class UnitChargeTests {
         val result = kilocoulomb.plus(coulomb)
 
         kilocoulomb.div(Second(1.0)).let {
-            UnitCurrent.Companion.minusUnit(it, it)
+            UnitCurrent.minusUnit(it, it)
         }
         
         assertEquals(1500.0, result.value, 0.1)

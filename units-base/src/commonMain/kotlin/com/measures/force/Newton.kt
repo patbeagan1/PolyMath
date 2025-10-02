@@ -13,12 +13,12 @@ value class Newton(override val value: Double) : UnitForce<Newton>, BaseUnit {
     override fun asType(d: Double) = Newton(d)
     override fun asBaseUnit() = this
 
-    override operator fun plus(other: UnitForce<*>) = UnitForce.Companion.plusUnit(this, other)
-    override operator fun minus(other: UnitForce<*>) = UnitForce.Companion.minusUnit(this, other)
-    override operator fun div(other: UnitArea<*>) = UnitForce.Companion.divUnit(this, other)
-    override operator fun times(other: UnitDistance<*>): Joule = UnitForce.Companion.timesUnit(this, other)
-    override operator fun div(other: UnitMass<*>) = UnitForce.Companion.divUnit(this, other)
-    override operator fun div(other: UnitAcceleration<*>) = UnitForce.Companion.divUnit(this, other)
+    override operator fun plus(other: UnitForce<*>) = UnitForce.plusUnit(this, other)
+    override operator fun minus(other: UnitForce<*>) = UnitForce.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitForce.divUnit(this, other)
+    override operator fun times(other: UnitDistance<*>): Joule = UnitForce.timesUnit(this, other)
+    override operator fun div(other: UnitMass<*>) = UnitForce.divUnit(this, other)
+    override operator fun div(other: UnitAcceleration<*>) = UnitForce.divUnit(this, other)
 
     companion object {
         fun from(mass: UnitMass<*>, acceleration: UnitAcceleration<*>): Newton = mass * acceleration
