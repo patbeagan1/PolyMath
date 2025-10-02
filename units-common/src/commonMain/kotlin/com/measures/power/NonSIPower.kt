@@ -13,7 +13,7 @@ value class Horsepower(override val value: Double) : UnitPower<Horsepower> {
 
     override operator fun plus(other: UnitPower<*>) = (this as UnitPower<*>).plusUnit(other)
     override operator fun minus(other: UnitPower<*>) = (this as UnitPower<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitPower<*>).timesUnit(other)
+    override operator fun times(other: UnitTime<*>) = timesUnit(this as UnitPower<*>, other)
 }
 
 @JvmInline
@@ -23,7 +23,7 @@ value class ErgPerSecond(override val value: Double) : UnitPower<ErgPerSecond> {
 
     override operator fun plus(other: UnitPower<*>) = (this as UnitPower<*>).plusUnit(other)
     override operator fun minus(other: UnitPower<*>) = (this as UnitPower<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitPower<*>).timesUnit(other)
+    override operator fun times(other: UnitTime<*>) = timesUnit(this as UnitPower<*>, other)
 }
 
 @JvmInline
@@ -33,7 +33,7 @@ value class FootPoundPerSecond(override val value: Double) : UnitPower<FootPound
 
     override operator fun plus(other: UnitPower<*>) = (this as UnitPower<*>).plusUnit(other)
     override operator fun minus(other: UnitPower<*>) = (this as UnitPower<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitPower<*>).timesUnit(other)
+    override operator fun times(other: UnitTime<*>) = timesUnit(this as UnitPower<*>, other)
 }
 
 @JvmInline
@@ -43,7 +43,7 @@ value class Milliwatt(override val value: Double) : UnitPower<Milliwatt> {
 
     override operator fun plus(other: UnitPower<*>) = (this as UnitPower<*>).plusUnit(other)
     override operator fun minus(other: UnitPower<*>) = (this as UnitPower<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitPower<*>).timesUnit(other)
+    override operator fun times(other: UnitTime<*>) = timesUnit(this as UnitPower<*>, other)
 }
 
 @JvmInline
@@ -53,7 +53,7 @@ value class Kilowatt(override val value: Double) : UnitPower<Kilowatt> {
 
     override operator fun plus(other: UnitPower<*>) = (this as UnitPower<*>).plusUnit(other)
     override operator fun minus(other: UnitPower<*>) = (this as UnitPower<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitPower<*>).timesUnit(other)
+    override operator fun times(other: UnitTime<*>) = timesUnit(this as UnitPower<*>, other)
 }
 
 @JvmInline
@@ -63,7 +63,7 @@ value class Megawatt(override val value: Double) : UnitPower<Megawatt> {
 
     override operator fun plus(other: UnitPower<*>) = (this as UnitPower<*>).plusUnit(other)
     override operator fun minus(other: UnitPower<*>) = (this as UnitPower<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitPower<*>).timesUnit(other)
+    override operator fun times(other: UnitTime<*>) = timesUnit(this as UnitPower<*>, other)
 }
 
 @JvmInline
@@ -73,7 +73,7 @@ value class Gigawatt(override val value: Double) : UnitPower<Gigawatt> {
 
     override operator fun plus(other: UnitPower<*>) = (this as UnitPower<*>).plusUnit(other)
     override operator fun minus(other: UnitPower<*>) = (this as UnitPower<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitPower<*>).timesUnit(other)
+    override operator fun times(other: UnitTime<*>) = timesUnit(this as UnitPower<*>, other)
 }
 
 // Conversion functions for non-SI power units

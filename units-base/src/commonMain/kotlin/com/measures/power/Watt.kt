@@ -14,7 +14,7 @@ value class Watt(override val value: Double) : UnitPower<Watt>, BaseUnit {
 
     override operator fun plus(other: UnitPower<*>) = (this as UnitPower<*>).plusUnit(other)
     override operator fun minus(other: UnitPower<*>) = (this as UnitPower<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitPower<*>).timesUnit(other)
+    override operator fun times(other: UnitTime<*>) = timesUnit(this, other)
 
     companion object {
         fun from(mass: UnitMass<*>, distance: UnitDistance<*>, time: UnitTime<*>): Watt =

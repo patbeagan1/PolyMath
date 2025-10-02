@@ -3,6 +3,14 @@ package com.measures.charge
 import com.measures.energy.Joule
 import com.measures.power.Watt
 import com.measures.time.Second
+import com.measures.charge.Millicoulomb
+import com.measures.charge.Microcoulomb
+import com.measures.charge.Nanocoulomb
+import com.measures.charge.Picocoulomb
+import com.measures.charge.Kilocoulomb
+import com.measures.charge.AmpereHour
+import com.measures.charge.MilliampereHour
+import com.measures.current.minusUnit
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -78,8 +86,8 @@ class UnitChargeTests {
         // Test subtraction between different charge units
         val coulomb = Coulomb(2.0)
         val microcoulomb = Microcoulomb(500000.0) // 0.5 Coulombs
-        val result = coulomb.minus(microcoulomb)
-        
+        val result = coulomb - microcoulomb
+
         assertEquals(1.5, result.value, 0.0001)
         assertEquals(Coulomb::class, result::class)
     }
@@ -90,6 +98,10 @@ class UnitChargeTests {
         val kilocoulomb = Kilocoulomb(1.0) // 1000 Coulombs
         val coulomb = Coulomb(500.0)
         val result = kilocoulomb.plus(coulomb)
+
+        kilocoulomb.div(Second(1.0)).let {
+            it.minusUnit()
+        }
         
         assertEquals(1500.0, result.value, 0.1)
         assertEquals(Coulomb::class, result::class)

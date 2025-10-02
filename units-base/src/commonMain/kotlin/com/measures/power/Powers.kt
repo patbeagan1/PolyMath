@@ -17,5 +17,5 @@ fun UnitPower<*>.plusUnit(other: UnitPower<*>): Watt =
 fun UnitPower<*>.minusUnit(other: UnitPower<*>): Watt =
     Watt(this.asBaseUnit().value - other.asBaseUnit().value)
 
-fun UnitPower<*>.timesUnit(other: UnitTime<*>): Joule =
-    Joule(this.asBaseUnit().value * other.asBaseUnit().value)
+fun timesUnit(power: UnitPower<*>, other: UnitTime<*>): Joule =
+    Joule(power.asBaseUnit().value * other.asBaseUnit().value)

@@ -11,8 +11,8 @@ value class Coulomb(override val value: Double) : UnitCharge<Coulomb>, BaseUnit 
     override fun asType(d: Double) = Coulomb(d)
     override fun asBaseUnit() = this
 
-    override operator fun plus(other: UnitCharge<*>) = (this as UnitCharge<*>).plusUnit(other)
-    override operator fun minus(other: UnitCharge<*>) = (this as UnitCharge<*>).minusUnit(other)
+    override operator fun plus(other: UnitCharge<*>) = UnitCharge.plusUnit(this, other)
+    override operator fun minus(other: UnitCharge<*>) = UnitCharge.minusUnit(this, other)
     override operator fun div(other: UnitTime<*>): Ampere = Ampere(this.value / other.asBaseUnit().value)
 
     companion object {

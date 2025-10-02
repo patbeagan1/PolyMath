@@ -9,13 +9,16 @@ interface UnitCharge<T : DoubleBase> : UnitType<T, Coulomb> {
     operator fun plus(other: UnitCharge<*>): Coulomb
     operator fun minus(other: UnitCharge<*>): Coulomb
     operator fun div(other: UnitTime<*>): Ampere
+
+    companion object {
+        fun plusUnit(charge: UnitCharge<*>, other: UnitCharge<*>): Coulomb =
+            Coulomb(charge.asBaseUnit().value + other.asBaseUnit().value)
+
+        fun minusUnit(charge: UnitCharge<*>, other: UnitCharge<*>): Coulomb =
+            Coulomb(charge.asBaseUnit().value - other.asBaseUnit().value)
+
+        fun divUnit(charge: UnitCharge<*>, other: UnitTime<*>): Ampere =
+            Ampere(charge.asBaseUnit().value / other.asBaseUnit().value)
+    }
 }
 
-fun UnitCharge<*>.plusUnit(other: UnitCharge<*>): Coulomb =
-    Coulomb(this.asBaseUnit().value + other.asBaseUnit().value)
-
-fun UnitCharge<*>.minusUnit(other: UnitCharge<*>): Coulomb =
-    Coulomb(this.asBaseUnit().value - other.asBaseUnit().value)
-
-fun UnitCharge<*>.divUnit(other: UnitTime<*>): Ampere =
-    Ampere(this.asBaseUnit().value / other.asBaseUnit().value)

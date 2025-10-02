@@ -28,6 +28,7 @@ kotlin {
             }
         }
         nodejs()
+        
     }
     linuxX64()
 
