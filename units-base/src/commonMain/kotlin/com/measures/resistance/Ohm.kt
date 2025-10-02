@@ -12,8 +12,8 @@ value class Ohm(override val value: Double) : UnitResistance<Ohm>, BaseUnit {
     override fun asType(d: Double) = Ohm(d)
     override fun asBaseUnit() = this
 
-    override operator fun plus(other: UnitResistance<*>) = (this as UnitResistance<*>).plusUnit(other)
-    override operator fun minus(other: UnitResistance<*>) = (this as UnitResistance<*>).minusUnit(other)
+    override operator fun plus(other: UnitResistance<*>) = UnitResistance.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitResistance<*>) = UnitResistance.Companion.minusUnit(this, other)
 
     companion object {
         fun from(mass: UnitMass<*>, distance: UnitDistance<*>, current: UnitCurrent<*>, time: UnitTime<*>): Ohm {

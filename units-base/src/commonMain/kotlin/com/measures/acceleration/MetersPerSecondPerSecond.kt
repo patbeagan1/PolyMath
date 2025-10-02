@@ -12,10 +12,11 @@ value class MetersPerSecondPerSecond(override val value: Double) : UnitAccelerat
     override fun asType(d: Double) = MetersPerSecondPerSecond(d)
     override fun asBaseUnit() = this
 
-    override operator fun plus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).plusUnit(other)
-    override operator fun minus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitAcceleration<*>).timesUnit(other)
-    override operator fun times(other: UnitMass<*>) = (this as UnitAcceleration<*>).timesUnit(other)
+    override operator fun plus(other: UnitAcceleration<*>) = UnitAcceleration.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitAcceleration<*>) = UnitAcceleration.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitTime<*>) = UnitAcceleration.Companion.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>) = UnitAcceleration.Companion.divUnit(this, other)
+    override operator fun times(other: UnitMass<*>) = UnitAcceleration.Companion.timesUnit(this, other)
 
 
     companion object {

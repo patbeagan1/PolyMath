@@ -12,8 +12,8 @@ value class Farad(override val value: Double) : UnitCapacitance<Farad>, BaseUnit
     override fun asType(d: Double) = Farad(d)
     override fun asBaseUnit() = this
 
-    override operator fun plus(other: UnitCapacitance<*>) = (this as UnitCapacitance<*>).minusUnit(other)
-    override operator fun minus(other: UnitCapacitance<*>) = (this as UnitCapacitance<*>).minusUnit(other)
+    override operator fun plus(other: UnitCapacitance<*>) = UnitCapacitance.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitCapacitance<*>) = UnitCapacitance.Companion.minusUnit(this, other)
 
     companion object {
         fun from(current: UnitCurrent<*>, time: UnitTime<*>, mass: UnitMass<*>, distance: UnitDistance<*>): Farad {

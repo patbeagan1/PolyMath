@@ -13,8 +13,8 @@ value class Kelvin(override val value: Double) : UnitTemperature<Kelvin>, BaseUn
     override fun asType(d: Double) = Kelvin(d)
     override fun asBaseUnit() = this
 
-    operator fun plus(other: UnitTemperature<*>) = (this as UnitTemperature<*>).plusUnit(other)
-    operator fun minus(other: UnitTemperature<*>) = (this as UnitTemperature<*>).minusUnit(other)
+    operator fun plus(other: UnitTemperature<*>) = UnitTemperature.Companion.plusUnit(this, other)
+    operator fun minus(other: UnitTemperature<*>) = UnitTemperature.Companion.minusUnit(this, other)
 }
 
 fun UnitTemperature<*>.toKelvin() = this.asBaseUnit()

@@ -10,7 +10,7 @@ import com.measures.charge.Picocoulomb
 import com.measures.charge.Kilocoulomb
 import com.measures.charge.AmpereHour
 import com.measures.charge.MilliampereHour
-import com.measures.current.minusUnit
+import com.measures.current.UnitCurrent
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -100,7 +100,7 @@ class UnitChargeTests {
         val result = kilocoulomb.plus(coulomb)
 
         kilocoulomb.div(Second(1.0)).let {
-            it.minusUnit()
+            UnitCurrent.Companion.minusUnit(it, it)
         }
         
         assertEquals(1500.0, result.value, 0.1)

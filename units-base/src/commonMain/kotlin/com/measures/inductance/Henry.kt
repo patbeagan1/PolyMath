@@ -12,8 +12,8 @@ value class Henry(override val value: Double) : UnitInductance<Henry>, BaseUnit 
     override fun asType(d: Double) = Henry(d)
     override fun asBaseUnit() = this
 
-    override operator fun plus(other: UnitInductance<*>) = (this as UnitInductance<*>).minusUnit(other)
-    override operator fun minus(other: UnitInductance<*>) = (this as UnitInductance<*>).minusUnit(other)
+    override operator fun plus(other: UnitInductance<*>) = UnitInductance.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitInductance<*>) = UnitInductance.Companion.minusUnit(this, other)
 
     companion object {
         fun from(mass: UnitMass<*>, distance: UnitDistance<*>, current: UnitCurrent<*>, time: UnitTime<*>): Henry {

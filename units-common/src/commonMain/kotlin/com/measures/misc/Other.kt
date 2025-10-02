@@ -23,11 +23,11 @@ value class Angstroms(override val value: Double) : UnitDistance<Angstroms> {
     override fun asType(d: Double) = Angstroms(d)
     override fun asBaseUnit() = com.measures.distance.Meter(this.value * 1E-10)
 
-    override fun plus(other: UnitDistance<*>): Meter = (this as UnitDistance<*>).plusUnit(other)
-    override fun minus(other: UnitDistance<*>): Meter = (this as UnitDistance<*>).minusUnit(other)
-    override fun times(other: UnitDistance<*>): SquareMeter = (this as UnitDistance<*>).timesUnit(other)
-    override fun times(other: UnitArea<*>): Liter = (this as UnitDistance<*>).timesUnit(other)
-    override fun div(other: UnitTime<*>): MetersPerSecond = (this as UnitDistance<*>).divUnit(other)
+    override fun plus(other: UnitDistance<*>): Meter = UnitDistance.Companion.plusUnit(this, other)
+    override fun minus(other: UnitDistance<*>): Meter = UnitDistance.Companion.minusUnit(this, other)
+    override fun times(other: UnitDistance<*>): SquareMeter = UnitDistance.Companion.timesUnit(this, other)
+    override fun times(other: UnitArea<*>): Liter = UnitDistance.Companion.timesUnit(this, other)
+    override fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -35,11 +35,11 @@ value class Capefeet(override val value: Double) : UnitDistance<Capefeet> {
     override fun asType(d: Double) = Capefeet(d)
     override fun asBaseUnit() = com.measures.distance.Meter(this.value * 0.314856)
 
-    override fun plus(other: UnitDistance<*>): Meter = (this as UnitDistance<*>).plusUnit(other)
-    override fun minus(other: UnitDistance<*>): Meter = (this as UnitDistance<*>).minusUnit(other)
-    override fun times(other: UnitDistance<*>): SquareMeter = (this as UnitDistance<*>).timesUnit(other)
-    override fun times(other: UnitArea<*>): Liter = (this as UnitDistance<*>).timesUnit(other)
-    override fun div(other: UnitTime<*>): MetersPerSecond = (this as UnitDistance<*>).divUnit(other)
+    override fun plus(other: UnitDistance<*>): Meter = UnitDistance.Companion.plusUnit(this, other)
+    override fun minus(other: UnitDistance<*>): Meter = UnitDistance.Companion.minusUnit(this, other)
+    override fun times(other: UnitDistance<*>): SquareMeter = UnitDistance.Companion.timesUnit(this, other)
+    override fun times(other: UnitArea<*>): Liter = UnitDistance.Companion.timesUnit(this, other)
+    override fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -47,10 +47,10 @@ value class CupBreakfast(override val value: Double) : UnitVolume<CupBreakfast> 
     override fun asType(d: Double) = CupBreakfast(d)
     override fun asBaseUnit() = Liter(value * 0.000284131 * 1000)
 
-    override fun plus(other: UnitVolume<*>): Liter = (this as UnitVolume<*>).plusUnit(other)
-    override fun minus(other: UnitVolume<*>): Liter = (this as UnitVolume<*>).minusUnit(other)
-    override fun div(other: UnitArea<*>): Meter = (this as UnitVolume<*>).divUnit(other)
-    override fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override fun plus(other: UnitVolume<*>): Liter = UnitVolume.Companion.plusUnit(this, other)
+    override fun minus(other: UnitVolume<*>): Liter = UnitVolume.Companion.minusUnit(this, other)
+    override fun div(other: UnitArea<*>): Meter = UnitVolume.Companion.divUnit(this, other)
+    override fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -58,10 +58,10 @@ value class CupCanadian(override val value: Double) : UnitVolume<CupCanadian> {
     override fun asType(d: Double) = CupCanadian(d)
     override fun asBaseUnit() = Liter(value * 0.000227305 * 1000)
 
-    override fun plus(other: UnitVolume<*>): Liter = (this as UnitVolume<*>).plusUnit(other)
-    override fun minus(other: UnitVolume<*>): Liter = (this as UnitVolume<*>).minusUnit(other)
-    override fun div(other: UnitArea<*>): Meter = (this as UnitVolume<*>).divUnit(other)
-    override fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override fun plus(other: UnitVolume<*>): Liter = UnitVolume.Companion.plusUnit(this, other)
+    override fun minus(other: UnitVolume<*>): Liter = UnitVolume.Companion.minusUnit(this, other)
+    override fun div(other: UnitArea<*>): Meter = UnitVolume.Companion.divUnit(this, other)
+    override fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -69,11 +69,11 @@ value class Microns(override val value: Double) : UnitDistance<Microns> {
     override fun asType(d: Double) = Microns(d)
     override fun asBaseUnit() = com.measures.distance.Meter(this.value * 0.000001)
 
-    override fun plus(other: UnitDistance<*>): Meter = (this as UnitDistance<*>).plusUnit(other)
-    override fun minus(other: UnitDistance<*>): Meter = (this as UnitDistance<*>).minusUnit(other)
-    override fun times(other: UnitDistance<*>): SquareMeter = (this as UnitDistance<*>).timesUnit(other)
-    override fun times(other: UnitArea<*>): Liter = (this as UnitDistance<*>).timesUnit(other)
-    override fun div(other: UnitTime<*>): MetersPerSecond = (this as UnitDistance<*>).divUnit(other)
+    override fun plus(other: UnitDistance<*>): Meter = UnitDistance.Companion.plusUnit(this, other)
+    override fun minus(other: UnitDistance<*>): Meter = UnitDistance.Companion.minusUnit(this, other)
+    override fun times(other: UnitDistance<*>): SquareMeter = UnitDistance.Companion.timesUnit(this, other)
+    override fun times(other: UnitArea<*>): Liter = UnitDistance.Companion.timesUnit(this, other)
+    override fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -81,11 +81,11 @@ value class Mils(override val value: Double) : UnitDistance<Mils> {
     override fun asType(d: Double) = Mils(d)
     override fun asBaseUnit() = com.measures.distance.Meter(this.value * 0.0000254)
 
-    override fun plus(other: UnitDistance<*>): Meter = (this as UnitDistance<*>).plusUnit(other)
-    override fun minus(other: UnitDistance<*>): Meter = (this as UnitDistance<*>).minusUnit(other)
-    override fun times(other: UnitDistance<*>): SquareMeter = (this as UnitDistance<*>).timesUnit(other)
-    override fun times(other: UnitArea<*>): Liter = (this as UnitDistance<*>).timesUnit(other)
-    override fun div(other: UnitTime<*>): MetersPerSecond = (this as UnitDistance<*>).divUnit(other)
+    override fun plus(other: UnitDistance<*>): Meter = UnitDistance.Companion.plusUnit(this, other)
+    override fun minus(other: UnitDistance<*>): Meter = UnitDistance.Companion.minusUnit(this, other)
+    override fun times(other: UnitDistance<*>): SquareMeter = UnitDistance.Companion.timesUnit(this, other)
+    override fun times(other: UnitArea<*>): Liter = UnitDistance.Companion.timesUnit(this, other)
+    override fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -93,10 +93,10 @@ value class TablespoonCanadian(override val value: Double) : UnitVolume<Tablespo
     override fun asType(d: Double) = TablespoonCanadian(d)
     override fun asBaseUnit() = Liter(value * 1.42065E-05 * 1000)
 
-    override fun plus(other: UnitVolume<*>): Liter = (this as UnitVolume<*>).plusUnit(other)
-    override fun minus(other: UnitVolume<*>): Liter = (this as UnitVolume<*>).minusUnit(other)
-    override fun div(other: UnitArea<*>): Meter = (this as UnitVolume<*>).divUnit(other)
-    override fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override fun plus(other: UnitVolume<*>): Liter = UnitVolume.Companion.plusUnit(this, other)
+    override fun minus(other: UnitVolume<*>): Liter = UnitVolume.Companion.minusUnit(this, other)
+    override fun div(other: UnitArea<*>): Meter = UnitVolume.Companion.divUnit(this, other)
+    override fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -104,9 +104,9 @@ value class TeaspoonCanadian(override val value: Double) : UnitVolume<TeaspoonCa
     override fun asType(d: Double) = TeaspoonCanadian(d)
     override fun asBaseUnit() = Liter(value * 4.73551E-06 * 1000)
 
-    override fun plus(other: UnitVolume<*>): Liter = (this as UnitVolume<*>).plusUnit(other)
-    override fun minus(other: UnitVolume<*>): Liter = (this as UnitVolume<*>).minusUnit(other)
-    override fun div(other: UnitArea<*>): Meter = (this as UnitVolume<*>).divUnit(other)
-    override fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override fun plus(other: UnitVolume<*>): Liter = UnitVolume.Companion.plusUnit(this, other)
+    override fun minus(other: UnitVolume<*>): Liter = UnitVolume.Companion.minusUnit(this, other)
+    override fun div(other: UnitArea<*>): Meter = UnitVolume.Companion.divUnit(this, other)
+    override fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 

@@ -12,17 +12,26 @@ interface UnitAcceleration<T : DoubleBase> : UnitType<T, MetersPerSecondPerSecon
     operator fun plus(other: UnitAcceleration<*>): MetersPerSecondPerSecond
     operator fun minus(other: UnitAcceleration<*>): MetersPerSecondPerSecond
     operator fun times(other: UnitTime<*>): MetersPerSecond
+    operator fun div(other: UnitTime<*>): MetersPerSecondPerSecond
     operator fun times(other: UnitMass<*>): Newton
+
+    companion object {
+        fun plusUnit(acceleration: UnitAcceleration<*>, other: UnitAcceleration<*>): MetersPerSecondPerSecond =
+            MetersPerSecondPerSecond(acceleration.asBaseUnit().value + other.asBaseUnit().value)
+
+        fun minusUnit(acceleration: UnitAcceleration<*>, other: UnitAcceleration<*>): MetersPerSecondPerSecond =
+            MetersPerSecondPerSecond(acceleration.asBaseUnit().value - other.asBaseUnit().value)
+
+        fun timesUnit(acceleration: UnitAcceleration<*>, other: UnitTime<*>): MetersPerSecond =
+            MetersPerSecond(acceleration.asBaseUnit().value * other.asBaseUnit().value)
+
+        fun divUnit(velocity: UnitVelocity<*>, other: UnitTime<*>): MetersPerSecondPerSecond =
+            MetersPerSecondPerSecond(velocity.asBaseUnit().value / other.asBaseUnit().value)
+
+        fun divUnit(acceleration: UnitAcceleration<*>, other: UnitTime<*>): MetersPerSecondPerSecond =
+            MetersPerSecondPerSecond(acceleration.asBaseUnit().value / other.asBaseUnit().value)
+
+        fun timesUnit(acceleration: UnitAcceleration<*>, other: UnitMass<*>): Newton =
+            Newton(acceleration.asBaseUnit().value * other.asBaseUnit().value)
+    }
 }
-
- fun UnitAcceleration<*>.plusUnit(other: UnitAcceleration<*>): MetersPerSecondPerSecond =
-    MetersPerSecondPerSecond(this.asBaseUnit().value + other.asBaseUnit().value)
-
- fun UnitAcceleration<*>.minusUnit(other: UnitAcceleration<*>): MetersPerSecondPerSecond =
-    MetersPerSecondPerSecond(this.asBaseUnit().value - other.asBaseUnit().value)
-
- fun UnitAcceleration<*>.timesUnit(other: UnitTime<*>): MetersPerSecond =
-    MetersPerSecond(this.asBaseUnit().value * other.asBaseUnit().value)
-
- fun UnitAcceleration<*>.timesUnit(other: UnitMass<*>): Newton =
-    Newton(this.asBaseUnit().value * other.asBaseUnit().value)

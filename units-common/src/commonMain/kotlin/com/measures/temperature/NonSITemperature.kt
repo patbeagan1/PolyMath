@@ -16,8 +16,8 @@ value class Celsius(override val value: Double) : UnitTemperature<Celsius> {
     override fun asType(d: Double) = Celsius(d)
     override fun asBaseUnit() = com.measures.temperature.Kelvin(this.value + 273.15)
 
-    operator fun plus(other: UnitTemperature<*>) = (this as UnitTemperature<*>).plusUnit(other)
-    operator fun minus(other: UnitTemperature<*>) = (this as UnitTemperature<*>).minusUnit(other)
+    operator fun plus(other: UnitTemperature<*>) = UnitTemperature.Companion.plusUnit(this, other)
+    operator fun minus(other: UnitTemperature<*>) = UnitTemperature.Companion.minusUnit(this, other)
 }
 
 /**
@@ -28,8 +28,8 @@ value class Fahrenheit(override val value: Double) : UnitTemperature<Fahrenheit>
     override fun asType(d: Double) = Fahrenheit(d)
     override fun asBaseUnit() = com.measures.temperature.Kelvin((this.value - 32.0) * 5.0 / 9.0 + 273.15)
 
-    operator fun plus(other: UnitTemperature<*>) = (this as UnitTemperature<*>).plusUnit(other)
-    operator fun minus(other: UnitTemperature<*>) = (this as UnitTemperature<*>).minusUnit(other)
+    operator fun plus(other: UnitTemperature<*>) = UnitTemperature.Companion.plusUnit(this, other)
+    operator fun minus(other: UnitTemperature<*>) = UnitTemperature.Companion.minusUnit(this, other)
 }
 
 /**
@@ -41,8 +41,8 @@ value class Rankine(override val value: Double) : UnitTemperature<Rankine> {
     override fun asType(d: Double) = Rankine(d)
     override fun asBaseUnit() = com.measures.temperature.Kelvin(this.value * 5.0 / 9.0)
 
-    operator fun plus(other: UnitTemperature<*>) = (this as UnitTemperature<*>).plusUnit(other)
-    operator fun minus(other: UnitTemperature<*>) = (this as UnitTemperature<*>).minusUnit(other)
+    operator fun plus(other: UnitTemperature<*>) = UnitTemperature.Companion.plusUnit(this, other)
+    operator fun minus(other: UnitTemperature<*>) = UnitTemperature.Companion.minusUnit(this, other)
 }
 
 // Conversion functions for non-SI temperature units

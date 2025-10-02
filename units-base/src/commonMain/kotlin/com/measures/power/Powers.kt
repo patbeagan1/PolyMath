@@ -9,13 +9,15 @@ interface UnitPower<T : DoubleBase> : UnitType<T, Watt> {
     operator fun plus(other: UnitPower<*>): Watt
     operator fun minus(other: UnitPower<*>): Watt
     operator fun times(other: UnitTime<*>): Joule
+
+    companion object {
+        fun plusUnit(power: UnitPower<*>, other: UnitPower<*>): Watt =
+            Watt(power.asBaseUnit().value + other.asBaseUnit().value)
+
+        fun minusUnit(power: UnitPower<*>, other: UnitPower<*>): Watt =
+            Watt(power.asBaseUnit().value - other.asBaseUnit().value)
+
+        fun timesUnit(power: UnitPower<*>, other: UnitTime<*>): Joule =
+            Joule(power.asBaseUnit().value * other.asBaseUnit().value)
+    }
 }
-
-fun UnitPower<*>.plusUnit(other: UnitPower<*>): Watt =
-    Watt(this.asBaseUnit().value + other.asBaseUnit().value)
-
-fun UnitPower<*>.minusUnit(other: UnitPower<*>): Watt =
-    Watt(this.asBaseUnit().value - other.asBaseUnit().value)
-
-fun timesUnit(power: UnitPower<*>, other: UnitTime<*>): Joule =
-    Joule(power.asBaseUnit().value * other.asBaseUnit().value)

@@ -11,9 +11,9 @@ value class Gram(override val value: Double) : UnitMass<KiloGram>, BaseUnit {
     override fun asType(d: Double) = KiloGram(d)
     override fun asBaseUnit() = KiloGram(this.value / 1000.0)
 
-    override operator fun plus(other: UnitMass<*>) = (this as UnitMass<*>).plusUnit(other)
-    override operator fun minus(other: UnitMass<*>) = (this as UnitMass<*>).minusUnit(other)
-    override operator fun times(other: UnitAcceleration<*>) = (this as UnitMass<*>).timesUnit(other)
+    override operator fun plus(other: UnitMass<*>) = UnitMass.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitMass<*>) = UnitMass.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitAcceleration<*>) = UnitMass.Companion.timesUnit(this, other)
 }
 
 // Conversion functions using toUnit

@@ -6,10 +6,12 @@ import com.measures.UnitType
 interface UnitSolidAngle<T : DoubleBase> : UnitType<T, Steradian>{
     operator fun plus(other: UnitSolidAngle<*>): Steradian
     operator fun minus(other: UnitSolidAngle<*>): Steradian
+
+    companion object {
+        fun plusUnit(solidAngle: UnitSolidAngle<*>, other: UnitSolidAngle<*>): Steradian =
+            Steradian(solidAngle.asBaseUnit().value + other.asBaseUnit().value)
+
+        fun minusUnit(solidAngle: UnitSolidAngle<*>, other: UnitSolidAngle<*>): Steradian =
+            Steradian(solidAngle.asBaseUnit().value - other.asBaseUnit().value)
+    }
 }
-
-fun UnitSolidAngle<*>.plusUnit(other: UnitSolidAngle<*>): Steradian =
-    Steradian(this.asBaseUnit().value + other.asBaseUnit().value)
-
-fun UnitSolidAngle<*>.minusUnit(other: UnitSolidAngle<*>): Steradian =
-    Steradian(this.asBaseUnit().value - other.asBaseUnit().value)

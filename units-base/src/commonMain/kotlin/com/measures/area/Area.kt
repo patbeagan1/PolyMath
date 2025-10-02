@@ -11,16 +11,18 @@ interface UnitArea<T : DoubleBase> : UnitType<T, SquareMeter>{
     operator fun minus(other: UnitArea<*>): SquareMeter
     operator fun times(other: UnitDistance<*>): Liter
     operator fun div(other: UnitDistance<*>): Meter
+
+    companion object {
+        fun divUnit(area: UnitArea<*>, other: UnitDistance<*>): Meter =
+            Meter(area.asBaseUnit().value / other.asBaseUnit().value)
+
+        fun plusUnit(area: UnitArea<*>, other: UnitArea<*>): SquareMeter =
+            SquareMeter(area.asBaseUnit().value + other.asBaseUnit().value)
+
+        fun minusUnit(area: UnitArea<*>, other: UnitArea<*>): SquareMeter =
+            SquareMeter(area.asBaseUnit().value - other.asBaseUnit().value)
+
+        fun timesUnit(area: UnitArea<*>, other: UnitDistance<*>): Liter =
+            Liter(area.asBaseUnit().value * other.asBaseUnit().value * 1000)
+    }
 }
-
-fun UnitArea<*>.divUnit(other: UnitDistance<*>): Meter =
-    Meter(this.asBaseUnit().value / other.asBaseUnit().value)
-
-fun UnitArea<*>.plusUnit(other: UnitArea<*>): SquareMeter =
-    SquareMeter(this.asBaseUnit().value + other.asBaseUnit().value)
-
-fun UnitArea<*>.minusUnit(other: UnitArea<*>): SquareMeter =
-    SquareMeter(this.asBaseUnit().value - other.asBaseUnit().value)
-
-fun UnitArea<*>.timesUnit(other: UnitDistance<*>): Liter =
-    Liter(this.asBaseUnit().value * other.asBaseUnit().value * 1000)

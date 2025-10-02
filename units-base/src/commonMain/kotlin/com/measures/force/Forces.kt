@@ -18,25 +18,27 @@ interface UnitForce<T : DoubleBase> : UnitType<T, Newton> {
     operator fun times(other: UnitDistance<*>): Joule
     operator fun div(other: UnitMass<*>): MetersPerSecondPerSecond
     operator fun div(other: UnitAcceleration<*>): KiloGram
+
+    companion object {
+        fun plusUnit(force: UnitForce<*>, other: UnitForce<*>): Newton =
+            Newton(force.asBaseUnit().value + other.asBaseUnit().value)
+
+        fun minusUnit(force: UnitForce<*>, other: UnitForce<*>): Newton =
+            Newton(force.asBaseUnit().value - other.asBaseUnit().value)
+
+        fun divUnit(force: UnitForce<*>, other: UnitArea<*>): Pascal =
+            Pascal(force.asBaseUnit().value / other.asBaseUnit().value)
+
+        // Force × Distance = Energy
+        fun timesUnit(force: UnitForce<*>, other: UnitDistance<*>): Joule =
+            Joule(force.asBaseUnit().value * other.asBaseUnit().value)
+
+        // Force ÷ Mass = Acceleration
+        fun divUnit(force: UnitForce<*>, other: UnitMass<*>): MetersPerSecondPerSecond =
+            MetersPerSecondPerSecond(force.asBaseUnit().value / other.asBaseUnit().value)
+
+        // Force ÷ Acceleration = Mass
+        fun divUnit(force: UnitForce<*>, other: UnitAcceleration<*>): KiloGram =
+            KiloGram(force.asBaseUnit().value / other.asBaseUnit().value)
+    }
 }
-
-fun UnitForce<*>.plusUnit(other: UnitForce<*>): Newton =
-    Newton(this.asBaseUnit().value + other.asBaseUnit().value)
-
-fun UnitForce<*>.minusUnit(other: UnitForce<*>): Newton =
-    Newton(this.asBaseUnit().value - other.asBaseUnit().value)
-
-fun UnitForce<*>.divUnit(other: UnitArea<*>): Pascal =
-    Pascal(this.asBaseUnit().value / other.asBaseUnit().value)
-
-// Force × Distance = Energy
-fun UnitForce<*>.timesUnit(other: UnitDistance<*>): Joule =
-    Joule(this.asBaseUnit().value * other.asBaseUnit().value)
-
-// Force ÷ Mass = Acceleration
-fun UnitForce<*>.divUnit(other: UnitMass<*>): MetersPerSecondPerSecond =
-    MetersPerSecondPerSecond(this.asBaseUnit().value / other.asBaseUnit().value)
-
-// Force ÷ Acceleration = Mass
-fun UnitForce<*>.divUnit(other: UnitAcceleration<*>): KiloGram =
-    KiloGram(this.asBaseUnit().value / other.asBaseUnit().value)

@@ -9,13 +9,15 @@ interface UnitPressure<T : DoubleBase> : UnitType<T, Pascal>{
     operator fun plus(other: UnitPressure<*>): Pascal
     operator fun minus(other: UnitPressure<*>): Pascal
     operator fun times(other: UnitArea<*>): Newton
+
+    companion object {
+        fun plusUnit(pressure: UnitPressure<*>, other: UnitPressure<*>): Pascal =
+            Pascal(pressure.asBaseUnit().value + other.asBaseUnit().value)
+
+        fun minusUnit(pressure: UnitPressure<*>, other: UnitPressure<*>): Pascal =
+            Pascal(pressure.asBaseUnit().value - other.asBaseUnit().value)
+
+        fun timesUnit(pressure: UnitPressure<*>, other: UnitArea<*>): Newton =
+            Newton(pressure.asBaseUnit().value * other.asBaseUnit().value)
+    }
 }
-
-fun UnitPressure<*>.plusUnit(other: UnitPressure<*>): Pascal =
-    Pascal(this.asBaseUnit().value + other.asBaseUnit().value)
-
-fun UnitPressure<*>.minusUnit(other: UnitPressure<*>): Pascal =
-    Pascal(this.asBaseUnit().value - other.asBaseUnit().value)
-
-fun UnitPressure<*>.timesUnit(other: UnitArea<*>): Newton =
-    Newton(this.asBaseUnit().value * other.asBaseUnit().value)

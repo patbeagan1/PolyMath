@@ -14,20 +14,22 @@ interface UnitDistance<T : DoubleBase> : UnitType<T, Meter> {
     operator fun times(other: UnitDistance<*>): SquareMeter
     operator fun times(other: UnitArea<*>): Liter
     operator fun div(other: UnitTime<*>): MetersPerSecond
+
+    companion object {
+        fun plusUnit(distance: UnitDistance<*>, other: UnitDistance<*>): Meter =
+            Meter(distance.asBaseUnit().value + other.asBaseUnit().value)
+
+        fun minusUnit(distance: UnitDistance<*>, other: UnitDistance<*>): Meter =
+            Meter(distance.asBaseUnit().value - other.asBaseUnit().value)
+
+        fun timesUnit(distance: UnitDistance<*>, other: UnitDistance<*>): SquareMeter =
+            SquareMeter(distance.asBaseUnit().value * other.asBaseUnit().value)
+
+        fun timesUnit(distance: UnitDistance<*>, other: UnitArea<*>): Liter =
+            Liter(distance.asBaseUnit().value * other.asBaseUnit().value * 1000)
+
+        // Distance ÷ Time = Velocity
+        fun divUnit(distance: UnitDistance<*>, other: UnitTime<*>): MetersPerSecond =
+            MetersPerSecond(distance.asBaseUnit().value / other.asBaseUnit().value)
+    }
 }
-
-fun UnitDistance<*>.plusUnit(other: UnitDistance<*>): Meter =
-    Meter(this.asBaseUnit().value + other.asBaseUnit().value)
-
-fun UnitDistance<*>.minusUnit(other: UnitDistance<*>): Meter =
-    Meter(this.asBaseUnit().value - other.asBaseUnit().value)
-
-fun UnitDistance<*>.timesUnit(other: UnitDistance<*>): SquareMeter =
-    SquareMeter(this.asBaseUnit().value * other.asBaseUnit().value)
-
-fun UnitDistance<*>.timesUnit(other: UnitArea<*>): Liter =
-    Liter(this.asBaseUnit().value * other.asBaseUnit().value * 1000)
-
-// Distance ÷ Time = Velocity
-fun UnitDistance<*>.divUnit(other: UnitTime<*>): MetersPerSecond =
-    MetersPerSecond(this.asBaseUnit().value / other.asBaseUnit().value)

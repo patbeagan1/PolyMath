@@ -11,16 +11,18 @@ interface UnitVelocity<T : DoubleBase> : UnitType<T, MetersPerSecond> {
     operator fun minus(other: UnitVelocity<*>): MetersPerSecond
     operator fun times(other: UnitTime<*>): Meter
     operator fun div(other: UnitTime<*>): MetersPerSecondPerSecond
+
+    companion object {
+        fun plusUnit(velocity: UnitVelocity<*>, other: UnitVelocity<*>): MetersPerSecond =
+            MetersPerSecond(velocity.asBaseUnit().value + other.asBaseUnit().value)
+
+        fun minusUnit(velocity: UnitVelocity<*>, other: UnitVelocity<*>): MetersPerSecond =
+            MetersPerSecond(velocity.asBaseUnit().value - other.asBaseUnit().value)
+
+        fun timesUnit(velocity: UnitVelocity<*>, other: UnitTime<*>): Meter =
+            Meter(velocity.asBaseUnit().value * other.asBaseUnit().value)
+
+        fun divUnit(velocity: UnitVelocity<*>, other: UnitTime<*>): MetersPerSecondPerSecond =
+            MetersPerSecondPerSecond(velocity.asBaseUnit().value / other.asBaseUnit().value)
+    }
 }
-
-fun UnitVelocity<*>.plusUnit(other: UnitVelocity<*>): MetersPerSecond =
-    MetersPerSecond(this.asBaseUnit().value + other.asBaseUnit().value)
-
-fun UnitVelocity<*>.minusUnit(other: UnitVelocity<*>): MetersPerSecond =
-    MetersPerSecond(this.asBaseUnit().value - other.asBaseUnit().value)
-
-fun UnitVelocity<*>.timesUnit(other: UnitTime<*>): Meter =
-    Meter(this.asBaseUnit().value * other.asBaseUnit().value)
-
-fun UnitVelocity<*>.divUnit(other: UnitTime<*>): MetersPerSecondPerSecond =
-    MetersPerSecondPerSecond(this.asBaseUnit().value / other.asBaseUnit().value)

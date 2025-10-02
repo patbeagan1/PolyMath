@@ -12,8 +12,8 @@ value class Weber(override val value: Double) : UnitFlux<Weber>, BaseUnit {
     override fun asType(d: Double) = Weber(d)
     override fun asBaseUnit() = this
 
-    override operator fun plus(other: UnitFlux<*>) = (this as UnitFlux<*>).minusUnit(other)
-    override operator fun minus(other: UnitFlux<*>) = (this as UnitFlux<*>).minusUnit(other)
+    override operator fun plus(other: UnitFlux<*>) = UnitFlux.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitFlux<*>) = UnitFlux.Companion.minusUnit(this, other)
 
     companion object {
         fun from(mass: UnitMass<*>, distance: UnitDistance<*>, current: UnitCurrent<*>, time: UnitTime<*>): Weber {

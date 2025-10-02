@@ -13,11 +13,11 @@ value class Meter(override val value: Double) : UnitDistance<Meter>, BaseUnit {
     override fun asType(d: Double) = Meter(d)
     override fun asBaseUnit() = this
 
-    override operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plusUnit(other)
-    override operator fun minus(other: UnitDistance<*>) = (this as UnitDistance<*>).minusUnit(other)
-    override operator fun times(other: UnitDistance<*>) = (this as UnitDistance<*>).timesUnit(other)
-    override operator fun times(other: UnitArea<*>) = (this as UnitDistance<*>).timesUnit(other)
-    override operator fun div(other: UnitTime<*>): MetersPerSecond = (this as UnitDistance<*>).divUnit(other)
+    override operator fun plus(other: UnitDistance<*>) = UnitDistance.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitDistance<*>) = UnitDistance.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitDistance<*>) = UnitDistance.Companion.timesUnit(this, other)
+    override operator fun times(other: UnitArea<*>) = UnitDistance.Companion.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.Companion.divUnit(this, other)
 }
 
 fun UnitDistance<*>.toMeter() = this.asBaseUnit()

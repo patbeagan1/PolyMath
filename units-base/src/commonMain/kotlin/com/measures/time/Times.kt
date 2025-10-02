@@ -8,14 +8,16 @@ interface UnitTime<T : DoubleBase> : UnitType<T, Second> {
     operator fun plus(other: UnitTime<*>): Second
     operator fun minus(other: UnitTime<*>): Second
     operator fun inv(): Hertz
+
+    companion object {
+        fun plusUnit(time: UnitTime<*>, other: UnitTime<*>): Second =
+            Second(time.asBaseUnit().value + other.asBaseUnit().value)
+
+        fun minusUnit(time: UnitTime<*>, other: UnitTime<*>): Second =
+            Second(time.asBaseUnit().value - other.asBaseUnit().value)
+
+        // Time to Frequency conversion: 1/time = frequency
+        fun invUnit(time: UnitTime<*>): Hertz =
+            Hertz(1.0 / time.asBaseUnit().value)
+    }
 }
-
-fun UnitTime<*>.plusUnit(other: UnitTime<*>): Second =
-    Second(this.asBaseUnit().value + other.asBaseUnit().value)
-
-fun UnitTime<*>.minusUnit(other: UnitTime<*>): Second =
-    Second(this.asBaseUnit().value - other.asBaseUnit().value)
-
-// Time to Frequency conversion: 1/time = frequency
-fun UnitTime<*>.invUnit(): Hertz =
-    Hertz(1.0 / this.asBaseUnit().value)

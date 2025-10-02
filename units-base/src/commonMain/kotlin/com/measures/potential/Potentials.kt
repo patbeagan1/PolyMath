@@ -9,14 +9,16 @@ interface UnitPotential<T : DoubleBase> : UnitType<T, Volt> {
     operator fun plus(other: UnitPotential<*>): Volt
     operator fun minus(other: UnitPotential<*>): Volt
     operator fun times(other: UnitCharge<*>): Joule
+
+    companion object {
+        fun plusUnit(potential: UnitPotential<*>, other: UnitPotential<*>): Volt =
+            Volt(potential.asBaseUnit().value + other.asBaseUnit().value)
+
+        fun minusUnit(potential: UnitPotential<*>, other: UnitPotential<*>): Volt =
+            Volt(potential.asBaseUnit().value - other.asBaseUnit().value)
+
+        // Potential × Charge = Energy
+        fun timesUnit(potential: UnitPotential<*>, other: UnitCharge<*>): Joule =
+            Joule(potential.asBaseUnit().value * other.asBaseUnit().value)
+    }
 }
-
-fun UnitPotential<*>.plusUnit(other: UnitPotential<*>): Volt =
-    Volt(this.asBaseUnit().value + other.asBaseUnit().value)
-
-fun UnitPotential<*>.minusUnit(other: UnitPotential<*>): Volt =
-    Volt(this.asBaseUnit().value - other.asBaseUnit().value)
-
-// Potential × Charge = Energy
-fun UnitPotential<*>.timesUnit(other: UnitCharge<*>): Joule =
-    Joule(this.asBaseUnit().value * other.asBaseUnit().value)

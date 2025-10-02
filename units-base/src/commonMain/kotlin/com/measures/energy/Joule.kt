@@ -13,10 +13,10 @@ value class Joule(override val value: Double) : UnitEnergy<Joule>, BaseUnit {
     override fun asType(d: Double) = Joule(d)
     override fun asBaseUnit() = this
 
-    override operator fun plus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).plusUnit(other)
-    override operator fun minus(other: UnitEnergy<*>) = (this as UnitEnergy<*>).minusUnit(other)
-    override operator fun div(other: UnitTime<*>) = (this as UnitEnergy<*>).divUnit(other)
-    override operator fun div(other: UnitCharge<*>): Volt = (this as UnitEnergy<*>).divUnit(other)
+    override operator fun plus(other: UnitEnergy<*>) = UnitEnergy.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitEnergy<*>) = UnitEnergy.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitTime<*>) = UnitEnergy.Companion.divUnit(this, other)
+    override operator fun div(other: UnitCharge<*>): Volt = UnitEnergy.Companion.divUnit(this, other)
 
     companion object {
         fun from(mass: UnitMass<*>, distance: UnitDistance<*>, time: UnitTime<*>): Joule {

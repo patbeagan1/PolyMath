@@ -35,10 +35,10 @@ value class Attoliter(override val value: Double) : UnitVolume<Attoliter> {
     override fun asType(d: Double) = Attoliter(d)
     override fun asBaseUnit() = Liter(value * Consts.ATTO)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -46,10 +46,10 @@ value class Centiliter(override val value: Double) : UnitVolume<Centiliter> {
     override fun asType(d: Double) = Centiliter(d)
     override fun asBaseUnit() = Liter(value * Consts.CENTI)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -57,10 +57,10 @@ value class CubicCentimeter(override val value: Double) : UnitVolume<CubicCentim
     override fun asType(d: Double) = CubicCentimeter(d)
     override fun asBaseUnit() = Liter(value * 0.000001 * 1000)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -68,10 +68,10 @@ value class CubicMeter(override val value: Double) : UnitVolume<CubicMeter> {
     override fun asType(d: Double) = CubicMeter(d)
     override fun asBaseUnit() = Liter(value * 1 * 1000)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -79,10 +79,10 @@ value class Deciliter(override val value: Double) : UnitVolume<Deciliter> {
     override fun asType(d: Double) = Deciliter(d)
     override fun asBaseUnit() = Liter(value * Consts.DECI)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -90,10 +90,10 @@ value class Dekaliter(override val value: Double) : UnitVolume<Dekaliter> {
     override fun asType(d: Double) = Dekaliter(d)
     override fun asBaseUnit() = Liter(value * Consts.DEKA)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -101,10 +101,10 @@ value class Exaliter(override val value: Double) : UnitVolume<Exaliter> {
     override fun asType(d: Double) = Exaliter(d)
     override fun asBaseUnit() = Liter(value * Consts.EXA)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -112,10 +112,10 @@ value class Femtoliter(override val value: Double) : UnitVolume<Femtoliter> {
     override fun asType(d: Double) = Femtoliter(d)
     override fun asBaseUnit() = Liter(value * Consts.FEMTO)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -123,10 +123,10 @@ value class Gigaliter(override val value: Double) : UnitVolume<Gigaliter> {
     override fun asType(d: Double) = Gigaliter(d)
     override fun asBaseUnit() = Liter(value * Consts.GIGA)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -134,10 +134,10 @@ value class Hectoliter(override val value: Double) : UnitVolume<Hectoliter> {
     override fun asType(d: Double) = Hectoliter(d)
     override fun asBaseUnit() = Liter(value * Consts.HECTO)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -145,10 +145,10 @@ value class Kiloliter(override val value: Double) : UnitVolume<Kiloliter> {
     override fun asType(d: Double) = Kiloliter(d)
     override fun asBaseUnit() = Liter(value * Consts.KILO)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -156,10 +156,10 @@ value class Megaliter(override val value: Double) : UnitVolume<Megaliter> {
     override fun asType(d: Double) = Megaliter(d)
     override fun asBaseUnit() = Liter(value * Consts.MEGA)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -167,10 +167,10 @@ value class Microliter(override val value: Double) : UnitVolume<Microliter> {
     override fun asType(d: Double) = Microliter(d)
     override fun asBaseUnit() = Liter(value * Consts.MICRO)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -178,10 +178,10 @@ value class Milliliter(override val value: Double) : UnitVolume<Milliliter> {
     override fun asType(d: Double) = Milliliter(d)
     override fun asBaseUnit() = Liter(value * Consts.MILLI)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -189,10 +189,10 @@ value class Nanoliter(override val value: Double) : UnitVolume<Nanoliter> {
     override fun asType(d: Double) = Nanoliter(d)
     override fun asBaseUnit() = Liter(value * Consts.NANO)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -200,10 +200,10 @@ value class Petaliter(override val value: Double) : UnitVolume<Petaliter> {
     override fun asType(d: Double) = Petaliter(d)
     override fun asBaseUnit() = Liter(value * Consts.PETA)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -211,10 +211,10 @@ value class Picoliter(override val value: Double) : UnitVolume<Picoliter> {
     override fun asType(d: Double) = Picoliter(d)
     override fun asBaseUnit() = Liter(value * Consts.PICO)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -222,10 +222,10 @@ value class Teraliter(override val value: Double) : UnitVolume<Teraliter> {
     override fun asType(d: Double) = Teraliter(d)
     override fun asBaseUnit() = Liter(value * Consts.TERA)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -233,10 +233,10 @@ value class Yoctoliter(override val value: Double) : UnitVolume<Yoctoliter> {
     override fun asType(d: Double) = Yoctoliter(d)
     override fun asBaseUnit() = Liter(value * Consts.YOCTO)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -244,10 +244,10 @@ value class Yottaliter(override val value: Double) : UnitVolume<Yottaliter> {
     override fun asType(d: Double) = Yottaliter(d)
     override fun asBaseUnit() = Liter(value * Consts.YOTTA)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -255,10 +255,10 @@ value class Zeptoliter(override val value: Double) : UnitVolume<Zeptoliter> {
     override fun asType(d: Double) = Zeptoliter(d)
     override fun asBaseUnit() = Liter(value * Consts.ZEPTO)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -266,8 +266,8 @@ value class Zettaliter(override val value: Double) : UnitVolume<Zettaliter> {
     override fun asType(d: Double) = Zettaliter(d)
     override fun asBaseUnit() = Liter(value * Consts.ZETTA)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }

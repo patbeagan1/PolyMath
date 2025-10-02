@@ -13,9 +13,10 @@ value class FeetPerSecondPerSecond(override val value: Double) : UnitAcceleratio
     override fun asType(d: Double) = FeetPerSecondPerSecond(d)
     override fun asBaseUnit() = MetersPerSecondPerSecond(this.value * 0.3048)
 
-    override operator fun plus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).plusUnit(other)
-    override operator fun minus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitAcceleration<*>).timesUnit(other)
+    override operator fun plus(other: UnitAcceleration<*>) = UnitAcceleration.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitAcceleration<*>) = UnitAcceleration.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitTime<*>) = UnitAcceleration.Companion.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>) = UnitAcceleration.Companion.divUnit(this, other)
     override operator fun times(other: UnitMass<*>): Newton = Newton(this.asBaseUnit().value * other.asBaseUnit().value * 100)
 }
 
@@ -24,9 +25,10 @@ value class Gal(override val value: Double) : UnitAcceleration<Gal> {
     override fun asType(d: Double) = Gal(d)
     override fun asBaseUnit() = MetersPerSecondPerSecond(this.value * 0.01)
 
-    override operator fun plus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).plusUnit(other)
-    override operator fun minus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitAcceleration<*>).timesUnit(other)
+    override operator fun plus(other: UnitAcceleration<*>) = UnitAcceleration.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitAcceleration<*>) = UnitAcceleration.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitTime<*>) = UnitAcceleration.Companion.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>) = UnitAcceleration.Companion.divUnit(this, other)
     override operator fun times(other: UnitMass<*>): Newton = Newton(this.asBaseUnit().value * other.asBaseUnit().value * 100)
 }
 
@@ -35,9 +37,10 @@ value class GForce(override val value: Double) : UnitAcceleration<GForce> {
     override fun asType(d: Double) = GForce(d)
     override fun asBaseUnit() = MetersPerSecondPerSecond(this.value * 9.80665)
 
-    override operator fun plus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).plusUnit(other)
-    override operator fun minus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitAcceleration<*>).timesUnit(other)
+    override operator fun plus(other: UnitAcceleration<*>) = UnitAcceleration.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitAcceleration<*>) = UnitAcceleration.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitTime<*>) = UnitAcceleration.Companion.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>) = UnitAcceleration.Companion.divUnit(this, other)
     override operator fun times(other: UnitMass<*>): Newton = Newton(this.asBaseUnit().value * other.asBaseUnit().value * 100)
 }
 
@@ -46,9 +49,10 @@ value class CentimetersPerSecondSquared(override val value: Double) : UnitAccele
     override fun asType(d: Double) = CentimetersPerSecondSquared(d)
     override fun asBaseUnit() = MetersPerSecondPerSecond(this.value * 0.01)
 
-    override operator fun plus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).plusUnit(other)
-    override operator fun minus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitAcceleration<*>).timesUnit(other)
+    override operator fun plus(other: UnitAcceleration<*>) = UnitAcceleration.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitAcceleration<*>) = UnitAcceleration.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitTime<*>) = UnitAcceleration.Companion.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>) = UnitAcceleration.Companion.divUnit(this, other)
     override operator fun times(other: UnitMass<*>): Newton = Newton(this.asBaseUnit().value * other.asBaseUnit().value * 100)
 }
 
@@ -57,9 +61,10 @@ value class KilometersPerSecondPerSecond(override val value: Double) : UnitAccel
     override fun asType(d: Double) = KilometersPerSecondPerSecond(d)
     override fun asBaseUnit() = MetersPerSecondPerSecond(this.value * 1000.0)
 
-    override operator fun plus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).plusUnit(other)
-    override operator fun minus(other: UnitAcceleration<*>) = (this as UnitAcceleration<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitAcceleration<*>).timesUnit(other)
+    override operator fun plus(other: UnitAcceleration<*>) = UnitAcceleration.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitAcceleration<*>) = UnitAcceleration.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitTime<*>) = UnitAcceleration.Companion.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>) = UnitAcceleration.Companion.divUnit(this, other)
     override operator fun times(other: UnitMass<*>): Newton = Newton(this.asBaseUnit().value * other.asBaseUnit().value * 100)
 }
 

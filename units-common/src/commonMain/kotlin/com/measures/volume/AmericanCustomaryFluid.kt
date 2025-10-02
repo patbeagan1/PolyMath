@@ -26,10 +26,10 @@ value class USCup(override val value: Double) : UnitVolume<USCup> {
     override fun asType(d: Double) = USCup(d)
     override fun asBaseUnit() = USFluidPint(value / 2.0).asBaseUnit()
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -37,10 +37,10 @@ value class USFluidBarrel(override val value: Double) : UnitVolume<USFluidBarrel
     override fun asType(d: Double) = USFluidBarrel(d)
     override fun asBaseUnit() = USFluidGallon(value * 31.5).asBaseUnit()
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -48,10 +48,10 @@ value class USFluidDram(override val value: Double) : UnitVolume<USFluidDram> {
     override fun asType(d: Double) = USFluidDram(d)
     override fun asBaseUnit() = USTeaspoon(value * 0.75).asBaseUnit()
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -59,10 +59,10 @@ value class USFluidGallon(override val value: Double) : UnitVolume<USFluidGallon
     override fun asType(d: Double) = USFluidGallon(d)
     override fun asBaseUnit() = USFluidQuart(value * 4.0).asBaseUnit()
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -70,10 +70,10 @@ value class USFluidOunce(override val value: Double) : UnitVolume<USFluidOunce> 
     override fun asType(d: Double) = USFluidOunce(d)
     override fun asBaseUnit() = USCup(value / 8.0).asBaseUnit()
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -81,10 +81,10 @@ value class USFluidPint(override val value: Double) : UnitVolume<USFluidPint> {
     override fun asType(d: Double) = USFluidPint(d)
     override fun asBaseUnit() = USFluidQuart(value / 2.0).asBaseUnit()
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -92,10 +92,10 @@ value class USFluidPottle(override val value: Double) : UnitVolume<USFluidPottle
     override fun asType(d: Double) = USFluidPottle(d)
     override fun asBaseUnit() = USFluidQuart(value * 2.0).asBaseUnit()
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -103,10 +103,10 @@ value class USFluidQuart(override val value: Double) : UnitVolume<USFluidQuart> 
     override fun asType(d: Double) = USFluidQuart(d)
     override fun asBaseUnit() = Liter(value * 0.946352946)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -114,10 +114,10 @@ value class USGill(override val value: Double) : UnitVolume<USGill> {
     override fun asType(d: Double) = USGill(d)
     override fun asBaseUnit() = USCup(value / 2.0).asBaseUnit()
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -125,10 +125,10 @@ value class USHogshead(override val value: Double) : UnitVolume<USHogshead> {
     override fun asType(d: Double) = USHogshead(d)
     override fun asBaseUnit() = USFluidGallon(value * 63.0).asBaseUnit()
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -136,10 +136,10 @@ value class USMinim(override val value: Double) : UnitVolume<USMinim> {
     override fun asType(d: Double) = USMinim(d)
     override fun asBaseUnit() = USFluidDram(value / 60.0).asBaseUnit()
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -147,10 +147,10 @@ value class USOilBarrel(override val value: Double) : UnitVolume<USOilBarrel> {
     override fun asType(d: Double) = USOilBarrel(d)
     override fun asBaseUnit() = USFluidGallon(value * 42.0).asBaseUnit()
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -158,10 +158,10 @@ value class USShot(override val value: Double) : UnitVolume<USShot> {
     override fun asType(d: Double) = USShot(d)
     override fun asBaseUnit() = USTablespoon(value * 1.5).asBaseUnit()
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -169,10 +169,10 @@ value class USTablespoon(override val value: Double) : UnitVolume<USTablespoon> 
     override fun asType(d: Double) = USTablespoon(d)
     override fun asBaseUnit() = USFluidOunce(value / 2.0).asBaseUnit()
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -180,10 +180,10 @@ value class USTeaspoon(override val value: Double) : UnitVolume<USTeaspoon> {
     override fun asType(d: Double) = USTeaspoon(d)
     override fun asBaseUnit() = USTablespoon(value / 3.0).asBaseUnit()
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -191,10 +191,10 @@ value class Acrefoot(override val value: Double) : UnitVolume<Acrefoot> {
     override fun asType(d: Double) = Acrefoot(d)
     override fun asBaseUnit() = Liter(value * 1233.481838 * 1000)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -202,10 +202,10 @@ value class CordFirewood(override val value: Double) : UnitVolume<CordFirewood> 
     override fun asType(d: Double) = CordFirewood(d)
     override fun asBaseUnit() = Liter(value * 3.624556364 * 1000)
 
-    override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plusUnit(other)
-    override operator fun minus(other: UnitVolume<*>) = (this as UnitVolume<*>).minusUnit(other)
-    override operator fun div(other: UnitArea<*>) = (this as UnitVolume<*>).divUnit(other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = (this as UnitVolume<*>).divUnit(other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
 }
 
 fun UnitVolume<*>.toAcrefoot() = toUnit(Acrefoot(1.0))

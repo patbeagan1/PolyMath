@@ -15,10 +15,10 @@ value class KilometersPerHour(override val value: Double) : UnitVelocity<Kilomet
     override fun asType(d: Double) = KilometersPerHour(d)
     override fun asBaseUnit() = com.measures.velocity.MetersPerSecond(this.value * 0.27778)
 
-    override operator fun plus(other: UnitVelocity<*>) = (this as UnitVelocity<*>).plusUnit(other)
-    override operator fun minus(other: UnitVelocity<*>) = (this as UnitVelocity<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitVelocity<*>).timesUnit(other)
-    override operator fun div(other: UnitTime<*>) = (this as UnitVelocity<*>).divUnit(other)
+    override operator fun plus(other: UnitVelocity<*>) = UnitVelocity.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVelocity<*>) = UnitVelocity.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitTime<*>) = UnitVelocity.Companion.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>) = UnitVelocity.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -26,10 +26,10 @@ value class MilesPerHour(override val value: Double) : UnitVelocity<MilesPerHour
     override fun asType(d: Double) = MilesPerHour(d)
     override fun asBaseUnit() = com.measures.velocity.MetersPerSecond(this.value * 0.44704)
 
-    override operator fun plus(other: UnitVelocity<*>) = (this as UnitVelocity<*>).plusUnit(other)
-    override operator fun minus(other: UnitVelocity<*>) = (this as UnitVelocity<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitVelocity<*>).timesUnit(other)
-    override operator fun div(other: UnitTime<*>) = (this as UnitVelocity<*>).divUnit(other)
+    override operator fun plus(other: UnitVelocity<*>) = UnitVelocity.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVelocity<*>) = UnitVelocity.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitTime<*>) = UnitVelocity.Companion.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>) = UnitVelocity.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -37,10 +37,10 @@ value class FeetPerSecond(override val value: Double) : UnitVelocity<FeetPerSeco
     override fun asType(d: Double) = FeetPerSecond(d)
     override fun asBaseUnit() = com.measures.velocity.MetersPerSecond(this.value * 0.3048)
 
-    override operator fun plus(other: UnitVelocity<*>) = (this as UnitVelocity<*>).plusUnit(other)
-    override operator fun minus(other: UnitVelocity<*>) = (this as UnitVelocity<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitVelocity<*>).timesUnit(other)
-    override operator fun div(other: UnitTime<*>) = (this as UnitVelocity<*>).divUnit(other)
+    override operator fun plus(other: UnitVelocity<*>) = UnitVelocity.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVelocity<*>) = UnitVelocity.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitTime<*>) = UnitVelocity.Companion.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>) = UnitVelocity.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -48,10 +48,10 @@ value class Knots(override val value: Double) : UnitVelocity<Knots> {
     override fun asType(d: Double) = Knots(d)
     override fun asBaseUnit() = com.measures.velocity.MetersPerSecond(this.value * 0.51444)
 
-    override operator fun plus(other: UnitVelocity<*>) = (this as UnitVelocity<*>).plusUnit(other)
-    override operator fun minus(other: UnitVelocity<*>) = (this as UnitVelocity<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitVelocity<*>).timesUnit(other)
-    override operator fun div(other: UnitTime<*>) = (this as UnitVelocity<*>).divUnit(other)
+    override operator fun plus(other: UnitVelocity<*>) = UnitVelocity.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVelocity<*>) = UnitVelocity.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitTime<*>) = UnitVelocity.Companion.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>) = UnitVelocity.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -59,10 +59,10 @@ value class CentimetersPerSecond(override val value: Double) : UnitVelocity<Cent
     override fun asType(d: Double) = CentimetersPerSecond(d)
     override fun asBaseUnit() = com.measures.velocity.MetersPerSecond(this.value * 0.01)
 
-    override operator fun plus(other: UnitVelocity<*>) = (this as UnitVelocity<*>).plusUnit(other)
-    override operator fun minus(other: UnitVelocity<*>) = (this as UnitVelocity<*>).minusUnit(other)
-    override operator fun times(other: UnitTime<*>) = (this as UnitVelocity<*>).timesUnit(other)
-    override operator fun div(other: UnitTime<*>) = (this as UnitVelocity<*>).divUnit(other)
+    override operator fun plus(other: UnitVelocity<*>) = UnitVelocity.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitVelocity<*>) = UnitVelocity.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitTime<*>) = UnitVelocity.Companion.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>) = UnitVelocity.Companion.divUnit(this, other)
 }
 
 // Conversion functions for non-SI velocity units

@@ -18,11 +18,11 @@ value class InternationalFoot(override val value: Double) : UnitDistance<Interna
     override fun asType(d: Double) = InternationalFoot(d)
     override fun asBaseUnit() = InternationalYard(value / 3.0).asBaseUnit()
 
-    override operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plusUnit(other)
-    override operator fun minus(other: UnitDistance<*>) = (this as UnitDistance<*>).minusUnit(other)
-    override operator fun times(other: UnitDistance<*>) = (this as UnitDistance<*>).timesUnit(other)
-    override operator fun times(other: UnitArea<*>) = (this as UnitDistance<*>).timesUnit(other)
-    override operator fun div(other: UnitTime<*>): MetersPerSecond = (this as UnitDistance<*>).divUnit(other)
+    override operator fun plus(other: UnitDistance<*>) = UnitDistance.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitDistance<*>) = UnitDistance.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitDistance<*>) = UnitDistance.Companion.timesUnit(this, other)
+    override operator fun times(other: UnitArea<*>) = UnitDistance.Companion.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -30,11 +30,11 @@ value class InternationalInch(override val value: Double) : UnitDistance<Interna
     override fun asType(d: Double) = InternationalInch(d)
     override fun asBaseUnit() = InternationalFoot(value / 12.0).asBaseUnit()
 
-    override operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plusUnit(other)
-    override operator fun minus(other: UnitDistance<*>) = (this as UnitDistance<*>).minusUnit(other)
-    override operator fun times(other: UnitDistance<*>) = (this as UnitDistance<*>).timesUnit(other)
-    override operator fun times(other: UnitArea<*>) = (this as UnitDistance<*>).timesUnit(other)
-    override operator fun div(other: UnitTime<*>): MetersPerSecond = (this as UnitDistance<*>).divUnit(other)
+    override operator fun plus(other: UnitDistance<*>) = UnitDistance.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitDistance<*>) = UnitDistance.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitDistance<*>) = UnitDistance.Companion.timesUnit(this, other)
+    override operator fun times(other: UnitArea<*>) = UnitDistance.Companion.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -42,11 +42,11 @@ value class InternationalMile(override val value: Double) : UnitDistance<Interna
     override fun asType(d: Double) = InternationalMile(d)
     override fun asBaseUnit() = InternationalYard(value * 1760.0).asBaseUnit()
 
-    override operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plusUnit(other)
-    override operator fun minus(other: UnitDistance<*>) = (this as UnitDistance<*>).minusUnit(other)
-    override operator fun times(other: UnitDistance<*>) = (this as UnitDistance<*>).timesUnit(other)
-    override operator fun times(other: UnitArea<*>) = (this as UnitDistance<*>).timesUnit(other)
-    override operator fun div(other: UnitTime<*>): MetersPerSecond = (this as UnitDistance<*>).divUnit(other)
+    override operator fun plus(other: UnitDistance<*>) = UnitDistance.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitDistance<*>) = UnitDistance.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitDistance<*>) = UnitDistance.Companion.timesUnit(this, other)
+    override operator fun times(other: UnitArea<*>) = UnitDistance.Companion.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -54,11 +54,11 @@ value class InternationalPica(override val value: Double) : UnitDistance<Interna
     override fun asType(d: Double) = InternationalPica(d)
     override fun asBaseUnit() = InternationalInch(value / 6.0).asBaseUnit()
 
-    override operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plusUnit(other)
-    override operator fun minus(other: UnitDistance<*>) = (this as UnitDistance<*>).minusUnit(other)
-    override operator fun times(other: UnitDistance<*>) = (this as UnitDistance<*>).timesUnit(other)
-    override operator fun times(other: UnitArea<*>) = (this as UnitDistance<*>).timesUnit(other)
-    override operator fun div(other: UnitTime<*>): MetersPerSecond = (this as UnitDistance<*>).divUnit(other)
+    override operator fun plus(other: UnitDistance<*>) = UnitDistance.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitDistance<*>) = UnitDistance.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitDistance<*>) = UnitDistance.Companion.timesUnit(this, other)
+    override operator fun times(other: UnitArea<*>) = UnitDistance.Companion.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -66,11 +66,11 @@ value class InternationalPoint(override val value: Double) : UnitDistance<Intern
     override fun asType(d: Double) = InternationalPoint(d)
     override fun asBaseUnit() = InternationalPica(value / 12.0).asBaseUnit()
 
-    override operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plusUnit(other)
-    override operator fun minus(other: UnitDistance<*>) = (this as UnitDistance<*>).minusUnit(other)
-    override operator fun times(other: UnitDistance<*>) = (this as UnitDistance<*>).timesUnit(other)
-    override operator fun times(other: UnitArea<*>) = (this as UnitDistance<*>).timesUnit(other)
-    override operator fun div(other: UnitTime<*>): MetersPerSecond = (this as UnitDistance<*>).divUnit(other)
+    override operator fun plus(other: UnitDistance<*>) = UnitDistance.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitDistance<*>) = UnitDistance.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitDistance<*>) = UnitDistance.Companion.timesUnit(this, other)
+    override operator fun times(other: UnitArea<*>) = UnitDistance.Companion.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -78,11 +78,11 @@ value class InternationalYard(override val value: Double) : UnitDistance<Interna
     override fun asType(d: Double) = InternationalYard(d)
     override fun asBaseUnit() = Meter(0.9144 * value)
 
-    override operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plusUnit(other)
-    override operator fun minus(other: UnitDistance<*>) = (this as UnitDistance<*>).minusUnit(other)
-    override operator fun times(other: UnitDistance<*>) = (this as UnitDistance<*>).timesUnit(other)
-    override operator fun times(other: UnitArea<*>) = (this as UnitDistance<*>).timesUnit(other)
-    override operator fun div(other: UnitTime<*>): MetersPerSecond = (this as UnitDistance<*>).divUnit(other)
+    override operator fun plus(other: UnitDistance<*>) = UnitDistance.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitDistance<*>) = UnitDistance.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitDistance<*>) = UnitDistance.Companion.timesUnit(this, other)
+    override operator fun times(other: UnitArea<*>) = UnitDistance.Companion.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.Companion.divUnit(this, other)
 }
 
 // Nautical Distance Units
@@ -95,11 +95,11 @@ value class InternationalCable(override val value: Double) : UnitDistance<Intern
     override fun asType(d: Double) = InternationalCable(d)
     override fun asBaseUnit() = InternationalFathom(value * 120.0).asBaseUnit()
 
-    override operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plusUnit(other)
-    override operator fun minus(other: UnitDistance<*>) = (this as UnitDistance<*>).minusUnit(other)
-    override operator fun times(other: UnitDistance<*>) = (this as UnitDistance<*>).timesUnit(other)
-    override operator fun times(other: UnitArea<*>) = (this as UnitDistance<*>).timesUnit(other)
-    override operator fun div(other: UnitTime<*>): MetersPerSecond = (this as UnitDistance<*>).divUnit(other)
+    override operator fun plus(other: UnitDistance<*>) = UnitDistance.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitDistance<*>) = UnitDistance.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitDistance<*>) = UnitDistance.Companion.timesUnit(this, other)
+    override operator fun times(other: UnitArea<*>) = UnitDistance.Companion.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -107,11 +107,11 @@ value class InternationalFathom(override val value: Double) : UnitDistance<Inter
     override fun asType(d: Double) = InternationalFathom(d)
     override fun asBaseUnit() = InternationalYard(value * 2.0).asBaseUnit()
 
-    override operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plusUnit(other)
-    override operator fun minus(other: UnitDistance<*>) = (this as UnitDistance<*>).minusUnit(other)
-    override operator fun times(other: UnitDistance<*>) = (this as UnitDistance<*>).timesUnit(other)
-    override operator fun times(other: UnitArea<*>) = (this as UnitDistance<*>).timesUnit(other)
-    override operator fun div(other: UnitTime<*>): MetersPerSecond = (this as UnitDistance<*>).divUnit(other)
+    override operator fun plus(other: UnitDistance<*>) = UnitDistance.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitDistance<*>) = UnitDistance.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitDistance<*>) = UnitDistance.Companion.timesUnit(this, other)
+    override operator fun times(other: UnitArea<*>) = UnitDistance.Companion.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.Companion.divUnit(this, other)
 }
 
 @JvmInline
@@ -119,9 +119,9 @@ value class InternationalNauticalMile(override val value: Double) : UnitDistance
     override fun asType(d: Double) = InternationalNauticalMile(d)
     override fun asBaseUnit() = InternationalCable(value * 8.439).asBaseUnit()
 
-    override operator fun plus(other: UnitDistance<*>) = (this as UnitDistance<*>).plusUnit(other)
-    override operator fun minus(other: UnitDistance<*>) = (this as UnitDistance<*>).minusUnit(other)
-    override operator fun times(other: UnitDistance<*>) = (this as UnitDistance<*>).timesUnit(other)
-    override operator fun times(other: UnitArea<*>) = (this as UnitDistance<*>).timesUnit(other)
-    override operator fun div(other: UnitTime<*>): MetersPerSecond = (this as UnitDistance<*>).divUnit(other)
+    override operator fun plus(other: UnitDistance<*>) = UnitDistance.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitDistance<*>) = UnitDistance.Companion.minusUnit(this, other)
+    override operator fun times(other: UnitDistance<*>) = UnitDistance.Companion.timesUnit(this, other)
+    override operator fun times(other: UnitArea<*>) = UnitDistance.Companion.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.Companion.divUnit(this, other)
 }

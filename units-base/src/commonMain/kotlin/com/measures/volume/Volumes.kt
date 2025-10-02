@@ -12,18 +12,20 @@ interface UnitVolume<T : DoubleBase> : UnitType<T, Liter> {
     operator fun minus(other: UnitVolume<*>): Liter
     operator fun div(other: UnitArea<*>): Meter
     operator fun div(other: UnitDistance<*>): SquareMeter
+
+    companion object {
+        fun plusUnit(volume: UnitVolume<*>, other: UnitVolume<*>): Liter =
+            Liter(volume.asBaseUnit().value + other.asBaseUnit().value)
+
+        fun minusUnit(volume: UnitVolume<*>, other: UnitVolume<*>): Liter =
+            Liter(volume.asBaseUnit().value - other.asBaseUnit().value)
+
+        fun divUnit(volume: UnitVolume<*>, other: UnitArea<*>): Meter =
+            Meter(volume.asBaseUnit().value / other.asBaseUnit().value)
+
+        fun divUnit(volume: UnitVolume<*>, other: UnitDistance<*>): SquareMeter =
+            SquareMeter(volume.asBaseUnit().value / other.asBaseUnit().value)
+    }
 }
-
-fun UnitVolume<*>.plusUnit(other: UnitVolume<*>): Liter =
-    Liter(this.asBaseUnit().value + other.asBaseUnit().value)
-
-fun UnitVolume<*>.minusUnit(other: UnitVolume<*>): Liter =
-    Liter(this.asBaseUnit().value - other.asBaseUnit().value)
-
-fun UnitVolume<*>.divUnit(other: UnitArea<*>): Meter =
-    Meter(this.asBaseUnit().value / other.asBaseUnit().value)
-
-fun UnitVolume<*>.divUnit(other: UnitDistance<*>): SquareMeter =
-    SquareMeter(this.asBaseUnit().value / other.asBaseUnit().value)
 
 

@@ -11,8 +11,8 @@ value class Degree(override val value: Double) : UnitAngle<Degree> {
     override fun asType(d: Double) = Degree(d)
     override fun asBaseUnit() = Radian(this.value * PI / 180.0)
 
-    override operator fun plus(other: UnitAngle<*>) = (this as UnitAngle<*>).plusUnit(other)
-    override operator fun minus(other: UnitAngle<*>) = (this as UnitAngle<*>).minusUnit(other)
+    override operator fun plus(other: UnitAngle<*>) = UnitAngle.Companion.plusUnit(this, other)
+    override operator fun minus(other: UnitAngle<*>) = UnitAngle.Companion.minusUnit(this, other)
 }
 
 // Conversion functions for non-SI angle units

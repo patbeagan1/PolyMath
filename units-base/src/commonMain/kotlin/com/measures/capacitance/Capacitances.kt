@@ -6,10 +6,12 @@ import com.measures.UnitType
 interface UnitCapacitance<T : DoubleBase> : UnitType<T, Farad> {
     operator fun plus(other: UnitCapacitance<*>): Farad
     operator fun minus(other: UnitCapacitance<*>): Farad
+
+    companion object {
+        fun plusUnit(capacitance: UnitCapacitance<*>, other: UnitCapacitance<*>): Farad =
+            Farad(capacitance.asBaseUnit().value + other.asBaseUnit().value)
+
+        fun minusUnit(capacitance: UnitCapacitance<*>, other: UnitCapacitance<*>): Farad =
+            Farad(capacitance.asBaseUnit().value - other.asBaseUnit().value)
+    }
 }
-
-fun UnitCapacitance<*>.plusUnit(other: UnitCapacitance<*>): Farad =
-    Farad(this.asBaseUnit().value + other.asBaseUnit().value)
-
-fun UnitCapacitance<*>.minusUnit(other: UnitCapacitance<*>): Farad =
-    Farad(this.asBaseUnit().value - other.asBaseUnit().value)
