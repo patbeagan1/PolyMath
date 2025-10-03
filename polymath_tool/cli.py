@@ -46,9 +46,30 @@ def get_kotlin_roots() -> List[Path]:
 
 
 GENERATION_MAP: Dict[str, List[Callable[[], int]]] = {
-    "metric": [generators.generate_metric_distance, generators.generate_metric_volume],
+    "metric": [
+        generators.generate_metric_distance, 
+        generators.generate_metric_volume,
+        generators.generate_metric_area,
+        generators.generate_metric_acceleration,
+        generators.generate_metric_energy,
+        generators.generate_metric_force,
+        generators.generate_metric_power,
+        generators.generate_metric_pressure,
+        generators.generate_metric_time,
+        generators.generate_metric_velocity,
+        generators.generate_metric_weight
+    ],
     "metric-distance": [generators.generate_metric_distance],
     "metric-volume": [generators.generate_metric_volume],
+    "metric-area": [generators.generate_metric_area],
+    "metric-acceleration": [generators.generate_metric_acceleration],
+    "metric-energy": [generators.generate_metric_energy],
+    "metric-force": [generators.generate_metric_force],
+    "metric-power": [generators.generate_metric_power],
+    "metric-pressure": [generators.generate_metric_pressure],
+    "metric-time": [generators.generate_metric_time],
+    "metric-velocity": [generators.generate_metric_velocity],
+    "metric-weight": [generators.generate_metric_weight],
     
     "american-customary": [
         generators.generate_american_customary_distance,
@@ -75,6 +96,15 @@ GENERATION_MAP: Dict[str, List[Callable[[], int]]] = {
     "all": [
         generators.generate_metric_distance,
         generators.generate_metric_volume,
+        generators.generate_metric_area,
+        generators.generate_metric_acceleration,
+        generators.generate_metric_energy,
+        generators.generate_metric_force,
+        generators.generate_metric_power,
+        generators.generate_metric_pressure,
+        generators.generate_metric_time,
+        generators.generate_metric_velocity,
+        generators.generate_metric_weight,
         generators.generate_american_customary_distance,
         generators.generate_american_customary_area,
         generators.generate_american_customary_fluid,

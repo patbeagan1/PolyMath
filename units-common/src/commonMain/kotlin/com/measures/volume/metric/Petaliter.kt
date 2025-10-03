@@ -13,10 +13,10 @@ value class Petaliter(override val value: Double) : UnitVolume<Petaliter> {
     override fun asType(d: Double) = Petaliter(d)
     override fun asBaseUnit() = Liter(value * Consts.PETA)
 
-    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
-    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
-    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.divUnit(this, other)
 }
 
 fun UnitVolume<*>.toPetaliter() = toUnit(Petaliter(1.0))

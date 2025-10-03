@@ -13,10 +13,10 @@ value class CubicMeter(override val value: Double) : UnitVolume<CubicMeter> {
     override fun asType(d: Double) = CubicMeter(d)
     override fun asBaseUnit() = Liter(value * Consts.KILO)
 
-    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
-    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
-    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.divUnit(this, other)
 }
 
 fun UnitVolume<*>.toCubicMeter() = toUnit(CubicMeter(1.0))

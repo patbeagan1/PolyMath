@@ -13,10 +13,10 @@ value class Gigaliter(override val value: Double) : UnitVolume<Gigaliter> {
     override fun asType(d: Double) = Gigaliter(d)
     override fun asBaseUnit() = Liter(value * Consts.GIGA)
 
-    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
-    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
-    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.divUnit(this, other)
 }
 
 fun UnitVolume<*>.toGigaliter() = toUnit(Gigaliter(1.0))

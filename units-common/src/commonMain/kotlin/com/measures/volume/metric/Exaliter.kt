@@ -13,10 +13,10 @@ value class Exaliter(override val value: Double) : UnitVolume<Exaliter> {
     override fun asType(d: Double) = Exaliter(d)
     override fun asBaseUnit() = Liter(value * Consts.EXA)
 
-    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
-    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
-    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.Companion.divUnit(this, other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.divUnit(this, other)
 }
 
 fun UnitVolume<*>.toExaliter() = toUnit(Exaliter(1.0))

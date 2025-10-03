@@ -13,11 +13,11 @@ value class Femtometer(override val value: Double) : UnitDistance<Femtometer> {
     override fun asType(d: Double) = Femtometer(d)
     override fun asBaseUnit() = Meter(value * Consts.FEMTO)
 
-    override operator fun plus(other: UnitDistance<*>) = UnitDistance.Companion.plusUnit(this, other)
-    override operator fun minus(other: UnitDistance<*>) = UnitDistance.Companion.minusUnit(this, other)
-    override operator fun times(other: UnitDistance<*>) = UnitDistance.Companion.timesUnit(this, other)
-    override operator fun times(other: UnitArea<*>) = UnitDistance.Companion.timesUnit(this, other)
-    override operator fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.Companion.divUnit(this, other)
+    override operator fun plus(other: UnitDistance<*>) = UnitDistance.plusUnit(this, other)
+    override operator fun minus(other: UnitDistance<*>) = UnitDistance.minusUnit(this, other)
+    override operator fun times(other: UnitDistance<*>) = UnitDistance.timesUnit(this, other)
+    override operator fun times(other: UnitArea<*>) = UnitDistance.timesUnit(this, other)
+    override operator fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.divUnit(this, other)
 }
 
 fun UnitDistance<*>.toFemtometer() = toUnit(Femtometer(1.0))
