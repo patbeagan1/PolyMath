@@ -49,6 +49,7 @@ def generate_metric_distance() -> int:
 
 import com.measures.Consts
 import com.measures.area.UnitArea
+import com.measures.distance.Meter
 import com.measures.distance.UnitDistance
 import com.measures.time.UnitTime
 import com.measures.velocity.MetersPerSecond
@@ -88,8 +89,8 @@ def generate_metric_volume() -> int:
     units = [
         ("Attoliter", "Consts.ATTO"),
         ("Centiliter", "Consts.CENTI"),
-        ("CubicCentimeter", "0.000001 * 1000"),
-        ("CubicMeter", "1 * 1000"),
+        ("CubicCentimeter", "Consts.MILLI"),
+        ("CubicMeter", "Consts.KILO"),
         ("Deciliter", "Consts.DECI"),
         ("Dekaliter", "Consts.DEKA"),
         ("Exaliter", "Consts.EXA"),
@@ -115,6 +116,7 @@ import com.measures.Consts
 import com.measures.area.SquareMeter
 import com.measures.area.UnitArea
 import com.measures.distance.UnitDistance
+import com.measures.volume.Liter
 import com.measures.volume.UnitVolume
 import kotlin.jvm.JvmInline
 
