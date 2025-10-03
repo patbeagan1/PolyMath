@@ -6,7 +6,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Millimole(override val value: Double) : UnitAmount<Millimole> {
-override fun asType(d: Double) = Millimole(d)
+    override fun asType(d: Double) = Millimole(d)
     override fun asBaseUnit() = Mole(this.value * 0.001)
 
     override operator fun plus(other: UnitAmount<*>) = UnitAmount.Companion.plusUnit(this, other)

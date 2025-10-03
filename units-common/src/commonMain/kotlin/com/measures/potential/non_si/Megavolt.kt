@@ -7,7 +7,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Megavolt(override val value: Double) : UnitPotential<Megavolt> {
-override fun asType(d: Double) = Megavolt(d)
+    override fun asType(d: Double) = Megavolt(d)
     override fun asBaseUnit() = Volt(this.value * 1E6)
 
     override operator fun plus(other: UnitPotential<*>) = UnitPotential.Companion.plusUnit(this, other)

@@ -5,10 +5,9 @@ import com.measures.area.UnitArea
 import com.measures.distance.UnitDistance
 import com.measures.volume.UnitVolume
 import kotlin.jvm.JvmInline
-
 @JvmInline
 value class USShot(override val value: Double) : UnitVolume<USShot> {
-override fun asType(d: Double) = USShot(d)
+    override fun asType(d: Double) = USShot(d)
     override fun asBaseUnit() = USTablespoon(value * 1.5).asBaseUnit()
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)

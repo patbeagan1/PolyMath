@@ -5,7 +5,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Celsius(override val value: Double) : UnitTemperature<Celsius> {
-override fun asType(d: Double) = Celsius(d)
+    override fun asType(d: Double) = Celsius(d)
     override fun asBaseUnit() = com.measures.temperature.Kelvin(this.value + 273.15)
 
     operator fun plus(other: UnitTemperature<*>) = UnitTemperature.Companion.plusUnit(this, other)

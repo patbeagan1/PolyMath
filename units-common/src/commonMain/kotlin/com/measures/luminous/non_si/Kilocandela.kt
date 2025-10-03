@@ -6,7 +6,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Kilocandela(override val value: Double) : UnitLuminous<Kilocandela> {
-override fun asType(d: Double) = Kilocandela(d)
+    override fun asType(d: Double) = Kilocandela(d)
     override fun asBaseUnit() = Candela(this.value * 1000.0)
 
     override operator fun plus(other: UnitLuminous<*>) = UnitLuminous.Companion.plusUnit(this, other)

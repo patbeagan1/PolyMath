@@ -6,7 +6,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Millisecond(override val value: Double) : UnitTime<Millisecond> {
-override fun asType(d: Double) = Millisecond(d)
+    override fun asType(d: Double) = Millisecond(d)
     override fun asBaseUnit() = Second(this.value * 0.001)
 
     override operator fun plus(other: UnitTime<*>) = UnitTime.Companion.plusUnit(this, other)

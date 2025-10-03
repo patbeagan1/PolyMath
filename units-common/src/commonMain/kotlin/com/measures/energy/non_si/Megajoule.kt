@@ -8,7 +8,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Megajoule(override val value: Double) : UnitEnergy<Megajoule> {
-override fun asType(d: Double) = Megajoule(d)
+    override fun asType(d: Double) = Megajoule(d)
     override fun asBaseUnit() = Joule(this.value * 1E6)
 
     override operator fun plus(other: UnitEnergy<*>) = UnitEnergy.Companion.plusUnit(this, other)

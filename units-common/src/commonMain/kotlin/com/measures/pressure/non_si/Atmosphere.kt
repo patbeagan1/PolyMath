@@ -7,7 +7,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Atmosphere(override val value: Double) : UnitPressure<Atmosphere> {
-override fun asType(d: Double) = Atmosphere(d)
+    override fun asType(d: Double) = Atmosphere(d)
     override fun asBaseUnit() = Pascal(this.value * 101325.0)
 
     override operator fun plus(other: UnitPressure<*>) = UnitPressure.Companion.plusUnit(this, other)

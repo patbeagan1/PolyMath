@@ -5,10 +5,9 @@ import com.measures.distance.UnitDistance
 import com.measures.volume.Liter
 import com.measures.volume.UnitVolume
 import kotlin.jvm.JvmInline
-
 @JvmInline
 value class USDryPeck(override val value: Double) : UnitVolume<USDryPeck> {
-override fun asType(d: Double) = USDryPeck(d)
+    override fun asType(d: Double) = USDryPeck(d)
     override fun asBaseUnit() = Liter(value * 0.008809768 * 1000)
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)

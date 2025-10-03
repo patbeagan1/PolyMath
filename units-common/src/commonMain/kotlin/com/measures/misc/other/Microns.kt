@@ -11,7 +11,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Microns(override val value: Double) : UnitDistance<Microns> {
-override fun asType(d: Double) = Microns(d)
+    override fun asType(d: Double) = Microns(d)
     override fun asBaseUnit() = com.measures.distance.Meter(this.value * 0.000001)
 
     override fun plus(other: UnitDistance<*>): Meter = UnitDistance.Companion.plusUnit(this, other)

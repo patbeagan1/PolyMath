@@ -7,7 +7,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class FootPoundPerSecond(override val value: Double) : UnitPower<FootPoundPerSecond> {
-override fun asType(d: Double) = FootPoundPerSecond(d)
+    override fun asType(d: Double) = FootPoundPerSecond(d)
     override fun asBaseUnit() = Watt(this.value * 1.355818)
 
     override operator fun plus(other: UnitPower<*>) = UnitPower.Companion.plusUnit(this, other)

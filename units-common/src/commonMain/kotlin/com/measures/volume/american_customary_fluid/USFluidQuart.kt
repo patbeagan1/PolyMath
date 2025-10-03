@@ -6,10 +6,9 @@ import com.measures.distance.UnitDistance
 import com.measures.volume.Liter
 import com.measures.volume.UnitVolume
 import kotlin.jvm.JvmInline
-
 @JvmInline
 value class USFluidQuart(override val value: Double) : UnitVolume<USFluidQuart> {
-override fun asType(d: Double) = USFluidQuart(d)
+    override fun asType(d: Double) = USFluidQuart(d)
     override fun asBaseUnit() = Liter(value * 0.946352946)
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)

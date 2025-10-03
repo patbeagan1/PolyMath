@@ -6,7 +6,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Hour(override val value: Double) : UnitTime<Hour> {
-override fun asType(d: Double) = Hour(d)
+    override fun asType(d: Double) = Hour(d)
     override fun asBaseUnit() = Second(this.value * 3600.0)
 
     override operator fun plus(other: UnitTime<*>) = UnitTime.Companion.plusUnit(this, other)

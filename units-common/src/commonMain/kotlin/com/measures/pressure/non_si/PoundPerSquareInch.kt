@@ -7,7 +7,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class PoundPerSquareInch(override val value: Double) : UnitPressure<PoundPerSquareInch> {
-override fun asType(d: Double) = PoundPerSquareInch(d)
+    override fun asType(d: Double) = PoundPerSquareInch(d)
     override fun asBaseUnit() = Pascal(this.value * 6894.757)
 
     override operator fun plus(other: UnitPressure<*>) = UnitPressure.Companion.plusUnit(this, other)

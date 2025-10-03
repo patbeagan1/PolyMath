@@ -8,7 +8,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class BritishThermalUnit(override val value: Double) : UnitEnergy<BritishThermalUnit> {
-override fun asType(d: Double) = BritishThermalUnit(d)
+    override fun asType(d: Double) = BritishThermalUnit(d)
     override fun asBaseUnit() = Joule(this.value * 1055.056)
 
     override operator fun plus(other: UnitEnergy<*>) = UnitEnergy.Companion.plusUnit(this, other)

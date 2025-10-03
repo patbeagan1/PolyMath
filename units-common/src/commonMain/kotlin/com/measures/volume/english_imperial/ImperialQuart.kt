@@ -5,10 +5,9 @@ import com.measures.area.UnitArea
 import com.measures.distance.UnitDistance
 import com.measures.volume.UnitVolume
 import kotlin.jvm.JvmInline
-
 @JvmInline
 value class ImperialQuart(override val value: Double) : UnitVolume<ImperialQuart> {
-override fun asType(d: Double) = ImperialQuart(d)
+    override fun asType(d: Double) = ImperialQuart(d)
     override fun asBaseUnit() = ImperialFluidOunce(this.value * 40.0).asBaseUnit()
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)

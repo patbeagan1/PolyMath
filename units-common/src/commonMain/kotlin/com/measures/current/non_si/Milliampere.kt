@@ -1,6 +1,5 @@
 package com.measures.current.non_si
 
-import com.measures.Consts
 import com.measures.current.Ampere
 import com.measures.current.UnitCurrent
 import com.measures.time.UnitTime
@@ -8,8 +7,8 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Milliampere(override val value: Double) : UnitCurrent<Milliampere> {
-override fun asType(d: Double) = Milliampere(d)
-    override fun asBaseUnit() = Ampere(this.value * Consts.MILLI)
+    override fun asType(d: Double) = Milliampere(d)
+    override fun asBaseUnit() = Ampere(this.value * 0.001)
 
     override operator fun plus(other: UnitCurrent<*>) = UnitCurrent.Companion.plusUnit(this, other)
     override operator fun minus(other: UnitCurrent<*>) = UnitCurrent.Companion.minusUnit(this, other)

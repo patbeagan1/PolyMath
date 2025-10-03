@@ -11,7 +11,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Angstroms(override val value: Double) : UnitDistance<Angstroms> {
-override fun asType(d: Double) = Angstroms(d)
+    override fun asType(d: Double) = Angstroms(d)
     override fun asBaseUnit() = com.measures.distance.Meter(this.value * 1E-10)
 
     override fun plus(other: UnitDistance<*>): Meter = UnitDistance.Companion.plusUnit(this, other)

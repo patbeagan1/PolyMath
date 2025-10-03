@@ -6,10 +6,9 @@ import com.measures.distance.UnitDistance
 import com.measures.volume.Liter
 import com.measures.volume.UnitVolume
 import kotlin.jvm.JvmInline
-
 @JvmInline
 value class ImperialFluidOunce(override val value: Double) : UnitVolume<ImperialFluidOunce> {
-override fun asType(d: Double) = ImperialFluidOunce(d)
+    override fun asType(d: Double) = ImperialFluidOunce(d)
     override fun asBaseUnit() = Liter(this.value * 28.4130625 / 1000)
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)

@@ -5,10 +5,9 @@ import com.measures.area.UnitArea
 import com.measures.distance.UnitDistance
 import com.measures.volume.UnitVolume
 import kotlin.jvm.JvmInline
-
 @JvmInline
 value class ImperialGill(override val value: Double) : UnitVolume<ImperialGill> {
-override fun asType(d: Double) = ImperialGill(d)
+    override fun asType(d: Double) = ImperialGill(d)
     override fun asBaseUnit() = ImperialFluidOunce(this.value * 5.0).asBaseUnit()
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)

@@ -8,7 +8,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Erg(override val value: Double) : UnitEnergy<Erg> {
-override fun asType(d: Double) = Erg(d)
+    override fun asType(d: Double) = Erg(d)
     override fun asBaseUnit() = Joule(this.value * 1E-7)
 
     override operator fun plus(other: UnitEnergy<*>) = UnitEnergy.Companion.plusUnit(this, other)

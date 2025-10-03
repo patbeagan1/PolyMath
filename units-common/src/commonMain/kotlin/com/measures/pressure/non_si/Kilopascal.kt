@@ -7,7 +7,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Kilopascal(override val value: Double) : UnitPressure<Kilopascal> {
-override fun asType(d: Double) = Kilopascal(d)
+    override fun asType(d: Double) = Kilopascal(d)
     override fun asBaseUnit() = Pascal(this.value * 1000.0)
 
     override operator fun plus(other: UnitPressure<*>) = UnitPressure.Companion.plusUnit(this, other)

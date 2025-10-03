@@ -7,7 +7,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Horsepower(override val value: Double) : UnitPower<Horsepower> {
-override fun asType(d: Double) = Horsepower(d)
+    override fun asType(d: Double) = Horsepower(d)
     override fun asBaseUnit() = Watt(this.value * 745.7)
 
     override operator fun plus(other: UnitPower<*>) = UnitPower.Companion.plusUnit(this, other)

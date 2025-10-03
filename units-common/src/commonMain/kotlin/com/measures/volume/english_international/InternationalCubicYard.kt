@@ -5,10 +5,9 @@ import com.measures.area.UnitArea
 import com.measures.distance.UnitDistance
 import com.measures.volume.UnitVolume
 import kotlin.jvm.JvmInline
-
 @JvmInline
 value class InternationalCubicYard(override val value: Double) : UnitVolume<InternationalCubicYard> {
-override fun asType(d: Double) = InternationalCubicYard(d)
+    override fun asType(d: Double) = InternationalCubicYard(d)
     override fun asBaseUnit() = InternationalCubicFoot(value * 27).asBaseUnit()
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)

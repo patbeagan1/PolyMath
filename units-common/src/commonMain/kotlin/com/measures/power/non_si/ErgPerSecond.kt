@@ -7,7 +7,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class ErgPerSecond(override val value: Double) : UnitPower<ErgPerSecond> {
-override fun asType(d: Double) = ErgPerSecond(d)
+    override fun asType(d: Double) = ErgPerSecond(d)
     override fun asBaseUnit() = Watt(this.value * 1E-7)
 
     override operator fun plus(other: UnitPower<*>) = UnitPower.Companion.plusUnit(this, other)

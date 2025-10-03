@@ -7,7 +7,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class AmpereHour(override val value: Double) : UnitCharge<AmpereHour> {
-override fun asType(d: Double) = AmpereHour(d)
+    override fun asType(d: Double) = AmpereHour(d)
     override fun asBaseUnit() = Coulomb(this.value * 3600.0)
 
     override operator fun plus(other: UnitCharge<*>) = UnitCharge.plusUnit(this, other)

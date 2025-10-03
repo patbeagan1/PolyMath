@@ -7,7 +7,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Torr(override val value: Double) : UnitPressure<Torr> {
-override fun asType(d: Double) = Torr(d)
+    override fun asType(d: Double) = Torr(d)
     override fun asBaseUnit() = Pascal(this.value * 133.322)
 
     override operator fun plus(other: UnitPressure<*>) = UnitPressure.Companion.plusUnit(this, other)

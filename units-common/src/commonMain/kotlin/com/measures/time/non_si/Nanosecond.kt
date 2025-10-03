@@ -6,7 +6,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Nanosecond(override val value: Double) : UnitTime<Nanosecond> {
-override fun asType(d: Double) = Nanosecond(d)
+    override fun asType(d: Double) = Nanosecond(d)
     override fun asBaseUnit() = Second(this.value * 1E-9)
 
     override operator fun plus(other: UnitTime<*>) = UnitTime.Companion.plusUnit(this, other)

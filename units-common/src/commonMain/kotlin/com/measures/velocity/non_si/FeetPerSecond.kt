@@ -6,7 +6,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class FeetPerSecond(override val value: Double) : UnitVelocity<FeetPerSecond> {
-override fun asType(d: Double) = FeetPerSecond(d)
+    override fun asType(d: Double) = FeetPerSecond(d)
     override fun asBaseUnit() = com.measures.velocity.MetersPerSecond(this.value * 0.3048)
 
     override operator fun plus(other: UnitVelocity<*>) = UnitVelocity.Companion.plusUnit(this, other)

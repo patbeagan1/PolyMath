@@ -7,7 +7,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Nanocoulomb(override val value: Double) : UnitCharge<Nanocoulomb> {
-override fun asType(d: Double) = Nanocoulomb(d)
+    override fun asType(d: Double) = Nanocoulomb(d)
     override fun asBaseUnit() = Coulomb(this.value * 1E-9)
 
     override operator fun plus(other: UnitCharge<*>) = UnitCharge.plusUnit(this, other)

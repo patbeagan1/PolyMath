@@ -1,16 +1,16 @@
 package com.measures.charge
 
+import com.measures.charge.non_si.AmpereHour
+import com.measures.charge.non_si.Kilocoulomb
+import com.measures.charge.non_si.Microcoulomb
+import com.measures.charge.non_si.MilliampereHour
+import com.measures.charge.non_si.Millicoulomb
+import com.measures.charge.non_si.Nanocoulomb
+import com.measures.charge.non_si.Picocoulomb
+import com.measures.current.UnitCurrent
 import com.measures.energy.Joule
 import com.measures.power.Watt
 import com.measures.time.Second
-import com.measures.charge.Millicoulomb
-import com.measures.charge.Microcoulomb
-import com.measures.charge.Nanocoulomb
-import com.measures.charge.Picocoulomb
-import com.measures.charge.Kilocoulomb
-import com.measures.charge.AmpereHour
-import com.measures.charge.MilliampereHour
-import com.measures.current.UnitCurrent
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

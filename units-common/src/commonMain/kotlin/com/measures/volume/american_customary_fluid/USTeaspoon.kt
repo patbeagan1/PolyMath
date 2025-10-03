@@ -5,10 +5,9 @@ import com.measures.area.UnitArea
 import com.measures.distance.UnitDistance
 import com.measures.volume.UnitVolume
 import kotlin.jvm.JvmInline
-
 @JvmInline
 value class USTeaspoon(override val value: Double) : UnitVolume<USTeaspoon> {
-override fun asType(d: Double) = USTeaspoon(d)
+    override fun asType(d: Double) = USTeaspoon(d)
     override fun asBaseUnit() = USTablespoon(value / 3.0).asBaseUnit()
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)

@@ -5,10 +5,9 @@ import com.measures.area.UnitArea
 import com.measures.distance.UnitDistance
 import com.measures.volume.UnitVolume
 import kotlin.jvm.JvmInline
-
 @JvmInline
 value class USFluidBarrel(override val value: Double) : UnitVolume<USFluidBarrel> {
-override fun asType(d: Double) = USFluidBarrel(d)
+    override fun asType(d: Double) = USFluidBarrel(d)
     override fun asBaseUnit() = USFluidGallon(value * 31.5).asBaseUnit()
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)

@@ -7,7 +7,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Millicoulomb(override val value: Double) : UnitCharge<Millicoulomb> {
-override fun asType(d: Double) = Millicoulomb(d)
+    override fun asType(d: Double) = Millicoulomb(d)
     override fun asBaseUnit() = Coulomb(this.value * 0.001)
 
     override operator fun plus(other: UnitCharge<*>) = UnitCharge.plusUnit(this, other)

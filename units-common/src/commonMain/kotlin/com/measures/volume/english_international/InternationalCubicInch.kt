@@ -6,10 +6,9 @@ import com.measures.distance.UnitDistance
 import com.measures.volume.Liter
 import com.measures.volume.UnitVolume
 import kotlin.jvm.JvmInline
-
 @JvmInline
 value class InternationalCubicInch(override val value: Double) : UnitVolume<InternationalCubicInch> {
-override fun asType(d: Double) = InternationalCubicInch(d)
+    override fun asType(d: Double) = InternationalCubicInch(d)
     override fun asBaseUnit() = Liter(value * 1.63871E-05 * 1000)
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)

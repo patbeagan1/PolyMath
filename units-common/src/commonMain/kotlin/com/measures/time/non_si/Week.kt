@@ -6,7 +6,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Week(override val value: Double) : UnitTime<Week> {
-override fun asType(d: Double) = Week(d)
+    override fun asType(d: Double) = Week(d)
     override fun asBaseUnit() = Second(this.value * 604800.0)
 
     override operator fun plus(other: UnitTime<*>) = UnitTime.Companion.plusUnit(this, other)

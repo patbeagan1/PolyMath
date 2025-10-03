@@ -5,10 +5,9 @@ import com.measures.area.UnitArea
 import com.measures.distance.UnitDistance
 import com.measures.volume.UnitVolume
 import kotlin.jvm.JvmInline
-
 @JvmInline
 value class USGill(override val value: Double) : UnitVolume<USGill> {
-override fun asType(d: Double) = USGill(d)
+    override fun asType(d: Double) = USGill(d)
     override fun asBaseUnit() = USCup(value / 2.0).asBaseUnit()
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)

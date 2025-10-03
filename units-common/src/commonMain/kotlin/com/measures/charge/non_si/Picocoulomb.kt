@@ -7,7 +7,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Picocoulomb(override val value: Double) : UnitCharge<Picocoulomb> {
-override fun asType(d: Double) = Picocoulomb(d)
+    override fun asType(d: Double) = Picocoulomb(d)
     override fun asBaseUnit() = Coulomb(this.value * 1E-12)
 
     override operator fun plus(other: UnitCharge<*>) = UnitCharge.plusUnit(this, other)

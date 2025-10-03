@@ -11,7 +11,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Capefeet(override val value: Double) : UnitDistance<Capefeet> {
-override fun asType(d: Double) = Capefeet(d)
+    override fun asType(d: Double) = Capefeet(d)
     override fun asBaseUnit() = com.measures.distance.Meter(this.value * 0.314856)
 
     override fun plus(other: UnitDistance<*>): Meter = UnitDistance.Companion.plusUnit(this, other)

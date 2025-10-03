@@ -7,7 +7,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class MillimeterOfMercury(override val value: Double) : UnitPressure<MillimeterOfMercury> {
-override fun asType(d: Double) = MillimeterOfMercury(d)
+    override fun asType(d: Double) = MillimeterOfMercury(d)
     override fun asBaseUnit() = Pascal(this.value * 133.322)
 
     override operator fun plus(other: UnitPressure<*>) = UnitPressure.Companion.plusUnit(this, other)

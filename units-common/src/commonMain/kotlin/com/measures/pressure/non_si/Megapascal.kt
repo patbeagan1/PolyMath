@@ -7,7 +7,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Megapascal(override val value: Double) : UnitPressure<Megapascal> {
-override fun asType(d: Double) = Megapascal(d)
+    override fun asType(d: Double) = Megapascal(d)
     override fun asBaseUnit() = Pascal(this.value * 1E6)
 
     override operator fun plus(other: UnitPressure<*>) = UnitPressure.Companion.plusUnit(this, other)
