@@ -1,19 +1,21 @@
 package com.measures.volume.american_customary_dry
 
 import com.measures.area.UnitArea
+import com.measures.area.SquareMeter
 import com.measures.distance.UnitDistance
 import com.measures.volume.Liter
 import com.measures.volume.UnitVolume
 import kotlin.jvm.JvmInline
+
 @JvmInline
 value class USDryPint(override val value: Double) : UnitVolume<USDryPint> {
     override fun asType(d: Double) = USDryPint(d)
-    override fun asBaseUnit() = Liter(value * 0.00055061 * 1000)
+    override fun asBaseUnit() = USDryQuart(value / 2).asBaseUnit()
 
-    override operator fun plus(other: UnitVolume<*>) = UnitVolume.Companion.plusUnit(this, other)
-    override operator fun minus(other: UnitVolume<*>) = UnitVolume.Companion.minusUnit(this, other)
-    override operator fun div(other: UnitDistance<*>) = UnitVolume.Companion.divUnit(this, other)
-    override operator fun div(other: UnitArea<*>) = UnitVolume.Companion.divUnit(this, other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.divUnit(this, other)
 }
 
 fun UnitVolume<*>.toUSDryPint() = toUnit(USDryPint(1.0))
