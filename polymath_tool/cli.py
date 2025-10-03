@@ -82,27 +82,24 @@ GENERATION_MAP: Dict[str, List[Callable[[], int]]] = {
     "american-customary-fluid-volume": [generators.generate_american_customary_fluid],
     "american-customary-dry-volume": [generators.generate_american_customary_dry],
     
-    "english-imperial": [generators.generate_english_imperial],
-    "english-imperial-volume": [generators.generate_english_imperial_volume],
-    "english-international-volume": [generators.generate_english_international_volume],
     
     "avoirdupois": [generators.generate_avoirdupois],
     "troy": [generators.generate_troy],
     
     # Weight systems (1959 agreement)
-    "avoirdupois-1959": [generators.generate_avoirdupois_1959],
-    "troy-1959": [generators.generate_troy_1959],
-    "apothecaries": [generators.generate_apothecaries],
+    "international_weight_avoirdupois": [generators.generate_avoirdupois_1959],
+    "international_weight_troy": [generators.generate_troy_1959],
+    "international_weight_apothecaries": [generators.generate_apothecaries],
     
     # US Survey units (deprecated)
     "us-survey-distance": [generators.generate_us_survey_distance],
     "us-survey-area": [generators.generate_us_survey_area],
     
-    # US International units (current)
-    "us-international-distance": [generators.generate_us_international_distance],
-    "us-international-area": [generators.generate_us_international_area],
-    "us-international-fluid-volume": [generators.generate_us_international_fluid_volume],
-    "us-international-dry-volume": [generators.generate_us_international_dry_volume],
+    # US units (current)
+    "us-distance": [generators.generate_us_international_distance],
+    "us-area": [generators.generate_us_international_area],
+    "us-fluid-volume": [generators.generate_us_international_fluid_volume],
+    "us-dry-volume": [generators.generate_us_international_dry_volume],
     
     # UK Imperial units (pre-1824)
     "uk-imperial-pre1824-distance": [generators.generate_uk_imperial_pre1824_distance],
@@ -117,9 +114,6 @@ GENERATION_MAP: Dict[str, List[Callable[[], int]]] = {
     "international-1959-nautical": [generators.generate_international_1959_nautical],
     "international-1959-volume": [generators.generate_international_1959_volume],
     
-    "acceleration": [generators.generate_acceleration],
-    "non-si": [generators.generate_non_si],
-    "remaining": [generators.generate_remaining],
     
     "all": [
         generators.generate_metric_distance,
