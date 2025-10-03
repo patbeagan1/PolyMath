@@ -89,6 +89,34 @@ GENERATION_MAP: Dict[str, List[Callable[[], int]]] = {
     "avoirdupois": [generators.generate_avoirdupois],
     "troy": [generators.generate_troy],
     
+    # Weight systems (1959 agreement)
+    "avoirdupois-1959": [generators.generate_avoirdupois_1959],
+    "troy-1959": [generators.generate_troy_1959],
+    "apothecaries": [generators.generate_apothecaries],
+    
+    # US Survey units (deprecated)
+    "us-survey-distance": [generators.generate_us_survey_distance],
+    "us-survey-area": [generators.generate_us_survey_area],
+    
+    # US International units (current)
+    "us-international-distance": [generators.generate_us_international_distance],
+    "us-international-area": [generators.generate_us_international_area],
+    "us-international-fluid-volume": [generators.generate_us_international_fluid_volume],
+    "us-international-dry-volume": [generators.generate_us_international_dry_volume],
+    
+    # UK Imperial units (pre-1824)
+    "uk-imperial-pre1824-distance": [generators.generate_uk_imperial_pre1824_distance],
+    "uk-imperial-pre1824-volume": [generators.generate_uk_imperial_pre1824_volume],
+    
+    # UK Imperial units (1824)
+    "uk-imperial-1824-distance": [generators.generate_uk_imperial_1824_distance],
+    "uk-imperial-1824-volume": [generators.generate_uk_imperial_1824_volume],
+    
+    # International 1959 agreement
+    "international-1959-distance": [generators.generate_international_1959_distance],
+    "international-1959-nautical": [generators.generate_international_1959_nautical],
+    "international-1959-volume": [generators.generate_international_1959_volume],
+    
     "acceleration": [generators.generate_acceleration],
     "non-si": [generators.generate_non_si],
     "remaining": [generators.generate_remaining],

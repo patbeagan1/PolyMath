@@ -12,12 +12,42 @@ from .american_customary import (
     generate_american_customary_fluid,
     generate_american_customary_dry
 )
-from .english_imperial import (
+from .weight_systems import generate_avoirdupois, generate_troy
+from .international_weight_systems_1959 import (
+    generate_avoirdupois_1959,
+    generate_troy_1959,
+    generate_apothecaries
+)
+from .us_survey import (
+    generate_us_survey_distance,
+    generate_us_survey_area
+)
+from .international_1959 import (
+    generate_us_international_distance,
+    generate_us_international_area,
+    generate_us_international_fluid_volume,
+    generate_us_international_dry_volume
+)
+from .uk_imperial_pre1824 import (
+    generate_uk_imperial_pre1824_distance,
+    generate_uk_imperial_pre1824_volume
+)
+from .uk_imperial_1824 import (
+    generate_uk_imperial_1824_distance,
+    generate_uk_imperial_1824_volume,
     generate_english_imperial,
     generate_english_international_volume,
     generate_english_imperial_volume
 )
-from .weight_systems import generate_avoirdupois, generate_troy
+from .international_1959 import (
+    generate_international_1959_distance,
+    generate_international_1959_nautical,
+    generate_international_1959_volume,
+    generate_us_international_distance,
+    generate_us_international_area,
+    generate_us_international_fluid_volume,
+    generate_us_international_dry_volume
+)
 from .acceleration import generate_acceleration, generate_metric_acceleration
 from .metric_area import generate_metric_area
 from .metric_energy import generate_metric_energy
@@ -53,14 +83,44 @@ __all__ = [
     'generate_american_customary_fluid',
     'generate_american_customary_dry',
     
+    
+    # Weight systems
+    'generate_avoirdupois',
+    'generate_troy',
+    
+    # Weight systems (1959 agreement)
+    'generate_avoirdupois_1959',
+    'generate_troy_1959',
+    'generate_apothecaries',
+    
+    # US Survey units (deprecated)
+    'generate_us_survey_distance',
+    'generate_us_survey_area',
+    
+    # US International units (current)
+    'generate_us_international_distance',
+    'generate_us_international_area',
+    'generate_us_international_fluid_volume',
+    'generate_us_international_dry_volume',
+    
+    # UK Imperial units (pre-1824)
+    'generate_uk_imperial_pre1824_distance',
+    'generate_uk_imperial_pre1824_volume',
+    
+    # UK Imperial units (1824)
+    'generate_uk_imperial_1824_distance',
+    'generate_uk_imperial_1824_volume',
+    
     # English Imperial units
     'generate_english_imperial',
     'generate_english_international_volume',
     'generate_english_imperial_volume',
     
-    # Weight systems
-    'generate_avoirdupois',
-    'generate_troy',
+    # International 1959 agreement
+    'generate_international_1959_distance',
+    'generate_international_1959_nautical',
+    'generate_international_1959_volume',
+    
     
     # Acceleration
     'generate_acceleration',

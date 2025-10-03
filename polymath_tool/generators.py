@@ -38,6 +38,34 @@ from .generators import (
     generate_avoirdupois,
     generate_troy,
     
+    # Corrected weight systems
+    generate_avoirdupois_corrected,
+    generate_troy_corrected,
+    generate_apothecaries,
+    
+    # US Survey units (deprecated)
+    generate_us_survey_distance,
+    generate_us_survey_area,
+    
+    # US International units (current)
+    generate_us_international_distance,
+    generate_us_international_area,
+    generate_us_international_fluid_volume,
+    generate_us_international_dry_volume,
+    
+    # UK Imperial units (pre-1824)
+    generate_uk_imperial_pre1824_distance,
+    generate_uk_imperial_pre1824_volume,
+    
+    # UK Imperial units (post-1824)
+    generate_uk_imperial_post1824_distance,
+    generate_uk_imperial_post1824_volume,
+    
+    # International 1959 agreement
+    generate_international_1959_distance,
+    generate_international_1959_nautical,
+    generate_international_1959_volume,
+    
     # Acceleration
     generate_acceleration,
     
@@ -79,6 +107,34 @@ __all__ = [
     # Weight systems
     'generate_avoirdupois',
     'generate_troy',
+    
+    # Corrected weight systems
+    'generate_avoirdupois_corrected',
+    'generate_troy_corrected',
+    'generate_apothecaries',
+    
+    # US Survey units (deprecated)
+    'generate_us_survey_distance',
+    'generate_us_survey_area',
+    
+    # US International units (current)
+    'generate_us_international_distance',
+    'generate_us_international_area',
+    'generate_us_international_fluid_volume',
+    'generate_us_international_dry_volume',
+    
+    # UK Imperial units (pre-1824)
+    'generate_uk_imperial_pre1824_distance',
+    'generate_uk_imperial_pre1824_volume',
+    
+    # UK Imperial units (post-1824)
+    'generate_uk_imperial_post1824_distance',
+    'generate_uk_imperial_post1824_volume',
+    
+    # International 1959 agreement
+    'generate_international_1959_distance',
+    'generate_international_1959_nautical',
+    'generate_international_1959_volume',
     
     # Acceleration
     'generate_acceleration',
