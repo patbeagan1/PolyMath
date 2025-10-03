@@ -1,8 +1,6 @@
 package com.measures.weight
 
 import com.measures.BaseUnit
-import com.measures.weight.KiloGram
-import com.measures.weight.UnitMass
 import com.measures.acceleration.UnitAcceleration
 import kotlin.jvm.JvmInline
 

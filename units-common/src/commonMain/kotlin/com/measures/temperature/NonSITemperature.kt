@@ -1,7 +1,5 @@
 package com.measures.temperature
 
-import com.measures.DoubleBase
-import com.measures.UnitType
 import kotlin.jvm.JvmInline
 
 // Non-SI Temperature Units

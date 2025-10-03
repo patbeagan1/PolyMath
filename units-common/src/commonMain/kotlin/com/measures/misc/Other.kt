@@ -2,10 +2,12 @@ package com.measures.misc
 
 import com.measures.area.SquareMeter
 import com.measures.area.UnitArea
-import com.measures.distance.*
+import com.measures.distance.Meter
+import com.measures.distance.UnitDistance
 import com.measures.time.UnitTime
 import com.measures.velocity.MetersPerSecond
-import com.measures.volume.*
+import com.measures.volume.Liter
+import com.measures.volume.UnitVolume
 import kotlin.jvm.JvmInline
 
 fun UnitVolume<*>.toCupBreakfast() = toUnit(CupBreakfast(1.0))

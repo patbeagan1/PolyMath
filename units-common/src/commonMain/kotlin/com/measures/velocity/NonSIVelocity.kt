@@ -1,10 +1,6 @@
 package com.measures.velocity
 
-import com.measures.DoubleBase
-import com.measures.UnitType
 import com.measures.time.UnitTime
-import com.measures.distance.Meter
-import com.measures.acceleration.MetersPerSecondPerSecond
 import kotlin.jvm.JvmInline
 
 // Non-SI Velocity Units

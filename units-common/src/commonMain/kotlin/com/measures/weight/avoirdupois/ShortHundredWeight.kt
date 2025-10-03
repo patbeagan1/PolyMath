@@ -2,9 +2,8 @@ package com.measures.weight.avoirdupois
 
 import com.measures.acceleration.UnitAcceleration
 import com.measures.force.Newton
-import com.measures.weight.UnitMass
 import com.measures.weight.KiloGram
-import com.measures.weight.avoirdupois.Pound
+import com.measures.weight.UnitMass
 import kotlin.jvm.JvmInline
 
 @JvmInline

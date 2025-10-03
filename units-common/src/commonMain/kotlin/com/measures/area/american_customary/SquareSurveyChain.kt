@@ -1,7 +1,6 @@
 package com.measures.area.american_customary
 
 import com.measures.area.UnitArea
-import com.measures.area.american_customary.SquareSurveyFoot
 import com.measures.distance.UnitDistance
 import kotlin.jvm.JvmInline
 

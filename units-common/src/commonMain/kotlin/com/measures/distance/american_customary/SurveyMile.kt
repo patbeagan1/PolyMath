@@ -2,8 +2,6 @@ package com.measures.distance.american_customary
 
 import com.measures.area.UnitArea
 import com.measures.distance.UnitDistance
-import com.measures.distance.Meter
-import com.measures.distance.american_customary.SurveyFurlong
 import com.measures.time.UnitTime
 import com.measures.velocity.MetersPerSecond
 import kotlin.jvm.JvmInline

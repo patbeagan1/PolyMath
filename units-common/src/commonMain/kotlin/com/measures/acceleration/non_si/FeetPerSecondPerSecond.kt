@@ -1,7 +1,7 @@
 package com.measures.acceleration.non_si
 
-import com.measures.acceleration.UnitAcceleration
 import com.measures.acceleration.MetersPerSecondPerSecond
+import com.measures.acceleration.UnitAcceleration
 import com.measures.force.Newton
 import com.measures.time.UnitTime
 import com.measures.weight.UnitMass

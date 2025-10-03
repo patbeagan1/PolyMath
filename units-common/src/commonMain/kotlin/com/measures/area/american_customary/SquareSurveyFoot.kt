@@ -1,7 +1,7 @@
 package com.measures.area.american_customary
 
-import com.measures.area.UnitArea
 import com.measures.area.SquareMeter
+import com.measures.area.UnitArea
 import com.measures.distance.UnitDistance
 import kotlin.jvm.JvmInline
 
