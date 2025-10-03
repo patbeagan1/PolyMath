@@ -109,3 +109,44 @@ fun UnitAcceleration<*>.to{unit_name}() = toUnit({unit_name}(1.0))
         print(f"Created: {file_path}")
     
     return 0
+
+
+def generate_g_force() -> int:
+    """Generate G-force units."""
+    base_dir = get_measures_base() / "acceleration" / "g_force"
+    base_dir.mkdir(parents=True, exist_ok=True)
+    
+    units = [
+        ("GForce", "MetersPerSecondPerSecond(value * 9.80665)"),  # Standard gravity
+        ("LunarG", "MetersPerSecondPerSecond(value * 1.62)"),    # Moon gravity
+        ("MartianG", "MetersPerSecondPerSecond(value * 3.72076)"), # Mars gravity
+        ("JovianG", "MetersPerSecondPerSecond(value * 24.79)"),    # Jupiter gravity
+        ("VenusianG", "MetersPerSecondPerSecond(value * 8.87)"),   # Venus gravity
+        ("MercurianG", "MetersPerSecondPerSecond(value * 3.7)"),   # Mercury gravity
+        ("SaturnianG", "MetersPerSecondPerSecond(value * 10.44)"), # Saturn gravity
+        ("UranianG", "MetersPerSecondPerSecond(value * 8.87)"),    # Uranus gravity
+        ("NeptunianG", "MetersPerSecondPerSecond(value * 11.15)"), # Neptune gravity
+    ]
+    
+    template = """package com.measures.acceleration.g_force
+
+import com.measures.acceleration.UnitAcceleration
+import com.measures.acceleration.MetersPerSecondPerSecond
+import kotlin.jvm.JvmInline
+
+@JvmInline
+value class {unit_name}(override val value: Double) : UnitAcceleration<{unit_name}> {{
+    override fun asType(d: Double) = {unit_name}(d)
+    override fun asBaseUnit() = {base_conversion}
+}}
+
+fun UnitAcceleration<*>.to{unit_name}() = toUnit({unit_name}(1.0))
+"""
+    
+    for unit_name, base_conversion in units:
+        file_path = base_dir / f"{unit_name}.kt"
+        content = template.format(unit_name=unit_name, base_conversion=base_conversion)
+        file_path.write_text(content)
+        print(f"Created: {file_path}")
+    
+    return 0

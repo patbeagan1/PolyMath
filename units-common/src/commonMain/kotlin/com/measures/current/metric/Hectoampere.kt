@@ -1,18 +1,19 @@
-package com.measures.current.non_si
+package com.measures.current.metric
 
-import com.measures.current.Ampere
+import com.measures.Consts
 import com.measures.current.UnitCurrent
+import com.measures.current.Ampere
 import com.measures.time.UnitTime
 import kotlin.jvm.JvmInline
 
 @JvmInline
-value class Microampere(override val value: Double) : UnitCurrent<Microampere> {
-    override fun asType(d: Double) = Microampere(d)
-    override fun asBaseUnit() = Ampere(this.value * 0.000001)
+value class Hectoampere(override val value: Double) : UnitCurrent<Hectoampere> {
+    override fun asType(d: Double) = Hectoampere(d)
+    override fun asBaseUnit() = Ampere(value * Consts.HECTO)
 
     override operator fun plus(other: UnitCurrent<*>) = UnitCurrent.Companion.plusUnit(this, other)
     override operator fun minus(other: UnitCurrent<*>) = UnitCurrent.Companion.minusUnit(this, other)
     override operator fun times(other: UnitTime<*>) = UnitCurrent.Companion.timesUnit(this, other)
 }
 
-fun UnitCurrent<*>.toMicroampere() = toUnit(Microampere(1.0))
+fun UnitCurrent<*>.toHectoampere() = toUnit(Hectoampere(1.0))

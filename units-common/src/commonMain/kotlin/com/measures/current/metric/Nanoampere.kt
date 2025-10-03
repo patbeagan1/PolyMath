@@ -1,18 +1,19 @@
-package com.measures.current.non_si
+package com.measures.current.metric
 
-import com.measures.current.Ampere
+import com.measures.Consts
 import com.measures.current.UnitCurrent
+import com.measures.current.Ampere
 import com.measures.time.UnitTime
 import kotlin.jvm.JvmInline
 
 @JvmInline
-value class Megaampere(override val value: Double) : UnitCurrent<Megaampere> {
-    override fun asType(d: Double) = Megaampere(d)
-    override fun asBaseUnit() = Ampere(this.value * 1000000.0)
+value class Nanoampere(override val value: Double) : UnitCurrent<Nanoampere> {
+    override fun asType(d: Double) = Nanoampere(d)
+    override fun asBaseUnit() = Ampere(value * Consts.NANO)
 
     override operator fun plus(other: UnitCurrent<*>) = UnitCurrent.Companion.plusUnit(this, other)
     override operator fun minus(other: UnitCurrent<*>) = UnitCurrent.Companion.minusUnit(this, other)
     override operator fun times(other: UnitTime<*>) = UnitCurrent.Companion.timesUnit(this, other)
 }
 
-fun UnitCurrent<*>.toMegaampere() = toUnit(Megaampere(1.0))
+fun UnitCurrent<*>.toNanoampere() = toUnit(Nanoampere(1.0))

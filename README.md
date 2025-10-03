@@ -477,3 +477,7 @@ python polymath.py search --pattern "UnitVolume"
 ---
 
 **PolyMath**: Making mathematics accessible, type-safe, and beautiful in Kotlin. 🧮✨
+
+#### _Notes:_ 
+
+Unit conversion information: https://www.mathconverse.com/en/Definitions/Units/Decabytes/

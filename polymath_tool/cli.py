@@ -70,6 +70,11 @@ GENERATION_MAP: Dict[str, List[Callable[[], int]]] = {
     "metric-time": [generators.generate_metric_time],
     "metric-velocity": [generators.generate_metric_velocity],
     "metric-weight": [generators.generate_metric_weight],
+    "metric-amount": [generators.generate_metric_amount],
+    "metric-current": [generators.generate_current],
+    "metric-charge": [generators.generate_charge],
+    
+    "g-force": [generators.generate_g_force],
     
     "american-customary": [
         generators.generate_american_customary_distance,
@@ -79,6 +84,7 @@ GENERATION_MAP: Dict[str, List[Callable[[], int]]] = {
     ],
     "american-customary-distance": [generators.generate_american_customary_distance],
     "american-customary-area": [generators.generate_american_customary_area],
+    "us-customary-area": [generators.generate_us_customary_area],
     "american-customary-fluid-volume": [generators.generate_american_customary_fluid],
     "american-customary-dry-volume": [generators.generate_american_customary_dry],
     
@@ -113,6 +119,9 @@ GENERATION_MAP: Dict[str, List[Callable[[], int]]] = {
     "international-1959-distance": [generators.generate_international_1959_distance],
     "international-1959-nautical": [generators.generate_international_1959_nautical],
     "international-1959-volume": [generators.generate_international_1959_volume],
+    "international-square-foot": [generators.generate_international_square_foot],
+    "charge": [generators.generate_charge],
+    "current": [generators.generate_current],
     
     
     "all": [

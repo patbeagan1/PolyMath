@@ -12,6 +12,9 @@ from .american_customary import (
     generate_american_customary_fluid,
     generate_american_customary_dry
 )
+from .us_customary import (
+    generate_us_customary_area
+)
 from .weight_systems import generate_avoirdupois, generate_troy
 from .international_weight_systems_1959 import (
     generate_avoirdupois_1959,
@@ -22,7 +25,7 @@ from .us_survey import (
     generate_us_survey_distance,
     generate_us_survey_area
 )
-from .international_1959 import (
+from .international_1959_distance import (
     generate_us_international_distance,
     generate_us_international_area,
     generate_us_international_fluid_volume,
@@ -39,7 +42,7 @@ from .uk_imperial_1824 import (
     generate_english_international_volume,
     generate_english_imperial_volume
 )
-from .international_1959 import (
+from .international_1959_distance import (
     generate_international_1959_distance,
     generate_international_1959_nautical,
     generate_international_1959_volume,
@@ -48,7 +51,16 @@ from .international_1959 import (
     generate_us_international_fluid_volume,
     generate_us_international_dry_volume
 )
-from .acceleration import generate_acceleration, generate_metric_acceleration
+from .international_1959_area import (
+    generate_international_square_foot
+)
+from .metric_charge import (
+    generate_charge
+)
+from .metric_current import (
+    generate_current
+)
+from .planetary_acceleration import generate_acceleration, generate_metric_acceleration, generate_g_force
 from .metric_area import generate_metric_area
 from .metric_energy import generate_metric_energy
 from .metric_force import generate_metric_force
@@ -57,6 +69,7 @@ from .metric_pressure import generate_metric_pressure
 from .metric_time import generate_metric_time
 from .metric_velocity import generate_metric_velocity
 from .metric_weight import generate_metric_weight
+from .metric_amount import generate_metric_amount
 from .non_si import generate_non_si, generate_remaining
 
 __all__ = [
@@ -75,13 +88,16 @@ __all__ = [
     'generate_metric_time',
     'generate_metric_velocity',
     'generate_metric_weight',
+    'generate_metric_amount',
     'generate_metric_acceleration',
+    'generate_g_force',
     
     # American Customary units
     'generate_american_customary_distance',
     'generate_american_customary_area',
     'generate_american_customary_fluid',
     'generate_american_customary_dry',
+    'generate_us_customary_area',
     
     
     # Weight systems
@@ -120,6 +136,9 @@ __all__ = [
     'generate_international_1959_distance',
     'generate_international_1959_nautical',
     'generate_international_1959_volume',
+    'generate_international_square_foot',
+    'generate_charge',
+    'generate_current',
     
     
     # Acceleration

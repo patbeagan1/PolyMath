@@ -9,14 +9,14 @@ from .common import get_measures_base
 
 def generate_uk_imperial_1824_distance() -> int:
     """Generate UK Imperial distance units (1824 agreement)."""
-    base_dir = get_measures_base() / "distance" / "uk_imp"
+    base_dir = get_measures_base() / "distance" / "uk_imperial_1824"
     base_dir.mkdir(parents=True, exist_ok=True)
     
     units = [
-        ("ImperialFoot1824", "Meter(value * 0.3048)"),  # Same as international
-        ("ImperialInch1824", "ImperialFoot1824(value / 12).asBaseUnit()"),
-        ("ImperialYard1824", "ImperialFoot1824(value * 3).asBaseUnit()"),
-        ("ImperialMile1824", "ImperialFoot1824(value * 5280).asBaseUnit()"),
+        ("ImperialFoot", "Meter(value * 0.3048)"),  # Same as international
+        ("ImperialInch", "ImperialFoot(value / 12).asBaseUnit()"),
+        ("ImperialYard", "ImperialFoot(value * 3).asBaseUnit()"),
+        ("ImperialMile", "ImperialFoot(value * 5280).asBaseUnit()"),
     ]
     
     template = """package com.measures.distance.uk_imp
@@ -58,11 +58,11 @@ def generate_uk_imperial_1824_volume() -> int:
     base_dir.mkdir(parents=True, exist_ok=True)
     
     units = [
-        ("ImperialFluidOunce1824", "Liter(value * 0.0284130625)"),  # 1/160 imperial gallon
-        ("ImperialGill1824", "ImperialFluidOunce1824(value * 5).asBaseUnit()"),
-        ("ImperialPint1824", "ImperialFluidOunce1824(value * 20).asBaseUnit()"),
-        ("ImperialQuart1824", "ImperialPint1824(value * 2).asBaseUnit()"),
-        ("ImperialGallon1824", "ImperialQuart1824(value * 4).asBaseUnit()"),
+        ("ImperialFluidOunce", "Liter(value * 0.0284130625)"),  # 1/160 imperial gallon
+        ("ImperialGill", "ImperialFluidOunce(value * 5).asBaseUnit()"),
+        ("ImperialPint", "ImperialFluidOunce(value * 20).asBaseUnit()"),
+        ("ImperialQuart", "ImperialPint(value * 2).asBaseUnit()"),
+        ("ImperialGallon", "ImperialQuart(value * 4).asBaseUnit()"),
     ]
     
     template = """package com.measures.volume.uk_imp
