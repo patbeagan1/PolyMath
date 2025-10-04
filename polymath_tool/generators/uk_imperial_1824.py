@@ -4,52 +4,32 @@ UK Imperial unit generation (1824 agreement).
 Based on the 1824 British Imperial system.
 """
 
-from .common import get_measures_base
+from .base_distance_generator import BaseDistanceGenerator
+
+
+class UKImperial1824DistanceGenerator(BaseDistanceGenerator):
+    """Generator for UK Imperial distance units (1824 agreement)."""
+    
+    def __init__(self):
+        super().__init__(
+            subdirectory="uk_imperial_1824",
+            package_name="com.measures.distance.uk_imp"
+        )
+    
+    def _get_units(self):
+        """Get UK Imperial distance units (1824 agreement)."""
+        return [
+            ("ImperialFoot", "Meter(value * 0.3048)"),  # Same as international
+            ("ImperialInch", "ImperialFoot(value / 12).asBaseUnit()"),
+            ("ImperialYard", "ImperialFoot(value * 3).asBaseUnit()"),
+            ("ImperialMile", "ImperialFoot(value * 5280).asBaseUnit()"),
+        ]
 
 
 def generate_uk_imperial_1824_distance() -> int:
     """Generate UK Imperial distance units (1824 agreement)."""
-    base_dir = get_measures_base() / "distance" / "uk_imperial_1824"
-    base_dir.mkdir(parents=True, exist_ok=True)
-    
-    units = [
-        ("ImperialFoot", "Meter(value * 0.3048)"),  # Same as international
-        ("ImperialInch", "ImperialFoot(value / 12).asBaseUnit()"),
-        ("ImperialYard", "ImperialFoot(value * 3).asBaseUnit()"),
-        ("ImperialMile", "ImperialFoot(value * 5280).asBaseUnit()"),
-    ]
-    
-    template = """package com.measures.distance.uk_imp
-
-import com.measures.area.UnitArea
-import com.measures.distance.UnitDistance
-import com.measures.distance.Meter
-import com.measures.time.UnitTime
-import com.measures.velocity.MetersPerSecond
-import kotlin.jvm.JvmInline
-
-@JvmInline
-value class {unit_name}(override val value: Double) : UnitDistance<{unit_name}> {{
-    override fun asType(d: Double) = {unit_name}(d)
-    override fun asBaseUnit() = {base_conversion}
-
-    override operator fun plus(other: UnitDistance<*>) = UnitDistance.plusUnit(this, other)
-    override operator fun minus(other: UnitDistance<*>) = UnitDistance.minusUnit(this, other)
-    override operator fun times(other: UnitDistance<*>) = UnitDistance.timesUnit(this, other)
-    override operator fun times(other: UnitArea<*>) = UnitDistance.timesUnit(this, other)
-    override operator fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.divUnit(this, other)
-}}
-
-fun UnitDistance<*>.to{unit_name}() = toUnit({unit_name}(1.0))
-"""
-    
-    for unit_name, base_conversion in units:
-        file_path = base_dir / f"{unit_name}.kt"
-        content = template.format(unit_name=unit_name, base_conversion=base_conversion)
-        file_path.write_text(content)
-        print(f"Created: {file_path}")
-    
-    return 0
+    generator = UKImperial1824DistanceGenerator()
+    return generator.generate()
 
 
 def generate_uk_imperial_1824_volume() -> int:
@@ -96,49 +76,29 @@ fun UnitVolume<*>.to{unit_name}() = toUnit({unit_name}(1.0))
     
     return 0
 
+class EnglishImperialDistanceGenerator(BaseDistanceGenerator):
+    """Generator for English Imperial distance units (1824 agreement)."""
+    
+    def __init__(self):
+        super().__init__(
+            subdirectory="uk_imp",
+            package_name="com.measures.distance.uk_imp"
+        )
+    
+    def _get_units(self):
+        """Get English Imperial distance units (1824 agreement)."""
+        return [
+            ("ImperialFoot", "Meter(value * 0.3048)"),
+            ("ImperialInch", "ImperialFoot(value / 12).asBaseUnit()"),
+            ("ImperialYard", "ImperialFoot(value * 3).asBaseUnit()"),
+            ("ImperialMile", "ImperialFoot(value * 5280).asBaseUnit()"),
+        ]
+
+
 def generate_english_imperial() -> int:
     """Generate English Imperial units (1824 agreement)."""
-    base_dir = get_measures_base() / "distance" / "uk_imp"
-    base_dir.mkdir(parents=True, exist_ok=True)
-    
-    units = [
-        ("ImperialFoot", "Meter(value * 0.3048)"),
-        ("ImperialInch", "ImperialFoot(value / 12).asBaseUnit()"),
-        ("ImperialYard", "ImperialFoot(value * 3).asBaseUnit()"),
-        ("ImperialMile", "ImperialFoot(value * 5280).asBaseUnit()"),
-    ]
-    
-    template = """package com.measures.distance.uk_imp
-
-import com.measures.area.UnitArea
-import com.measures.distance.UnitDistance
-import com.measures.distance.Meter
-import com.measures.time.UnitTime
-import com.measures.velocity.MetersPerSecond
-import kotlin.jvm.JvmInline
-
-@JvmInline
-value class {unit_name}(override val value: Double) : UnitDistance<{unit_name}> {{
-    override fun asType(d: Double) = {unit_name}(d)
-    override fun asBaseUnit() = {base_conversion}
-
-    override operator fun plus(other: UnitDistance<*>) = UnitDistance.plusUnit(this, other)
-    override operator fun minus(other: UnitDistance<*>) = UnitDistance.minusUnit(this, other)
-    override operator fun times(other: UnitDistance<*>) = UnitDistance.timesUnit(this, other)
-    override operator fun times(other: UnitArea<*>) = UnitDistance.timesUnit(this, other)
-    override operator fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.divUnit(this, other)
-}}
-
-fun UnitDistance<*>.to{unit_name}() = toUnit({unit_name}(1.0))
-"""
-    
-    for unit_name, base_conversion in units:
-        file_path = base_dir / f"{unit_name}.kt"
-        content = template.format(unit_name=unit_name, base_conversion=base_conversion)
-        file_path.write_text(content)
-        print(f"Created: {file_path}")
-    
-    return 0
+    generator = EnglishImperialDistanceGenerator()
+    return generator.generate()
 
 
 def generate_english_international_volume() -> int:

@@ -4,52 +4,32 @@ International unit generation (1959 agreement).
 Based on the 1959 International Yard and Pound Agreement.
 """
 
-from .common import get_measures_base
+from .base_distance_generator import BaseDistanceGenerator
+
+
+class USInternationalDistanceGenerator(BaseDistanceGenerator):
+    """Generator for US International distance units (1959 standard)."""
+    
+    def __init__(self):
+        super().__init__(
+            subdirectory="us_international_1959",
+            package_name="com.measures.distance.us_international_1959"
+        )
+    
+    def _get_units(self):
+        """Get US International distance units (1959 standard)."""
+        return [
+            ("InternationalFoot", "Meter(value * 0.3048)"),  # 1959 agreement
+            ("InternationalInch", "InternationalFoot(value / 12).asBaseUnit()"),
+            ("InternationalYard", "InternationalFoot(value * 3).asBaseUnit()"),
+            ("InternationalMile", "InternationalFoot(value * 5280).asBaseUnit()"),
+        ]
 
 
 def generate_us_international_distance() -> int:
     """Generate US International distance units (1959 standard)."""
-    base_dir = get_measures_base() / "distance" / "us_international_1959"
-    base_dir.mkdir(parents=True, exist_ok=True)
-    
-    units = [
-        ("InternationalFoot", "Meter(value * 0.3048)"),  # 1959 agreement
-        ("InternationalInch", "InternationalFoot(value / 12).asBaseUnit()"),
-        ("InternationalYard", "InternationalFoot(value * 3).asBaseUnit()"),
-        ("InternationalMile", "InternationalFoot(value * 5280).asBaseUnit()"),
-    ]
-    
-    template = """package com.measures.distance.us_international_1959
-
-import com.measures.area.UnitArea
-import com.measures.distance.UnitDistance
-import com.measures.distance.Meter
-import com.measures.time.UnitTime
-import com.measures.velocity.MetersPerSecond
-import kotlin.jvm.JvmInline
-
-@JvmInline
-value class {unit_name}(override val value: Double) : UnitDistance<{unit_name}> {{
-    override fun asType(d: Double) = {unit_name}(d)
-    override fun asBaseUnit() = {base_conversion}
-
-    override operator fun plus(other: UnitDistance<*>) = UnitDistance.plusUnit(this, other)
-    override operator fun minus(other: UnitDistance<*>) = UnitDistance.minusUnit(this, other)
-    override operator fun times(other: UnitDistance<*>) = UnitDistance.timesUnit(this, other)
-    override operator fun times(other: UnitArea<*>) = UnitDistance.timesUnit(this, other)
-    override operator fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.divUnit(this, other)
-}}
-
-fun UnitDistance<*>.to{unit_name}() = toUnit({unit_name}(1.0))
-"""
-    
-    for unit_name, base_conversion in units:
-        file_path = base_dir / f"{unit_name}.kt"
-        content = template.format(unit_name=unit_name, base_conversion=base_conversion)
-        file_path.write_text(content)
-        print(f"Created: {file_path}")
-    
-    return 0
+    generator = USInternationalDistanceGenerator()
+    return generator.generate()
 
 
 def generate_us_international_area() -> int:
@@ -182,93 +162,53 @@ fun UnitVolume<*>.to{unit_name}() = toUnit({unit_name}(1.0))
     
     return 0
 
+class International1959DistanceGenerator(BaseDistanceGenerator):
+    """Generator for International distance units (1959 agreement)."""
+    
+    def __init__(self):
+        super().__init__(
+            subdirectory="international_1959",
+            package_name="com.measures.distance.international_1959"
+        )
+    
+    def _get_units(self):
+        """Get International distance units (1959 agreement)."""
+        return [
+            ("InternationalFoot1959", "Meter(value * 0.3048)"),  # 1959 agreement
+            ("InternationalInch1959", "InternationalFoot1959(value / 12).asBaseUnit()"),
+            ("InternationalYard1959", "InternationalFoot1959(value * 3).asBaseUnit()"),
+            ("InternationalMile1959", "InternationalFoot1959(value * 5280).asBaseUnit()"),
+        ]
+
+
 def generate_international_1959_distance() -> int:
     """Generate International distance units (1959 agreement)."""
-    base_dir = get_measures_base() / "distance" / "international_1959"
-    base_dir.mkdir(parents=True, exist_ok=True)
-    
-    units = [
-        ("InternationalFoot1959", "Meter(value * 0.3048)"),  # 1959 agreement
-        ("InternationalInch1959", "InternationalFoot1959(value / 12).asBaseUnit()"),
-        ("InternationalYard1959", "InternationalFoot1959(value * 3).asBaseUnit()"),
-        ("InternationalMile1959", "InternationalFoot1959(value * 5280).asBaseUnit()"),
-    ]
-    
-    template = """package com.measures.distance.international_1959
+    generator = International1959DistanceGenerator()
+    return generator.generate()
 
-import com.measures.area.UnitArea
-import com.measures.distance.UnitDistance
-import com.measures.distance.Meter
-import com.measures.time.UnitTime
-import com.measures.velocity.MetersPerSecond
-import kotlin.jvm.JvmInline
 
-@JvmInline
-value class {unit_name}(override val value: Double) : UnitDistance<{unit_name}> {{
-    override fun asType(d: Double) = {unit_name}(d)
-    override fun asBaseUnit() = {base_conversion}
-
-    override operator fun plus(other: UnitDistance<*>) = UnitDistance.plusUnit(this, other)
-    override operator fun minus(other: UnitDistance<*>) = UnitDistance.minusUnit(this, other)
-    override operator fun times(other: UnitDistance<*>) = UnitDistance.timesUnit(this, other)
-    override operator fun times(other: UnitArea<*>) = UnitDistance.timesUnit(this, other)
-    override operator fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.divUnit(this, other)
-}}
-
-fun UnitDistance<*>.to{unit_name}() = toUnit({unit_name}(1.0))
-"""
+class International1959NauticalDistanceGenerator(BaseDistanceGenerator):
+    """Generator for International nautical distance units (1959 agreement)."""
     
-    for unit_name, base_conversion in units:
-        file_path = base_dir / f"{unit_name}.kt"
-        content = template.format(unit_name=unit_name, base_conversion=base_conversion)
-        file_path.write_text(content)
-        print(f"Created: {file_path}")
+    def __init__(self):
+        super().__init__(
+            subdirectory="international_1959_nautical",
+            package_name="com.measures.distance.international_1959_nautical"
+        )
     
-    return 0
+    def _get_units(self):
+        """Get International nautical distance units (1959 agreement)."""
+        return [
+            ("Fathom", "Meter(value * 1.8288)"),  # 2 yards
+            ("Cable", "Meter(value * 219.456)"),  # 120 fathoms
+            ("NauticalMile", "Meter(value * 1852)"),  # 1.151 statute miles
+        ]
 
 
 def generate_international_1959_nautical() -> int:
     """Generate International nautical units (1959 agreement)."""
-    base_dir = get_measures_base() / "distance" / "international_1959_nautical"
-    base_dir.mkdir(parents=True, exist_ok=True)
-    
-    units = [
-        ("Fathom", "Meter(value * 1.8288)"),  # 2 yards
-        ("Cable", "Meter(value * 219.456)"),  # 120 fathoms
-        ("NauticalMile", "Meter(value * 1852)"),  # 1.151 statute miles
-    ]
-    
-    template = """package com.measures.distance.international_1959_nautical
-
-import com.measures.area.UnitArea
-import com.measures.distance.UnitDistance
-import com.measures.distance.Meter
-import com.measures.time.UnitTime
-import com.measures.velocity.MetersPerSecond
-import kotlin.jvm.JvmInline
-
-@JvmInline
-value class {unit_name}(override val value: Double) : UnitDistance<{unit_name}> {{
-    override fun asType(d: Double) = {unit_name}(d)
-    override fun asBaseUnit() = {base_conversion}
-
-    override operator fun plus(other: UnitDistance<*>) = UnitDistance.plusUnit(this, other)
-    override operator fun minus(other: UnitDistance<*>) = UnitDistance.minusUnit(this, other)
-    override operator fun times(other: UnitDistance<*>) = UnitDistance.timesUnit(this, other)
-    override operator fun times(other: UnitArea<*>) = UnitDistance.timesUnit(this, other)
-    override operator fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.divUnit(this, other)
-}}
-
-fun UnitDistance<*>.to{unit_name}() = toUnit({unit_name}(1.0))
-"""
-    
-    for unit_name, base_conversion in units:
-        file_path = base_dir / f"{unit_name}.kt"
-        content = template.format(unit_name=unit_name, base_conversion=base_conversion)
-        file_path.write_text(content)
-        print(f"Created: {file_path}")
-    
-    return 0
+    generator = International1959NauticalDistanceGenerator()
+    return generator.generate()
 
 
 def generate_international_1959_volume() -> int:
