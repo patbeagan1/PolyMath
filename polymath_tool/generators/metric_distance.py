@@ -38,32 +38,9 @@ class MetricDistanceGenerator(BaseDistanceGenerator):
             ("Zettameter", "Meter(value * Consts.ZETTA)")
         ]
     
-    def get_template(self):
-        """Get the template with Consts import for metric units."""
-        return """package {package_name}
-
-import com.measures.Consts
-import com.measures.area.UnitArea
-import com.measures.distance.Meter
-import com.measures.distance.UnitDistance
-import com.measures.time.UnitTime
-import com.measures.velocity.MetersPerSecond
-import kotlin.jvm.JvmInline
-
-@JvmInline
-value class {unit_name}(override val value: Double) : UnitDistance<{unit_name}> {{
-    override fun asType(d: Double) = {unit_name}(d)
-    override fun asBaseUnit() = {base_conversion}
-
-    override operator fun plus(other: UnitDistance<*>) = UnitDistance.plusUnit(this, other)
-    override operator fun minus(other: UnitDistance<*>) = UnitDistance.minusUnit(this, other)
-    override operator fun times(other: UnitDistance<*>) = UnitDistance.timesUnit(this, other)
-    override operator fun times(other: UnitArea<*>) = UnitDistance.timesUnit(this, other)
-    override operator fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.divUnit(this, other)
-}}
-
-fun UnitDistance<*>.to{unit_name}() = toUnit({unit_name}(1.0))
-"""
+    def get_additional_imports(self):
+        """Get additional imports for metric units."""
+        return ["com.measures.Consts"]
 
 
 def generate_metric_distance() -> int:

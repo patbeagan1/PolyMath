@@ -41,29 +41,9 @@ class MetricWeightGenerator(BaseWeightGenerator):
             ("Zettagram", "KiloGram(value * Consts.ZETTA / 1000)")
         ]
     
-    def get_template(self):
-        """Get the template with Consts import for metric units."""
-        return """package {package_name}
-
-import com.measures.Consts
-import com.measures.acceleration.UnitAcceleration
-import com.measures.force.Newton
-import com.measures.weight.KiloGram
-import com.measures.weight.UnitMass
-import kotlin.jvm.JvmInline
-
-@JvmInline
-value class {unit_name}(override val value: Double) : UnitMass<{unit_name}> {{
-    override fun asType(d: Double) = {unit_name}(d)
-    override fun asBaseUnit() = {base_conversion}
-
-    override fun plus(other: UnitMass<*>): KiloGram = UnitMass.plusUnit(this, other)
-    override fun minus(other: UnitMass<*>): KiloGram = UnitMass.minusUnit(this, other)
-    override fun times(other: UnitAcceleration<*>): Newton = UnitMass.timesUnit(this, other)
-}}
-
-fun UnitMass<*>.to{unit_name}() = toUnit({unit_name}(1.0))
-"""
+    def get_additional_imports(self):
+        """Get additional imports for metric units."""
+        return ["com.measures.Consts"]
 
 
 def generate_metric_weight() -> int:

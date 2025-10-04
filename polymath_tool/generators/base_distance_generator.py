@@ -41,6 +41,15 @@ class BaseDistanceGenerator(ABC):
             List of tuples containing (unit_name, base_conversion)
         """
     
+    def get_additional_imports(self) -> List[str]:
+        """
+        Get additional imports for this generator.
+        
+        Returns:
+            List of additional import statements
+        """
+        return []
+    
     def get_template(self) -> str:
         """
         Get the Kotlin template for distance units.
@@ -50,7 +59,7 @@ class BaseDistanceGenerator(ABC):
         """
         return """package {package_name}
 
-import com.measures.area.UnitArea
+{imports_section}import com.measures.area.UnitArea
 import com.measures.distance.UnitDistance
 import com.measures.distance.Meter
 import com.measures.time.UnitTime
@@ -86,13 +95,20 @@ fun UnitDistance<*>.to{unit_name}() = toUnit({unit_name}(1.0))
         units = self.get_units()
         template = self.get_template()
         
+        # Get additional imports
+        additional_imports = self.get_additional_imports()
+        imports_section = ""
+        if additional_imports:
+            imports_section = "\n".join(f"import {imp}" for imp in additional_imports) + "\n"
+        
         # Generate each unit file
         for unit_name, base_conversion in units:
             file_path = self.base_dir / f"{unit_name}.kt"
             content = template.format(
                 package_name=self.package_name,
                 unit_name=unit_name,
-                base_conversion=base_conversion
+                base_conversion=base_conversion,
+                imports_section=imports_section
             )
             file_path.write_text(content)
             print(f"Created: {file_path}")

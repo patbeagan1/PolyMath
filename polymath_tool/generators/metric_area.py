@@ -38,31 +38,9 @@ class MetricAreaGenerator(BaseAreaGenerator):
             ("ZettameterSquared", "SquareMeter(value * Consts.ZETTA)")
         ]
     
-    def get_template(self):
-        """Get the template with Consts import for metric units."""
-        return """package {package_name}
-
-import com.measures.Consts
-import com.measures.area.SquareMeter
-import com.measures.area.UnitArea
-import com.measures.distance.Meter
-import com.measures.distance.UnitDistance
-import com.measures.volume.Liter
-import kotlin.jvm.JvmInline
-
-@JvmInline
-value class {unit_name}(override val value: Double) : UnitArea<{unit_name}> {{
-    override fun asType(d: Double) = {unit_name}(d)
-    override fun asBaseUnit() = {base_conversion}
-
-    override fun plus(other: UnitArea<*>): SquareMeter = UnitArea.plusUnit(this, other)
-    override fun minus(other: UnitArea<*>): SquareMeter = UnitArea.minusUnit(this, other)
-    override fun times(other: UnitDistance<*>): Liter = UnitArea.timesUnit(this, other)
-    override fun div(other: UnitDistance<*>): Meter = UnitArea.divUnit(this, other)
-}}
-
-fun UnitArea<*>.to{unit_name}() = toUnit({unit_name}(1.0))
-"""
+    def get_additional_imports(self):
+        """Get additional imports for metric units."""
+        return ["com.measures.Consts"]
 
 
 def generate_metric_area() -> int:

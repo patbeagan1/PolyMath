@@ -2,8 +2,8 @@ package com.measures.distance.metric
 
 import com.measures.Consts
 import com.measures.area.UnitArea
-import com.measures.distance.Meter
 import com.measures.distance.UnitDistance
+import com.measures.distance.Meter
 import com.measures.time.UnitTime
 import com.measures.velocity.MetersPerSecond
 import kotlin.jvm.JvmInline

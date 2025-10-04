@@ -42,31 +42,9 @@ class MetricVolumeGenerator(BaseVolumeGenerator):
             ("Zettaliter", "Liter(value * Consts.ZETTA)")
         ]
     
-    def get_template(self):
-        """Get the template with Consts import for metric units."""
-        return """package {package_name}
-
-import com.measures.Consts
-import com.measures.area.SquareMeter
-import com.measures.area.UnitArea
-import com.measures.distance.UnitDistance
-import com.measures.volume.Liter
-import com.measures.volume.UnitVolume
-import kotlin.jvm.JvmInline
-
-@JvmInline
-value class {unit_name}(override val value: Double) : UnitVolume<{unit_name}> {{
-    override fun asType(d: Double) = {unit_name}(d)
-    override fun asBaseUnit() = {base_conversion}
-
-    override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
-    override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)
-    override operator fun div(other: UnitArea<*>) = UnitVolume.divUnit(this, other)
-    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.divUnit(this, other)
-}}
-
-fun UnitVolume<*>.to{unit_name}() = toUnit({unit_name}(1.0))
-"""
+    def get_additional_imports(self):
+        """Get additional imports for metric units."""
+        return ["com.measures.Consts"]
 
 
 def generate_metric_volume() -> int:
