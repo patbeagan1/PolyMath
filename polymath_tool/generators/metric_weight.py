@@ -3,52 +3,59 @@
 Metric weight unit generation.
 """
 
-from .common import get_measures_base
+from .base_weight_generator import BaseWeightGenerator
 
 
-def generate_metric_weight() -> int:
-    """Generate metric weight units (Kilogram prefixes)."""
-    base_dir = get_measures_base() / "weight" / "metric"
-    base_dir.mkdir(parents=True, exist_ok=True)
+class MetricWeightGenerator(BaseWeightGenerator):
+    """Generator for metric weight units (Kilogram prefixes)."""
     
-    units = [
-        # weight is special because the base unit is kilogram, not gram
-        # all other units are divided by 1000 to get the base unit
-        ("Gram", "1"),
-        ("Attogram", "Consts.ATTO"),
-        ("Decigram", "Consts.DECI"),
-        ("Dekagram", "Consts.DEKA"),
-        ("Exagram", "Consts.EXA"),
-        ("Femtogram", "Consts.FEMTO"),
-        ("Gigagram", "Consts.GIGA"),
-        ("Hectogram", "Consts.HECTO"),
-        ("Megagram", "Consts.MEGA"),
-        ("Microgram", "Consts.MICRO"),
-        ("Milligram", "Consts.MILLI"),
-        ("Milligram", "Consts.MILLI"),
-        ("Nanogram", "Consts.NANO"),
-        ("Petagram", "Consts.PETA"),
-        ("Picogram", "Consts.PICO"),
-        ("Teragram", "Consts.TERA"),
-        ("Yoctogram", "Consts.YOCTO"),
-        ("Yottagram", "Consts.YOTTA"),
-        ("Zeptogram", "Consts.ZEPTO"),
-        ("Zettagram", "Consts.ZETTA")
-    ]
+    def __init__(self):
+        super().__init__(
+            subdirectory="metric",
+            package_name="com.measures.weight.metric"
+        )
     
-    template = """package com.measures.weight.metric
+    def _get_units(self):
+        """Get metric weight units."""
+        return [
+            # weight is special because the base unit is kilogram, not gram
+            # all other units are divided by 1000 to get the base unit
+            ("Gram", "KiloGram(value / 1000)"),
+            ("Attogram", "KiloGram(value * Consts.ATTO / 1000)"),
+            ("Decigram", "KiloGram(value * Consts.DECI / 1000)"),
+            ("Dekagram", "KiloGram(value * Consts.DEKA / 1000)"),
+            ("Exagram", "KiloGram(value * Consts.EXA / 1000)"),
+            ("Femtogram", "KiloGram(value * Consts.FEMTO / 1000)"),
+            ("Gigagram", "KiloGram(value * Consts.GIGA / 1000)"),
+            ("Hectogram", "KiloGram(value * Consts.HECTO / 1000)"),
+            ("Megagram", "KiloGram(value * Consts.MEGA / 1000)"),
+            ("Microgram", "KiloGram(value * Consts.MICRO / 1000)"),
+            ("Milligram", "KiloGram(value * Consts.MILLI / 1000)"),
+            ("Nanogram", "KiloGram(value * Consts.NANO / 1000)"),
+            ("Petagram", "KiloGram(value * Consts.PETA / 1000)"),
+            ("Picogram", "KiloGram(value * Consts.PICO / 1000)"),
+            ("Teragram", "KiloGram(value * Consts.TERA / 1000)"),
+            ("Yoctogram", "KiloGram(value * Consts.YOCTO / 1000)"),
+            ("Yottagram", "KiloGram(value * Consts.YOTTA / 1000)"),
+            ("Zeptogram", "KiloGram(value * Consts.ZEPTO / 1000)"),
+            ("Zettagram", "KiloGram(value * Consts.ZETTA / 1000)")
+        ]
+    
+    def get_template(self):
+        """Get the template with Consts import for metric units."""
+        return """package {package_name}
 
 import com.measures.Consts
-import com.measures.weight.KiloGram
-import com.measures.weight.UnitMass
 import com.measures.acceleration.UnitAcceleration
 import com.measures.force.Newton
+import com.measures.weight.KiloGram
+import com.measures.weight.UnitMass
 import kotlin.jvm.JvmInline
 
 @JvmInline
 value class {unit_name}(override val value: Double) : UnitMass<{unit_name}> {{
     override fun asType(d: Double) = {unit_name}(d)
-    override fun asBaseUnit() = KiloGram(value * {const_name} / 1000)
+    override fun asBaseUnit() = {base_conversion}
 
     override fun plus(other: UnitMass<*>): KiloGram = UnitMass.plusUnit(this, other)
     override fun minus(other: UnitMass<*>): KiloGram = UnitMass.minusUnit(this, other)
@@ -57,11 +64,9 @@ value class {unit_name}(override val value: Double) : UnitMass<{unit_name}> {{
 
 fun UnitMass<*>.to{unit_name}() = toUnit({unit_name}(1.0))
 """
-    
-    for unit_name, const_name in units:
-        file_path = base_dir / f"{unit_name}.kt"
-        content = template.format(unit_name=unit_name, const_name=const_name)
-        file_path.write_text(content)
-        print(f"Created: {file_path}")
-    
-    return 0
+
+
+def generate_metric_weight() -> int:
+    """Generate metric weight units (Kilogram prefixes)."""
+    generator = MetricWeightGenerator()
+    return generator.generate()

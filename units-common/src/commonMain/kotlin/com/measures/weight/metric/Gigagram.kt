@@ -1,10 +1,10 @@
 package com.measures.weight.metric
 
 import com.measures.Consts
-import com.measures.weight.KiloGram
-import com.measures.weight.UnitMass
 import com.measures.acceleration.UnitAcceleration
 import com.measures.force.Newton
+import com.measures.weight.KiloGram
+import com.measures.weight.UnitMass
 import kotlin.jvm.JvmInline
 
 @JvmInline
