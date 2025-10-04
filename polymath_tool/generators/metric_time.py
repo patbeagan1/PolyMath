@@ -3,60 +3,47 @@
 Metric time unit generation.
 """
 
-from .common import get_measures_base
+from .base_time_generator import BaseTimeGenerator
+
+
+class MetricTimeGenerator(BaseTimeGenerator):
+    """Generator for metric time units (Second prefixes)."""
+    
+    def __init__(self):
+        super().__init__(
+            subdirectory="metric",
+            package_name="com.measures.time.metric"
+        )
+    
+    def _get_units(self):
+        """Get metric time units."""
+        return [
+            ("Attosecond", "Second(value * Consts.ATTO)"),
+            ("Decisecond", "Second(value * Consts.DECI)"),
+            ("Dekasecond", "Second(value * Consts.DEKA)"),
+            ("Exasecond", "Second(value * Consts.EXA)"),
+            ("Femtosecond", "Second(value * Consts.FEMTO)"),
+            ("Gigasecond", "Second(value * Consts.GIGA)"),
+            ("Hectosecond", "Second(value * Consts.HECTO)"),
+            ("Megasecond", "Second(value * Consts.MEGA)"),
+            ("Microsecond", "Second(value * Consts.MICRO)"),
+            ("Millisecond", "Second(value * Consts.MILLI)"),
+            ("Nanosecond", "Second(value * Consts.NANO)"),
+            ("Petasecond", "Second(value * Consts.PETA)"),
+            ("Picosecond", "Second(value * Consts.PICO)"),
+            ("Terasecond", "Second(value * Consts.TERA)"),
+            ("Yoctosecond", "Second(value * Consts.YOCTO)"),
+            ("Yottasecond", "Second(value * Consts.YOTTA)"),
+            ("Zeptosecond", "Second(value * Consts.ZEPTO)"),
+            ("Zettasecond", "Second(value * Consts.ZETTA)")
+        ]
+    
+    def get_additional_imports(self):
+        """Get additional imports for metric units."""
+        return ["com.measures.Consts"]
 
 
 def generate_metric_time() -> int:
     """Generate metric time units (Second prefixes)."""
-    base_dir = get_measures_base() / "time" / "metric"
-    base_dir.mkdir(parents=True, exist_ok=True)
-    
-    units = [
-        ("Attosecond", "Consts.ATTO"),
-        ("Decisecond", "Consts.DECI"),
-        ("Dekasecond", "Consts.DEKA"),
-        ("Exasecond", "Consts.EXA"),
-        ("Femtosecond", "Consts.FEMTO"),
-        ("Gigasecond", "Consts.GIGA"),
-        ("Hectosecond", "Consts.HECTO"),
-        ("Megasecond", "Consts.MEGA"),
-        ("Microsecond", "Consts.MICRO"),
-        ("Millisecond", "Consts.MILLI"),
-        ("Nanosecond", "Consts.NANO"),
-        ("Petasecond", "Consts.PETA"),
-        ("Picosecond", "Consts.PICO"),
-        ("Terasecond", "Consts.TERA"),
-        ("Yoctosecond", "Consts.YOCTO"),
-        ("Yottasecond", "Consts.YOTTA"),
-        ("Zeptosecond", "Consts.ZEPTO"),
-        ("Zettasecond", "Consts.ZETTA")
-    ]
-    
-    template = """package com.measures.time.metric
-
-import com.measures.Consts
-import com.measures.time.Second
-import com.measures.time.UnitTime
-import com.measures.frequency.Hertz
-import kotlin.jvm.JvmInline
-
-@JvmInline
-value class {unit_name}(override val value: Double) : UnitTime<{unit_name}> {{
-    override fun asType(d: Double) = {unit_name}(d)
-    override fun asBaseUnit() = Second(value * {const_name})
-
-    override operator fun plus(other: UnitTime<*>) = UnitTime.plusUnit(this, other)
-    override operator fun minus(other: UnitTime<*>) = UnitTime.minusUnit(this, other)
-    override fun inv(): Hertz = UnitTime.invUnit(this)
-}}
-
-fun UnitTime<*>.to{unit_name}() = toUnit({unit_name}(1.0))
-"""
-    
-    for unit_name, const_name in units:
-        file_path = base_dir / f"{unit_name}.kt"
-        content = template.format(unit_name=unit_name, const_name=const_name)
-        file_path.write_text(content)
-        print(f"Created: {file_path}")
-    
-    return 0
+    generator = MetricTimeGenerator()
+    return generator.generate()

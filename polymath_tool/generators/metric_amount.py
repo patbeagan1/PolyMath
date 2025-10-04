@@ -3,42 +3,45 @@
 Metric amount unit generation.
 """
 
-from .common import get_measures_base
+from .base_amount_generator import BaseAmountGenerator
+
+
+class MetricAmountGenerator(BaseAmountGenerator):
+    """Generator for metric amount units (mole)."""
+    
+    def __init__(self):
+        super().__init__(
+            subdirectory="metric",
+            package_name="com.measures.amount.metric"
+        )
+    
+    def _get_units(self):
+        """Get metric amount units."""
+        return [
+            ("Yoctomole", "Mole(value * Consts.YOCTO)"),
+            ("Zeptomole", "Mole(value * Consts.ZEPTO)"),
+            ("Attomole", "Mole(value * Consts.ATTO)"),
+            ("Femtomole", "Mole(value * Consts.FEMTO)"),
+            ("Picomole", "Mole(value * Consts.PICO)"),
+            ("Nanomole", "Mole(value * Consts.NANO)"),
+            ("Micromole", "Mole(value * Consts.MICRO)"),
+            ("Millimole", "Mole(value * Consts.MILLI)"),
+            ("Centimole", "Mole(value * Consts.CENTI)"),
+            ("Decimole", "Mole(value * Consts.DECI)"),
+            ("Dekamole", "Mole(value * Consts.DEKA)"),
+            ("Hectomole", "Mole(value * Consts.HECTO)"),
+            ("Kilomole", "Mole(value * Consts.KILO)"),
+            ("Megamole", "Mole(value * Consts.MEGA)"),
+            ("Gigamole", "Mole(value * Consts.GIGA)"),
+            ("Teramole", "Mole(value * Consts.TERA)"),
+            ("Petamole", "Mole(value * Consts.PETA)"),
+            ("Examole", "Mole(value * Consts.EXA)"),
+            ("Zettamole", "Mole(value * Consts.ZETTA)"),
+            ("Yottamole", "Mole(value * Consts.YOTTA)"),
+        ]
 
 
 def generate_metric_amount() -> int:
     """Generate metric amount units (mole)."""
-    base_dir = get_measures_base() / "amount" / "metric"
-    base_dir.mkdir(parents=True, exist_ok=True)
-    
-    units = [
-        ("Mole", "Mole(value * 1.0)"),  # Base unit
-        ("Millimole", "Mole(value * 0.001)"),
-        ("Micromole", "Mole(value * 0.000001)"),
-        ("Nanomole", "Mole(value * 0.000000001)"),
-        ("Picomole", "Mole(value * 0.000000000001)"),
-        ("Kilomole", "Mole(value * 1000)"),
-    ]
-    
-    template = """package com.measures.amount.metric
-
-import com.measures.amount.UnitAmount
-import com.measures.amount.Mole
-import kotlin.jvm.JvmInline
-
-@JvmInline
-value class {unit_name}(override val value: Double) : UnitAmount<{unit_name}> {{
-    override fun asType(d: Double) = {unit_name}(d)
-    override fun asBaseUnit() = {base_conversion}
-}}
-
-fun UnitAmount<*>.to{unit_name}() = toUnit({unit_name}(1.0))
-"""
-    
-    for unit_name, base_conversion in units:
-        file_path = base_dir / f"{unit_name}.kt"
-        content = template.format(unit_name=unit_name, base_conversion=base_conversion)
-        file_path.write_text(content)
-        print(f"Created: {file_path}")
-    
-    return 0
+    generator = MetricAmountGenerator()
+    return generator.generate()
