@@ -4,6 +4,7 @@ American Customary unit generation.
 """
 
 from .base_distance_generator import BaseDistanceGenerator
+from .base_area_generator import BaseAreaGenerator
 from .common import get_measures_base
 
 
@@ -32,44 +33,27 @@ def generate_american_customary_distance() -> int:
     return generator.generate()
 
 
+class AmericanCustomaryAreaGenerator(BaseAreaGenerator):
+    """Generator for American Customary area units."""
+    
+    def __init__(self):
+        super().__init__(
+            subdirectory="american_customary",
+            package_name="com.measures.area.american_customary"
+        )
+    
+    def _get_units(self):
+        """Get American Customary area units."""
+        return [
+            ("Acre", "SquareFoot(value * 43560).asBaseUnit()"),
+            ("SquareFoot", "SquareMeter(value * 0.09290304)"),
+        ]
+
+
 def generate_american_customary_area() -> int:
     """Generate American Customary area units."""
-    base_dir = get_measures_base() / "area" / "american_customary"
-    base_dir.mkdir(parents=True, exist_ok=True)
-    
-    units = [
-        ("Acre", "SquareFoot(value * 43560).asBaseUnit()"),
-        ("SquareFoot", "SquareMeter(value * 0.09290304)"),
-    ]
-    
-    template = """package com.measures.area.american_customary
-
-import com.measures.area.SquareMeter
-import com.measures.area.UnitArea
-import com.measures.distance.UnitDistance
-import com.measures.volume.UnitVolume
-import kotlin.jvm.JvmInline
-
-@JvmInline
-value class {unit_name}(override val value: Double) : UnitArea<{unit_name}> {{
-    override fun asType(d: Double) = {unit_name}(d)
-    override fun asBaseUnit() = {base_conversion}
-
-    override fun plus(other: UnitArea<*>): SquareMeter = UnitArea.plusUnit(this, other)
-    override fun minus(other: UnitArea<*>): SquareMeter = UnitArea.minusUnit(this, other)
-    override fun times(other: UnitDistance<*>): UnitVolume<*> = UnitArea.timesUnit(this, other)
-}}
-
-fun UnitArea<*>.to{unit_name}() = toUnit({unit_name}(1.0))
-"""
-    
-    for unit_name, base_conversion in units:
-        file_path = base_dir / f"{unit_name}.kt"
-        content = template.format(unit_name=unit_name, base_conversion=base_conversion)
-        file_path.write_text(content)
-        print(f"Created: {file_path}")
-    
-    return 0
+    generator = AmericanCustomaryAreaGenerator()
+    return generator.generate()
 
 
 def generate_american_customary_fluid() -> int:
