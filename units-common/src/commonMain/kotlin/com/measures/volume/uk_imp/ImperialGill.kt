@@ -8,9 +8,9 @@ import com.measures.volume.UnitVolume
 import kotlin.jvm.JvmInline
 
 @JvmInline
-value class ImperialQuart(override val value: Double) : UnitVolume<ImperialQuart> {
-    override fun asType(d: Double) = ImperialQuart(d)
-    override fun asBaseUnit() = ImperialPint(value * 2).asBaseUnit()
+value class ImperialGill(override val value: Double) : UnitVolume<ImperialGill> {
+    override fun asType(d: Double) = ImperialGill(d)
+    override fun asBaseUnit() = ImperialFluidOunce(value * 5).asBaseUnit()
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
     override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)
@@ -18,4 +18,4 @@ value class ImperialQuart(override val value: Double) : UnitVolume<ImperialQuart
     override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.divUnit(this, other)
 }
 
-fun UnitVolume<*>.toImperialQuart() = toUnit(ImperialQuart(1.0))
+fun UnitVolume<*>.toImperialGill() = toUnit(ImperialGill(1.0))

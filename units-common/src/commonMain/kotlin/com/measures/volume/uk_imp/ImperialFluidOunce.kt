@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class ImperialFluidOunce(override val value: Double) : UnitVolume<ImperialFluidOunce> {
     override fun asType(d: Double) = ImperialFluidOunce(d)
-    override fun asBaseUnit() = ImperialPint(value / 20).asBaseUnit()
+    override fun asBaseUnit() = Liter(value * 0.0284130625)
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
     override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)

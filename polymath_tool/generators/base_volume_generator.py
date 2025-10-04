@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Base class for area unit generators.
+Base class for volume unit generators.
 """
 
 from abc import ABC, abstractmethod
@@ -8,20 +8,20 @@ from typing import List, Tuple
 from .common import get_measures_base
 
 
-class BaseAreaGenerator(ABC):
-    """Base class for area unit generators."""
+class BaseVolumeGenerator(ABC):
+    """Base class for volume unit generators."""
     
     def __init__(self, subdirectory: str, package_name: str):
         """
-        Initialize the base area generator.
+        Initialize the base volume generator.
         
         Args:
-            subdirectory: The subdirectory within area/ (e.g., "metric", "american_customary")
-            package_name: The Kotlin package name (e.g., "com.measures.area.metric")
+            subdirectory: The subdirectory within volume/ (e.g., "metric", "american_customary_fluid")
+            package_name: The Kotlin package name (e.g., "com.measures.volume.metric")
         """
         self.subdirectory = subdirectory
         self.package_name = package_name
-        self.base_dir = get_measures_base() / "area" / subdirectory
+        self.base_dir = get_measures_base() / "volume" / subdirectory
     
     def get_units(self) -> List[Tuple[str, str]]:
         """
@@ -43,37 +43,37 @@ class BaseAreaGenerator(ABC):
     
     def get_template(self) -> str:
         """
-        Get the Kotlin template for area units.
+        Get the Kotlin template for volume units.
         
         Returns:
             The template string for generating Kotlin files
         """
         return """package {package_name}
 
-import com.measures.area.SquareMeter
 import com.measures.area.UnitArea
-import com.measures.distance.Meter
+import com.measures.area.SquareMeter
 import com.measures.distance.UnitDistance
 import com.measures.volume.Liter
+import com.measures.volume.UnitVolume
 import kotlin.jvm.JvmInline
 
 @JvmInline
-value class {unit_name}(override val value: Double) : UnitArea<{unit_name}> {{
+value class {unit_name}(override val value: Double) : UnitVolume<{unit_name}> {{
     override fun asType(d: Double) = {unit_name}(d)
     override fun asBaseUnit() = {base_conversion}
 
-    override fun plus(other: UnitArea<*>): SquareMeter = UnitArea.plusUnit(this, other)
-    override fun minus(other: UnitArea<*>): SquareMeter = UnitArea.minusUnit(this, other)
-    override fun times(other: UnitDistance<*>): Liter = UnitArea.timesUnit(this, other)
-    override fun div(other: UnitDistance<*>): Meter = UnitArea.divUnit(this, other)
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.divUnit(this, other)
 }}
 
-fun UnitArea<*>.to{unit_name}() = toUnit({unit_name}(1.0))
+fun UnitVolume<*>.to{unit_name}() = toUnit({unit_name}(1.0))
 """
     
     def generate(self) -> int:
         """
-        Generate the area units.
+        Generate the volume units.
         
         Returns:
             0 on success

@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class ImperialPint(override val value: Double) : UnitVolume<ImperialPint> {
     override fun asType(d: Double) = ImperialPint(d)
-    override fun asBaseUnit() = ImperialQuart(value / 2).asBaseUnit()
+    override fun asBaseUnit() = ImperialFluidOunce(value * 20).asBaseUnit()
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
     override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)
