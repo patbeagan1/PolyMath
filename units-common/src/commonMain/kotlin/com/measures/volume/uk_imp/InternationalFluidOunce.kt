@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class InternationalFluidOunce(override val value: Double) : UnitVolume<InternationalFluidOunce> {
     override fun asType(d: Double) = InternationalFluidOunce(d)
-    override fun asBaseUnit() = InternationalPint(value / 20).asBaseUnit()
+    override fun asBaseUnit() = Liter(value * 0.0295735295625)
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
     override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)

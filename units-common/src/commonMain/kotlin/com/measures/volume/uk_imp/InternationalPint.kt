@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class InternationalPint(override val value: Double) : UnitVolume<InternationalPint> {
     override fun asType(d: Double) = InternationalPint(d)
-    override fun asBaseUnit() = InternationalQuart(value / 2).asBaseUnit()
+    override fun asBaseUnit() = Liter(value * 0.473176473)
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
     override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)

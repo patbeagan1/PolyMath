@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class InternationalQuart(override val value: Double) : UnitVolume<InternationalQuart> {
     override fun asType(d: Double) = InternationalQuart(d)
-    override fun asBaseUnit() = InternationalGallon(value / 4).asBaseUnit()
+    override fun asBaseUnit() = Liter(value * 0.946352946)
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
     override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)

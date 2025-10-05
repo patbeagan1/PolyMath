@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class SurveyYard(override val value: Double) : UnitDistance<SurveyYard> {
     override fun asType(d: Double) = SurveyYard(d)
-    override fun asBaseUnit() = SurveyFoot(value * 3).asBaseUnit()
+    override fun asBaseUnit() = Meter(value * 3600/3937)
 
     override operator fun plus(other: UnitDistance<*>) = UnitDistance.plusUnit(this, other)
     override operator fun minus(other: UnitDistance<*>) = UnitDistance.minusUnit(this, other)

@@ -1,0 +1,21 @@
+package com.measures.volume.us_international_fluid_1959
+
+import com.measures.area.UnitArea
+import com.measures.area.SquareMeter
+import com.measures.distance.UnitDistance
+import com.measures.volume.Liter
+import com.measures.volume.UnitVolume
+import kotlin.jvm.JvmInline
+
+@JvmInline
+value class USPint(override val value: Double) : UnitVolume<USPint> {
+    override fun asType(d: Double) = USPint(d)
+    override fun asBaseUnit() = USQuart(value * 0.5).asBaseUnit()
+
+    override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
+    override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)
+    override operator fun div(other: UnitArea<*>) = UnitVolume.divUnit(this, other)
+    override operator fun div(other: UnitDistance<*>): SquareMeter = UnitVolume.divUnit(this, other)
+}
+
+fun UnitVolume<*>.toUSPint() = toUnit(USPint(1.0))

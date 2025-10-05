@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class SurveyFurlong(override val value: Double) : UnitDistance<SurveyFurlong> {
     override fun asType(d: Double) = SurveyFurlong(d)
-    override fun asBaseUnit() = SurveyFoot(value * 660).asBaseUnit()
+    override fun asBaseUnit() = Meter(value * 792000/3937)
 
     override operator fun plus(other: UnitDistance<*>) = UnitDistance.plusUnit(this, other)
     override operator fun minus(other: UnitDistance<*>) = UnitDistance.minusUnit(this, other)

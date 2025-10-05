@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class ImperialGill(override val value: Double) : UnitVolume<ImperialGill> {
     override fun asType(d: Double) = ImperialGill(d)
-    override fun asBaseUnit() = ImperialFluidOunce(value * 5).asBaseUnit()
+    override fun asBaseUnit() = Liter(value * 0.1420653125)
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
     override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)

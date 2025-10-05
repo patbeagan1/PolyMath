@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class ImperialInch(override val value: Double) : UnitDistance<ImperialInch> {
     override fun asType(d: Double) = ImperialInch(d)
-    override fun asBaseUnit() = ImperialFoot(value / 12).asBaseUnit()
+    override fun asBaseUnit() = Meter(value * 0.0254)
 
     override operator fun plus(other: UnitDistance<*>) = UnitDistance.plusUnit(this, other)
     override operator fun minus(other: UnitDistance<*>) = UnitDistance.minusUnit(this, other)

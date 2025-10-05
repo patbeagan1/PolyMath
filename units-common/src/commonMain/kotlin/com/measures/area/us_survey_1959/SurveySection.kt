@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class SurveySection(override val value: Double) : UnitArea<SurveySection> {
     override fun asType(d: Double) = SurveySection(d)
-    override fun asBaseUnit() = SurveyAcre(value * 640).asBaseUnit()
+    override fun asBaseUnit() = SquareMeter(value * 2589988.110336)
 
     override fun plus(other: UnitArea<*>): SquareMeter = UnitArea.plusUnit(this, other)
     override fun minus(other: UnitArea<*>): SquareMeter = UnitArea.minusUnit(this, other)

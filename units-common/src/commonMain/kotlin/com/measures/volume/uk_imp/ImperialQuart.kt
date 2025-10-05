@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class ImperialQuart(override val value: Double) : UnitVolume<ImperialQuart> {
     override fun asType(d: Double) = ImperialQuart(d)
-    override fun asBaseUnit() = ImperialPint(value * 2).asBaseUnit()
+    override fun asBaseUnit() = Liter(value * 1.1365225)
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
     override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)

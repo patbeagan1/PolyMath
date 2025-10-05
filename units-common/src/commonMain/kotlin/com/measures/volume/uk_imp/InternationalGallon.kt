@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class InternationalGallon(override val value: Double) : UnitVolume<InternationalGallon> {
     override fun asType(d: Double) = InternationalGallon(d)
-    override fun asBaseUnit() = Liter(value * 4.54609)
+    override fun asBaseUnit() = Liter(value * 3.785411784)
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
     override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)

@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+"""
+Metric velocity unit generation.
+"""
+
+from .base_velocity_generator import BaseVelocityGenerator
+from .base.base_metric import generate_metric_units
+
+
+class MetricVelocityGenerator(BaseVelocityGenerator):
+    """Generator for metric velocity units (m/s prefixes)."""
+
+    def __init__(self):
+        super().__init__(
+            subdirectory="metric", package_name="com.measures.velocity.metric"
+        )
+
+    def _get_units(self):
+        """Get metric velocity units."""
+        return generate_metric_units("meterPerSecond", "MetersPerSecond")
+
+    def get_additional_imports(self):
+        """Get additional imports for metric units."""
+        return ["com.measures.Consts"]
