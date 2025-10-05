@@ -3,7 +3,7 @@
 Non-SI power unit generation.
 """
 
-from .base_power_generator import BasePowerGenerator
+from ..base.base_power_generator import BasePowerGenerator
 
 
 class NonSiPowerGenerator(BasePowerGenerator):

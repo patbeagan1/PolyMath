@@ -3,8 +3,8 @@
 Metric area unit generation.
 """
 
-from .base.base_area_generator import BaseAreaGenerator
-from .base.base_metric import generate_metric_units
+from ..base.base_area_generator import BaseAreaGenerator
+from ..base.base_metric import MetricUnitGenerator
 
 
 class MetricAreaGenerator(BaseAreaGenerator):
@@ -15,8 +15,10 @@ class MetricAreaGenerator(BaseAreaGenerator):
 
     def _get_units(self):
         """Get metric area units."""
-        return generate_metric_units("meterSquared", "SquareMeter")
+        generator = MetricUnitGenerator()
+        return generator.generate_units("meterSquared", "SquareMeter")
 
     def get_additional_imports(self):
         """Get additional imports for metric units."""
         return ["com.measures.Consts"]
+

@@ -3,8 +3,8 @@
 Astronomical area unit generation.
 """
 
-from .base_acceleration_generator import BaseAccelerationGenerator
-from .base_distance_generator import BaseDistanceGenerator
+from ..base.base_acceleration_generator import BaseAccelerationGenerator
+from ..base.base_distance_generator import BaseDistanceGenerator
 
 
 class AstronomicalDistanceGenerator(BaseDistanceGenerator):

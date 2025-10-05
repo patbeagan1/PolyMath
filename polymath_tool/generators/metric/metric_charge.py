@@ -3,8 +3,8 @@
 Charge unit generation (Coulomb).
 """
 
-from .base_charge_generator import BaseChargeGenerator
-from .base.base_metric import generate_metric_units
+from ..base.base_charge_generator import BaseChargeGenerator
+from ..base.base_metric import MetricUnitGenerator
 
 
 class MetricChargeGenerator(BaseChargeGenerator):
@@ -18,7 +18,8 @@ class MetricChargeGenerator(BaseChargeGenerator):
     
     def _get_units(self):
         """Get metric charge units."""
-        return generate_metric_units("coulomb", "Coulomb")
+        generator = MetricUnitGenerator()
+        return generator.generate_units("coulomb", "Coulomb")
     
     def get_additional_imports(self):
         """Get additional imports for metric units."""

@@ -3,8 +3,8 @@
 Metric energy unit generation.
 """
 
-from .base_energy_generator import BaseEnergyGenerator
-from .base.base_metric import generate_metric_units
+from ..base.base_energy_generator import BaseEnergyGenerator
+from ..base.base_metric import MetricUnitGenerator
 
 
 class MetricEnergyGenerator(BaseEnergyGenerator):
@@ -18,7 +18,8 @@ class MetricEnergyGenerator(BaseEnergyGenerator):
     
     def _get_units(self):
         """Get metric energy units."""
-        return generate_metric_units("joule", "Joule")
+        generator = MetricUnitGenerator()
+        return generator.generate_units("joule", "Joule")
     
     def get_additional_imports(self):
         """Get additional imports for metric units."""

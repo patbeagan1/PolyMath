@@ -3,8 +3,8 @@
 Metric distance unit generation.
 """
 
-from .base_distance_generator import BaseDistanceGenerator
-from .base.base_metric import generate_metric_units
+from ..base.base_distance_generator import BaseDistanceGenerator
+from ..base.base_metric import MetricUnitGenerator
 
 
 class MetricDistanceGenerator(BaseDistanceGenerator):
@@ -18,8 +18,11 @@ class MetricDistanceGenerator(BaseDistanceGenerator):
     
     def _get_units(self):
         """Get metric distance units."""
-        return generate_metric_units("meter", "Meter")
+        generator = MetricUnitGenerator()
+        return generator.generate_units("meter", "Meter")
     
     def get_additional_imports(self):
         """Get additional imports for metric units."""
         return ["com.measures.Consts"]
+
+

@@ -3,7 +3,7 @@
 Metric weight unit generation.
 """
 
-from .base_weight_generator import BaseWeightGenerator
+from ..base.base_weight_generator import BaseWeightGenerator
 
 
 class MetricWeightGenerator(BaseWeightGenerator):

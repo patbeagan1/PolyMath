@@ -3,8 +3,8 @@
 Metric velocity unit generation.
 """
 
-from .base_velocity_generator import BaseVelocityGenerator
-from .base.base_metric import generate_metric_units
+from ..base.base_velocity_generator import BaseVelocityGenerator
+from ..base.base_metric import MetricUnitGenerator
 
 
 class MetricVelocityGenerator(BaseVelocityGenerator):
@@ -17,7 +17,8 @@ class MetricVelocityGenerator(BaseVelocityGenerator):
 
     def _get_units(self):
         """Get metric velocity units."""
-        return generate_metric_units("meterPerSecond", "MetersPerSecond")
+        generator = MetricUnitGenerator()
+        return generator.generate_units("meterPerSecond", "MetersPerSecond")
 
     def get_additional_imports(self):
         """Get additional imports for metric units."""

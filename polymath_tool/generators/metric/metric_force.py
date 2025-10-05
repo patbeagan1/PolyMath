@@ -3,8 +3,8 @@
 Metric force unit generation.
 """
 
-from .base_force_generator import BaseForceGenerator
-from .base.base_metric import generate_metric_units
+from ..base.base_force_generator import BaseForceGenerator
+from ..base.base_metric import MetricUnitGenerator
 
 
 class MetricForceGenerator(BaseForceGenerator):
@@ -18,7 +18,8 @@ class MetricForceGenerator(BaseForceGenerator):
     
     def _get_units(self):
         """Get metric force units."""
-        return generate_metric_units("newton", "Newton")
+        generator = MetricUnitGenerator()
+        return generator.generate_units("newton", "Newton")
     
     def get_additional_imports(self):
         """Get additional imports for metric units."""

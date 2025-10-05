@@ -3,7 +3,7 @@
 Non-SI volume unit generation.
 """
 
-from .base_volume_generator import BaseVolumeGenerator
+from ..base.base_volume_generator import BaseVolumeGenerator
 
 
 class NonSiVolumeGenerator(BaseVolumeGenerator):

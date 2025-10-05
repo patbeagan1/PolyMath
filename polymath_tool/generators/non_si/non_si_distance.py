@@ -3,7 +3,7 @@
 Non-SI distance unit generation.
 """
 
-from .base_distance_generator import BaseDistanceGenerator
+from ..base.base_distance_generator import BaseDistanceGenerator
 
 
 class NonSiDistanceGenerator(BaseDistanceGenerator):

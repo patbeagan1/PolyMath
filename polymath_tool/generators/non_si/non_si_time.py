@@ -3,7 +3,7 @@
 Non-SI time unit generation.
 """
 
-from .base_time_generator import BaseTimeGenerator
+from ..base.base_time_generator import BaseTimeGenerator
 
 
 class NonSiTimeGenerator(BaseTimeGenerator):

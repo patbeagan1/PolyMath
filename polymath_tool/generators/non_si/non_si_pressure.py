@@ -3,7 +3,7 @@
 Non-SI pressure unit generation.
 """
 
-from .base_pressure_generator import BasePressureGenerator
+from ..base.base_pressure_generator import BasePressureGenerator
 
 
 class NonSiPressureGenerator(BasePressureGenerator):

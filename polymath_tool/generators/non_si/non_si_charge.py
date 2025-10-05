@@ -3,7 +3,7 @@
 Non-SI charge unit generation.
 """
 
-from .base_charge_generator import BaseChargeGenerator
+from ..base.base_charge_generator import BaseChargeGenerator
 
 
 class NonSiChargeGenerator(BaseChargeGenerator):

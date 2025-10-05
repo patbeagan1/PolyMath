@@ -3,8 +3,8 @@
 Current unit generation (Ampere).
 """
 
-from .base_current_generator import BaseCurrentGenerator
-from .base.base_metric import generate_metric_units
+from ..base.base_current_generator import BaseCurrentGenerator
+from ..base.base_metric import MetricUnitGenerator
 
 
 class MetricCurrentGenerator(BaseCurrentGenerator):
@@ -17,7 +17,8 @@ class MetricCurrentGenerator(BaseCurrentGenerator):
 
     def _get_units(self):
         """Get metric current units."""
-        return generate_metric_units("ampere", "Ampere")
+        generator = MetricUnitGenerator()
+        return generator.generate_units("ampere", "Ampere")
 
     def get_additional_imports(self):
         """Get additional imports for metric units."""

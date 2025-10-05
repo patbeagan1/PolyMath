@@ -5,7 +5,7 @@ Base class for weight unit generators.
 
 from abc import ABC, abstractmethod
 from typing import List, Tuple
-from .common import get_measures_base
+from ..common import get_measures_base
 
 
 class BaseWeightGenerator(ABC):

@@ -3,8 +3,8 @@
 Metric amount unit generation.
 """
 
-from .base_amount_generator import BaseAmountGenerator
-from .base.base_metric import generate_metric_amount_units
+from ..base.base_amount_generator import BaseAmountGenerator
+from ..base.base_metric import MetricUnitGenerator
 
 
 class MetricAmountGenerator(BaseAmountGenerator):
@@ -17,7 +17,8 @@ class MetricAmountGenerator(BaseAmountGenerator):
 
     def _get_units(self):
         """Get metric amount units."""
-        return generate_metric_amount_units("mole", "Mole")
+        generator = MetricUnitGenerator()
+        return generator.generate_units("mole", "Mole")
 
     def get_additional_imports(self):
         """Get additional imports for metric units."""

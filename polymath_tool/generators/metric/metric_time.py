@@ -3,8 +3,8 @@
 Metric time unit generation.
 """
 
-from .base_time_generator import BaseTimeGenerator
-from .base.base_metric import generate_metric_units
+from ..base.base_time_generator import BaseTimeGenerator
+from ..base.base_metric import MetricUnitGenerator
 
 
 class MetricTimeGenerator(BaseTimeGenerator):
@@ -18,7 +18,8 @@ class MetricTimeGenerator(BaseTimeGenerator):
     
     def _get_units(self):
         """Get metric time units."""
-        return generate_metric_units("second", "Second")
+        generator = MetricUnitGenerator()
+        return generator.generate_units("second", "Second")
     
     def get_additional_imports(self):
         """Get additional imports for metric units."""

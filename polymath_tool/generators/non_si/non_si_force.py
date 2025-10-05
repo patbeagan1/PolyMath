@@ -3,7 +3,7 @@
 Non-SI force unit generation.
 """
 
-from .base_force_generator import BaseForceGenerator
+from ..base.base_force_generator import BaseForceGenerator
 
 
 class NonSiForceGenerator(BaseForceGenerator):

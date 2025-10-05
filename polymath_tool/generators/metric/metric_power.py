@@ -3,8 +3,8 @@
 Metric power unit generation.
 """
 
-from .base_power_generator import BasePowerGenerator
-from .base.base_metric import generate_metric_units
+from ..base.base_power_generator import BasePowerGenerator
+from ..base.base_metric import MetricUnitGenerator
 
 
 class MetricPowerGenerator(BasePowerGenerator):
@@ -18,7 +18,8 @@ class MetricPowerGenerator(BasePowerGenerator):
     
     def _get_units(self):
         """Get metric power units."""
-        return generate_metric_units("watt", "Watt")
+        generator = MetricUnitGenerator()
+        return generator.generate_units("watt", "Watt")
     
     def get_additional_imports(self):
         """Get additional imports for metric units."""

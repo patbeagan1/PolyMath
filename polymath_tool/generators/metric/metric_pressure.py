@@ -3,8 +3,8 @@
 Metric pressure unit generation.
 """
 
-from .base_pressure_generator import BasePressureGenerator
-from .base.base_metric import generate_metric_units
+from ..base.base_pressure_generator import BasePressureGenerator
+from ..base.base_metric import MetricUnitGenerator
 
 
 class MetricPressureGenerator(BasePressureGenerator):
@@ -18,7 +18,8 @@ class MetricPressureGenerator(BasePressureGenerator):
     
     def _get_units(self):
         """Get metric pressure units."""
-        return generate_metric_units("pascal", "Pascal")
+        generator = MetricUnitGenerator()
+        return generator.generate_units("pascal", "Pascal")
     
     def get_additional_imports(self):
         """Get additional imports for metric units."""

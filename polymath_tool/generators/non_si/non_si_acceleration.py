@@ -3,7 +3,7 @@
 Non-SI acceleration unit generation.
 """
 
-from .base_acceleration_generator import BaseAccelerationGenerator
+from ..base.base_acceleration_generator import BaseAccelerationGenerator
 
 
 class NonSiAccelerationGenerator(BaseAccelerationGenerator):

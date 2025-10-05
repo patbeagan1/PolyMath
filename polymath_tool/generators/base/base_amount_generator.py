@@ -5,7 +5,7 @@ Base class for amount unit generators.
 
 from abc import ABC, abstractmethod
 from typing import List, Tuple
-from .common import get_measures_base
+from ..common import get_measures_base
 
 
 class BaseAmountGenerator(ABC):
@@ -59,8 +59,7 @@ class BaseAmountGenerator(ABC):
         """
         return """package {package_name}
 
-{imports_section}import com.measures.Consts
-import com.measures.amount.UnitAmount
+{imports_section}import com.measures.amount.UnitAmount
 import com.measures.amount.Mole
 import kotlin.jvm.JvmInline
 
