@@ -11,22 +11,24 @@ class MetricUnitGenerator:
     def __init__(self):
         """Initialize the metric unit generator."""
         self.prefixes = [
-            "Atto",  # 10^-18
+            "Yocto",  # 10^-24
+            "Zepto",  # 10^-21
+            "Atto",   # 10^-18
             "Femto",  # 10^-15
-            "Pico",  # 10^-12
-            "Nano",  # 10^-9
+            "Pico",   # 10^-12
+            "Nano",   # 10^-9
             "Micro",  # 10^-6
             "Milli",  # 10^-3
             "Centi",  # 10^-2
-            "Deci",  # 10^-1
-            "Deka",  # 10^1
+            "Deci",   # 10^-1
+            "Deka",   # 10^1
             "Hecto",  # 10^2
-            "Kilo",  # 10^3
-            "Mega",  # 10^6
-            "Giga",  # 10^9
-            "Tera",  # 10^12
-            "Peta",  # 10^15
-            "Exa",  # 10^18
+            "Kilo",   # 10^3
+            "Mega",   # 10^6
+            "Giga",   # 10^9
+            "Tera",   # 10^12
+            "Peta",   # 10^15
+            "Exa",    # 10^18
             "Zetta",  # 10^21
             "Yotta",  # 10^24
         ]
