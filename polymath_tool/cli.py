@@ -8,7 +8,7 @@ Usage (uv recommended):
   ./pm generate metric metric-volume
   ./pm fix all
   ./pm search --pattern "UnitDistance"
-  
+
 Or with uv/python:
   uv run python -m polymath_tool generate --list
   python -m polymath_tool fix all
@@ -42,80 +42,89 @@ def get_kotlin_roots() -> List[Path]:
         repo_root / "math-base" / "src",
         repo_root / "math-geometry" / "src",
         repo_root / "math-algebra" / "src",
-    ] 
+    ]
 
 
 GENERATION_MAP: Dict[str, List[Callable[[], int]]] = {
+    "astronomical-distance": [
+        lambda: generators.AstronomicalDistanceGenerator().generate()
+    ],
+    "g-force-acceleration": [
+        lambda: generators.GForceAccelerationGenerator().generate()
+    ],
+
     "metric": [
-        lambda: generators.MetricDistanceGenerator().generate(),
-        lambda: generators.MetricVolumeGenerator().generate(),
+        lambda: generators.MetricAccelerationGenerator().generate(),
+        lambda: generators.MetricAmountGenerator().generate(),
         lambda: generators.MetricAreaGenerator().generate(),
+        lambda: generators.MetricChargeGenerator().generate(),
+        lambda: generators.MetricCurrentGenerator().generate(),
+        lambda: generators.MetricDistanceGenerator().generate(),
         lambda: generators.MetricEnergyGenerator().generate(),
         lambda: generators.MetricForceGenerator().generate(),
         lambda: generators.MetricPowerGenerator().generate(),
         lambda: generators.MetricPressureGenerator().generate(),
         lambda: generators.MetricTimeGenerator().generate(),
         lambda: generators.MetricVelocityGenerator().generate(),
+        lambda: generators.MetricVolumeGenerator().generate(),
         lambda: generators.MetricWeightGenerator().generate(),
-        lambda: generators.MetricAmountGenerator().generate(),
-        lambda: generators.MetricChargeGenerator().generate(),
-        lambda: generators.MetricCurrentGenerator().generate()
     ],
-    "metric-distance": [lambda: generators.MetricDistanceGenerator().generate()],
-    "metric-volume": [lambda: generators.MetricVolumeGenerator().generate()],
+    "metric-acceleration": [ lambda: generators.MetricAccelerationGenerator().generate() ],
+    "metric-amount": [lambda: generators.MetricAmountGenerator().generate()],
     "metric-area": [lambda: generators.MetricAreaGenerator().generate()],
+    "metric-charge": [lambda: generators.MetricChargeGenerator().generate()],
+    "metric-current": [lambda: generators.MetricCurrentGenerator().generate()],
+    "metric-distance": [lambda: generators.MetricDistanceGenerator().generate()],
     "metric-energy": [lambda: generators.MetricEnergyGenerator().generate()],
     "metric-force": [lambda: generators.MetricForceGenerator().generate()],
     "metric-power": [lambda: generators.MetricPowerGenerator().generate()],
     "metric-pressure": [lambda: generators.MetricPressureGenerator().generate()],
     "metric-time": [lambda: generators.MetricTimeGenerator().generate()],
     "metric-velocity": [lambda: generators.MetricVelocityGenerator().generate()],
+    "metric-volume": [lambda: generators.MetricVolumeGenerator().generate()],
     "metric-weight": [lambda: generators.MetricWeightGenerator().generate()],
-    "metric-amount": [lambda: generators.MetricAmountGenerator().generate()],
-    "metric-current": [lambda: generators.MetricCurrentGenerator().generate()],
-    "metric-charge": [lambda: generators.MetricChargeGenerator().generate()],
-    
-    "g-force-acceleration": [lambda: generators.GForceAccelerationGenerator().generate()],
-    "non-si-acceleration": [lambda: generators.NonSiAccelerationGenerator().generate()],
+   
+   "non-si-acceleration": [lambda: generators.NonSiAccelerationGenerator().generate()],
     "non-si-charge": [lambda: generators.NonSiChargeGenerator().generate()],
+    "non-si-distance": [lambda: generators.NonSiDistanceGenerator().generate()],
     "non-si-energy": [lambda: generators.NonSiEnergyGenerator().generate()],
     "non-si-force": [lambda: generators.NonSiForceGenerator().generate()],
-    "non-si-pressure": [lambda: generators.NonSiPressureGenerator().generate()],
-    "non-si-distance": [lambda: generators.NonSiDistanceGenerator().generate()],
-    "non-si-volume": [lambda: generators.NonSiVolumeGenerator().generate()],
     "non-si-power": [lambda: generators.NonSiPowerGenerator().generate()],
+    "non-si-pressure": [lambda: generators.NonSiPressureGenerator().generate()],
     "non-si-time": [lambda: generators.NonSiTimeGenerator().generate()],
-    "astronomical-distance": [lambda: generators.AstronomicalDistanceGenerator().generate()],
+    "non-si-volume": [lambda: generators.NonSiVolumeGenerator().generate()],
     "non-si-weight": [lambda: generators.NonSiWeightGenerator().generate()],
     
-    
-    
+    "international-yard-distance": [lambda: generators.InternationalYardDistanceGenerator().generate()],
+
     "all": [
-        lambda: generators.MetricDistanceGenerator().generate(),
-        lambda: generators.MetricVolumeGenerator().generate(),
+        lambda: generators.AstronomicalDistanceGenerator().generate(),
+        lambda: generators.GForceAccelerationGenerator().generate(),
+        lambda: generators.InternationalYardDistanceGenerator().generate(),
+        lambda: generators.MetricAccelerationGenerator().generate(),
+        lambda: generators.MetricAmountGenerator().generate(),
         lambda: generators.MetricAreaGenerator().generate(),
+        lambda: generators.MetricChargeGenerator().generate(),
+        lambda: generators.MetricCurrentGenerator().generate(),
+        lambda: generators.MetricDistanceGenerator().generate(),
         lambda: generators.MetricEnergyGenerator().generate(),
         lambda: generators.MetricForceGenerator().generate(),
         lambda: generators.MetricPowerGenerator().generate(),
         lambda: generators.MetricPressureGenerator().generate(),
         lambda: generators.MetricTimeGenerator().generate(),
         lambda: generators.MetricVelocityGenerator().generate(),
+        lambda: generators.MetricVolumeGenerator().generate(),
         lambda: generators.MetricWeightGenerator().generate(),
-        lambda: generators.MetricAmountGenerator().generate(),
-        lambda: generators.MetricChargeGenerator().generate(),
-        lambda: generators.MetricCurrentGenerator().generate(),
+        lambda: generators.NonSiAccelerationGenerator().generate(),
+        lambda: generators.NonSiChargeGenerator().generate(),
+        lambda: generators.NonSiDistanceGenerator().generate(),
+        lambda: generators.NonSiEnergyGenerator().generate(),
+        lambda: generators.NonSiForceGenerator().generate(),
+        lambda: generators.NonSiPowerGenerator().generate(),
+        lambda: generators.NonSiPressureGenerator().generate(),
+        lambda: generators.NonSiTimeGenerator().generate(),
         lambda: generators.NonSiVolumeGenerator().generate(),
         lambda: generators.NonSiWeightGenerator().generate(),
-        lambda: generators.NonSiDistanceGenerator().generate(),
-        lambda: generators.NonSiForceGenerator().generate(),
-        lambda: generators.NonSiEnergyGenerator().generate(),
-        lambda: generators.NonSiPressureGenerator().generate(),
-        lambda: generators.NonSiPowerGenerator().generate(),
-        lambda: generators.NonSiTimeGenerator().generate(),
-        lambda: generators.NonSiChargeGenerator().generate(),
-        lambda: generators.NonSiAccelerationGenerator().generate(),
-        lambda: generators.AstronomicalDistanceGenerator().generate(),
-        lambda: generators.GForceAccelerationGenerator().generate(),
     ],
 }
 
@@ -158,7 +167,10 @@ def cmd_generate(args: argparse.Namespace) -> int:
     for family in families:
         funcs = GENERATION_MAP.get(family)
         if not funcs:
-            print(f"[WARN] Unknown family '{family}'. Use --list to see options.", file=sys.stderr)
+            print(
+                f"[WARN] Unknown family '{family}'. Use --list to see options.",
+                file=sys.stderr,
+            )
             exit_code = 2
             continue
         print(f"[GEN] {family} -> {len(funcs)} generator(s)")
@@ -179,7 +191,10 @@ def cmd_fix(args: argparse.Namespace) -> int:
     for task in tasks:
         funcs = FIX_MAP.get(task)
         if not funcs:
-            print(f"[WARN] Unknown fix task '{task}'. Choices: {', '.join(sorted(FIX_MAP))}", file=sys.stderr)
+            print(
+                f"[WARN] Unknown fix task '{task}'. Choices: {', '.join(sorted(FIX_MAP))}",
+                file=sys.stderr,
+            )
             exit_code = 2
             continue
         print(f"[FIX] {task} -> {len(funcs)} fixer(s)")
@@ -237,23 +252,41 @@ def cmd_search(args: argparse.Namespace) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="polymath", description="PolyMath generation/fix/search tool")
+    parser = argparse.ArgumentParser(
+        prog="polymath", description="PolyMath generation/fix/search tool"
+    )
     sub = parser.add_subparsers(dest="command", required=True)
 
     p_gen = sub.add_parser("generate", help="Generate unit families")
     p_gen.add_argument("families", nargs="*", help="Families to generate (use --list)")
-    p_gen.add_argument("--list", action="store_true", help="List available families and exit")
+    p_gen.add_argument(
+        "--list", action="store_true", help="List available families and exit"
+    )
     p_gen.set_defaults(func=cmd_generate)
 
     p_fix = sub.add_parser("fix", help="Run fix utilities")
-    p_fix.add_argument("tasks", nargs="*", help=f"Fix task groups. Choices: {', '.join(sorted(FIX_MAP))}")
+    p_fix.add_argument(
+        "tasks",
+        nargs="*",
+        help=f"Fix task groups. Choices: {', '.join(sorted(FIX_MAP))}",
+    )
     p_fix.set_defaults(func=cmd_fix)
 
-    p_search = sub.add_parser("search", help="Search Kotlin sources for a regex pattern")
-    p_search.add_argument("--pattern", required=True, help="Regex pattern to search for")
-    p_search.add_argument("--root", help="Root directory to search (defaults to PolyMath roots)")
-    p_search.add_argument("--ignore-case", action="store_true", help="Case-insensitive search")
-    p_search.add_argument("--limit", type=int, default=0, help="Max number of results (0 for unlimited)")
+    p_search = sub.add_parser(
+        "search", help="Search Kotlin sources for a regex pattern"
+    )
+    p_search.add_argument(
+        "--pattern", required=True, help="Regex pattern to search for"
+    )
+    p_search.add_argument(
+        "--root", help="Root directory to search (defaults to PolyMath roots)"
+    )
+    p_search.add_argument(
+        "--ignore-case", action="store_true", help="Case-insensitive search"
+    )
+    p_search.add_argument(
+        "--limit", type=int, default=0, help="Max number of results (0 for unlimited)"
+    )
     p_search.set_defaults(func=cmd_search)
 
     return parser
@@ -267,5 +300,3 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
-

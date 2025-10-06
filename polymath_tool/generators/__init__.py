@@ -15,6 +15,7 @@ from .metric.metric_time import MetricTimeGenerator
 from .metric.metric_velocity import MetricVelocityGenerator
 from .metric.metric_weight import MetricWeightGenerator
 from .metric.metric_amount import MetricAmountGenerator
+from .metric.metric_acceleration import MetricAccelerationGenerator
 from .metric.metric_charge import MetricChargeGenerator
 from .metric.metric_current import MetricCurrentGenerator
 # Non-SI generators
@@ -29,6 +30,9 @@ from .non_si.non_si_time import NonSiTimeGenerator
 from .non_si.non_si_charge import NonSiChargeGenerator
 from .non_si.non_si_acceleration import NonSiAccelerationGenerator
 
+# International yard and pound generators
+from .non_si.non_si_distance import InternationalYardDistanceGenerator
+
 # Astronomical generators
 from .astronomical.astronomical import AstronomicalDistanceGenerator, GForceAccelerationGenerator
 
@@ -39,6 +43,7 @@ __all__ = [
     
     # Metric generators
     'MetricDistanceGenerator',
+    'MetricAccelerationGenerator',
     'MetricVolumeGenerator',
     'MetricAreaGenerator',
     'MetricEnergyGenerator',
@@ -63,6 +68,9 @@ __all__ = [
     'NonSiTimeGenerator',
     'NonSiChargeGenerator',
     'NonSiAccelerationGenerator',
+
+    # International yard and pound generators
+    'InternationalYardDistanceGenerator',
     
     # Astronomical generators
     'AstronomicalDistanceGenerator',

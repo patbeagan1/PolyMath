@@ -8,13 +8,12 @@ from ..base.base_distance_generator import BaseDistanceGenerator
 
 class NonSiDistanceGenerator(BaseDistanceGenerator):
     """Generator for non-SI distance units."""
-    
+
     def __init__(self):
         super().__init__(
-            subdirectory="non_si",
-            package_name="com.measures.distance.non_si"
+            subdirectory="non_si", package_name="com.measures.distance.non_si"
         )
-    
+
     def _get_units(self):
         """Get non-SI distance units."""
         return [
@@ -24,7 +23,22 @@ class NonSiDistanceGenerator(BaseDistanceGenerator):
         ]
 
 
-def generate_non_si_distance() -> int:
-    """Generate non-SI distance units."""
-    generator = NonSiDistanceGenerator()
-    return generator.generate()
+class InternationalYardDistanceGenerator(BaseDistanceGenerator):
+    """Generator for international yard distance units."""
+
+    def __init__(self):
+        super().__init__(
+            subdirectory="international_yard",
+            package_name="com.measures.distance.international_yard",
+        )
+
+    def _get_units(self):
+        """Get international yard distance units."""
+        return [
+            ("Yard", "Meter(value * 0.9144)"),
+            ("Inch", "Yard(value / 36).asBaseUnit()"),
+            ("Foot", "Yard(value / 3).asBaseUnit()"),
+            ("Mile", "Yard(value * 1760).asBaseUnit()"),
+            ("Fathom", "Yard(value * 2).asBaseUnit()"),
+            ("NauticalMile", "Yard(value * 2025.3718285).asBaseUnit()"),
+        ]
