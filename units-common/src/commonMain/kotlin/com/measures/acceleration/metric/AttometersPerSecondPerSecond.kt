@@ -1,17 +1,17 @@
 package com.measures.acceleration.metric
 
 import com.measures.Consts
-import com.measures.acceleration.MetersPerSecondPerSecond
 import com.measures.acceleration.UnitAcceleration
+import com.measures.acceleration.MetersPerSecondPerSecond
 import com.measures.time.UnitTime
 import com.measures.weight.UnitMass
 import com.measures.force.Newton
 import kotlin.jvm.JvmInline
 
 @JvmInline
-value class GigameterPerSecondPerSecond(override val value: Double) : UnitAcceleration<GigameterPerSecondPerSecond> {
-    override fun asType(d: Double) = GigameterPerSecondPerSecond(d)
-    override fun asBaseUnit() = MetersPerSecondPerSecond(value * Consts.GIGA)
+value class AttometersPerSecondPerSecond(override val value: Double) : UnitAcceleration<AttometersPerSecondPerSecond> {
+    override fun asType(d: Double) = AttometersPerSecondPerSecond(d)
+    override fun asBaseUnit() = MetersPerSecondPerSecond(value * Consts.ATTO)
 
     override operator fun plus(other: UnitAcceleration<*>) = UnitAcceleration.plusUnit(this, other)
     override operator fun minus(other: UnitAcceleration<*>) = UnitAcceleration.minusUnit(this, other)
@@ -20,4 +20,4 @@ value class GigameterPerSecondPerSecond(override val value: Double) : UnitAccele
     override operator fun times(other: UnitMass<*>): Newton = UnitAcceleration.timesUnit(this, other)
 }
 
-fun UnitAcceleration<*>.toGigameterPerSecondPerSecond() = toUnit(GigameterPerSecondPerSecond(1.0))
+fun UnitAcceleration<*>.toAttometersPerSecondPerSecond() = toUnit(AttometersPerSecondPerSecond(1.0))

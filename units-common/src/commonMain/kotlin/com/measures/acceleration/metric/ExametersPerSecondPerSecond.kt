@@ -1,17 +1,17 @@
 package com.measures.acceleration.metric
 
 import com.measures.Consts
-import com.measures.acceleration.MetersPerSecondPerSecond
 import com.measures.acceleration.UnitAcceleration
+import com.measures.acceleration.MetersPerSecondPerSecond
 import com.measures.time.UnitTime
 import com.measures.weight.UnitMass
 import com.measures.force.Newton
 import kotlin.jvm.JvmInline
 
 @JvmInline
-value class YottameterPerSecondPerSecond(override val value: Double) : UnitAcceleration<YottameterPerSecondPerSecond> {
-    override fun asType(d: Double) = YottameterPerSecondPerSecond(d)
-    override fun asBaseUnit() = MetersPerSecondPerSecond(value * Consts.YOTTA)
+value class ExametersPerSecondPerSecond(override val value: Double) : UnitAcceleration<ExametersPerSecondPerSecond> {
+    override fun asType(d: Double) = ExametersPerSecondPerSecond(d)
+    override fun asBaseUnit() = MetersPerSecondPerSecond(value * Consts.EXA)
 
     override operator fun plus(other: UnitAcceleration<*>) = UnitAcceleration.plusUnit(this, other)
     override operator fun minus(other: UnitAcceleration<*>) = UnitAcceleration.minusUnit(this, other)
@@ -20,4 +20,4 @@ value class YottameterPerSecondPerSecond(override val value: Double) : UnitAccel
     override operator fun times(other: UnitMass<*>): Newton = UnitAcceleration.timesUnit(this, other)
 }
 
-fun UnitAcceleration<*>.toYottameterPerSecondPerSecond() = toUnit(YottameterPerSecondPerSecond(1.0))
+fun UnitAcceleration<*>.toExametersPerSecondPerSecond() = toUnit(ExametersPerSecondPerSecond(1.0))

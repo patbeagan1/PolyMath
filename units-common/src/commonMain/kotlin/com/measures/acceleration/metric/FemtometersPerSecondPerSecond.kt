@@ -1,16 +1,16 @@
 package com.measures.acceleration.metric
 
 import com.measures.Consts
-import com.measures.acceleration.MetersPerSecondPerSecond
 import com.measures.acceleration.UnitAcceleration
+import com.measures.acceleration.MetersPerSecondPerSecond
 import com.measures.time.UnitTime
 import com.measures.weight.UnitMass
 import com.measures.force.Newton
 import kotlin.jvm.JvmInline
 
 @JvmInline
-value class FemtometerPerSecondPerSecond(override val value: Double) : UnitAcceleration<FemtometerPerSecondPerSecond> {
-    override fun asType(d: Double) = FemtometerPerSecondPerSecond(d)
+value class FemtometersPerSecondPerSecond(override val value: Double) : UnitAcceleration<FemtometersPerSecondPerSecond> {
+    override fun asType(d: Double) = FemtometersPerSecondPerSecond(d)
     override fun asBaseUnit() = MetersPerSecondPerSecond(value * Consts.FEMTO)
 
     override operator fun plus(other: UnitAcceleration<*>) = UnitAcceleration.plusUnit(this, other)
@@ -20,4 +20,4 @@ value class FemtometerPerSecondPerSecond(override val value: Double) : UnitAccel
     override operator fun times(other: UnitMass<*>): Newton = UnitAcceleration.timesUnit(this, other)
 }
 
-fun UnitAcceleration<*>.toFemtometerPerSecondPerSecond() = toUnit(FemtometerPerSecondPerSecond(1.0))
+fun UnitAcceleration<*>.toFemtometersPerSecondPerSecond() = toUnit(FemtometersPerSecondPerSecond(1.0))

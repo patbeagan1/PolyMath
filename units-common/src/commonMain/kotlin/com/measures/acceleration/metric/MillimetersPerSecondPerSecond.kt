@@ -1,17 +1,17 @@
 package com.measures.acceleration.metric
 
 import com.measures.Consts
-import com.measures.acceleration.MetersPerSecondPerSecond
 import com.measures.acceleration.UnitAcceleration
+import com.measures.acceleration.MetersPerSecondPerSecond
 import com.measures.time.UnitTime
 import com.measures.weight.UnitMass
 import com.measures.force.Newton
 import kotlin.jvm.JvmInline
 
 @JvmInline
-value class ExameterPerSecondPerSecond(override val value: Double) : UnitAcceleration<ExameterPerSecondPerSecond> {
-    override fun asType(d: Double) = ExameterPerSecondPerSecond(d)
-    override fun asBaseUnit() = MetersPerSecondPerSecond(value * Consts.EXA)
+value class MillimetersPerSecondPerSecond(override val value: Double) : UnitAcceleration<MillimetersPerSecondPerSecond> {
+    override fun asType(d: Double) = MillimetersPerSecondPerSecond(d)
+    override fun asBaseUnit() = MetersPerSecondPerSecond(value * Consts.MILLI)
 
     override operator fun plus(other: UnitAcceleration<*>) = UnitAcceleration.plusUnit(this, other)
     override operator fun minus(other: UnitAcceleration<*>) = UnitAcceleration.minusUnit(this, other)
@@ -20,4 +20,4 @@ value class ExameterPerSecondPerSecond(override val value: Double) : UnitAcceler
     override operator fun times(other: UnitMass<*>): Newton = UnitAcceleration.timesUnit(this, other)
 }
 
-fun UnitAcceleration<*>.toExameterPerSecondPerSecond() = toUnit(ExameterPerSecondPerSecond(1.0))
+fun UnitAcceleration<*>.toMillimetersPerSecondPerSecond() = toUnit(MillimetersPerSecondPerSecond(1.0))
