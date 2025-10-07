@@ -112,6 +112,8 @@ GENERATION_MAP: Dict[str, List[Callable[[], int]]] = {
         lambda: generators.AstronomicalDistanceGenerator().generate(),
         lambda: generators.GForceAccelerationGenerator().generate(),
         lambda: generators.InternationalYardDistanceGenerator().generate(),
+        lambda: generators.InternationalYardAreaGenerator().generate(),
+        lambda: generators.InternationalYardVolumeGenerator().generate(),
         lambda: generators.MetricAccelerationGenerator().generate(),
         lambda: generators.MetricAmountGenerator().generate(),
         lambda: generators.MetricAreaGenerator().generate(),

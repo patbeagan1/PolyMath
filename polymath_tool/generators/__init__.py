@@ -32,6 +32,8 @@ from .non_si.non_si_acceleration import NonSiAccelerationGenerator
 
 # International yard and pound generators
 from .non_si.non_si_distance import InternationalYardDistanceGenerator
+from .non_si.non_si_distance import InternationalYardAreaGenerator
+from .non_si.non_si_distance import InternationalYardVolumeGenerator
 
 # Astronomical generators
 from .astronomical.astronomical import AstronomicalDistanceGenerator, GForceAccelerationGenerator
@@ -86,7 +88,9 @@ __all__ = [
 
     # International yard and pound generators
     'InternationalYardDistanceGenerator',
-    
+    'InternationalYardAreaGenerator',
+    'InternationalYardVolumeGenerator',
+
     # Astronomical generators
     'AstronomicalDistanceGenerator',
     'GForceAccelerationGenerator',

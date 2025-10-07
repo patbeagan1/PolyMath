@@ -23,6 +23,8 @@ class NonSiVolumeGenerator(BaseVolumeGenerator):
             ("CoffeeMug", "Liter(value * 0.35488235475)"),  # 12 oz
             ("TablespoonCanadian", "Liter(value * 0.01420653125)"),
             ("TeaspoonCanadian", "Liter(value * 0.004735510416666667)"),
+            ("CubicCentimeter", "Liter(value * 0.001)"),
+            ("CubicMeter", "Liter(value * 1000)"),
         ]
 
 
