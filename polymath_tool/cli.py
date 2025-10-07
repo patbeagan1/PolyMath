@@ -96,6 +96,17 @@ GENERATION_MAP: Dict[str, List[Callable[[], int]]] = {
     "non-si-weight": [lambda: generators.NonSiWeightGenerator().generate()],
     
     "international-yard-distance": [lambda: generators.InternationalYardDistanceGenerator().generate()],
+    
+    # US Customary generators
+    "us-distance": [lambda: generators.UsDistanceGenerator().generate()],
+    "us-area": [lambda: generators.UsAreaGenerator().generate()],
+    "us-fluid-volume": [lambda: generators.UsFluidVolumeGenerator().generate()],
+    "us-dry-volume": [lambda: generators.UsDryVolumeGenerator().generate()],
+    
+    # UK Imperial generators
+    "uk-distance": [lambda: generators.UkDistanceGenerator().generate()],
+    "uk-area": [lambda: generators.UkAreaGenerator().generate()],
+    "uk-volume": [lambda: generators.UkVolumeGenerator().generate()],
 
     "all": [
         lambda: generators.AstronomicalDistanceGenerator().generate(),
@@ -125,6 +136,13 @@ GENERATION_MAP: Dict[str, List[Callable[[], int]]] = {
         lambda: generators.NonSiTimeGenerator().generate(),
         lambda: generators.NonSiVolumeGenerator().generate(),
         lambda: generators.NonSiWeightGenerator().generate(),
+        lambda: generators.UsDistanceGenerator().generate(),
+        lambda: generators.UsAreaGenerator().generate(),
+        lambda: generators.UsFluidVolumeGenerator().generate(),
+        lambda: generators.UsDryVolumeGenerator().generate(),
+        lambda: generators.UkDistanceGenerator().generate(),
+        lambda: generators.UkAreaGenerator().generate(),
+        lambda: generators.UkVolumeGenerator().generate(),
     ],
 }
 
