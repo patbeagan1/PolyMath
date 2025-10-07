@@ -43,14 +43,16 @@ from .non_si.us_customary import (
     UsDistanceGenerator,
     UsAreaGenerator,
     UsFluidVolumeGenerator,
-    UsDryVolumeGenerator
+    UsDryVolumeGenerator,
+    UsWeightGenerator
 )
 
 # UK Imperial generators
 from .non_si.uk_imperial import (
     UkDistanceGenerator,
     UkAreaGenerator,
-    UkVolumeGenerator
+    UkVolumeGenerator,
+    UkWeightGenerator
 )
 
 __all__ = [
@@ -100,9 +102,11 @@ __all__ = [
     'UsAreaGenerator',
     'UsFluidVolumeGenerator',
     'UsDryVolumeGenerator',
+    'UsWeightGenerator',
     
     # UK Imperial generators
     'UkDistanceGenerator',
     'UkAreaGenerator',
     'UkVolumeGenerator',
+    'UkWeightGenerator',
 ]

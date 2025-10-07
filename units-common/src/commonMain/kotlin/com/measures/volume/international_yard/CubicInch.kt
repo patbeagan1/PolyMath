@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class CubicInch(override val value: Double) : UnitVolume<CubicInch> {
     override fun asType(d: Double) = CubicInch(d)
-    override fun asBaseUnit() = CubicMeter(value / 1000 * 16.387064)
+    override fun asBaseUnit() = Liter(value / 1000 * 16.387064)
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
     override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)

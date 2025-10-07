@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class UKAcre(override val value: Double) : UnitArea<UKAcre> {
     override fun asType(d: Double) = UKAcre(d)
-    override fun asBaseUnit() = SquareUKFoot(value * 43560).asBaseUnit()
+    override fun asBaseUnit() = UKSquareFoot(value * 43560).asBaseUnit()
 
     override fun plus(other: UnitArea<*>): SquareMeter = UnitArea.plusUnit(this, other)
     override fun minus(other: UnitArea<*>): SquareMeter = UnitArea.minusUnit(this, other)

@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class USFluidQuart(override val value: Double) : UnitVolume<USFluidQuart> {
     override fun asType(d: Double) = USFluidQuart(d)
-    override fun asBaseUnit() = USPint(value * 2).asBaseUnit()
+    override fun asBaseUnit() = USFluidPint(value * 2).asBaseUnit()
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
     override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)

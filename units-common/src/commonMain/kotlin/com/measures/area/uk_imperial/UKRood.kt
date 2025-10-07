@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class UKRood(override val value: Double) : UnitArea<UKRood> {
     override fun asType(d: Double) = UKRood(d)
-    override fun asBaseUnit() = SquareUKFoot(value * 10890).asBaseUnit()
+    override fun asBaseUnit() = UKSquareFoot(value * 10890).asBaseUnit()
 
     override fun plus(other: UnitArea<*>): SquareMeter = UnitArea.plusUnit(this, other)
     override fun minus(other: UnitArea<*>): SquareMeter = UnitArea.minusUnit(this, other)

@@ -77,7 +77,7 @@ class InternationalYardVolumeGenerator(BaseVolumeGenerator):
         # Derived volume units (cube of distance units)
         """Get international yard volume units (cubed distance units)."""
         return [
-            ("CubicInch", "CubicMeter(value / 1000 * 16.387064)"),  # value in yd^3
+            ("CubicInch", "Liter(value / 1000 * 16.387064)"),  # value in yd^3
             ("CubicFoot", "CubicInch(value * 1728).asBaseUnit()"),
             ("CubicYard", "CubicFoot(value * 27).asBaseUnit()"),
         ]

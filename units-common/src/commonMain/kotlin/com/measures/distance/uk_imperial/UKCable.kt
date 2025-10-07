@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class UKCable(override val value: Double) : UnitDistance<UKCable> {
     override fun asType(d: Double) = UKCable(d)
-    override fun asBaseUnit() = NauticalMile(value / 100).asBaseUnit()
+    override fun asBaseUnit() = UKNauticalMile(value / 100).asBaseUnit()
 
     override operator fun plus(other: UnitDistance<*>) = UnitDistance.plusUnit(this, other)
     override operator fun minus(other: UnitDistance<*>) = UnitDistance.minusUnit(this, other)

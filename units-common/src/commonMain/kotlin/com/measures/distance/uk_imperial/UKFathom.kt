@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class UKFathom(override val value: Double) : UnitDistance<UKFathom> {
     override fun asType(d: Double) = UKFathom(d)
-    override fun asBaseUnit() = NauticalMile(value / 1000).asBaseUnit()
+    override fun asBaseUnit() = UKNauticalMile(value / 1000).asBaseUnit()
 
     override operator fun plus(other: UnitDistance<*>) = UnitDistance.plusUnit(this, other)
     override operator fun minus(other: UnitDistance<*>) = UnitDistance.minusUnit(this, other)

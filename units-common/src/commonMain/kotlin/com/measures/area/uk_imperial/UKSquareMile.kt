@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class UKSquareMile(override val value: Double) : UnitArea<UKSquareMile> {
     override fun asType(d: Double) = UKSquareMile(d)
-    override fun asBaseUnit() = SquareUKFoot(value * 27878400).asBaseUnit()
+    override fun asBaseUnit() = UKSquareFoot(value * 27878400).asBaseUnit()
 
     override fun plus(other: UnitArea<*>): SquareMeter = UnitArea.plusUnit(this, other)
     override fun minus(other: UnitArea<*>): SquareMeter = UnitArea.minusUnit(this, other)

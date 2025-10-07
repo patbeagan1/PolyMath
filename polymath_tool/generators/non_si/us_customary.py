@@ -100,8 +100,8 @@ class UsFluidVolumeGenerator(BaseVolumeGenerator):
             ("USGill", "USFluidOunce(value * 4).asBaseUnit()"),  # 4 US fluid ounces
             ("USCup", "USFluidOunce(value * 8).asBaseUnit()"),  # 8 US fluid ounces
             ("USFluidPint", "USCup(value * 2).asBaseUnit()"),  # 2 US cups (liquid pint)
-            ("USFluidQuart", "USPint(value * 2).asBaseUnit()"),  # 2 US pints (liquid quart)
-            ("USPottle", "USQuart(value * 2).asBaseUnit()"),  # 2 US quarts (liquid pottle)
+            ("USFluidQuart", "USFluidPint(value * 2).asBaseUnit()"),  # 2 US pints (liquid quart)
+            ("USPottle", "USFluidQuart(value * 2).asBaseUnit()"),  # 2 US quarts (liquid pottle)
             ("USFluidGallon", "Liter(value * 3.785411784)"),  # 1 US gallon (liquid), base unit
             ("USFluidBarrel", "USFluidGallon(value * 31.5).asBaseUnit()"),  # 31.5 US gallons (liquid barrel)
             ("USOilBarrel", "USFluidGallon(value * 42).asBaseUnit()"),  # 42 US gallons (oil barrel)
@@ -122,7 +122,7 @@ class UsDryVolumeGenerator(BaseVolumeGenerator):
         """Get US Customary dry volume units."""
         return [
             # Dry volume units (based on Winchester measure)
-            ("USDryPint", "Liters(value * 0.5506104713575).asBaseUnit()"),  # Dry pint
+            ("USDryPint", "Liter(value * 0.5506104713575).asBaseUnit()"),  # Dry pint
             ("USDryQuart", "USDryPint(value * 2).asBaseUnit()"),  # Dry quart
             ("USDryGallon", "USDryPint(value * 8).asBaseUnit()"),  # Dry gallon
             ("USPeck", "USDryGallon(value * 2).asBaseUnit()"),  # Peck
@@ -147,7 +147,7 @@ class UsWeightGenerator(BaseWeightGenerator):
             ("USGrain", "USPound(value / 7000).asBaseUnit()"),  # 1/7000 pound (grain)
             ("USDram", "USPound(value / 256).asBaseUnit()"),    # 1/256 pound (dram)
             ("USOunce", "USPound(value / 16).asBaseUnit()"),    # 1/16 pound (ounce)
-            ("USPound", "Kilogram(value * 0.45359237)"),        # 1 pound = 0.45359237 kg (base unit)
+            ("USPound", "KiloGram(value * 0.45359237)"),        # 1 pound = 0.45359237 kg (base unit)
             ("USShortHundredweight", "USPound(value * 100).asBaseUnit()"),  # 100 pounds (short hundredweight)
             ("USLongHundredweight", "USPound(value * 112).asBaseUnit()"),  # 100 pounds (short hundredweight)
             ("USShortTon", "USPound(value * 2000).asBaseUnit()"),      # 2000 pounds (short ton)

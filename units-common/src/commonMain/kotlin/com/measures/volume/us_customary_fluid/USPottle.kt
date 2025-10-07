@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class USPottle(override val value: Double) : UnitVolume<USPottle> {
     override fun asType(d: Double) = USPottle(d)
-    override fun asBaseUnit() = USQuart(value * 2).asBaseUnit()
+    override fun asBaseUnit() = USFluidQuart(value * 2).asBaseUnit()
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
     override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)

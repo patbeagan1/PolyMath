@@ -27,7 +27,7 @@ class UkDistanceGenerator(BaseDistanceGenerator):
             ("UKBarleycorn", "UKFoot(value / 36).asBaseUnit()"),
             ("UKInch", "UKFoot(value / 12).asBaseUnit()"),
             ("UKHand", "UKFoot(value / 3).asBaseUnit()"),
-            ("UKUKFoot", "Foot(value).asBaseUnit()"),
+            ("UKFoot", "Meter(value * 0.3048).asBaseUnit()"),
             ("UKYard", "UKFoot(value * 3).asBaseUnit()"),
             ("UKChain", "UKFoot(value * 66).asBaseUnit()"),
             ("UKFurlong", "UKFoot(value * 660).asBaseUnit()"),
@@ -35,8 +35,8 @@ class UkDistanceGenerator(BaseDistanceGenerator):
             ("UKLeague", "UKFoot(value * 15840).asBaseUnit()"),
  
             # Nautical units (UK version)
-            ("UKFathom", "NauticalMile(value / 1000).asBaseUnit()"),
-            ("UKCable", "NauticalMile(value / 100).asBaseUnit()"),
+            ("UKFathom", "UKNauticalMile(value / 1000).asBaseUnit()"),
+            ("UKCable", "UKNauticalMile(value / 100).asBaseUnit()"),
             ("UKNauticalMile", "UKFoot(value * 6076.1154855643).asBaseUnit()"),
  
             # Survey units 
@@ -58,14 +58,14 @@ class UkAreaGenerator(BaseAreaGenerator):
         """Get UK Imperial area units."""
         return [
             # Basic area units (square feet, yards, miles)
-            ("UKSquareInch", "SquareUKFoot(value / 144).asBaseUnit()"),
-            ("UKSquareUKFoot", "SquareMeter(value * 0.09290304)"),  # Base unit for UK area
-            ("UKSquareYard", "SquareUKFoot(value * 9).asBaseUnit()"),
-            ("UKSquareMile", "SquareUKFoot(value * 27878400).asBaseUnit()"),
+            ("UKSquareInch", "UKSquareFoot(value / 144).asBaseUnit()"),
+            ("UKSquareFoot", "SquareMeter(value * 0.09290304)"),  # Base unit for UK area
+            ("UKSquareYard", "UKSquareFoot(value * 9).asBaseUnit()"),
+            ("UKSquareMile", "UKSquareFoot(value * 27878400).asBaseUnit()"),
             # Traditional UK area units
-            ("UKAcre", "SquareUKFoot(value * 43560).asBaseUnit()"),  # 43,560 square feet
-            ("UKRood", "SquareUKFoot(value * 10890).asBaseUnit()"),  # 1/4 acre
-            ("UKPerch", "SquareUKFoot(value * 272.25).asBaseUnit()"),  # 1/160 acre
+            ("UKAcre", "UKSquareFoot(value * 43560).asBaseUnit()"),  # 43,560 square feet
+            ("UKRood", "UKSquareFoot(value * 10890).asBaseUnit()"),  # 1/4 acre
+            ("UKPerch", "UKSquareFoot(value * 272.25).asBaseUnit()"),  # 1/160 acre
         ]
 
 
@@ -96,7 +96,7 @@ class UkVolumeGenerator(BaseVolumeGenerator):
             ("UKApothecaryFluidScruple", "UKApothecaryPint(value / 480).asBaseUnit()"),   # 1/480 pint
             ("UKApothecaryFluidDram", "UKApothecaryPint(value / 160).asBaseUnit()"),      # 1/160 pint
             ("UKApothecaryFluidOunce", "UKApothecaryPint(value / 20).asBaseUnit()"),  # 1/20 pint
-            ("UKApothecaryPint", "Liters(value / 1000 * 28.4130625).asBaseUnit()"),        # 1 pint (apothecary)
+            ("UKApothecaryPint", "Liter(value / 1000 * 28.4130625).asBaseUnit()"),        # 1 pint (apothecary)
             ("UKApothecaryQuart", "UKApothecaryPint(value * 2).asBaseUnit()"),   # 2 pints
             ("UKApothecaryGallon", "UKApothecaryPint(value * 8).asBaseUnit()"),  # 8 pints
         ]
@@ -116,12 +116,12 @@ class UkWeightGenerator(BaseWeightGenerator):
             ("UKGrain", "UKPound(value / 7000).asBaseUnit()"),  # 1/7000 pound
             ("UKDrachm", "UKPound(value / 256).asBaseUnit()"),  # 1/256 pound
             ("UKOunce", "UKPound(value / 16).asBaseUnit()"),    # 1/16 pound
-            ("UKPound", "Kilogram(value * 0.45359237)"),        # Base unit for UK system
+            ("UKPound", "KiloGram(value * 0.45359237)"),        # Base unit for UK system
             ("UKStone", "UKPound(value * 14).asBaseUnit()"),    # 14 pounds
             ("UKQuarter", "UKPound(value * 28).asBaseUnit()"),  # 28 pounds
             ("UKHundredweight", "UKPound(value * 112).asBaseUnit()"),  # 112 pounds
             ("UKLongTon", "UKPound(value * 2240).asBaseUnit()"),  # 2240 pounds
 
             # Other units
-            ("UKSlug", "Kilogram(value * 14.59390294).asBaseUnit()"),
+            ("UKSlug", "KiloGram(value * 14.59390294).asBaseUnit()"),
         ]

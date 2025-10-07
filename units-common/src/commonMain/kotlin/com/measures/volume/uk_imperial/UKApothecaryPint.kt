@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class UKApothecaryPint(override val value: Double) : UnitVolume<UKApothecaryPint> {
     override fun asType(d: Double) = UKApothecaryPint(d)
-    override fun asBaseUnit() = Liters(value / 1000 * 28.4130625).asBaseUnit()
+    override fun asBaseUnit() = Liter(value / 1000 * 28.4130625).asBaseUnit()
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
     override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)

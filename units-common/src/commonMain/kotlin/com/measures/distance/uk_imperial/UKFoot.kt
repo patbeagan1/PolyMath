@@ -8,9 +8,9 @@ import com.measures.velocity.MetersPerSecond
 import kotlin.jvm.JvmInline
 
 @JvmInline
-value class UKUKFoot(override val value: Double) : UnitDistance<UKUKFoot> {
-    override fun asType(d: Double) = UKUKFoot(d)
-    override fun asBaseUnit() = Foot(value).asBaseUnit()
+value class UKFoot(override val value: Double) : UnitDistance<UKFoot> {
+    override fun asType(d: Double) = UKFoot(d)
+    override fun asBaseUnit() = Meter(value * 0.3048).asBaseUnit()
 
     override operator fun plus(other: UnitDistance<*>) = UnitDistance.plusUnit(this, other)
     override operator fun minus(other: UnitDistance<*>) = UnitDistance.minusUnit(this, other)
@@ -19,4 +19,4 @@ value class UKUKFoot(override val value: Double) : UnitDistance<UKUKFoot> {
     override operator fun div(other: UnitTime<*>): MetersPerSecond = UnitDistance.divUnit(this, other)
 }
 
-fun UnitDistance<*>.toUKUKFoot() = toUnit(UKUKFoot(1.0))
+fun UnitDistance<*>.toUKFoot() = toUnit(UKFoot(1.0))
