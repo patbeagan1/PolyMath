@@ -5,9 +5,6 @@ A comprehensive mathematical DSL (Domain Specific Language) for Kotlin that lets
 ## 🚀 Quick Start
 
 ```kotlin
-import main.dsl.mathnum.*
-import main.dsl.expressions.ScalarAlgebra.*
-
 // Basic arithmetic with proper order of operations
 val result = (5.num() + 3.num()) * 2.num()
 println(result.evaluate()) // 16.0
@@ -422,4 +419,65 @@ This project is part of a larger mathematical computing ecosystem. See individua
 
 ---
 
+### PolyMath CLI Tool
+
+A unified Python CLI to generate unit families, run fix utilities, and search Kotlin sources.
+
+#### Quick Start (Recommended)
+
+```bash
+# From the PolyMath directory
+cd PolyMath
+
+# List available generation families
+./pm generate --list
+
+# Generate metric families
+./pm generate metric
+./pm generate metric-distance metric-volume american-customary
+
+# Generate all families
+./pm generate all
+
+# Run fix utilities
+./pm fix imports      # Fix import issues
+./pm fix force        # Fix force unit issues
+./pm fix all          # Run all fixes
+
+# Search Kotlin sources (regex)
+./pm search --pattern "UnitDistance"
+./pm search --pattern "class.*Meter" --ignore-case --limit 10
+```
+
+#### Alternative Usage
+
+```bash
+# Using uv directly
+uv run python -m polymath_tool generate --list
+uv run python -m polymath_tool fix all
+
+# Using standard Python
+python -m polymath_tool generate metric
+python polymath.py search --pattern "UnitVolume"
+```
+
+#### Available Commands
+
+- **generate** - Generate unit families (metric, american-customary, english-imperial, avoirdupois, troy, acceleration, etc.)
+- **fix** - Run fix utilities (imports, force, types, units, circular, interfaces, final, all)
+- **search** - Search Kotlin sources with regex patterns
+
+#### Features
+
+- ✅ **No hardcoded paths** - Works from any directory
+- ✅ **Zero dependencies** - Pure stdlib Python
+- ✅ **uv compatible** - Uses shebang for seamless execution
+- ✅ **Consolidated logic** - All generation and fix utilities in one tool
+
+---
+
 **PolyMath**: Making mathematics accessible, type-safe, and beautiful in Kotlin. 🧮✨
+
+#### _Notes:_ 
+
+Unit conversion information: https://www.mathconverse.com/en/Definitions/Units/Decabytes/

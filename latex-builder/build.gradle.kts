@@ -1,5 +1,7 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
-    kotlin("multiplatform") version "1.9.20"
+    kotlin("multiplatform")
 }
 
 repositories {
@@ -8,20 +10,20 @@ repositories {
 
 kotlin {
     jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "17"
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
         }
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
         }
     }
-    js().nodejs()
+    js(IR).nodejs()
     linuxX64()
 
     sourceSets {
         commonMain.dependencies {
             implementation(kotlin("test"))
-            api(projects.unitBase)
+            api(projects.unitsBase)
             api(projects.mathAlgebra)
             api(projects.mathGeometry)
             api(projects.physicsClassical)

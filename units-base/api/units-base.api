@@ -1,0 +1,1415 @@
+public abstract interface class com/measures/BaseUnit : com/measures/DoubleBase {
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/BaseUnit$DefaultImpls {
+	public static fun toUnitInternal (Lcom/measures/BaseUnit;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/Consts {
+	public static final field ATTO D
+	public static final field BILLION D
+	public static final field BILLIONTH D
+	public static final field CENTI D
+	public static final field DECI D
+	public static final field DEKA D
+	public static final field EXA D
+	public static final field FEMTO D
+	public static final field GIGA D
+	public static final field HECTO D
+	public static final field HUNDRED D
+	public static final field HUNDREDTH D
+	public static final field INSTANCE Lcom/measures/Consts;
+	public static final field KILO D
+	public static final field MEGA D
+	public static final field MICRO D
+	public static final field MILLI D
+	public static final field MILLION D
+	public static final field MILLIONTH D
+	public static final field NANO D
+	public static final field PETA D
+	public static final field PICO D
+	public static final field QUADRILLION D
+	public static final field QUADRILLIONTH D
+	public static final field QUINTILLION D
+	public static final field QUINTILLIONTH D
+	public static final field SEPTILLION D
+	public static final field SEPTILLIONTH D
+	public static final field SEXTILLION D
+	public static final field SEXTILLIONTH D
+	public static final field TEN D
+	public static final field TENTH D
+	public static final field TERA D
+	public static final field THOUSAND D
+	public static final field THOUSANDTH D
+	public static final field TRILLION D
+	public static final field TRILLIONTH D
+	public static final field YOCTO D
+	public static final field YOTTA D
+	public static final field ZEPTO D
+	public static final field ZETTA D
+}
+
+public abstract interface class com/measures/DoubleBase {
+	public abstract fun getValue ()D
+}
+
+public final class com/measures/PhysicalQuantity {
+	public fun <init> (DLcom/measures/PhysicalQuantity$PhysicalDimension;)V
+	public final fun component1 ()D
+	public final fun component2 ()Lcom/measures/PhysicalQuantity$PhysicalDimension;
+	public final fun copy (DLcom/measures/PhysicalQuantity$PhysicalDimension;)Lcom/measures/PhysicalQuantity;
+	public static synthetic fun copy$default (Lcom/measures/PhysicalQuantity;DLcom/measures/PhysicalQuantity$PhysicalDimension;ILjava/lang/Object;)Lcom/measures/PhysicalQuantity;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDimension ()Lcom/measures/PhysicalQuantity$PhysicalDimension;
+	public final fun getMagnitude ()D
+	public fun hashCode ()I
+	public final fun isCommensurableTo (Lcom/measures/PhysicalQuantity;)Z
+	public final fun plus (Lcom/measures/PhysicalQuantity;)V
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/measures/PhysicalQuantity$PhysicalDimension {
+	public fun <init> (IIIIIII)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun component3 ()I
+	public final fun component4 ()I
+	public final fun component5 ()I
+	public final fun component6 ()I
+	public final fun component7 ()I
+	public final fun copy (IIIIIII)Lcom/measures/PhysicalQuantity$PhysicalDimension;
+	public static synthetic fun copy$default (Lcom/measures/PhysicalQuantity$PhysicalDimension;IIIIIIIILjava/lang/Object;)Lcom/measures/PhysicalQuantity$PhysicalDimension;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAbsoluteTemperatureExp ()I
+	public final fun getAmountOfSubstanceExp ()I
+	public final fun getElectricCurrentExp ()I
+	public final fun getLengthExp ()I
+	public final fun getLuminousIntensityExp ()I
+	public final fun getMassExp ()I
+	public final fun getTimeExp ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/measures/UnitType : com/measures/DoubleBase {
+	public abstract fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public abstract fun asType (D)Lcom/measures/DoubleBase;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/UnitType$DefaultImpls {
+	public static fun toUnit (Lcom/measures/UnitType;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/acceleration/AccelerationKt {
+	public static final fun minusUnit (Lcom/measures/acceleration/UnitAcceleration;Lcom/measures/acceleration/UnitAcceleration;)D
+	public static final fun plusUnit (Lcom/measures/acceleration/UnitAcceleration;Lcom/measures/acceleration/UnitAcceleration;)D
+	public static final fun timesUnit (Lcom/measures/acceleration/UnitAcceleration;Lcom/measures/time/UnitTime;)D
+	public static final fun timesUnit (Lcom/measures/acceleration/UnitAcceleration;Lcom/measures/weight/UnitMass;)D
+}
+
+public final class com/measures/acceleration/MetersPerSecondPerSecond : com/measures/BaseUnit, com/measures/acceleration/UnitAcceleration {
+	public static final field Companion Lcom/measures/acceleration/MetersPerSecondPerSecond$Companion;
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-D2gSYzA ()D
+	public static fun asBaseUnit-D2gSYzA (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-HUjiI-0 (D)D
+	public static fun asType-HUjiI-0 (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/acceleration/MetersPerSecondPerSecond;
+	public static fun constructor-impl (D)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-HUjiI-0 (DLcom/measures/acceleration/UnitAcceleration;)D
+	public fun minus-HUjiI-0 (Lcom/measures/acceleration/UnitAcceleration;)D
+	public static fun plus-HUjiI-0 (DLcom/measures/acceleration/UnitAcceleration;)D
+	public fun plus-HUjiI-0 (Lcom/measures/acceleration/UnitAcceleration;)D
+	public static fun times-0OePHPc (DLcom/measures/weight/UnitMass;)D
+	public fun times-0OePHPc (Lcom/measures/weight/UnitMass;)D
+	public static fun times-WtbJ3mM (DLcom/measures/time/UnitTime;)D
+	public fun times-WtbJ3mM (Lcom/measures/time/UnitTime;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/acceleration/MetersPerSecondPerSecond$Companion {
+	public final fun from-nO9LCTo (Lcom/measures/distance/UnitDistance;Lcom/measures/time/UnitTime;)D
+}
+
+public final class com/measures/acceleration/MetersPerSecondPerSecondKt {
+	public static final fun toMetersPerSecondPerSecond (Lcom/measures/acceleration/UnitAcceleration;)D
+}
+
+public abstract interface class com/measures/acceleration/UnitAcceleration : com/measures/UnitType {
+	public abstract fun minus-HUjiI-0 (Lcom/measures/acceleration/UnitAcceleration;)D
+	public abstract fun plus-HUjiI-0 (Lcom/measures/acceleration/UnitAcceleration;)D
+	public abstract fun times-0OePHPc (Lcom/measures/weight/UnitMass;)D
+	public abstract fun times-WtbJ3mM (Lcom/measures/time/UnitTime;)D
+}
+
+public final class com/measures/acceleration/UnitAcceleration$DefaultImpls {
+	public static fun toUnit (Lcom/measures/acceleration/UnitAcceleration;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/amount/AmountKt {
+	public static final fun minusUnit (Lcom/measures/amount/UnitAmount;Lcom/measures/amount/UnitAmount;)D
+	public static final fun plusUnit (Lcom/measures/amount/UnitAmount;Lcom/measures/amount/UnitAmount;)D
+}
+
+public final class com/measures/amount/Mole : com/measures/BaseUnit, com/measures/amount/UnitAmount {
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-rHCo4XI ()D
+	public static fun asBaseUnit-rHCo4XI (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-euLs1zw (D)D
+	public static fun asType-euLs1zw (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/amount/Mole;
+	public static fun constructor-impl (D)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-euLs1zw (DLcom/measures/amount/UnitAmount;)D
+	public fun minus-euLs1zw (Lcom/measures/amount/UnitAmount;)D
+	public static fun plus-euLs1zw (DLcom/measures/amount/UnitAmount;)D
+	public fun plus-euLs1zw (Lcom/measures/amount/UnitAmount;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/amount/MoleKt {
+	public static final fun toMole (Lcom/measures/amount/UnitAmount;)D
+}
+
+public abstract interface class com/measures/amount/UnitAmount : com/measures/UnitType {
+	public abstract fun minus-euLs1zw (Lcom/measures/amount/UnitAmount;)D
+	public abstract fun plus-euLs1zw (Lcom/measures/amount/UnitAmount;)D
+}
+
+public final class com/measures/amount/UnitAmount$DefaultImpls {
+	public static fun toUnit (Lcom/measures/amount/UnitAmount;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/angle/AnglesKt {
+	public static final fun minusUnit (Lcom/measures/angle/UnitAngle;Lcom/measures/angle/UnitAngle;)D
+	public static final fun plusUnit (Lcom/measures/angle/UnitAngle;Lcom/measures/angle/UnitAngle;)D
+}
+
+public final class com/measures/angle/Radian : com/measures/BaseUnit, com/measures/angle/UnitAngle {
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-y8teA8Y ()D
+	public static fun asBaseUnit-y8teA8Y (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-IT8Kf4Y (D)D
+	public static fun asType-IT8Kf4Y (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/angle/Radian;
+	public static fun constructor-impl (D)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-IT8Kf4Y (DLcom/measures/angle/UnitAngle;)D
+	public fun minus-IT8Kf4Y (Lcom/measures/angle/UnitAngle;)D
+	public static fun plus-IT8Kf4Y (DLcom/measures/angle/UnitAngle;)D
+	public fun plus-IT8Kf4Y (Lcom/measures/angle/UnitAngle;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/angle/RadianKt {
+	public static final fun toRadian (Lcom/measures/angle/UnitAngle;)D
+}
+
+public abstract interface class com/measures/angle/UnitAngle : com/measures/UnitType {
+	public abstract fun minus-IT8Kf4Y (Lcom/measures/angle/UnitAngle;)D
+	public abstract fun plus-IT8Kf4Y (Lcom/measures/angle/UnitAngle;)D
+}
+
+public final class com/measures/angle/UnitAngle$DefaultImpls {
+	public static fun toUnit (Lcom/measures/angle/UnitAngle;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/area/AreaKt {
+	public static final fun divUnit (Lcom/measures/area/UnitArea;Lcom/measures/distance/UnitDistance;)D
+	public static final fun minusUnit (Lcom/measures/area/UnitArea;Lcom/measures/area/UnitArea;)D
+	public static final fun plusUnit (Lcom/measures/area/UnitArea;Lcom/measures/area/UnitArea;)D
+	public static final fun timesUnit (Lcom/measures/area/UnitArea;Lcom/measures/distance/UnitDistance;)D
+}
+
+public final class com/measures/area/SquareMeter : com/measures/BaseUnit, com/measures/area/UnitArea {
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-f0f0CAc ()D
+	public static fun asBaseUnit-f0f0CAc (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-dEq8eWo (D)D
+	public static fun asType-dEq8eWo (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/area/SquareMeter;
+	public static fun constructor-impl (D)D
+	public static fun div-PuCaF6k (DLcom/measures/distance/UnitDistance;)D
+	public fun div-PuCaF6k (Lcom/measures/distance/UnitDistance;)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-dEq8eWo (DLcom/measures/area/UnitArea;)D
+	public fun minus-dEq8eWo (Lcom/measures/area/UnitArea;)D
+	public static fun plus-dEq8eWo (DLcom/measures/area/UnitArea;)D
+	public fun plus-dEq8eWo (Lcom/measures/area/UnitArea;)D
+	public static fun times-jtirkjE (DLcom/measures/distance/UnitDistance;)D
+	public fun times-jtirkjE (Lcom/measures/distance/UnitDistance;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/area/SquareMeterKt {
+	public static final fun toSquareMeter (Lcom/measures/area/UnitArea;)D
+}
+
+public abstract interface class com/measures/area/UnitArea : com/measures/UnitType {
+	public abstract fun div-PuCaF6k (Lcom/measures/distance/UnitDistance;)D
+	public abstract fun minus-dEq8eWo (Lcom/measures/area/UnitArea;)D
+	public abstract fun plus-dEq8eWo (Lcom/measures/area/UnitArea;)D
+	public abstract fun times-jtirkjE (Lcom/measures/distance/UnitDistance;)D
+}
+
+public final class com/measures/area/UnitArea$DefaultImpls {
+	public static fun toUnit (Lcom/measures/area/UnitArea;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/capacitance/CapacitancesKt {
+	public static final fun minusUnit (Lcom/measures/capacitance/UnitCapacitance;Lcom/measures/capacitance/UnitCapacitance;)D
+	public static final fun plusUnit (Lcom/measures/capacitance/UnitCapacitance;Lcom/measures/capacitance/UnitCapacitance;)D
+}
+
+public final class com/measures/capacitance/Farad : com/measures/BaseUnit, com/measures/capacitance/UnitCapacitance {
+	public static final field Companion Lcom/measures/capacitance/Farad$Companion;
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-mp94IgE ()D
+	public static fun asBaseUnit-mp94IgE (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-HyzIWNA (D)D
+	public static fun asType-HyzIWNA (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/capacitance/Farad;
+	public static fun constructor-impl (D)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-HyzIWNA (DLcom/measures/capacitance/UnitCapacitance;)D
+	public fun minus-HyzIWNA (Lcom/measures/capacitance/UnitCapacitance;)D
+	public static fun plus-HyzIWNA (DLcom/measures/capacitance/UnitCapacitance;)D
+	public fun plus-HyzIWNA (Lcom/measures/capacitance/UnitCapacitance;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/capacitance/Farad$Companion {
+	public final fun from-KUt0eYw (Lcom/measures/current/UnitCurrent;Lcom/measures/time/UnitTime;Lcom/measures/weight/UnitMass;Lcom/measures/distance/UnitDistance;)D
+}
+
+public final class com/measures/capacitance/FaradKt {
+	public static final fun toFarad (Lcom/measures/capacitance/UnitCapacitance;)D
+}
+
+public abstract interface class com/measures/capacitance/UnitCapacitance : com/measures/UnitType {
+	public abstract fun minus-HyzIWNA (Lcom/measures/capacitance/UnitCapacitance;)D
+	public abstract fun plus-HyzIWNA (Lcom/measures/capacitance/UnitCapacitance;)D
+}
+
+public final class com/measures/capacitance/UnitCapacitance$DefaultImpls {
+	public static fun toUnit (Lcom/measures/capacitance/UnitCapacitance;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/charge/ChargesKt {
+	public static final fun divUnit (Lcom/measures/charge/UnitCharge;Lcom/measures/time/UnitTime;)D
+	public static final fun minusUnit (Lcom/measures/charge/UnitCharge;Lcom/measures/charge/UnitCharge;)D
+	public static final fun plusUnit (Lcom/measures/charge/UnitCharge;Lcom/measures/charge/UnitCharge;)D
+}
+
+public final class com/measures/charge/Coulomb : com/measures/BaseUnit, com/measures/charge/UnitCharge {
+	public static final field Companion Lcom/measures/charge/Coulomb$Companion;
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-BbjXgOM ()D
+	public static fun asBaseUnit-BbjXgOM (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-CnyxnuI (D)D
+	public static fun asType-CnyxnuI (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/charge/Coulomb;
+	public static fun constructor-impl (D)D
+	public static fun div-Juu55EM (DLcom/measures/time/UnitTime;)D
+	public fun div-Juu55EM (Lcom/measures/time/UnitTime;)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-CnyxnuI (DLcom/measures/charge/UnitCharge;)D
+	public fun minus-CnyxnuI (Lcom/measures/charge/UnitCharge;)D
+	public static fun plus-CnyxnuI (DLcom/measures/charge/UnitCharge;)D
+	public fun plus-CnyxnuI (Lcom/measures/charge/UnitCharge;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/charge/Coulomb$Companion {
+	public final fun from-y3EW9SI (Lcom/measures/current/UnitCurrent;Lcom/measures/time/UnitTime;)D
+}
+
+public final class com/measures/charge/CoulombKt {
+	public static final fun toCoulomb (Lcom/measures/charge/UnitCharge;)D
+}
+
+public abstract interface class com/measures/charge/UnitCharge : com/measures/UnitType {
+	public abstract fun div-Juu55EM (Lcom/measures/time/UnitTime;)D
+	public abstract fun minus-CnyxnuI (Lcom/measures/charge/UnitCharge;)D
+	public abstract fun plus-CnyxnuI (Lcom/measures/charge/UnitCharge;)D
+}
+
+public final class com/measures/charge/UnitCharge$DefaultImpls {
+	public static fun toUnit (Lcom/measures/charge/UnitCharge;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/current/Ampere : com/measures/BaseUnit, com/measures/current/UnitCurrent {
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-Q9AGS3s ()D
+	public static fun asBaseUnit-Q9AGS3s (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-Juu55EM (D)D
+	public static fun asType-Juu55EM (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/current/Ampere;
+	public static fun constructor-impl (D)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-Juu55EM (DLcom/measures/current/UnitCurrent;)D
+	public fun minus-Juu55EM (Lcom/measures/current/UnitCurrent;)D
+	public static fun plus-Juu55EM (DLcom/measures/current/UnitCurrent;)D
+	public fun plus-Juu55EM (Lcom/measures/current/UnitCurrent;)D
+	public static fun times-CnyxnuI (DLcom/measures/time/UnitTime;)D
+	public fun times-CnyxnuI (Lcom/measures/time/UnitTime;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/current/AmpereKt {
+	public static final fun toAmpere (Lcom/measures/current/UnitCurrent;)D
+}
+
+public final class com/measures/current/CurrentsKt {
+	public static final fun minusUnit (Lcom/measures/current/UnitCurrent;Lcom/measures/current/UnitCurrent;)D
+	public static final fun plusUnit (Lcom/measures/current/UnitCurrent;Lcom/measures/current/UnitCurrent;)D
+	public static final fun timesUnit (Lcom/measures/current/UnitCurrent;Lcom/measures/time/UnitTime;)D
+}
+
+public abstract interface class com/measures/current/UnitCurrent : com/measures/UnitType {
+	public abstract fun minus-Juu55EM (Lcom/measures/current/UnitCurrent;)D
+	public abstract fun plus-Juu55EM (Lcom/measures/current/UnitCurrent;)D
+	public abstract fun times-CnyxnuI (Lcom/measures/time/UnitTime;)D
+}
+
+public final class com/measures/current/UnitCurrent$DefaultImpls {
+	public static fun toUnit (Lcom/measures/current/UnitCurrent;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/distance/DistanceKt {
+	public static final fun divUnit (Lcom/measures/distance/UnitDistance;Lcom/measures/time/UnitTime;)D
+	public static final fun minusUnit (Lcom/measures/distance/UnitDistance;Lcom/measures/distance/UnitDistance;)D
+	public static final fun plusUnit (Lcom/measures/distance/UnitDistance;Lcom/measures/distance/UnitDistance;)D
+	public static final fun timesUnit (Lcom/measures/distance/UnitDistance;Lcom/measures/area/UnitArea;)D
+	public static final fun timesUnit (Lcom/measures/distance/UnitDistance;Lcom/measures/distance/UnitDistance;)D
+}
+
+public final class com/measures/distance/Meter : com/measures/BaseUnit, com/measures/distance/UnitDistance {
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-bV-vn4o ()D
+	public static fun asBaseUnit-bV-vn4o (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-PuCaF6k (D)D
+	public static fun asType-PuCaF6k (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/distance/Meter;
+	public static fun constructor-impl (D)D
+	public static fun div-WtbJ3mM (DLcom/measures/time/UnitTime;)D
+	public fun div-WtbJ3mM (Lcom/measures/time/UnitTime;)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-PuCaF6k (DLcom/measures/distance/UnitDistance;)D
+	public fun minus-PuCaF6k (Lcom/measures/distance/UnitDistance;)D
+	public static fun plus-PuCaF6k (DLcom/measures/distance/UnitDistance;)D
+	public fun plus-PuCaF6k (Lcom/measures/distance/UnitDistance;)D
+	public static fun times-dEq8eWo (DLcom/measures/distance/UnitDistance;)D
+	public fun times-dEq8eWo (Lcom/measures/distance/UnitDistance;)D
+	public static fun times-jtirkjE (DLcom/measures/area/UnitArea;)D
+	public fun times-jtirkjE (Lcom/measures/area/UnitArea;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/distance/MeterKt {
+	public static final fun toMeter (Lcom/measures/distance/UnitDistance;)D
+}
+
+public abstract interface class com/measures/distance/UnitDistance : com/measures/UnitType {
+	public abstract fun div-WtbJ3mM (Lcom/measures/time/UnitTime;)D
+	public abstract fun minus-PuCaF6k (Lcom/measures/distance/UnitDistance;)D
+	public abstract fun plus-PuCaF6k (Lcom/measures/distance/UnitDistance;)D
+	public abstract fun times-dEq8eWo (Lcom/measures/distance/UnitDistance;)D
+	public abstract fun times-jtirkjE (Lcom/measures/area/UnitArea;)D
+}
+
+public final class com/measures/distance/UnitDistance$DefaultImpls {
+	public static fun toUnit (Lcom/measures/distance/UnitDistance;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/energy/EnergiesKt {
+	public static final fun divUnit (Lcom/measures/energy/UnitEnergy;Lcom/measures/charge/UnitCharge;)D
+	public static final fun divUnit (Lcom/measures/energy/UnitEnergy;Lcom/measures/time/UnitTime;)D
+	public static final fun minusUnit (Lcom/measures/energy/UnitEnergy;Lcom/measures/energy/UnitEnergy;)D
+	public static final fun plusUnit (Lcom/measures/energy/UnitEnergy;Lcom/measures/energy/UnitEnergy;)D
+}
+
+public final class com/measures/energy/Joule : com/measures/BaseUnit, com/measures/energy/UnitEnergy {
+	public static final field Companion Lcom/measures/energy/Joule$Companion;
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-c9XqSHI ()D
+	public static fun asBaseUnit-c9XqSHI (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-AdTQ5jo (D)D
+	public static fun asType-AdTQ5jo (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/energy/Joule;
+	public static fun constructor-impl (D)D
+	public static fun div-LFydmeU (DLcom/measures/time/UnitTime;)D
+	public fun div-LFydmeU (Lcom/measures/time/UnitTime;)D
+	public static fun div-f0rbwW4 (DLcom/measures/charge/UnitCharge;)D
+	public fun div-f0rbwW4 (Lcom/measures/charge/UnitCharge;)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-AdTQ5jo (DLcom/measures/energy/UnitEnergy;)D
+	public fun minus-AdTQ5jo (Lcom/measures/energy/UnitEnergy;)D
+	public static fun plus-AdTQ5jo (DLcom/measures/energy/UnitEnergy;)D
+	public fun plus-AdTQ5jo (Lcom/measures/energy/UnitEnergy;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/energy/Joule$Companion {
+	public final fun from-UcyBnVs (Lcom/measures/weight/UnitMass;Lcom/measures/distance/UnitDistance;Lcom/measures/time/UnitTime;)D
+}
+
+public final class com/measures/energy/JouleKt {
+	public static final fun toJoule (Lcom/measures/energy/UnitEnergy;)D
+}
+
+public abstract interface class com/measures/energy/UnitEnergy : com/measures/UnitType {
+	public abstract fun div-LFydmeU (Lcom/measures/time/UnitTime;)D
+	public abstract fun div-f0rbwW4 (Lcom/measures/charge/UnitCharge;)D
+	public abstract fun minus-AdTQ5jo (Lcom/measures/energy/UnitEnergy;)D
+	public abstract fun plus-AdTQ5jo (Lcom/measures/energy/UnitEnergy;)D
+}
+
+public final class com/measures/energy/UnitEnergy$DefaultImpls {
+	public static fun toUnit (Lcom/measures/energy/UnitEnergy;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/flux/FluxesKt {
+	public static final fun minusUnit (Lcom/measures/flux/UnitFlux;Lcom/measures/flux/UnitFlux;)D
+	public static final fun plusUnit (Lcom/measures/flux/UnitFlux;Lcom/measures/flux/UnitFlux;)D
+}
+
+public abstract interface class com/measures/flux/UnitFlux : com/measures/UnitType {
+	public abstract fun minus-IisuqX8 (Lcom/measures/flux/UnitFlux;)D
+	public abstract fun plus-IisuqX8 (Lcom/measures/flux/UnitFlux;)D
+}
+
+public final class com/measures/flux/UnitFlux$DefaultImpls {
+	public static fun toUnit (Lcom/measures/flux/UnitFlux;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/flux/Weber : com/measures/BaseUnit, com/measures/flux/UnitFlux {
+	public static final field Companion Lcom/measures/flux/Weber$Companion;
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-Tj2V7HA ()D
+	public static fun asBaseUnit-Tj2V7HA (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-IisuqX8 (D)D
+	public static fun asType-IisuqX8 (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/flux/Weber;
+	public static fun constructor-impl (D)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-IisuqX8 (DLcom/measures/flux/UnitFlux;)D
+	public fun minus-IisuqX8 (Lcom/measures/flux/UnitFlux;)D
+	public static fun plus-IisuqX8 (DLcom/measures/flux/UnitFlux;)D
+	public fun plus-IisuqX8 (Lcom/measures/flux/UnitFlux;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/flux/Weber$Companion {
+	public final fun from-0WcfY_4 (Lcom/measures/weight/UnitMass;Lcom/measures/distance/UnitDistance;Lcom/measures/current/UnitCurrent;Lcom/measures/time/UnitTime;)D
+}
+
+public final class com/measures/flux/WeberKt {
+	public static final fun toWeber (Lcom/measures/flux/UnitFlux;)D
+}
+
+public final class com/measures/fluxdensity/FluxDensitiesKt {
+	public static final fun minusUnit (Lcom/measures/fluxdensity/UnitFluxDensity;Lcom/measures/fluxdensity/UnitFluxDensity;)D
+	public static final fun plusUnit (Lcom/measures/fluxdensity/UnitFluxDensity;Lcom/measures/fluxdensity/UnitFluxDensity;)D
+}
+
+public final class com/measures/fluxdensity/Tesla : com/measures/BaseUnit, com/measures/fluxdensity/UnitFluxDensity {
+	public static final field Companion Lcom/measures/fluxdensity/Tesla$Companion;
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-YIi1KwU ()D
+	public static fun asBaseUnit-YIi1KwU (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-lHdxrhA (D)D
+	public static fun asType-lHdxrhA (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/fluxdensity/Tesla;
+	public static fun constructor-impl (D)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-lHdxrhA (DLcom/measures/fluxdensity/UnitFluxDensity;)D
+	public fun minus-lHdxrhA (Lcom/measures/fluxdensity/UnitFluxDensity;)D
+	public static fun plus-lHdxrhA (DLcom/measures/fluxdensity/UnitFluxDensity;)D
+	public fun plus-lHdxrhA (Lcom/measures/fluxdensity/UnitFluxDensity;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/fluxdensity/Tesla$Companion {
+	public final fun from-EY0KEHU (Lcom/measures/weight/UnitMass;Lcom/measures/current/UnitCurrent;Lcom/measures/time/UnitTime;)D
+}
+
+public final class com/measures/fluxdensity/TeslaKt {
+	public static final fun toTesla (Lcom/measures/fluxdensity/UnitFluxDensity;)D
+}
+
+public abstract interface class com/measures/fluxdensity/UnitFluxDensity : com/measures/UnitType {
+	public abstract fun minus-lHdxrhA (Lcom/measures/fluxdensity/UnitFluxDensity;)D
+	public abstract fun plus-lHdxrhA (Lcom/measures/fluxdensity/UnitFluxDensity;)D
+}
+
+public final class com/measures/fluxdensity/UnitFluxDensity$DefaultImpls {
+	public static fun toUnit (Lcom/measures/fluxdensity/UnitFluxDensity;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/force/ForcesKt {
+	public static final fun divUnit (Lcom/measures/force/UnitForce;Lcom/measures/acceleration/UnitAcceleration;)D
+	public static final fun divUnit (Lcom/measures/force/UnitForce;Lcom/measures/area/UnitArea;)D
+	public static final fun divUnit (Lcom/measures/force/UnitForce;Lcom/measures/weight/UnitMass;)D
+	public static final fun minusUnit (Lcom/measures/force/UnitForce;Lcom/measures/force/UnitForce;)D
+	public static final fun plusUnit (Lcom/measures/force/UnitForce;Lcom/measures/force/UnitForce;)D
+	public static final fun timesUnit (Lcom/measures/force/UnitForce;Lcom/measures/distance/UnitDistance;)D
+}
+
+public final class com/measures/force/Newton : com/measures/BaseUnit, com/measures/force/UnitForce {
+	public static final field Companion Lcom/measures/force/Newton$Companion;
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-60VQ858 ()D
+	public static fun asBaseUnit-60VQ858 (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-0OePHPc (D)D
+	public static fun asType-0OePHPc (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/force/Newton;
+	public static fun constructor-impl (D)D
+	public static fun div-HUjiI-0 (DLcom/measures/weight/UnitMass;)D
+	public fun div-HUjiI-0 (Lcom/measures/weight/UnitMass;)D
+	public static fun div-fqnC8IA (DLcom/measures/area/UnitArea;)D
+	public fun div-fqnC8IA (Lcom/measures/area/UnitArea;)D
+	public static fun div-qf1KFg0 (DLcom/measures/acceleration/UnitAcceleration;)D
+	public fun div-qf1KFg0 (Lcom/measures/acceleration/UnitAcceleration;)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-0OePHPc (DLcom/measures/force/UnitForce;)D
+	public fun minus-0OePHPc (Lcom/measures/force/UnitForce;)D
+	public static fun plus-0OePHPc (DLcom/measures/force/UnitForce;)D
+	public fun plus-0OePHPc (Lcom/measures/force/UnitForce;)D
+	public static fun times-AdTQ5jo (DLcom/measures/distance/UnitDistance;)D
+	public fun times-AdTQ5jo (Lcom/measures/distance/UnitDistance;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/force/Newton$Companion {
+	public final fun from-9_v_mNY (Lcom/measures/weight/UnitMass;Lcom/measures/acceleration/UnitAcceleration;)D
+}
+
+public final class com/measures/force/NewtonKt {
+	public static final fun toNewton (Lcom/measures/force/UnitForce;)D
+}
+
+public abstract interface class com/measures/force/UnitForce : com/measures/UnitType {
+	public abstract fun div-HUjiI-0 (Lcom/measures/weight/UnitMass;)D
+	public abstract fun div-fqnC8IA (Lcom/measures/area/UnitArea;)D
+	public abstract fun div-qf1KFg0 (Lcom/measures/acceleration/UnitAcceleration;)D
+	public abstract fun minus-0OePHPc (Lcom/measures/force/UnitForce;)D
+	public abstract fun plus-0OePHPc (Lcom/measures/force/UnitForce;)D
+	public abstract fun times-AdTQ5jo (Lcom/measures/distance/UnitDistance;)D
+}
+
+public final class com/measures/force/UnitForce$DefaultImpls {
+	public static fun toUnit (Lcom/measures/force/UnitForce;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/frequency/FrequenciesKt {
+	public static final fun invUnit (Lcom/measures/frequency/UnitFrequency;)D
+	public static final fun minusUnit (Lcom/measures/frequency/UnitFrequency;Lcom/measures/frequency/UnitFrequency;)D
+	public static final fun plusUnit (Lcom/measures/frequency/UnitFrequency;Lcom/measures/frequency/UnitFrequency;)D
+}
+
+public final class com/measures/frequency/Hertz : com/measures/BaseUnit, com/measures/frequency/UnitFrequency {
+	public static final field Companion Lcom/measures/frequency/Hertz$Companion;
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-qy4p74A ()D
+	public static fun asBaseUnit-qy4p74A (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-kibY-Ro (D)D
+	public static fun asType-kibY-Ro (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/frequency/Hertz;
+	public static fun constructor-impl (D)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public fun inv-oUR5sBc ()D
+	public static fun inv-oUR5sBc (D)D
+	public static fun minus-kibY-Ro (DLcom/measures/frequency/UnitFrequency;)D
+	public fun minus-kibY-Ro (Lcom/measures/frequency/UnitFrequency;)D
+	public static fun plus-kibY-Ro (DLcom/measures/frequency/UnitFrequency;)D
+	public fun plus-kibY-Ro (Lcom/measures/frequency/UnitFrequency;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/frequency/Hertz$Companion {
+	public final fun from-kibY-Ro (Lcom/measures/time/UnitTime;)D
+}
+
+public final class com/measures/frequency/HertzKt {
+	public static final fun toHertz (Lcom/measures/frequency/UnitFrequency;)D
+}
+
+public abstract interface class com/measures/frequency/UnitFrequency : com/measures/UnitType {
+	public abstract fun inv-oUR5sBc ()D
+	public abstract fun minus-kibY-Ro (Lcom/measures/frequency/UnitFrequency;)D
+	public abstract fun plus-kibY-Ro (Lcom/measures/frequency/UnitFrequency;)D
+}
+
+public final class com/measures/frequency/UnitFrequency$DefaultImpls {
+	public static fun toUnit (Lcom/measures/frequency/UnitFrequency;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/inductance/Henry : com/measures/BaseUnit, com/measures/inductance/UnitInductance {
+	public static final field Companion Lcom/measures/inductance/Henry$Companion;
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-OCQh5Qk ()D
+	public static fun asBaseUnit-OCQh5Qk (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-JSEBfvY (D)D
+	public static fun asType-JSEBfvY (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/inductance/Henry;
+	public static fun constructor-impl (D)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-JSEBfvY (DLcom/measures/inductance/UnitInductance;)D
+	public fun minus-JSEBfvY (Lcom/measures/inductance/UnitInductance;)D
+	public static fun plus-JSEBfvY (DLcom/measures/inductance/UnitInductance;)D
+	public fun plus-JSEBfvY (Lcom/measures/inductance/UnitInductance;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/inductance/Henry$Companion {
+	public final fun from-Rrp-QfU (Lcom/measures/weight/UnitMass;Lcom/measures/distance/UnitDistance;Lcom/measures/current/UnitCurrent;Lcom/measures/time/UnitTime;)D
+}
+
+public final class com/measures/inductance/HenryKt {
+	public static final fun toHenry (Lcom/measures/inductance/UnitInductance;)D
+}
+
+public final class com/measures/inductance/InductancesKt {
+	public static final fun minusUnit (Lcom/measures/inductance/UnitInductance;Lcom/measures/inductance/UnitInductance;)D
+	public static final fun plusUnit (Lcom/measures/inductance/UnitInductance;Lcom/measures/inductance/UnitInductance;)D
+}
+
+public abstract interface class com/measures/inductance/UnitInductance : com/measures/UnitType {
+	public abstract fun minus-JSEBfvY (Lcom/measures/inductance/UnitInductance;)D
+	public abstract fun plus-JSEBfvY (Lcom/measures/inductance/UnitInductance;)D
+}
+
+public final class com/measures/inductance/UnitInductance$DefaultImpls {
+	public static fun toUnit (Lcom/measures/inductance/UnitInductance;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/luminous/Candela : com/measures/BaseUnit, com/measures/luminous/UnitLuminous {
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-Ng6xwAU ()D
+	public static fun asBaseUnit-Ng6xwAU (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-yngy7HM (D)D
+	public static fun asType-yngy7HM (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/luminous/Candela;
+	public static fun constructor-impl (D)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-yngy7HM (DLcom/measures/luminous/UnitLuminous;)D
+	public fun minus-yngy7HM (Lcom/measures/luminous/UnitLuminous;)D
+	public static fun plus-yngy7HM (DLcom/measures/luminous/UnitLuminous;)D
+	public fun plus-yngy7HM (Lcom/measures/luminous/UnitLuminous;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/luminous/CandelaKt {
+	public static final fun toCandela (Lcom/measures/luminous/UnitLuminous;)D
+}
+
+public final class com/measures/luminous/LuminousKt {
+	public static final fun minusUnit (Lcom/measures/luminous/UnitLuminous;Lcom/measures/luminous/UnitLuminous;)D
+	public static final fun plusUnit (Lcom/measures/luminous/UnitLuminous;Lcom/measures/luminous/UnitLuminous;)D
+}
+
+public abstract interface class com/measures/luminous/UnitLuminous : com/measures/UnitType {
+	public abstract fun minus-yngy7HM (Lcom/measures/luminous/UnitLuminous;)D
+	public abstract fun plus-yngy7HM (Lcom/measures/luminous/UnitLuminous;)D
+}
+
+public final class com/measures/luminous/UnitLuminous$DefaultImpls {
+	public static fun toUnit (Lcom/measures/luminous/UnitLuminous;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/potential/PotentialsKt {
+	public static final fun minusUnit (Lcom/measures/potential/UnitPotential;Lcom/measures/potential/UnitPotential;)D
+	public static final fun plusUnit (Lcom/measures/potential/UnitPotential;Lcom/measures/potential/UnitPotential;)D
+	public static final fun timesUnit (Lcom/measures/potential/UnitPotential;Lcom/measures/charge/UnitCharge;)D
+}
+
+public abstract interface class com/measures/potential/UnitPotential : com/measures/UnitType {
+	public abstract fun minus-f0rbwW4 (Lcom/measures/potential/UnitPotential;)D
+	public abstract fun plus-f0rbwW4 (Lcom/measures/potential/UnitPotential;)D
+	public abstract fun times-AdTQ5jo (Lcom/measures/charge/UnitCharge;)D
+}
+
+public final class com/measures/potential/UnitPotential$DefaultImpls {
+	public static fun toUnit (Lcom/measures/potential/UnitPotential;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/potential/Volt : com/measures/BaseUnit, com/measures/potential/UnitPotential {
+	public static final field Companion Lcom/measures/potential/Volt$Companion;
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-SZVXY9g ()D
+	public static fun asBaseUnit-SZVXY9g (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-f0rbwW4 (D)D
+	public static fun asType-f0rbwW4 (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/potential/Volt;
+	public static fun constructor-impl (D)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-f0rbwW4 (DLcom/measures/potential/UnitPotential;)D
+	public fun minus-f0rbwW4 (Lcom/measures/potential/UnitPotential;)D
+	public static fun plus-f0rbwW4 (DLcom/measures/potential/UnitPotential;)D
+	public fun plus-f0rbwW4 (Lcom/measures/potential/UnitPotential;)D
+	public static fun times-AdTQ5jo (DLcom/measures/charge/UnitCharge;)D
+	public fun times-AdTQ5jo (Lcom/measures/charge/UnitCharge;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/potential/Volt$Companion {
+	public final fun from-JHA4GCI (Lcom/measures/weight/UnitMass;Lcom/measures/distance/UnitDistance;Lcom/measures/current/UnitCurrent;Lcom/measures/time/UnitTime;)D
+}
+
+public final class com/measures/potential/VoltKt {
+	public static final fun toVolt (Lcom/measures/potential/UnitPotential;)D
+}
+
+public final class com/measures/power/PowersKt {
+	public static final fun minusUnit (Lcom/measures/power/UnitPower;Lcom/measures/power/UnitPower;)D
+	public static final fun plusUnit (Lcom/measures/power/UnitPower;Lcom/measures/power/UnitPower;)D
+	public static final fun timesUnit (Lcom/measures/power/UnitPower;Lcom/measures/time/UnitTime;)D
+}
+
+public abstract interface class com/measures/power/UnitPower : com/measures/UnitType {
+	public abstract fun minus-LFydmeU (Lcom/measures/power/UnitPower;)D
+	public abstract fun plus-LFydmeU (Lcom/measures/power/UnitPower;)D
+	public abstract fun times-AdTQ5jo (Lcom/measures/time/UnitTime;)D
+}
+
+public final class com/measures/power/UnitPower$DefaultImpls {
+	public static fun toUnit (Lcom/measures/power/UnitPower;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/power/Watt : com/measures/BaseUnit, com/measures/power/UnitPower {
+	public static final field Companion Lcom/measures/power/Watt$Companion;
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-PUUnNFY ()D
+	public static fun asBaseUnit-PUUnNFY (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-LFydmeU (D)D
+	public static fun asType-LFydmeU (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/power/Watt;
+	public static fun constructor-impl (D)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-LFydmeU (DLcom/measures/power/UnitPower;)D
+	public fun minus-LFydmeU (Lcom/measures/power/UnitPower;)D
+	public static fun plus-LFydmeU (DLcom/measures/power/UnitPower;)D
+	public fun plus-LFydmeU (Lcom/measures/power/UnitPower;)D
+	public static fun times-AdTQ5jo (DLcom/measures/time/UnitTime;)D
+	public fun times-AdTQ5jo (Lcom/measures/time/UnitTime;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/power/Watt$Companion {
+	public final fun from-anNBZRw (Lcom/measures/weight/UnitMass;Lcom/measures/distance/UnitDistance;Lcom/measures/time/UnitTime;)D
+}
+
+public final class com/measures/power/WattKt {
+	public static final fun toWatt (Lcom/measures/power/UnitPower;)D
+}
+
+public final class com/measures/pressure/Pascal : com/measures/BaseUnit, com/measures/pressure/UnitPressure {
+	public static final field Companion Lcom/measures/pressure/Pascal$Companion;
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-jQsmZDw ()D
+	public static fun asBaseUnit-jQsmZDw (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-fqnC8IA (D)D
+	public static fun asType-fqnC8IA (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/pressure/Pascal;
+	public static fun constructor-impl (D)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-fqnC8IA (DLcom/measures/pressure/UnitPressure;)D
+	public fun minus-fqnC8IA (Lcom/measures/pressure/UnitPressure;)D
+	public static fun plus-fqnC8IA (DLcom/measures/pressure/UnitPressure;)D
+	public fun plus-fqnC8IA (Lcom/measures/pressure/UnitPressure;)D
+	public static fun times-0OePHPc (DLcom/measures/area/UnitArea;)D
+	public fun times-0OePHPc (Lcom/measures/area/UnitArea;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/pressure/Pascal$Companion {
+	public final fun from-FUskqv4 (Lcom/measures/weight/UnitMass;Lcom/measures/distance/UnitDistance;Lcom/measures/time/UnitTime;)D
+}
+
+public final class com/measures/pressure/PascalKt {
+	public static final fun toPascal (Lcom/measures/pressure/UnitPressure;)D
+}
+
+public final class com/measures/pressure/PressuresKt {
+	public static final fun minusUnit (Lcom/measures/pressure/UnitPressure;Lcom/measures/pressure/UnitPressure;)D
+	public static final fun plusUnit (Lcom/measures/pressure/UnitPressure;Lcom/measures/pressure/UnitPressure;)D
+	public static final fun timesUnit (Lcom/measures/pressure/UnitPressure;Lcom/measures/area/UnitArea;)D
+}
+
+public abstract interface class com/measures/pressure/UnitPressure : com/measures/UnitType {
+	public abstract fun minus-fqnC8IA (Lcom/measures/pressure/UnitPressure;)D
+	public abstract fun plus-fqnC8IA (Lcom/measures/pressure/UnitPressure;)D
+	public abstract fun times-0OePHPc (Lcom/measures/area/UnitArea;)D
+}
+
+public final class com/measures/pressure/UnitPressure$DefaultImpls {
+	public static fun toUnit (Lcom/measures/pressure/UnitPressure;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/resistance/Ohm : com/measures/BaseUnit, com/measures/resistance/UnitResistance {
+	public static final field Companion Lcom/measures/resistance/Ohm$Companion;
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-KqbLhxw ()D
+	public static fun asBaseUnit-KqbLhxw (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-abKNkgY (D)D
+	public static fun asType-abKNkgY (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/resistance/Ohm;
+	public static fun constructor-impl (D)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-abKNkgY (DLcom/measures/resistance/UnitResistance;)D
+	public fun minus-abKNkgY (Lcom/measures/resistance/UnitResistance;)D
+	public static fun plus-abKNkgY (DLcom/measures/resistance/UnitResistance;)D
+	public fun plus-abKNkgY (Lcom/measures/resistance/UnitResistance;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/resistance/Ohm$Companion {
+	public final fun from-N_LX1is (Lcom/measures/weight/UnitMass;Lcom/measures/distance/UnitDistance;Lcom/measures/current/UnitCurrent;Lcom/measures/time/UnitTime;)D
+}
+
+public final class com/measures/resistance/OhmKt {
+	public static final fun toOhm (Lcom/measures/resistance/UnitResistance;)D
+}
+
+public final class com/measures/resistance/ResistancesKt {
+	public static final fun minusUnit (Lcom/measures/resistance/UnitResistance;Lcom/measures/resistance/UnitResistance;)D
+	public static final fun plusUnit (Lcom/measures/resistance/UnitResistance;Lcom/measures/resistance/UnitResistance;)D
+}
+
+public abstract interface class com/measures/resistance/UnitResistance : com/measures/UnitType {
+	public abstract fun minus-abKNkgY (Lcom/measures/resistance/UnitResistance;)D
+	public abstract fun plus-abKNkgY (Lcom/measures/resistance/UnitResistance;)D
+}
+
+public final class com/measures/resistance/UnitResistance$DefaultImpls {
+	public static fun toUnit (Lcom/measures/resistance/UnitResistance;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/solidangle/SolidAnglesKt {
+	public static final fun minusUnit (Lcom/measures/solidangle/UnitSolidAngle;Lcom/measures/solidangle/UnitSolidAngle;)D
+	public static final fun plusUnit (Lcom/measures/solidangle/UnitSolidAngle;Lcom/measures/solidangle/UnitSolidAngle;)D
+}
+
+public final class com/measures/solidangle/Steradian : com/measures/BaseUnit, com/measures/solidangle/UnitSolidAngle {
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-ccrJJgg ()D
+	public static fun asBaseUnit-ccrJJgg (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-5J-kPHg (D)D
+	public static fun asType-5J-kPHg (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/solidangle/Steradian;
+	public static fun constructor-impl (D)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-5J-kPHg (DLcom/measures/solidangle/UnitSolidAngle;)D
+	public fun minus-5J-kPHg (Lcom/measures/solidangle/UnitSolidAngle;)D
+	public static fun plus-5J-kPHg (DLcom/measures/solidangle/UnitSolidAngle;)D
+	public fun plus-5J-kPHg (Lcom/measures/solidangle/UnitSolidAngle;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/solidangle/SteradianKt {
+	public static final fun toSteradian (Lcom/measures/solidangle/UnitSolidAngle;)D
+}
+
+public abstract interface class com/measures/solidangle/UnitSolidAngle : com/measures/UnitType {
+	public abstract fun minus-5J-kPHg (Lcom/measures/solidangle/UnitSolidAngle;)D
+	public abstract fun plus-5J-kPHg (Lcom/measures/solidangle/UnitSolidAngle;)D
+}
+
+public final class com/measures/solidangle/UnitSolidAngle$DefaultImpls {
+	public static fun toUnit (Lcom/measures/solidangle/UnitSolidAngle;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/temperature/Kelvin : com/measures/BaseUnit, com/measures/temperature/UnitTemperature {
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-YcCgJZQ ()D
+	public static fun asBaseUnit-YcCgJZQ (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-lPtKYyk (D)D
+	public static fun asType-lPtKYyk (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/temperature/Kelvin;
+	public static fun constructor-impl (D)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static final fun minus-lPtKYyk (DLcom/measures/temperature/UnitTemperature;)D
+	public static final fun plus-lPtKYyk (DLcom/measures/temperature/UnitTemperature;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/temperature/KelvinKt {
+	public static final fun toKelvin (Lcom/measures/temperature/UnitTemperature;)D
+}
+
+public final class com/measures/temperature/TemperaturesKt {
+	public static final fun minusUnit (Lcom/measures/temperature/UnitTemperature;Lcom/measures/temperature/UnitTemperature;)D
+	public static final fun plusUnit (Lcom/measures/temperature/UnitTemperature;Lcom/measures/temperature/UnitTemperature;)D
+}
+
+public abstract interface class com/measures/temperature/UnitTemperature : com/measures/UnitType {
+}
+
+public final class com/measures/temperature/UnitTemperature$DefaultImpls {
+	public static fun toUnit (Lcom/measures/temperature/UnitTemperature;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/time/Second : com/measures/BaseUnit, com/measures/time/UnitTime {
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-oUR5sBc ()D
+	public static fun asBaseUnit-oUR5sBc (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-9Vh6O94 (D)D
+	public static fun asType-9Vh6O94 (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/time/Second;
+	public static fun constructor-impl (D)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public fun inv-qy4p74A ()D
+	public static fun inv-qy4p74A (D)D
+	public static fun minus-9Vh6O94 (DLcom/measures/time/UnitTime;)D
+	public fun minus-9Vh6O94 (Lcom/measures/time/UnitTime;)D
+	public static fun plus-9Vh6O94 (DLcom/measures/time/UnitTime;)D
+	public fun plus-9Vh6O94 (Lcom/measures/time/UnitTime;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/time/SecondKt {
+	public static final fun toSecond (Lcom/measures/time/UnitTime;)D
+}
+
+public final class com/measures/time/TimesKt {
+	public static final fun invUnit (Lcom/measures/time/UnitTime;)D
+	public static final fun minusUnit (Lcom/measures/time/UnitTime;Lcom/measures/time/UnitTime;)D
+	public static final fun plusUnit (Lcom/measures/time/UnitTime;Lcom/measures/time/UnitTime;)D
+}
+
+public abstract interface class com/measures/time/UnitTime : com/measures/UnitType {
+	public abstract fun inv-qy4p74A ()D
+	public abstract fun minus-9Vh6O94 (Lcom/measures/time/UnitTime;)D
+	public abstract fun plus-9Vh6O94 (Lcom/measures/time/UnitTime;)D
+}
+
+public final class com/measures/time/UnitTime$DefaultImpls {
+	public static fun toUnit (Lcom/measures/time/UnitTime;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/velocity/MetersPerSecond : com/measures/BaseUnit, com/measures/velocity/UnitVelocity {
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-zmzHLsk ()D
+	public static fun asBaseUnit-zmzHLsk (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-WtbJ3mM (D)D
+	public static fun asType-WtbJ3mM (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/velocity/MetersPerSecond;
+	public static fun constructor-impl (D)D
+	public static fun div-HUjiI-0 (DLcom/measures/time/UnitTime;)D
+	public fun div-HUjiI-0 (Lcom/measures/time/UnitTime;)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-WtbJ3mM (DLcom/measures/velocity/UnitVelocity;)D
+	public fun minus-WtbJ3mM (Lcom/measures/velocity/UnitVelocity;)D
+	public static fun plus-WtbJ3mM (DLcom/measures/velocity/UnitVelocity;)D
+	public fun plus-WtbJ3mM (Lcom/measures/velocity/UnitVelocity;)D
+	public static fun times-PuCaF6k (DLcom/measures/time/UnitTime;)D
+	public fun times-PuCaF6k (Lcom/measures/time/UnitTime;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/velocity/MetersPerSecondKt {
+	public static final fun toMetersPerSecond (Lcom/measures/velocity/UnitVelocity;)D
+}
+
+public abstract interface class com/measures/velocity/UnitVelocity : com/measures/UnitType {
+	public abstract fun div-HUjiI-0 (Lcom/measures/time/UnitTime;)D
+	public abstract fun minus-WtbJ3mM (Lcom/measures/velocity/UnitVelocity;)D
+	public abstract fun plus-WtbJ3mM (Lcom/measures/velocity/UnitVelocity;)D
+	public abstract fun times-PuCaF6k (Lcom/measures/time/UnitTime;)D
+}
+
+public final class com/measures/velocity/UnitVelocity$DefaultImpls {
+	public static fun toUnit (Lcom/measures/velocity/UnitVelocity;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/velocity/VelocityKt {
+	public static final fun divUnit (Lcom/measures/velocity/UnitVelocity;Lcom/measures/time/UnitTime;)D
+	public static final fun minusUnit (Lcom/measures/velocity/UnitVelocity;Lcom/measures/velocity/UnitVelocity;)D
+	public static final fun plusUnit (Lcom/measures/velocity/UnitVelocity;Lcom/measures/velocity/UnitVelocity;)D
+	public static final fun timesUnit (Lcom/measures/velocity/UnitVelocity;Lcom/measures/time/UnitTime;)D
+}
+
+public final class com/measures/volume/Liter : com/measures/BaseUnit, com/measures/volume/UnitVolume {
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-0pE_UVY ()D
+	public static fun asBaseUnit-0pE_UVY (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-jtirkjE (D)D
+	public static fun asType-jtirkjE (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/volume/Liter;
+	public static fun constructor-impl (D)D
+	public static fun div-PuCaF6k (DLcom/measures/area/UnitArea;)D
+	public fun div-PuCaF6k (Lcom/measures/area/UnitArea;)D
+	public static fun div-dEq8eWo (DLcom/measures/distance/UnitDistance;)D
+	public fun div-dEq8eWo (Lcom/measures/distance/UnitDistance;)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-jtirkjE (DLcom/measures/volume/UnitVolume;)D
+	public fun minus-jtirkjE (Lcom/measures/volume/UnitVolume;)D
+	public static fun plus-jtirkjE (DLcom/measures/volume/UnitVolume;)D
+	public fun plus-jtirkjE (Lcom/measures/volume/UnitVolume;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/volume/LiterKt {
+	public static final fun toLiter (Lcom/measures/volume/UnitVolume;)D
+}
+
+public abstract interface class com/measures/volume/UnitVolume : com/measures/UnitType {
+	public abstract fun div-PuCaF6k (Lcom/measures/area/UnitArea;)D
+	public abstract fun div-dEq8eWo (Lcom/measures/distance/UnitDistance;)D
+	public abstract fun minus-jtirkjE (Lcom/measures/volume/UnitVolume;)D
+	public abstract fun plus-jtirkjE (Lcom/measures/volume/UnitVolume;)D
+}
+
+public final class com/measures/volume/UnitVolume$DefaultImpls {
+	public static fun toUnit (Lcom/measures/volume/UnitVolume;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/volume/VolumesKt {
+	public static final fun divUnit (Lcom/measures/volume/UnitVolume;Lcom/measures/area/UnitArea;)D
+	public static final fun divUnit (Lcom/measures/volume/UnitVolume;Lcom/measures/distance/UnitDistance;)D
+	public static final fun minusUnit (Lcom/measures/volume/UnitVolume;Lcom/measures/volume/UnitVolume;)D
+	public static final fun plusUnit (Lcom/measures/volume/UnitVolume;Lcom/measures/volume/UnitVolume;)D
+}
+
+public final class com/measures/weight/KiloGram : com/measures/BaseUnit, com/measures/weight/UnitMass {
+	public synthetic fun asBaseUnit ()Lcom/measures/BaseUnit;
+	public fun asBaseUnit-iuq-jRg ()D
+	public static fun asBaseUnit-iuq-jRg (D)D
+	public synthetic fun asType (D)Lcom/measures/DoubleBase;
+	public fun asType-qf1KFg0 (D)D
+	public static fun asType-qf1KFg0 (DD)D
+	public static final synthetic fun box-impl (D)Lcom/measures/weight/KiloGram;
+	public static fun constructor-impl (D)D
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun getValue ()D
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static fun minus-qf1KFg0 (DLcom/measures/weight/UnitMass;)D
+	public fun minus-qf1KFg0 (Lcom/measures/weight/UnitMass;)D
+	public static fun plus-qf1KFg0 (DLcom/measures/weight/UnitMass;)D
+	public fun plus-qf1KFg0 (Lcom/measures/weight/UnitMass;)D
+	public static fun times-0OePHPc (DLcom/measures/acceleration/UnitAcceleration;)D
+	public fun times-0OePHPc (Lcom/measures/acceleration/UnitAcceleration;)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public fun toUnit (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnit-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public fun toUnitInternal (Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public static fun toUnitInternal-impl (DLcom/measures/UnitType;)Lcom/measures/DoubleBase;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class com/measures/weight/KiloGramKt {
+	public static final fun toKiloGram (Lcom/measures/weight/UnitMass;)D
+}
+
+public abstract interface class com/measures/weight/UnitMass : com/measures/UnitType {
+	public abstract fun minus-qf1KFg0 (Lcom/measures/weight/UnitMass;)D
+	public abstract fun plus-qf1KFg0 (Lcom/measures/weight/UnitMass;)D
+	public abstract fun times-0OePHPc (Lcom/measures/acceleration/UnitAcceleration;)D
+}
+
+public final class com/measures/weight/UnitMass$DefaultImpls {
+	public static fun toUnit (Lcom/measures/weight/UnitMass;Lcom/measures/UnitType;)Lcom/measures/DoubleBase;
+}
+
+public final class com/measures/weight/WeightsKt {
+	public static final fun minusUnit (Lcom/measures/weight/UnitMass;Lcom/measures/weight/UnitMass;)D
+	public static final fun plusUnit (Lcom/measures/weight/UnitMass;Lcom/measures/weight/UnitMass;)D
+	public static final fun timesUnit (Lcom/measures/weight/UnitMass;Lcom/measures/acceleration/UnitAcceleration;)D
+}
+

@@ -13,16 +13,12 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "tex-builder"
 
-include(":lib-graph")
+// include(":lib-graph")  // Temporarily disabled due to configuration issues
 include(":math-base")
 include(":math-algebra")
 include(":math-geometry")
 include(":physics-classical")
-include(":unit-american-customary")
-include(":unit-base")
-include(":unit-english-imperial")
-include(":unit-english-international")
-include(":unit-metric")
-include(":unit-weight-avoirdupois")
-include(":unit-weight-troy")
+include(":units-base")
+include(":units-common")
+include(":units-data")
 include(":latex-builder")
