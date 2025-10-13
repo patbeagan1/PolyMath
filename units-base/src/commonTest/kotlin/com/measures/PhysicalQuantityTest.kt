@@ -52,7 +52,7 @@ class PhysicalQuantityTest {
     fun `toUnit works with velocity`() {
         val velocity = distance(1.0) / time(1.0)
 
-        val message = (distance(1.0).inMeters / Second(10.0))
+        val message = (velocity.inMetersPerSecond / Second(10.0))
         println(message)
     }
 }

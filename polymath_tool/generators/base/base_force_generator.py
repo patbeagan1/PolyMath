@@ -68,7 +68,7 @@ import com.measures.acceleration.UnitAcceleration
 import com.measures.energy.Joule
 import com.measures.pressure.Pascal
 import com.measures.acceleration.MetersPerSecondPerSecond
-import com.measures.weight.KiloGram
+import com.measures.weight.Kilogram
 import kotlin.jvm.JvmInline
 
 @JvmInline
@@ -81,7 +81,7 @@ value class {unit_name}(override val value: Double) : UnitForce<{unit_name}> {{
     override operator fun div(other: UnitArea<*>): Pascal = UnitForce.divUnit(this, other)
     override operator fun times(other: UnitDistance<*>): Joule = UnitForce.timesUnit(this, other)
     override operator fun div(other: UnitMass<*>): MetersPerSecondPerSecond = UnitForce.divUnit(this, other)
-    override operator fun div(other: UnitAcceleration<*>): KiloGram = UnitForce.divUnit(this, other)
+    override operator fun div(other: UnitAcceleration<*>): Kilogram = UnitForce.divUnit(this, other)
 }}
 
 fun UnitForce<*>.to{unit_name}() = toUnit({unit_name}(1.0))

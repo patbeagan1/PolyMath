@@ -5,17 +5,17 @@ import com.measures.UnitType
 import com.measures.acceleration.UnitAcceleration
 import com.measures.force.Newton
 
-interface UnitMass<T : DoubleBase> : UnitType<T, KiloGram> {
-    operator fun plus(other: UnitMass<*>): KiloGram
-    operator fun minus(other: UnitMass<*>): KiloGram
+interface UnitMass<T : DoubleBase> : UnitType<T, Kilogram> {
+    operator fun plus(other: UnitMass<*>): Kilogram
+    operator fun minus(other: UnitMass<*>): Kilogram
     operator fun times(other: UnitAcceleration<*>): Newton
 
     companion object {
-        fun plusUnit(mass: UnitMass<*>, other: UnitMass<*>): KiloGram =
-            KiloGram(mass.asBaseUnit().value + other.asBaseUnit().value)
+        fun plusUnit(mass: UnitMass<*>, other: UnitMass<*>): Kilogram =
+            Kilogram(mass.asBaseUnit().value + other.asBaseUnit().value)
 
-        fun minusUnit(mass: UnitMass<*>, other: UnitMass<*>): KiloGram =
-            KiloGram(mass.asBaseUnit().value - other.asBaseUnit().value)
+        fun minusUnit(mass: UnitMass<*>, other: UnitMass<*>): Kilogram =
+            Kilogram(mass.asBaseUnit().value - other.asBaseUnit().value)
 
         // Weight × Acceleration = Force (mass × acceleration = force)
         fun timesUnit(mass: UnitMass<*>, other: UnitAcceleration<*>): Newton =

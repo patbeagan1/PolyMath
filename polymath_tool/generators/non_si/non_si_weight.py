@@ -19,6 +19,6 @@ class NonSiWeightGenerator(BaseWeightGenerator):
     def _get_units(self):
         """Get non-SI weight units."""
         return [
-            ("Carat", "KiloGram(value * 0.0002)"),
+            ("Carat", "Kilogram(value * 0.0002)"),
         ]
 

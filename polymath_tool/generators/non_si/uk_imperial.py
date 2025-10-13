@@ -116,12 +116,12 @@ class UkWeightGenerator(BaseWeightGenerator):
             ("UKGrain", "UKPound(value / 7000).asBaseUnit()"),  # 1/7000 pound
             ("UKDrachm", "UKPound(value / 256).asBaseUnit()"),  # 1/256 pound
             ("UKOunce", "UKPound(value / 16).asBaseUnit()"),    # 1/16 pound
-            ("UKPound", "KiloGram(value * 0.45359237)"),        # Base unit for UK system
+            ("UKPound", "Kilogram(value * 0.45359237)"),        # Base unit for UK system
             ("UKStone", "UKPound(value * 14).asBaseUnit()"),    # 14 pounds
             ("UKQuarter", "UKPound(value * 28).asBaseUnit()"),  # 28 pounds
             ("UKHundredweight", "UKPound(value * 112).asBaseUnit()"),  # 112 pounds
             ("UKLongTon", "UKPound(value * 2240).asBaseUnit()"),  # 2240 pounds
 
             # Other units
-            ("UKSlug", "KiloGram(value * 14.59390294).asBaseUnit()"),
+            ("UKSlug", "Kilogram(value * 14.59390294).asBaseUnit()"),
         ]

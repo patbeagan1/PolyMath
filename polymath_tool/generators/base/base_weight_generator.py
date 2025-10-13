@@ -61,7 +61,7 @@ class BaseWeightGenerator(ABC):
 
 {imports_section}import com.measures.acceleration.UnitAcceleration
 import com.measures.force.Newton
-import com.measures.weight.KiloGram
+import com.measures.weight.Kilogram
 import com.measures.weight.UnitMass
 import kotlin.jvm.JvmInline
 
@@ -70,8 +70,8 @@ value class {unit_name}(override val value: Double) : UnitMass<{unit_name}> {{
     override fun asType(d: Double) = {unit_name}(d)
     override fun asBaseUnit() = {base_conversion}
 
-    override fun plus(other: UnitMass<*>): KiloGram = UnitMass.plusUnit(this, other)
-    override fun minus(other: UnitMass<*>): KiloGram = UnitMass.minusUnit(this, other)
+    override fun plus(other: UnitMass<*>): Kilogram = UnitMass.plusUnit(this, other)
+    override fun minus(other: UnitMass<*>): Kilogram = UnitMass.minusUnit(this, other)
     override fun times(other: UnitAcceleration<*>): Newton = UnitMass.timesUnit(this, other)
 }}
 

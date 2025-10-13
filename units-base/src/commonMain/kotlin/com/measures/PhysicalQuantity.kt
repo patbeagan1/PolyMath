@@ -9,7 +9,7 @@ import com.measures.pressure.Pascal
 import com.measures.time.Second
 import com.measures.velocity.MetersPerSecond
 import com.measures.volume.Liter
-import com.measures.weight.KiloGram
+import com.measures.weight.Kilogram
 
 data class PhysicalQuantity(
     val magnitude: Double,
@@ -67,8 +67,8 @@ data class PhysicalQuantity(
     val inPascals: Pascal
         get() = convert(PhysicalDimension.pressure) { Pascal(magnitude) }
 
-    val inKilograms: KiloGram
-        get() = convert(PhysicalDimension.mass) { KiloGram(magnitude) }
+    val inKilograms: Kilogram
+        get() = convert(PhysicalDimension.mass) { Kilogram(magnitude) }
 
     val inAmperes: Ampere
         get() = convert(PhysicalDimension.electricCurrent) { Ampere(magnitude) }

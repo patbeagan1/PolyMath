@@ -147,7 +147,7 @@ class UsWeightGenerator(BaseWeightGenerator):
             ("USGrain", "USPound(value / 7000).asBaseUnit()"),  # 1/7000 pound (grain)
             ("USDram", "USPound(value / 256).asBaseUnit()"),    # 1/256 pound (dram)
             ("USOunce", "USPound(value / 16).asBaseUnit()"),    # 1/16 pound (ounce)
-            ("USPound", "KiloGram(value * 0.45359237)"),        # 1 pound = 0.45359237 kg (base unit)
+            ("USPound", "Kilogram(value * 0.45359237)"),        # 1 pound = 0.45359237 kg (base unit)
             ("USShortHundredweight", "USPound(value * 100).asBaseUnit()"),  # 100 pounds (short hundredweight)
             ("USLongHundredweight", "USPound(value * 112).asBaseUnit()"),  # 100 pounds (short hundredweight)
             ("USShortTon", "USPound(value * 2000).asBaseUnit()"),      # 2000 pounds (short ton)

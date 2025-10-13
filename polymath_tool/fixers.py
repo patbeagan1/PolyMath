@@ -58,8 +58,8 @@ def fix_kilogram_imports() -> int:
             content = file_path.read_text()
             modified = False
             
-            if "KiloGram" in content:
-                content = content.replace("KiloGram", "Kilogram")
+            if "Kilogram" in content:
+                content = content.replace("Kilogram", "Kilogram")
                 modified = True
             
             if modified:
