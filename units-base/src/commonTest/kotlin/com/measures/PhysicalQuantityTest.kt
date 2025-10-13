@@ -1,6 +1,7 @@
 package com.measures
 
 import com.measures.PhysicalQuantity.Companion.distance
+import com.measures.PhysicalQuantity.Companion.force
 import com.measures.PhysicalQuantity.Companion.mass
 import com.measures.PhysicalQuantity.Companion.time
 import com.measures.time.Second
@@ -54,5 +55,11 @@ class PhysicalQuantityTest {
 
         val message = (velocity.inMetersPerSecond / Second(10.0))
         println(message)
+    }
+
+    @Test
+    fun `force times distance equals energy`() {
+        val energy = force(1.0) * distance(1.0)
+        println(energy)
     }
 }

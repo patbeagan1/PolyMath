@@ -4,12 +4,13 @@ import com.measures.acceleration.MetersPerSecondPerSecond
 import com.measures.area.SquareMeter
 import com.measures.current.Ampere
 import com.measures.distance.Meter
+import com.measures.energy.Joule
 import com.measures.force.Newton
+import com.measures.mass.Kilogram
 import com.measures.pressure.Pascal
 import com.measures.time.Second
 import com.measures.velocity.MetersPerSecond
 import com.measures.volume.Liters
-import com.measures.mass.Kilogram
 
 data class PhysicalQuantity(
     val magnitude: Double,
@@ -72,6 +73,9 @@ data class PhysicalQuantity(
 
     val inAmperes: Ampere
         get() = convert(PhysicalDimension.electricCurrent) { Ampere(magnitude) }
+
+    val inJoules: Joule
+        get() = convert(PhysicalDimension.energy) { Joule(magnitude) }
 
     private fun <R> convert(
         givenDimension: PhysicalDimension,
@@ -173,7 +177,7 @@ data class PhysicalQuantity(
             val amountOfSubstance = PhysicalDimension(amountOfSubstanceExp = 1)
             val electricCurrent = PhysicalDimension(electricCurrentExp = 1)
             val length = PhysicalDimension(lengthExp = 1)
-            val energy = PhysicalDimension(lengthExp = 1, massExp = 1)
+            val energy = PhysicalDimension(timeExp = -2, lengthExp = 2, massExp = 1)
             val area = PhysicalDimension(lengthExp = 2)
             val volume = PhysicalDimension(lengthExp = 3)
             val luminousIntensity = PhysicalDimension(luminousIntensityExp = 1)
@@ -205,6 +209,11 @@ data class PhysicalQuantity(
         fun mass(magnitude: Double) = PhysicalQuantity(
             magnitude,
             PhysicalDimension(massExp = 1)
+        )
+
+        fun force(magnitude: Double) = PhysicalQuantity(
+            magnitude,
+            PhysicalDimension(timeExp = -2, lengthExp = 1, massExp = 1)
         )
 
         fun electricCurrent(magnitude: Double) = PhysicalQuantity(
