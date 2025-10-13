@@ -8,8 +8,8 @@ import com.measures.area.UnitArea
 import com.measures.distance.UnitDistance
 import com.measures.energy.Joule
 import com.measures.pressure.Pascal
-import com.measures.weight.Kilogram
-import com.measures.weight.UnitMass
+import com.measures.mass.Kilogram
+import com.measures.mass.UnitMass
 
 interface UnitForce<T : DoubleBase> : UnitType<T, Newton> {
     operator fun plus(other: UnitForce<*>): Newton

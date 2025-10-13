@@ -6,7 +6,7 @@ US Customary unit generation.
 from ..base.base_distance_generator import BaseDistanceGenerator
 from ..base.base_area_generator import BaseAreaGenerator
 from ..base.base_volume_generator import BaseVolumeGenerator
-from ..base.base_weight_generator import BaseWeightGenerator
+from ..base.base_mass_generator import BaseMassGenerator
 
 
 class UsDistanceGenerator(BaseDistanceGenerator):
@@ -131,7 +131,7 @@ class UsDryVolumeGenerator(BaseVolumeGenerator):
         ]
 
 
-class UsWeightGenerator(BaseWeightGenerator):
+class UsWeightGenerator(BaseMassGenerator):
     """Generator for US Customary weight units."""
 
     def __init__(self):

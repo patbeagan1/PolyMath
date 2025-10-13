@@ -3,10 +3,10 @@
 Non-SI weight unit generation.
 """
 
-from ..base.base_weight_generator import BaseWeightGenerator
+from ..base.base_mass_generator import BaseMassGenerator
 
 
-class NonSiWeightGenerator(BaseWeightGenerator):
+class NonSiWeightGenerator(BaseMassGenerator):
     """Generator for non-SI weight units."""
     
     def __init__(self):

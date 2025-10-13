@@ -3,7 +3,7 @@ package com.measures.acceleration.g_force
 import com.measures.acceleration.UnitAcceleration
 import com.measures.acceleration.MetersPerSecondPerSecond
 import com.measures.time.UnitTime
-import com.measures.weight.UnitMass
+import com.measures.mass.UnitMass
 import com.measures.force.Newton
 import kotlin.jvm.JvmInline
 

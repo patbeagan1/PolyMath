@@ -3,10 +3,10 @@
 Metric weight unit generation.
 """
 
-from ..base.base_weight_generator import BaseWeightGenerator
+from ..base.base_mass_generator import BaseMassGenerator
 
 
-class MetricWeightGenerator(BaseWeightGenerator):
+class MetricWeightGenerator(BaseMassGenerator):
     """Generator for metric weight units (Kilogram prefixes)."""
 
     def __init__(self):

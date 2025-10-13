@@ -9,7 +9,7 @@ import com.measures.pressure.Pascal
 import com.measures.time.Second
 import com.measures.velocity.MetersPerSecond
 import com.measures.volume.Liters
-import com.measures.weight.Kilogram
+import com.measures.mass.Kilogram
 
 data class PhysicalQuantity(
     val magnitude: Double,

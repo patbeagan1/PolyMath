@@ -5,7 +5,7 @@ import com.measures.charge.UnitCharge
 import com.measures.distance.UnitDistance
 import com.measures.potential.Volt
 import com.measures.time.UnitTime
-import com.measures.weight.UnitMass
+import com.measures.mass.UnitMass
 import kotlin.jvm.JvmInline
 
 @JvmInline

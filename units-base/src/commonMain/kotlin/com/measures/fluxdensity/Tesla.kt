@@ -3,7 +3,7 @@ package com.measures.fluxdensity
 import com.measures.BaseUnit
 import com.measures.current.UnitCurrent
 import com.measures.time.UnitTime
-import com.measures.weight.UnitMass
+import com.measures.mass.UnitMass
 import kotlin.jvm.JvmInline
 
 @JvmInline

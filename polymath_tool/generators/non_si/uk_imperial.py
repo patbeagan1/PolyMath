@@ -6,7 +6,7 @@ UK Imperial unit generation.
 from ..base.base_distance_generator import BaseDistanceGenerator
 from ..base.base_area_generator import BaseAreaGenerator
 from ..base.base_volume_generator import BaseVolumeGenerator
-from ..base.base_weight_generator import BaseWeightGenerator
+from ..base.base_mass_generator import BaseMassGenerator
 
 
 class UkDistanceGenerator(BaseDistanceGenerator):
@@ -101,7 +101,7 @@ class UkVolumeGenerator(BaseVolumeGenerator):
             ("UKApothecaryGallon", "UKApothecaryPint(value * 8).asBaseUnit()"),  # 8 pints
         ]
 
-class UkWeightGenerator(BaseWeightGenerator):
+class UkWeightGenerator(BaseMassGenerator):
     """Generator for UK Imperial weight units."""
 
     def __init__(self):

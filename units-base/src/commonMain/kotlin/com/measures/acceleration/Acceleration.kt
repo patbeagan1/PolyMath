@@ -6,7 +6,7 @@ import com.measures.force.Newton
 import com.measures.velocity.UnitVelocity
 import com.measures.velocity.MetersPerSecond
 import com.measures.time.UnitTime
-import com.measures.weight.UnitMass
+import com.measures.mass.UnitMass
 
 interface UnitAcceleration<T : DoubleBase> : UnitType<T, MetersPerSecondPerSecond> {
     operator fun plus(other: UnitAcceleration<*>): MetersPerSecondPerSecond
