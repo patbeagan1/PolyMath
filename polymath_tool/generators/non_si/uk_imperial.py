@@ -86,7 +86,7 @@ class UkVolumeGenerator(BaseVolumeGenerator):
             ("UKGill", "UKGallon(value / 32).asBaseUnit()"),  # 5 fl oz
             ("UKPint", "UKGallon(value / 8).asBaseUnit()"),  # 20 fl oz
             ("UKQuart", "UKGallon(value / 4).asBaseUnit()"),  # 40 fl oz
-            ("UKGallon", "Liter(value * 4.54609)"),  # Base unit for UK system
+            ("UKGallon", "Liters(value * 4.54609)"),  # Base unit for UK system
             # Imperial dry units (bushel system)
             ("UKPeck", "UKGallon(value * 2).asBaseUnit()"),  # 2 gallons
             ("UKBushel", "UKGallon(value * 8).asBaseUnit()"),  # 8 gallons
@@ -96,7 +96,7 @@ class UkVolumeGenerator(BaseVolumeGenerator):
             ("UKApothecaryFluidScruple", "UKApothecaryPint(value / 480).asBaseUnit()"),   # 1/480 pint
             ("UKApothecaryFluidDram", "UKApothecaryPint(value / 160).asBaseUnit()"),      # 1/160 pint
             ("UKApothecaryFluidOunce", "UKApothecaryPint(value / 20).asBaseUnit()"),  # 1/20 pint
-            ("UKApothecaryPint", "Liter(value / 1000 * 28.4130625).asBaseUnit()"),        # 1 pint (apothecary)
+            ("UKApothecaryPint", "Liters(value / 1000 * 28.4130625).asBaseUnit()"),        # 1 pint (apothecary)
             ("UKApothecaryQuart", "UKApothecaryPint(value * 2).asBaseUnit()"),   # 2 pints
             ("UKApothecaryGallon", "UKApothecaryPint(value * 8).asBaseUnit()"),  # 8 pints
         ]

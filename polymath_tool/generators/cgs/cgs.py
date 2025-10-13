@@ -15,7 +15,7 @@ class CGSVolumeGenerator(BaseVolumeGenerator):
     def _get_units(self):
         """Get CGS Volume units"""
         return [
-            ("CubicCentimeters", "Liter(value / 1000)")
+            ("CubicCentimeters", "Liters(value / 1000)")
         ]
 
 class CGSForceGenerator(BaseForceGenerator):

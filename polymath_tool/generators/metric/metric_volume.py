@@ -19,7 +19,7 @@ class MetricVolumeGenerator(BaseVolumeGenerator):
     def _get_units(self):
         """Get metric volume units."""
         generator = MetricUnitGenerator()
-        return generator.generate_units("liter", "Liter")
+        return generator.generate_units("liter", "Liters")
     
     def get_additional_imports(self):
         """Get additional imports for metric units."""

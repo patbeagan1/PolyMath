@@ -18,13 +18,13 @@ class NonSiVolumeGenerator(BaseVolumeGenerator):
     def _get_units(self):
         """Get non-SI volume units."""
         return [
-            ("CupBreakfast", "Liter(value * 0.284130625)"),
-            ("CupCanadian", "Liter(value * 0.2273045)"),
-            ("CoffeeMug", "Liter(value * 0.35488235475)"),  # 12 oz
-            ("TablespoonCanadian", "Liter(value * 0.01420653125)"),
-            ("TeaspoonCanadian", "Liter(value * 0.004735510416666667)"),
-            ("CubicCentimeter", "Liter(value * 0.001)"),
-            ("CubicMeter", "Liter(value * 1000)"),
+            ("CupBreakfast", "Liters(value * 0.284130625)"),
+            ("CupCanadian", "Liters(value * 0.2273045)"),
+            ("CoffeeMug", "Liters(value * 0.35488235475)"),  # 12 oz
+            ("TablespoonCanadian", "Liters(value * 0.01420653125)"),
+            ("TeaspoonCanadian", "Liters(value * 0.004735510416666667)"),
+            ("CubicCentimeter", "Liters(value * 0.001)"),
+            ("CubicMeter", "Liters(value * 1000)"),
         ]
 
 

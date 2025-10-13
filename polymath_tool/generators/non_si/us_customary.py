@@ -102,7 +102,7 @@ class UsFluidVolumeGenerator(BaseVolumeGenerator):
             ("USFluidPint", "USCup(value * 2).asBaseUnit()"),  # 2 US cups (liquid pint)
             ("USFluidQuart", "USFluidPint(value * 2).asBaseUnit()"),  # 2 US pints (liquid quart)
             ("USPottle", "USFluidQuart(value * 2).asBaseUnit()"),  # 2 US quarts (liquid pottle)
-            ("USFluidGallon", "Liter(value * 3.785411784)"),  # 1 US gallon (liquid), base unit
+            ("USFluidGallon", "Liters(value * 3.785411784)"),  # 1 US gallon (liquid), base unit
             ("USFluidBarrel", "USFluidGallon(value * 31.5).asBaseUnit()"),  # 31.5 US gallons (liquid barrel)
             ("USOilBarrel", "USFluidGallon(value * 42).asBaseUnit()"),  # 42 US gallons (oil barrel)
             ("USHogshead", "USFluidGallon(value * 63).asBaseUnit()"),  # 63 US gallons (hogshead)
@@ -122,7 +122,7 @@ class UsDryVolumeGenerator(BaseVolumeGenerator):
         """Get US Customary dry volume units."""
         return [
             # Dry volume units (based on Winchester measure)
-            ("USDryPint", "Liter(value * 0.5506104713575).asBaseUnit()"),  # Dry pint
+            ("USDryPint", "Liters(value * 0.5506104713575).asBaseUnit()"),  # Dry pint
             ("USDryQuart", "USDryPint(value * 2).asBaseUnit()"),  # Dry quart
             ("USDryGallon", "USDryPint(value * 8).asBaseUnit()"),  # Dry gallon
             ("USPeck", "USDryGallon(value * 2).asBaseUnit()"),  # Peck
