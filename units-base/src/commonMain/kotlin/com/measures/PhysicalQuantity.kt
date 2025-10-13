@@ -12,6 +12,11 @@ import com.measures.time.Second
 import com.measures.velocity.MetersPerSecond
 import com.measures.volume.Liters
 
+/**
+ * Covers the full basis of physical quantities using the SI units.
+ *
+ * Contains conversions to typesafe units for the most common units.
+ */
 data class PhysicalQuantity(
     val magnitude: Double,
     val dimension: PhysicalDimension
@@ -86,14 +91,17 @@ data class PhysicalQuantity(
         throw WrongUnitException(this.dimension, givenDimension)
     }
 
+    /**
+     * Some systems like CGS might have a fractional basis, so this needs to be a float
+     */
     data class PhysicalDimension(
-        val timeExp: Int = 0, // (T),
-        val lengthExp: Int = 0, // (L),
-        val massExp: Int = 0, // (M),
-        val electricCurrentExp: Int = 0, // (I),
-        val absoluteTemperatureExp: Int = 0, // (Θ),
-        val amountOfSubstanceExp: Int = 0, // (N)
-        val luminousIntensityExp: Int = 0, // (J).
+        val timeExp: Float  = 0f, // (T),
+        val lengthExp: Float  = 0f, // (L),
+        val massExp: Float  = 0f, // (M),
+        val electricCurrentExp: Float  = 0f, // (I),
+        val absoluteTemperatureExp: Float  = 0f, // (Θ),
+        val amountOfSubstanceExp: Float  = 0f, // (N)
+        val luminousIntensityExp: Float  = 0f, // (J).
         val isAngular: Boolean = false,
     ) {
         operator fun plus(other: PhysicalDimension): PhysicalDimension = PhysicalDimension(
@@ -117,32 +125,31 @@ data class PhysicalQuantity(
         )
 
         fun representedInSIDimension() = buildString {
-
-            if (timeExp != 0) {
+            if (timeExp != 0f) {
                 append("T")
                 append(timeExp)
             }
-            if (lengthExp != 0) {
+            if (lengthExp != 0f) {
                 append("L")
                 append(lengthExp)
             }
-            if (massExp != 0) {
+            if (massExp != 0f) {
                 append("M")
                 append(massExp)
             }
-            if (electricCurrentExp != 0) {
+            if (electricCurrentExp != 0f) {
                 append("I")
                 append(electricCurrentExp)
             }
-            if (absoluteTemperatureExp != 0) {
+            if (absoluteTemperatureExp != 0f) {
                 append("Θ")
                 append(absoluteTemperatureExp)
             }
-            if (amountOfSubstanceExp != 0) {
+            if (amountOfSubstanceExp != 0f) {
                 append("N")
                 append(amountOfSubstanceExp)
             }
-            if (luminousIntensityExp != 0) {
+            if (luminousIntensityExp != 0f) {
                 append("J")
                 append(luminousIntensityExp)
             }
@@ -172,68 +179,49 @@ data class PhysicalQuantity(
             }
         }
 
+        fun of(amount: Double) = PhysicalQuantity(amount, this)
+
         companion object {
-            val absoluteTemperature = PhysicalDimension(absoluteTemperatureExp = 1)
-            val amountOfSubstance = PhysicalDimension(amountOfSubstanceExp = 1)
-            val electricCurrent = PhysicalDimension(electricCurrentExp = 1)
-            val length = PhysicalDimension(lengthExp = 1)
-            val energy = PhysicalDimension(timeExp = -2, lengthExp = 2, massExp = 1)
-            val area = PhysicalDimension(lengthExp = 2)
-            val volume = PhysicalDimension(lengthExp = 3)
-            val luminousIntensity = PhysicalDimension(luminousIntensityExp = 1)
-            val mass = PhysicalDimension(massExp = 1)
-            val density = PhysicalDimension(massExp = 1, lengthExp = -3)
-            val velocity = PhysicalDimension(timeExp = -1, lengthExp = 1)
-            val power = PhysicalDimension(timeExp = -1, lengthExp = 1, massExp = 1)
-            val momentum = PhysicalDimension(timeExp = -1, lengthExp = 2, massExp = 1)
-            val acceleration = PhysicalDimension(timeExp = -2, lengthExp = 1)
-            val force = PhysicalDimension(timeExp = -2, lengthExp = 1, massExp = 1)
-            val pressure = PhysicalDimension(timeExp = -2, lengthExp = -1, massExp = 1)
-            val time = PhysicalDimension(timeExp = 1)
+            val absoluteTemperature = PhysicalDimension(absoluteTemperatureExp = 1f)
+            val amountOfSubstance = PhysicalDimension(amountOfSubstanceExp = 1f)
+            val electricCurrent = PhysicalDimension(electricCurrentExp = 1f)
+            val length = PhysicalDimension(lengthExp = 1f)
+            val energy = PhysicalDimension(timeExp = -2f, lengthExp = 2f, massExp = 1f)
+            val area = PhysicalDimension(lengthExp = 2f)
+            val volume = PhysicalDimension(lengthExp = 3f)
+            val luminousIntensity = PhysicalDimension(luminousIntensityExp = 1f)
+            val mass = PhysicalDimension(massExp = 1f)
+            val density = PhysicalDimension(massExp = 1f, lengthExp = -3f)
+            val velocity = PhysicalDimension(timeExp = -1f, lengthExp = 1f)
+            val power = PhysicalDimension(timeExp = -1f, lengthExp = 1f, massExp = 1f)
+            val momentum = PhysicalDimension(timeExp = -1f, lengthExp = 2f, massExp = 1f)
+            val acceleration = PhysicalDimension(timeExp = -2f, lengthExp = 1f)
+            val force = PhysicalDimension(timeExp = -2f, lengthExp = 1f, massExp = 1f)
+            val pressure = PhysicalDimension(timeExp = -2f, lengthExp = -1f, massExp = 1f)
+            val time = PhysicalDimension(timeExp = 1f)
         }
     }
 
     companion object {
-
-        fun time(magnitude: Double) = PhysicalQuantity(
-            magnitude,
-            PhysicalDimension(timeExp = 1)
-        )
-
+        // alias
         fun distance(magnitude: Double) = length(magnitude)
-        fun length(magnitude: Double) = PhysicalQuantity(
-            magnitude,
-            PhysicalDimension(lengthExp = 1)
-        )
 
-        fun mass(magnitude: Double) = PhysicalQuantity(
-            magnitude,
-            PhysicalDimension(massExp = 1)
-        )
-
-        fun force(magnitude: Double) = PhysicalQuantity(
-            magnitude,
-            PhysicalDimension(timeExp = -2, lengthExp = 1, massExp = 1)
-        )
-
-        fun electricCurrent(magnitude: Double) = PhysicalQuantity(
-            magnitude,
-            PhysicalDimension(electricCurrentExp = 1)
-        )
-
-        fun absoluteTemperature(magnitude: Double) = PhysicalQuantity(
-            magnitude,
-            PhysicalDimension(absoluteTemperatureExp = 1)
-        )
-
-        fun amountOfSubstance(magnitude: Double) = PhysicalQuantity(
-            magnitude,
-            PhysicalDimension(amountOfSubstanceExp = 1)
-        )
-
-        fun luminousIntensity(magnitude: Double) = PhysicalQuantity(
-            magnitude,
-            PhysicalDimension(luminousIntensityExp = 1)
-        )
+        fun absoluteTemperature(magnitude: Double) = PhysicalDimension.absoluteTemperature.of(magnitude)
+        fun amountOfSubstance(magnitude: Double) = PhysicalDimension.amountOfSubstance.of(magnitude)
+        fun electricCurrent(magnitude: Double) = PhysicalDimension.electricCurrent.of(magnitude)
+        fun length(magnitude: Double) = PhysicalDimension.length.of(magnitude)
+        fun energy(magnitude: Double) = PhysicalDimension.energy.of(magnitude)
+        fun area(magnitude: Double) = PhysicalDimension.area.of(magnitude)
+        fun volume(magnitude: Double) = PhysicalDimension.volume.of(magnitude)
+        fun luminousIntensity(magnitude: Double) = PhysicalDimension.luminousIntensity.of(magnitude)
+        fun mass(magnitude: Double) = PhysicalDimension.mass.of(magnitude)
+        fun density(magnitude: Double) = PhysicalDimension.density.of(magnitude)
+        fun velocity(magnitude: Double) = PhysicalDimension.velocity.of(magnitude)
+        fun power(magnitude: Double) = PhysicalDimension.power.of(magnitude)
+        fun momentum(magnitude: Double) = PhysicalDimension.momentum.of(magnitude)
+        fun acceleration(magnitude: Double) = PhysicalDimension.acceleration.of(magnitude)
+        fun force(magnitude: Double) = PhysicalDimension.force.of(magnitude)
+        fun pressure(magnitude: Double) = PhysicalDimension.pressure.of(magnitude)
+        fun time(magnitude: Double) = PhysicalDimension.time.of(magnitude)
     }
 }
