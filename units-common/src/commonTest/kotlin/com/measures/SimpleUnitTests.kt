@@ -9,11 +9,9 @@ import com.measures.distance.uk_imperial.UKInch
 import com.measures.distance.uk_imperial.UKYard
 import com.measures.distance.uk_imperial.toUKFoot
 import com.measures.distance.uk_imperial.toUKInch
-import com.measures.distance.uk_imperial.toUKYard
 import com.measures.volume.*
 import com.measures.volume.metric.Milliliter
 import com.measures.volume.metric.toMilliliter
-import com.measures.weight.*
 import com.measures.weight.metric.Gram
 import com.measures.weight.metric.toGram
 import com.measures.weight.us_customary.USPound
@@ -43,11 +41,11 @@ class SimpleUnitTests {
     @Test
     fun testBasicVolumeConversions() {
         // Test basic volume conversions
-        val liter = Liter(1.0)
+        val liters = Liters(1.0)
         val milliliter = Milliliter(1000.0)
         
         // Test that conversions work
-        val literToMl = liter.toMilliliter()
+        val literToMl = liters.toMilliliter()
         val mlToLiter = milliliter.toLiter()
         
         assertEquals(1000.0, literToMl.value, 0.1)

@@ -1,11 +1,9 @@
 package com.measures.distance
 
 import com.measures.BaseUnit
-import com.measures.area.SquareMeter
 import com.measures.area.UnitArea
 import com.measures.time.UnitTime
 import com.measures.velocity.MetersPerSecond
-import com.measures.volume.Liter
 import kotlin.jvm.JvmInline
 
 @JvmInline

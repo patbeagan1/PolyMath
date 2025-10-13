@@ -4,14 +4,14 @@ import com.measures.Consts
 import com.measures.area.UnitArea
 import com.measures.area.SquareMeter
 import com.measures.distance.UnitDistance
-import com.measures.volume.Liter
+import com.measures.volume.Liters
 import com.measures.volume.UnitVolume
 import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Hectoliter(override val value: Double) : UnitVolume<Hectoliter> {
     override fun asType(d: Double) = Hectoliter(d)
-    override fun asBaseUnit() = Liter(value * Consts.HECTO)
+    override fun asBaseUnit() = Liters(value * Consts.HECTO)
 
     override operator fun plus(other: UnitVolume<*>) = UnitVolume.plusUnit(this, other)
     override operator fun minus(other: UnitVolume<*>) = UnitVolume.minusUnit(this, other)

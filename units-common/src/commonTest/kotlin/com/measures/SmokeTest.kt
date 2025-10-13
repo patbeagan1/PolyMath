@@ -9,7 +9,6 @@ import com.measures.charge.metric.Nanocoulomb
 import com.measures.charge.metric.Picocoulomb
 import com.measures.charge.non_si.Amperehour
 import com.measures.current.UnitCurrent
-import com.measures.current.metric.Milliampere
 import com.measures.distance.international_yard.Fathom
 import com.measures.distance.international_yard.Foot
 import com.measures.distance.international_yard.Inch
@@ -30,7 +29,7 @@ import com.measures.distance.us_customary.*
 import com.measures.energy.Joule
 import com.measures.power.Watt
 import com.measures.time.Second
-import com.measures.volume.Liter
+import com.measures.volume.Liters
 import com.measures.volume.metric.Attoliter
 import com.measures.volume.metric.Milliliter
 import com.measures.volume.metric.toMegaliter
@@ -75,12 +74,12 @@ class SmokeTest {
         UKInch(2.0).toUKHand()
     ).map { it to it }
     private val volumes = listOf(
-        Liter(4.0).toMilliliter() + Milliliter(6.0),
+        Liters(4.0).toMilliliter() + Milliliter(6.0),
         USFluidOunce(1.0).toUKFluidOunce(),
         USFluidGallon(1.0).toLiter(),
         Attoliter(10000.0).toUSFluidGallon(),
         UKGallon(1.0).toUSFluidGallon(),
-        Liter(1.0).toUSFluidGallon()
+        Liters(1.0).toUSFluidGallon()
     ).map { it to it }
     private val other = listOf(
         com.measures.distance.Meter(2.0) * com.measures.distance.Meter(2.0),

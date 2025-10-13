@@ -3,7 +3,6 @@ package com.measures.volume.uk_imperial
 import com.measures.area.UnitArea
 import com.measures.area.SquareMeter
 import com.measures.distance.UnitDistance
-import com.measures.volume.Liter
 import com.measures.volume.UnitVolume
 import kotlin.jvm.JvmInline
 

@@ -8,7 +8,7 @@ import com.measures.force.Newton
 import com.measures.pressure.Pascal
 import com.measures.time.Second
 import com.measures.velocity.MetersPerSecond
-import com.measures.volume.Liter
+import com.measures.volume.Liters
 import com.measures.weight.Kilogram
 
 data class PhysicalQuantity(
@@ -49,8 +49,8 @@ data class PhysicalQuantity(
     val inSquareMeters: SquareMeter
         get() = convert(PhysicalDimension.area) { SquareMeter(magnitude) }
 
-    val inLeters: Liter
-        get() = convert(PhysicalDimension.volume) { Liter(magnitude * 1000) }
+    val inLeters: Liters
+        get() = convert(PhysicalDimension.volume) { Liters(magnitude * 1000) }
 
     val inSeconds: Second
         get() = convert(PhysicalDimension.time) { Second(magnitude) }

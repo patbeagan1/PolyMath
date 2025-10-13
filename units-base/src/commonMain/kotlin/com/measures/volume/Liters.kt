@@ -6,8 +6,8 @@ import com.measures.distance.UnitDistance
 import kotlin.jvm.JvmInline
 
 @JvmInline
-value class Liter(override val value: Double) : UnitVolume<Liter>, BaseUnit {
-    override fun asType(d: Double) = Liter(d)
+value class Liters(override val value: Double) : UnitVolume<Liters>, BaseUnit {
+    override fun asType(d: Double) = Liters(d)
     override fun asBaseUnit() = this
 
     override operator fun plus(other: UnitVolume<*>) = (this as UnitVolume<*>).plus(other)
