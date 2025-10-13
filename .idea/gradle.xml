@@ -22,18 +22,13 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/latex-builder" />
-            <option value="$PROJECT_DIR$/lib-graph" />
             <option value="$PROJECT_DIR$/math-algebra" />
             <option value="$PROJECT_DIR$/math-base" />
             <option value="$PROJECT_DIR$/math-geometry" />
             <option value="$PROJECT_DIR$/physics-classical" />
-            <option value="$PROJECT_DIR$/unit-american-customary" />
-            <option value="$PROJECT_DIR$/unit-base" />
-            <option value="$PROJECT_DIR$/unit-english-imperial" />
-            <option value="$PROJECT_DIR$/unit-english-international" />
-            <option value="$PROJECT_DIR$/unit-metric" />
-            <option value="$PROJECT_DIR$/unit-weight-avoirdupois" />
-            <option value="$PROJECT_DIR$/unit-weight-troy" />
+            <option value="$PROJECT_DIR$/units-base" />
+            <option value="$PROJECT_DIR$/units-common" />
+            <option value="$PROJECT_DIR$/units-data" />
           </set>
         </option>
       </GradleProjectSettings>

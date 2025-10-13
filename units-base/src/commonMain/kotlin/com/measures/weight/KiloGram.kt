@@ -4,6 +4,7 @@ import com.measures.BaseUnit
 import com.measures.acceleration.UnitAcceleration
 import kotlin.jvm.JvmInline
 
+// rename this with the correct capitalization
 @JvmInline
 value class KiloGram(override val value: Double) : UnitMass<KiloGram>, BaseUnit {
     override fun asType(d: Double) = KiloGram(d)

@@ -49,6 +49,46 @@ scripts:
     command: ./gradlew publishToMavenLocal
   subtree-push:
     command: ../monorepo subtree push git@github.com:patbeagan1/PolyMath.git PolyMath --branch develop
+  
+  # Module-specific publishing scripts
+  publish-units-base:
+    command: ./gradlew :units-base:publishToMavenLocal
+  publish-units-common:
+    command: ./gradlew :units-common:publishToMavenLocal
+  publish-units-data:
+    command: ./gradlew :units-data:publishToMavenLocal
+  publish-math-base:
+    command: ./gradlew :math-base:publishToMavenLocal
+  publish-math-algebra:
+    command: ./gradlew :math-algebra:publishToMavenLocal
+  publish-math-geometry:
+    command: ./gradlew :math-geometry:publishToMavenLocal
+  publish-physics-classical:
+    command: ./gradlew :physics-classical:publishToMavenLocal
+  publish-latex-builder:
+    command: ./gradlew :latex-builder:publishToMavenLocal
+  publish-lib-graph:
+    command: ./gradlew :lib-graph:publishToMavenLocal
+  
+  # Maven Central publishing scripts (requires proper credentials)
+  publish-units-base-central:
+    command: ./gradlew :units-base:publishAllPublicationsToMavenCentralRepository
+  publish-units-common-central:
+    command: ./gradlew :units-common:publishAllPublicationsToMavenCentralRepository
+  publish-units-data-central:
+    command: ./gradlew :units-data:publishAllPublicationsToMavenCentralRepository
+  publish-math-base-central:
+    command: ./gradlew :math-base:publishAllPublicationsToMavenCentralRepository
+  publish-math-algebra-central:
+    command: ./gradlew :math-algebra:publishAllPublicationsToMavenCentralRepository
+  publish-math-geometry-central:
+    command: ./gradlew :math-geometry:publishAllPublicationsToMavenCentralRepository
+  publish-physics-classical-central:
+    command: ./gradlew :physics-classical:publishAllPublicationsToMavenCentralRepository
+  publish-latex-builder-central:
+    command: ./gradlew :latex-builder:publishAllPublicationsToMavenCentralRepository
+  publish-lib-graph-central:
+    command: ./gradlew :lib-graph:publishAllPublicationsToMavenCentralRepository
 
 roadmap:
   todo:
