@@ -2,6 +2,7 @@ package com.measures
 
 import com.measures.PhysicalQuantity.Companion.distance
 import com.measures.PhysicalQuantity.Companion.force
+import com.measures.PhysicalQuantity.Companion.length
 import com.measures.PhysicalQuantity.Companion.mass
 import com.measures.PhysicalQuantity.Companion.time
 import com.measures.time.Second
@@ -61,5 +62,11 @@ class PhysicalQuantityTest {
     fun `force times distance equals energy`() {
         val energy = force(1.0) * distance(1.0)
         println(energy)
+    }
+
+    @Test
+    fun `density is mass over volume`() {
+        val density = mass(1.0) / length(1.0) / length(1.0) / length(1.0)
+        println(density)
     }
 }
