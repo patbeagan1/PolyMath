@@ -39,7 +39,7 @@ class UsDistanceGenerator(BaseDistanceGenerator):
  
             # Survey units (US Survey foot - obsolete as of 2023)
             ("USSurveyLink", "USSurveyFoot(value * 0.66).asBaseUnit()"),
-            ("USSurveyFoot", "Meter(value * (1200/3937))"),  # US Survey foot (obsolete as of 2023)
+            ("USSurveyFoot", "Meter(value * (1200.0/3937))"),  # US Survey foot (obsolete as of 2023)
             ("USSurveyRod", "USSurveyFoot(value * 16.5).asBaseUnit()"),
             ("USSurveyChain", "USSurveyFoot(value * 66).asBaseUnit()"),
             ("USSurveyFurlong", "USSurveyFoot(value * 660).asBaseUnit()"),
