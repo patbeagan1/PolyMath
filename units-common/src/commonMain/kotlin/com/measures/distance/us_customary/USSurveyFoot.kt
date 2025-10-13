@@ -10,7 +10,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class USSurveyFoot(override val value: Double) : UnitDistance<USSurveyFoot> {
     override fun asType(d: Double) = USSurveyFoot(d)
-    override fun asBaseUnit() = Meter(value * (1200/3937))
+    override fun asBaseUnit() = Meter(value * (1200.0/3937))
 
     override operator fun plus(other: UnitDistance<*>) = UnitDistance.plusUnit(this, other)
     override operator fun minus(other: UnitDistance<*>) = UnitDistance.minusUnit(this, other)
