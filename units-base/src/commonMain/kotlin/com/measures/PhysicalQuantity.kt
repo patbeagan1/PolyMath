@@ -2,11 +2,15 @@ package com.measures
 
 import com.measures.acceleration.MetersPerSecondPerSecond
 import com.measures.acceleration.UnitAcceleration
+import com.measures.amount.Mole
 import com.measures.amount.UnitAmount
+import com.measures.angle.Radian
 import com.measures.angle.UnitAngle
 import com.measures.area.SquareMeter
 import com.measures.area.UnitArea
+import com.measures.capacitance.Farad
 import com.measures.capacitance.UnitCapacitance
+import com.measures.charge.Coulomb
 import com.measures.charge.UnitCharge
 import com.measures.current.Ampere
 import com.measures.current.UnitCurrent
@@ -15,20 +19,29 @@ import com.measures.distance.UnitDistance
 import com.measures.energy.Joule
 import com.measures.energy.UnitEnergy
 import com.measures.flux.UnitFlux
+import com.measures.flux.Weber
+import com.measures.fluxdensity.Tesla
 import com.measures.fluxdensity.UnitFluxDensity
 import com.measures.force.Newton
 import com.measures.force.UnitForce
+import com.measures.frequency.Hertz
 import com.measures.frequency.UnitFrequency
+import com.measures.inductance.Henry
 import com.measures.inductance.UnitInductance
+import com.measures.luminous.Candela
 import com.measures.luminous.UnitLuminous
 import com.measures.mass.Kilogram
 import com.measures.mass.UnitMass
 import com.measures.potential.UnitPotential
+import com.measures.potential.Volt
 import com.measures.power.UnitPower
 import com.measures.pressure.Pascal
 import com.measures.pressure.UnitPressure
+import com.measures.resistance.Ohm
 import com.measures.resistance.UnitResistance
+import com.measures.solidangle.Steradian
 import com.measures.solidangle.UnitSolidAngle
+import com.measures.temperature.Kelvin
 import com.measures.temperature.UnitTemperature
 import com.measures.time.Second
 import com.measures.time.UnitTime
@@ -106,6 +119,45 @@ data class PhysicalQuantity(
 
     val asEnergy: Joule
         get() = convert(PhysicalDimension.energy) { Joule(magnitude) }
+
+    val asFrequency: Hertz
+        get() = convert(PhysicalDimension.frequency) { Hertz(magnitude) }
+
+    val asAmountOfSubstance: Mole
+        get() = convert(PhysicalDimension.amountOfSubstance) { Mole(magnitude) }
+
+    val asLuminousIntensity: Candela
+        get() = convert(PhysicalDimension.luminousIntensity) { Candela(magnitude) }
+
+    val asTemperature: Kelvin
+        get() = convert(PhysicalDimension.temperature) { Kelvin(magnitude) }
+
+    val asCharge: Coulomb
+        get() = convert(PhysicalDimension.charge) { Coulomb(magnitude) }
+
+    val asPotential: Volt
+        get() = convert(PhysicalDimension.potential) { Volt(magnitude) }
+
+    val asResistance: Ohm
+        get() = convert(PhysicalDimension.resistance) { Ohm(magnitude) }
+
+    val asCapacitance: Farad
+        get() = convert(PhysicalDimension.capacitance) { Farad(magnitude) }
+
+    val asInductance: Henry
+        get() = convert(PhysicalDimension.inductance) { Henry(magnitude) }
+
+    val asFlux: Weber
+        get() = convert(PhysicalDimension.flux) { Weber(magnitude) }
+
+    val asFluxDensity: Tesla
+        get() = convert(PhysicalDimension.fluxDensity) { Tesla(magnitude) }
+
+    val asAngle: Radian
+        get() = convert(PhysicalDimension.angle) { Radian(magnitude) }
+
+    val asSolidAngle: Steradian
+        get() = convert(PhysicalDimension.solidAngle) { Steradian(magnitude) }
 
     private fun <R> convert(
         givenDimension: PhysicalDimension,
