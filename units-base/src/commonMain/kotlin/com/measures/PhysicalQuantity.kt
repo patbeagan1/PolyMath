@@ -74,37 +74,37 @@ data class PhysicalQuantity(
             get() = "Expected $dimensionGiven to be $dimensionTarget"
     }
 
-    val inMeters: Meter
+    val asLength: Meter
         get() = convert(PhysicalDimension.length) { Meter(magnitude) }
 
-    val inSquareMeters: SquareMeter
+    val asArea: SquareMeter
         get() = convert(PhysicalDimension.area) { SquareMeter(magnitude) }
 
-    val inLeters: Liters
+    val asVolume: Liters
         get() = convert(PhysicalDimension.volume) { Liters(magnitude * 1000) }
 
-    val inSeconds: Second
+    val asTime: Second
         get() = convert(PhysicalDimension.time) { Second(magnitude) }
 
-    val inMetersPerSecond: MetersPerSecond
+    val asVelocity: MetersPerSecond
         get() = convert(PhysicalDimension.velocity) { MetersPerSecond(magnitude) }
 
-    val inMetersPerSecondPerSecond: MetersPerSecondPerSecond
+    val asAcceleration: MetersPerSecondPerSecond
         get() = convert(PhysicalDimension.acceleration) { MetersPerSecondPerSecond(magnitude) }
 
-    val inNewtons: Newton
+    val asForce: Newton
         get() = convert(PhysicalDimension.force) { Newton(magnitude) }
 
-    val inPascals: Pascal
+    val asPressure: Pascal
         get() = convert(PhysicalDimension.pressure) { Pascal(magnitude) }
 
-    val inKilograms: Kilogram
+    val asMass: Kilogram
         get() = convert(PhysicalDimension.mass) { Kilogram(magnitude) }
 
-    val inAmperes: Ampere
+    val asCurrent: Ampere
         get() = convert(PhysicalDimension.electricCurrent) { Ampere(magnitude) }
 
-    val inJoules: Joule
+    val asEnergy: Joule
         get() = convert(PhysicalDimension.energy) { Joule(magnitude) }
 
     private fun <R> convert(
@@ -183,7 +183,7 @@ data class PhysicalQuantity(
         override fun toString(): String {
             fun inSI() = "SI(${representedInSIDimension()})"
             return when {
-                this == absoluteTemperature -> "AbsoluteTemperature ${inSI()}"
+                this == temperature -> "AbsoluteTemperature ${inSI()}"
                 this == amountOfSubstance -> "AmountOfSubstance ${inSI()}"
                 this == electricCurrent -> "ElectricCurrent ${inSI()}"
                 this == length -> "Length ${inSI()}"
@@ -202,7 +202,6 @@ data class PhysicalQuantity(
                 this == time -> "Time ${inSI()}"
                 this == flux -> "Flux ${inSI()}"
                 this == angle -> "Angle ${inSI()}"
-                this == amount -> "Amount ${inSI()}"
                 this == charge -> "Charge ${inSI()}"
                 this == current -> "Current ${inSI()}"
                 this == distance -> "Distance ${inSI()}"
@@ -222,38 +221,150 @@ data class PhysicalQuantity(
         fun of(amount: Double) = PhysicalQuantity(amount, this)
 
         companion object {
-            val absoluteTemperature = PhysicalDimension(absoluteTemperatureExp = 1f)
-            val amountOfSubstance = PhysicalDimension(amountOfSubstanceExp = 1f)
-            val electricCurrent = PhysicalDimension(electricCurrentExp = 1f)
-            val length = PhysicalDimension(lengthExp = 1f)
-            val energy = PhysicalDimension(timeExp = -2f, lengthExp = 2f, massExp = 1f)
-            val area = PhysicalDimension(lengthExp = 2f)
-            val volume = PhysicalDimension(lengthExp = 3f)
-            val luminousIntensity = PhysicalDimension(luminousIntensityExp = 1f)
-            val mass = PhysicalDimension(massExp = 1f)
-            val density = PhysicalDimension(massExp = 1f, lengthExp = -3f)
-            val velocity = PhysicalDimension(timeExp = -1f, lengthExp = 1f)
-            val power = PhysicalDimension(timeExp = -1f, lengthExp = 1f, massExp = 1f)
-            val momentum = PhysicalDimension(timeExp = -1f, lengthExp = 2f, massExp = 1f)
+            /**
+             * Acceleration (SI unit: meter per second squared, m·s⁻²)
+             */
             val acceleration = PhysicalDimension(timeExp = -2f, lengthExp = 1f)
+
+            /**
+             * Amount of Substance (SI unit: mole, mol)
+             */
+            val amountOfSubstance = PhysicalDimension(amountOfSubstanceExp = 1f)
+
+            /**
+             * Angle (SI unit: radian, rad; dimensionless)
+             */
+            val angle = PhysicalDimension()
+
+            /**
+             * Area (SI unit: square meter, m²)
+             */
+            val area = PhysicalDimension(lengthExp = 2f)
+
+            /**
+             * Capacitance (SI unit: farad, F; m⁻²·kg⁻¹·s⁴·A²)
+             */
+            val capacitance = PhysicalDimension(timeExp = 4f, lengthExp = -2f, massExp = -1f, electricCurrentExp = 2f)
+
+            /**
+             * Electric Charge (SI unit: coulomb, C; s·A)
+             */
+            val charge = PhysicalDimension(timeExp = 1f, electricCurrentExp = 1f)
+
+            /**
+             * Electric Current (SI unit: ampere, A)
+             */
+            val current = PhysicalDimension(electricCurrentExp = 1f)
+
+            /**
+             * Density (SI derived unit: kilogram per cubic meter, kg·m⁻³)
+             */
+            val density = PhysicalDimension(massExp = 1f, lengthExp = -3f)
+
+            /**
+             * Electric Current (alias, SI unit: ampere, A)
+             */
+            val electricCurrent = PhysicalDimension(electricCurrentExp = 1f)
+
+            /**
+             * Energy (SI unit: joule, J; m²·kg·s⁻²)
+             */
+            val energy = PhysicalDimension(timeExp = -2f, lengthExp = 2f, massExp = 1f)
+
+            /**
+             * Magnetic Flux (SI unit: weber, Wb; m²·kg·s⁻²·A⁻¹)
+             */
+            val flux = PhysicalDimension(timeExp = -2f, lengthExp = 2f, massExp = 1f, electricCurrentExp = -1f)
+
+            /**
+             * Magnetic Flux Density (SI unit: tesla, T; kg·s⁻²·A⁻¹)
+             */
+            val fluxDensity = PhysicalDimension(timeExp = -2f, massExp = 1f, electricCurrentExp = -1f)
+
+            /**
+             * Force (SI unit: newton, N; m·kg·s⁻²)
+             */
             val force = PhysicalDimension(timeExp = -2f, lengthExp = 1f, massExp = 1f)
+
+            /**
+             * Frequency (SI unit: hertz, Hz; s⁻¹)
+             */
+            val frequency = PhysicalDimension(timeExp = -1f)
+
+            /**
+             * Inductance (SI unit: henry, H; m²·kg·s⁻²·A⁻²)
+             */
+            val inductance = PhysicalDimension(timeExp = -2f, lengthExp = 2f, massExp = 1f, electricCurrentExp = -2f)
+
+            /**
+             * Length (SI unit: meter, m)
+             */
+            val length = PhysicalDimension(lengthExp = 1f)
+
+            /**
+             * Luminous Intensity (SI unit: candela, cd)
+             */
+            val luminous = PhysicalDimension(luminousIntensityExp = 1f)
+
+            /**
+             * Luminous Intensity (alias, SI unit: candela, cd)
+             */
+            val luminousIntensity = PhysicalDimension(luminousIntensityExp = 1f)
+
+            /**
+             * Mass (SI unit: kilogram, kg)
+             */
+            val mass = PhysicalDimension(massExp = 1f)
+
+            /**
+             * Momentum (SI derived unit: kilogram meter per second, kg·m·s⁻¹)
+             */
+            val momentum = PhysicalDimension(timeExp = -1f, lengthExp = 2f, massExp = 1f)
+
+            /**
+             * Electric Potential (SI unit: volt, V; m²·kg·s⁻³·A⁻¹)
+             */
+            val potential = PhysicalDimension(timeExp = -3f, lengthExp = 2f, massExp = 1f, electricCurrentExp = -1f)
+
+            /**
+             * Power (SI unit: watt, W; m²·kg·s⁻³)
+             */
+            val power = PhysicalDimension(timeExp = -1f, lengthExp = 1f, massExp = 1f)
+
+            /**
+             * Pressure (SI unit: pascal, Pa; m⁻¹·kg·s⁻²)
+             */
             val pressure = PhysicalDimension(timeExp = -2f, lengthExp = -1f, massExp = 1f)
+
+            /**
+             * Resistance (SI unit: ohm, Ω; m²·kg·s⁻³·A⁻²)
+             */
+            val resistance = PhysicalDimension(timeExp = -3f, lengthExp = 2f, massExp = 1f, electricCurrentExp = -2f)
+
+            /**
+             * Solid Angle (SI unit: steradian, sr; dimensionless)
+             */
+            val solidAngle = PhysicalDimension()
+
+            /**
+             * Temperature (SI unit: kelvin, K)
+             */
+            val temperature = PhysicalDimension(absoluteTemperatureExp = 1f)
+
+            /**
+             * Time (SI unit: second, s)
+             */
             val time = PhysicalDimension(timeExp = 1f)
 
-            val flux = PhysicalDimension(/* todo */)
-            val angle = PhysicalDimension(/* todo */)
-            val amount = PhysicalDimension(/* todo */)
-            val charge = PhysicalDimension(/* todo */)
-            val current = PhysicalDimension(/* todo */)
-            val luminous = PhysicalDimension(/* todo */)
-            val frequency = PhysicalDimension(/* todo */)
-            val potential = PhysicalDimension(/* todo */)
-            val inductance = PhysicalDimension(/* todo */)
-            val resistance = PhysicalDimension(/* todo */)
-            val solidAngle = PhysicalDimension(/* todo */)
-            val capacitance = PhysicalDimension(/* todo */)
-            val fluxDensity = PhysicalDimension(/* todo */)
-            val temperature = PhysicalDimension(/* todo */)
+            /**
+             * Velocity (SI unit: meter per second, m·s⁻¹)
+             */
+            val velocity = PhysicalDimension(timeExp = -1f, lengthExp = 1f)
+
+            /**
+             * Volume (SI unit: cubic meter, m³)
+             */
+            val volume = PhysicalDimension(lengthExp = 3f)
 
             // alias
             val distance = length
@@ -261,34 +372,82 @@ data class PhysicalQuantity(
     }
 
     companion object {
-        fun <T : DoubleBase> from(unit: UnitAmount<T>) = PhysicalDimension.amount.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitAngle<T>) = PhysicalDimension.angle.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitArea<T>) = PhysicalDimension.area.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitCapacitance<T>) = PhysicalDimension.capacitance.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitCharge<T>) = PhysicalDimension.charge.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitCurrent<T>) = PhysicalDimension.current.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitDistance<T>) = PhysicalDimension.distance.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitEnergy<T>) = PhysicalDimension.energy.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitFlux<T>) = PhysicalDimension.flux.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitFluxDensity<T>) = PhysicalDimension.fluxDensity.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitForce<T>) = PhysicalDimension.force.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitFrequency<T>) = PhysicalDimension.frequency.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitInductance<T>) = PhysicalDimension.inductance.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitLuminous<T>) = PhysicalDimension.luminous.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitMass<T>) = PhysicalDimension.mass.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitPotential<T>) = PhysicalDimension.potential.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitPower<T>) = PhysicalDimension.power.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitPressure<T>) = PhysicalDimension.pressure.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitResistance<T>) = PhysicalDimension.resistance.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitSolidAngle<T>) = PhysicalDimension.solidAngle.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitTemperature<T>) = PhysicalDimension.temperature.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitTime<T>) = PhysicalDimension.time.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitVelocity<T>) = PhysicalDimension.velocity.of(unit.asBaseUnit().value)
-        fun <T : DoubleBase> from(unit: UnitVolume<T>) = PhysicalDimension.volume.of(unit.asBaseUnit().value)
+        fun <T : DoubleBase> from(unit: UnitAmount<T>): PhysicalQuantity =
+            PhysicalDimension.amountOfSubstance.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitAngle<T>) =
+            PhysicalDimension.angle.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitArea<T>) =
+            PhysicalDimension.area.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitCapacitance<T>) =
+            PhysicalDimension.capacitance.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitCharge<T>) =
+            PhysicalDimension.charge.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitCurrent<T>) =
+            PhysicalDimension.current.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitDistance<T>) =
+            PhysicalDimension.distance.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitEnergy<T>) =
+            PhysicalDimension.energy.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitFlux<T>) =
+            PhysicalDimension.flux.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitFluxDensity<T>) =
+            PhysicalDimension.fluxDensity.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitForce<T>) =
+            PhysicalDimension.force.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitFrequency<T>) =
+            PhysicalDimension.frequency.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitInductance<T>) =
+            PhysicalDimension.inductance.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitLuminous<T>) =
+            PhysicalDimension.luminous.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitMass<T>) =
+            PhysicalDimension.mass.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitPotential<T>) =
+            PhysicalDimension.potential.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitPower<T>) =
+            PhysicalDimension.power.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitPressure<T>) =
+            PhysicalDimension.pressure.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitResistance<T>) =
+            PhysicalDimension.resistance.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitSolidAngle<T>) =
+            PhysicalDimension.solidAngle.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitTemperature<T>) =
+            PhysicalDimension.temperature.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitTime<T>) =
+            PhysicalDimension.time.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitVelocity<T>) =
+            PhysicalDimension.velocity.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitVolume<T>) =
+            PhysicalDimension.volume.of(unit.asBaseUnit().value)
+
         fun <T : DoubleBase> from(unit: UnitAcceleration<T>) =
             PhysicalDimension.acceleration.of(unit.asBaseUnit().value)
 
-        fun absoluteTemperature(magnitude: Double) = PhysicalDimension.absoluteTemperature.of(magnitude)
+        fun temperature(magnitude: Double) = PhysicalDimension.temperature.of(magnitude)
         fun amountOfSubstance(magnitude: Double) = PhysicalDimension.amountOfSubstance.of(magnitude)
         fun electricCurrent(magnitude: Double) = PhysicalDimension.electricCurrent.of(magnitude)
         fun length(magnitude: Double) = PhysicalDimension.length.of(magnitude)
@@ -307,7 +466,6 @@ data class PhysicalQuantity(
         fun time(magnitude: Double) = PhysicalDimension.time.of(magnitude)
         fun flux(magnitude: Double) = PhysicalDimension.flux.of(magnitude)
         fun angle(magnitude: Double) = PhysicalDimension.angle.of(magnitude)
-        fun amount(magnitude: Double) = PhysicalDimension.amount.of(magnitude)
         fun charge(magnitude: Double) = PhysicalDimension.charge.of(magnitude)
         fun current(magnitude: Double) = PhysicalDimension.current.of(magnitude)
         fun distance(magnitude: Double) = PhysicalDimension.distance.of(magnitude)
@@ -319,6 +477,5 @@ data class PhysicalQuantity(
         fun solidAngle(magnitude: Double) = PhysicalDimension.solidAngle.of(magnitude)
         fun capacitance(magnitude: Double) = PhysicalDimension.capacitance.of(magnitude)
         fun fluxDensity(magnitude: Double) = PhysicalDimension.fluxDensity.of(magnitude)
-        fun temperature(magnitude: Double) = PhysicalDimension.temperature.of(magnitude)
     }
 }

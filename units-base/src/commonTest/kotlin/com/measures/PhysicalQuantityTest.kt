@@ -6,6 +6,7 @@ import com.measures.PhysicalQuantity.Companion.length
 import com.measures.PhysicalQuantity.Companion.mass
 import com.measures.PhysicalQuantity.Companion.time
 import com.measures.time.Second
+import com.measures.volume.Liters
 import kotlin.test.Test
 
 class PhysicalQuantityTest {
@@ -54,7 +55,7 @@ class PhysicalQuantityTest {
     fun `toUnit works with velocity`() {
         val velocity = distance(1.0) / time(1.0)
 
-        val message = (velocity.inMetersPerSecond / Second(10.0))
+        val message = (velocity.asVelocity / Second(10.0))
         println(message)
     }
 
@@ -68,5 +69,11 @@ class PhysicalQuantityTest {
     fun `density is mass over volume`() {
         val density = mass(1.0) / length(1.0) / length(1.0) / length(1.0)
         println(density)
+    }
+
+    @Test
+    fun `liters to physical quantity`() {
+        val a = PhysicalQuantity.from(Liters(3.0)) / distance(1.0)
+        println(a.asArea)
     }
 }
