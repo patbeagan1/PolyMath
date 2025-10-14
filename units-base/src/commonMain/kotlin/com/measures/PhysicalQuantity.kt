@@ -1,7 +1,11 @@
 package com.measures
 
+import com.measures.absorbeddose.Gray
+import com.measures.absorbeddose.UnitAbsorbedDose
 import com.measures.acceleration.MetersPerSecondPerSecond
 import com.measures.acceleration.UnitAcceleration
+import com.measures.activity.Becquerel
+import com.measures.activity.UnitActivity
 import com.measures.amount.Mole
 import com.measures.amount.UnitAmount
 import com.measures.angle.Radian
@@ -10,12 +14,18 @@ import com.measures.area.SquareMeter
 import com.measures.area.UnitArea
 import com.measures.capacitance.Farad
 import com.measures.capacitance.UnitCapacitance
+import com.measures.catalyticactivity.Katal
+import com.measures.catalyticactivity.UnitCatalyticActivity
 import com.measures.charge.Coulomb
 import com.measures.charge.UnitCharge
+import com.measures.conductance.Siemens
+import com.measures.conductance.UnitConductance
 import com.measures.current.Ampere
 import com.measures.current.UnitCurrent
 import com.measures.distance.Meter
 import com.measures.distance.UnitDistance
+import com.measures.doseequivalent.Sievert
+import com.measures.doseequivalent.UnitDoseEquivalent
 import com.measures.energy.Joule
 import com.measures.energy.UnitEnergy
 import com.measures.flux.UnitFlux
@@ -26,15 +36,20 @@ import com.measures.force.Newton
 import com.measures.force.UnitForce
 import com.measures.frequency.Hertz
 import com.measures.frequency.UnitFrequency
+import com.measures.illuminance.Lux
+import com.measures.illuminance.UnitIlluminance
 import com.measures.inductance.Henry
 import com.measures.inductance.UnitInductance
 import com.measures.luminous.Candela
 import com.measures.luminous.UnitLuminous
+import com.measures.luminousflux.Lumen
+import com.measures.luminousflux.UnitLuminousFlux
 import com.measures.mass.Kilogram
 import com.measures.mass.UnitMass
 import com.measures.potential.UnitPotential
 import com.measures.potential.Volt
 import com.measures.power.UnitPower
+import com.measures.power.Watt
 import com.measures.pressure.Pascal
 import com.measures.pressure.UnitPressure
 import com.measures.resistance.Ohm
@@ -120,6 +135,9 @@ data class PhysicalQuantity(
     val asEnergy: Joule
         get() = convert(PhysicalDimension.energy) { Joule(magnitude) }
 
+    val asPower: Watt
+        get() = convert(PhysicalDimension.power) { Watt(magnitude) }
+
     val asFrequency: Hertz
         get() = convert(PhysicalDimension.frequency) { Hertz(magnitude) }
 
@@ -159,6 +177,27 @@ data class PhysicalQuantity(
     val asSolidAngle: Steradian
         get() = convert(PhysicalDimension.solidAngle) { Steradian(magnitude) }
 
+    val asConductance: Siemens
+        get() = convert(PhysicalDimension.conductance) { Siemens(magnitude) }
+
+    val asLuminousFlux: Lumen
+        get() = convert(PhysicalDimension.luminousFlux) { Lumen(magnitude) }
+
+    val asIlluminance: Lux
+        get() = convert(PhysicalDimension.illuminance) { Lux(magnitude) }
+
+    val asActivity: Becquerel
+        get() = convert(PhysicalDimension.activity) { Becquerel(magnitude) }
+
+    val asAbsorbedDose: Gray
+        get() = convert(PhysicalDimension.absorbedDose) { Gray(magnitude) }
+
+    val asDoseEquivalent: Sievert
+        get() = convert(PhysicalDimension.doseEquivalent) { Sievert(magnitude) }
+
+    val asCatalyticActivity: Katal
+        get() = convert(PhysicalDimension.catalyticActivity) { Katal(magnitude) }
+
     private fun <R> convert(
         givenDimension: PhysicalDimension,
         onConvert: () -> R
@@ -179,7 +218,6 @@ data class PhysicalQuantity(
         val absoluteTemperatureExp: Float = 0f, // (Θ),
         val amountOfSubstanceExp: Float = 0f, // (N)
         val luminousIntensityExp: Float = 0f, // (J).
-        val isAngular: Boolean = false, // todo not satisfied with a boolean - needs to account for steradians
     ) {
         operator fun plus(other: PhysicalDimension): PhysicalDimension = PhysicalDimension(
             this.timeExp + other.timeExp,
@@ -266,6 +304,13 @@ data class PhysicalQuantity(
                 this == capacitance -> "Capacitance ${inSI()}"
                 this == fluxDensity -> "FluxDensity ${inSI()}"
                 this == temperature -> "Temperature ${inSI()}"
+                this == conductance -> "Conductance ${inSI()}"
+                this == luminousFlux -> "LuminousFlux ${inSI()}"
+                this == illuminance -> "Illuminance ${inSI()}"
+                this == activity -> "Activity ${inSI()}"
+                this == absorbedDose -> "AbsorbedDose ${inSI()}"
+                this == doseEquivalent -> "DoseEquivalent ${inSI()}"
+                this == catalyticActivity -> "CatalyticActivity ${inSI()}"
                 else -> inSI()
             }
         }
@@ -286,7 +331,7 @@ data class PhysicalQuantity(
             /**
              * Angle (SI unit: radian, rad; dimensionless)
              */
-            val angle = PhysicalDimension()
+            val angle: PhysicalDimension = TODO()
 
             /**
              * Area (SI unit: square meter, m²)
@@ -396,7 +441,7 @@ data class PhysicalQuantity(
             /**
              * Solid Angle (SI unit: steradian, sr; dimensionless)
              */
-            val solidAngle = PhysicalDimension()
+            val solidAngle: PhysicalDimension = TODO()
 
             /**
              * Temperature (SI unit: kelvin, K)
@@ -417,6 +462,41 @@ data class PhysicalQuantity(
              * Volume (SI unit: cubic meter, m³)
              */
             val volume = PhysicalDimension(lengthExp = 3f)
+
+            /**
+             * Conductance (SI unit: siemens, S; kg⁻¹·m⁻²·s³·A²)
+             */
+            val conductance = PhysicalDimension(timeExp = 3f, lengthExp = -2f, massExp = -1f, electricCurrentExp = 2f)
+
+            /**
+             * Luminous Flux (SI unit: lumen, lm; cd·sr)
+             */
+            val luminousFlux = PhysicalDimension(luminousIntensityExp = 1f)
+
+            /**
+             * Illuminance (SI unit: lux, lx; cd·sr·m⁻²)
+             */
+            val illuminance = PhysicalDimension(lengthExp = -2f, luminousIntensityExp = 1f)
+
+            /**
+             * Activity (SI unit: becquerel, Bq; s⁻¹)
+             */
+            val activity = PhysicalDimension(timeExp = -1f)
+
+            /**
+             * Absorbed Dose (SI unit: gray, Gy; m²·s⁻²)
+             */
+            val absorbedDose = PhysicalDimension(timeExp = -2f, lengthExp = 2f)
+
+            /**
+             * Dose Equivalent (SI unit: sievert, Sv; m²·s⁻²)
+             */
+            val doseEquivalent = PhysicalDimension(timeExp = -2f, lengthExp = 2f)
+
+            /**
+             * Catalytic Activity (SI unit: katal, kat; mol·s⁻¹)
+             */
+            val catalyticActivity = PhysicalDimension(timeExp = -1f, amountOfSubstanceExp = 1f)
 
             // alias
             val distance = length
@@ -499,6 +579,27 @@ data class PhysicalQuantity(
         fun <T : DoubleBase> from(unit: UnitAcceleration<T>) =
             PhysicalDimension.acceleration.of(unit.asBaseUnit().value)
 
+        fun <T : DoubleBase> from(unit: UnitConductance<T>) =
+            PhysicalDimension.conductance.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitLuminousFlux<T>) =
+            PhysicalDimension.luminousFlux.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitIlluminance<T>) =
+            PhysicalDimension.illuminance.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitActivity<T>) =
+            PhysicalDimension.activity.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitAbsorbedDose<T>) =
+            PhysicalDimension.absorbedDose.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitDoseEquivalent<T>) =
+            PhysicalDimension.doseEquivalent.of(unit.asBaseUnit().value)
+
+        fun <T : DoubleBase> from(unit: UnitCatalyticActivity<T>) =
+            PhysicalDimension.catalyticActivity.of(unit.asBaseUnit().value)
+
         fun temperature(magnitude: Double) = PhysicalDimension.temperature.of(magnitude)
         fun amountOfSubstance(magnitude: Double) = PhysicalDimension.amountOfSubstance.of(magnitude)
         fun electricCurrent(magnitude: Double) = PhysicalDimension.electricCurrent.of(magnitude)
@@ -529,5 +630,12 @@ data class PhysicalQuantity(
         fun solidAngle(magnitude: Double) = PhysicalDimension.solidAngle.of(magnitude)
         fun capacitance(magnitude: Double) = PhysicalDimension.capacitance.of(magnitude)
         fun fluxDensity(magnitude: Double) = PhysicalDimension.fluxDensity.of(magnitude)
+        fun conductance(magnitude: Double) = PhysicalDimension.conductance.of(magnitude)
+        fun luminousFlux(magnitude: Double) = PhysicalDimension.luminousFlux.of(magnitude)
+        fun illuminance(magnitude: Double) = PhysicalDimension.illuminance.of(magnitude)
+        fun activity(magnitude: Double) = PhysicalDimension.activity.of(magnitude)
+        fun absorbedDose(magnitude: Double) = PhysicalDimension.absorbedDose.of(magnitude)
+        fun doseEquivalent(magnitude: Double) = PhysicalDimension.doseEquivalent.of(magnitude)
+        fun catalyticActivity(magnitude: Double) = PhysicalDimension.catalyticActivity.of(magnitude)
     }
 }

@@ -9,24 +9,27 @@ from .astronomical.astronomical import AstronomicalDistanceGenerator, GForceAcce
 from .cgs.cgs import CGSForceGenerator
 from .cgs.cgs import CGSVolumeGenerator
 from .common import get_repo_root, get_measures_base
+from .metric.metric_absorbeddose import MetricAbsorbedDoseGenerator
 from .metric.metric_acceleration import MetricAccelerationGenerator
+from .metric.metric_activity import MetricActivityGenerator
 from .metric.metric_amount import MetricAmountGenerator
 from .metric.metric_area import MetricAreaGenerator
+from .metric.metric_catalyticactivity import MetricCatalyticActivityGenerator
 from .metric.metric_charge import MetricChargeGenerator
+from .metric.metric_conductance import MetricConductanceGenerator
 from .metric.metric_current import MetricCurrentGenerator
 from .metric.metric_distance import MetricDistanceGenerator
+from .metric.metric_doseequivalent import MetricDoseEquivalentGenerator
 from .metric.metric_energy import MetricEnergyGenerator
 from .metric.metric_force import MetricForceGenerator
+from .metric.metric_illuminance import MetricIlluminanceGenerator
+from .metric.metric_luminousflux import MetricLuminousFluxGenerator
 from .metric.metric_power import MetricPowerGenerator
 from .metric.metric_pressure import MetricPressureGenerator
 from .metric.metric_time import MetricTimeGenerator
 from .metric.metric_velocity import MetricVelocityGenerator
 from .metric.metric_volume import MetricVolumeGenerator
 from .metric.metric_weight import MetricWeightGenerator
-from .metric.metric_amount import MetricAmountGenerator
-from .metric.metric_acceleration import MetricAccelerationGenerator
-from .metric.metric_charge import MetricChargeGenerator
-from .metric.metric_current import MetricCurrentGenerator
 # Non-SI generators
 from .non_si.non_si_volume import NonSiVolumeGenerator
 from .non_si.non_si_weight import NonSiWeightGenerator
@@ -71,20 +74,27 @@ __all__ = [
     'get_measures_base',
 
     # Metric generators
-    'MetricDistanceGenerator',
+    'MetricAbsorbedDoseGenerator',
     'MetricAccelerationGenerator',
-    'MetricVolumeGenerator',
+    'MetricActivityGenerator',
+    'MetricAmountGenerator',
     'MetricAreaGenerator',
+    'MetricCatalyticActivityGenerator',
+    'MetricChargeGenerator',
+    'MetricConductanceGenerator',
+    'MetricCurrentGenerator',
+    'MetricDistanceGenerator',
+    'MetricDoseEquivalentGenerator',
     'MetricEnergyGenerator',
     'MetricForceGenerator',
+    'MetricIlluminanceGenerator',
+    'MetricLuminousFluxGenerator',
     'MetricPowerGenerator',
     'MetricPressureGenerator',
     'MetricTimeGenerator',
     'MetricVelocityGenerator',
+    'MetricVolumeGenerator',
     'MetricWeightGenerator',
-    'MetricAmountGenerator',
-    'MetricChargeGenerator',
-    'MetricCurrentGenerator',
 
     # Non-SI generators
     'NonSiVolumeGenerator',
