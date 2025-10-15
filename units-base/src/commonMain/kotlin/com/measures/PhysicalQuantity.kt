@@ -403,12 +403,14 @@ data class PhysicalQuantity(
             /**
              * Acceleration (SI unit: meter per second squared, m·s⁻²)
              */
-            val acceleration = PhysicalDimension(timeExp = -2f, lengthExp = 1f, tag = "Meter per Second Squared")
+            val acceleration =
+                PhysicalDimension(timeExp = -2f, lengthExp = 1f, tag = "Meter per Second Squared")
 
             /**
              * Amount of Substance (SI unit: mole, mol)
              */
-            val amountOfSubstance = PhysicalDimension(amountOfSubstanceExp = 1f, tag = "Mole")
+            val amountOfSubstance =
+                PhysicalDimension(amountOfSubstanceExp = 1f, tag = "Mole")
 
             /**
              * Angle (SI unit: radian, rad; dimensionless)
@@ -418,7 +420,8 @@ data class PhysicalQuantity(
             /**
              * Area (SI unit: square meter, m²)
              */
-            val area = PhysicalDimension(lengthExp = 2f, tag = "Square Meter")
+            val area =
+                PhysicalDimension(lengthExp = 2f, tag = "Square Meter")
 
             /**
              * Capacitance (SI unit: farad, F; m⁻²·kg⁻¹·s⁴·A²)
@@ -429,22 +432,26 @@ data class PhysicalQuantity(
             /**
              * Electric Charge (SI unit: coulomb, C; s·A)
              */
-            val charge = PhysicalDimension(timeExp = 1f, electricCurrentExp = 1f, tag = "Coulomb")
+            val charge =
+                PhysicalDimension(timeExp = 1f, electricCurrentExp = 1f, tag = "Coulomb")
 
             /**
              * Density (SI derived unit: kilogram per cubic meter, kg·m⁻³)
              */
-            val density = PhysicalDimension(massExp = 1f, lengthExp = -3f, tag = "Kilogram per Cubic Meter")
+            val density =
+                PhysicalDimension(massExp = 1f, lengthExp = -3f, tag = "Kilogram per Cubic Meter")
 
             /**
              * Electric Current (alias, SI unit: ampere, A)
              */
-            val electricCurrent = PhysicalDimension(electricCurrentExp = 1f, tag = "Ampere")
+            val electricCurrent =
+                PhysicalDimension(electricCurrentExp = 1f, tag = "Ampere")
 
             /**
              * Energy (SI unit: joule, J; m²·kg·s⁻²)
              */
-            val energy = PhysicalDimension(timeExp = -2f, lengthExp = 2f, massExp = 1f, tag = "Joule")
+            val energy =
+                PhysicalDimension(timeExp = -2f, lengthExp = 2f, massExp = 1f, tag = "Joule")
 
             /**
              * Magnetic Flux (SI unit: weber, Wb; m²·kg·s⁻²·A⁻¹)
@@ -455,17 +462,20 @@ data class PhysicalQuantity(
             /**
              * Magnetic Flux Density (SI unit: tesla, T; kg·s⁻²·A⁻¹)
              */
-            val fluxDensity = PhysicalDimension(timeExp = -2f, massExp = 1f, electricCurrentExp = -1f, tag = "Tesla")
+            val fluxDensity =
+                PhysicalDimension(timeExp = -2f, massExp = 1f, electricCurrentExp = -1f, tag = "Tesla")
 
             /**
              * Force (SI unit: newton, N; m·kg·s⁻²)
              */
-            val force = PhysicalDimension(timeExp = -2f, lengthExp = 1f, massExp = 1f, tag = "Newton")
+            val force =
+                PhysicalDimension(timeExp = -2f, lengthExp = 1f, massExp = 1f, tag = "Newton")
 
             /**
              * Frequency (SI unit: hertz, Hz; s⁻¹)
              */
-            val frequency = PhysicalDimension(timeExp = -1f, tag = "Hertz")
+            val frequency =
+                PhysicalDimension(timeExp = -1f, tag = "Hertz")
 
             /**
              * Inductance (SI unit: henry, H; m²·kg·s⁻²·A⁻²)
@@ -476,17 +486,20 @@ data class PhysicalQuantity(
             /**
              * Length (SI unit: meter, m)
              */
-            val length = PhysicalDimension(lengthExp = 1f, tag = "Meter")
+            val length =
+                PhysicalDimension(lengthExp = 1f, tag = "Meter")
 
             /**
              * Luminous Intensity (alias, SI unit: candela, cd)
              */
-            val luminousIntensity = PhysicalDimension(luminousIntensityExp = 1f, tag = "Candela")
+            val luminousIntensity =
+                PhysicalDimension(luminousIntensityExp = 1f, tag = "Candela")
 
             /**
              * Mass (SI unit: kilogram, kg)
              */
-            val mass = PhysicalDimension(massExp = 1f, tag = "Kilogram")
+            val mass =
+                PhysicalDimension(massExp = 1f, tag = "Kilogram")
 
             /**
              * Momentum (SI derived unit: kilogram meter per second, kg·m·s⁻¹)
@@ -503,12 +516,14 @@ data class PhysicalQuantity(
             /**
              * Power (SI unit: watt, W; m²·kg·s⁻³)
              */
-            val power = PhysicalDimension(timeExp = -1f, lengthExp = 1f, massExp = 1f, tag = "Watt")
+            val power =
+                PhysicalDimension(timeExp = -1f, lengthExp = 1f, massExp = 1f, tag = "Watt")
 
             /**
              * Pressure (SI unit: pascal, Pa; m⁻¹·kg·s⁻²)
              */
-            val pressure = PhysicalDimension(timeExp = -2f, lengthExp = -1f, massExp = 1f, tag = "Pascal")
+            val pressure =
+                PhysicalDimension(timeExp = -2f, lengthExp = -1f, massExp = 1f, tag = "Pascal")
 
             /**
              * Resistance (SI unit: ohm, Ω; m²·kg·s⁻³·A⁻²)
@@ -525,17 +540,20 @@ data class PhysicalQuantity(
             /**
              * Temperature (SI unit: kelvin, K)
              */
-            val temperature = PhysicalDimension(absoluteTemperatureExp = 1f, tag = "Kelvin")
+            val temperature =
+                PhysicalDimension(absoluteTemperatureExp = 1f, tag = "Kelvin")
 
             /**
              * Time (SI unit: second, s)
              */
-            val time = PhysicalDimension(timeExp = 1f, tag = "Second")
+            val time =
+                PhysicalDimension(timeExp = 1f, tag = "Second")
 
             /**
              * Velocity (SI unit: meter per second, m·s⁻¹)
              */
-            val velocity = PhysicalDimension(timeExp = -1f, lengthExp = 1f, tag = "Meter per Second")
+            val velocity =
+                PhysicalDimension(timeExp = -1f, lengthExp = 1f, tag = "Meter per Second")
 
             /**
              * Velocity (SI unit: radian per second, rad·s⁻¹)
@@ -546,7 +564,8 @@ data class PhysicalQuantity(
             /**
              * Volume (SI unit: cubic meter, m³)
              */
-            val volume = PhysicalDimension(lengthExp = 3f, tag = "Cubic Meter")
+            val volume =
+                PhysicalDimension(lengthExp = 3f, tag = "Cubic Meter")
 
             /**
              * Conductance (SI unit: siemens, S; kg⁻¹·m⁻²·s³·A²)
@@ -557,32 +576,39 @@ data class PhysicalQuantity(
             /**
              * Luminous Flux (SI unit: lumen, lm; cd·sr)
              */
-            val luminousFlux = PhysicalDimension(luminousIntensityExp = 1f, tag = "Lumen")
+            val luminousFlux =
+                PhysicalDimension(luminousIntensityExp = 1f, tag = "Lumen")
 
             /**
              * Illuminance (SI unit: lux, lx; cd·sr·m⁻²)
              */
-            val illuminance = PhysicalDimension(lengthExp = -2f, luminousIntensityExp = 1f, tag = "Lux")
+            val illuminance =
+                PhysicalDimension(lengthExp = -2f, luminousIntensityExp = 1f, tag = "Lux")
 
             /**
              * Activity (SI unit: becquerel, Bq; s⁻¹)
              */
-            val activity = PhysicalDimension(timeExp = -1f, tag = "Becquerel")
+            val activity =
+                PhysicalDimension(timeExp = -1f, tag = "Becquerel")
 
             /**
              * Absorbed Dose (SI unit: gray, Gy; m²·s⁻²)
              */
-            val absorbedDose = PhysicalDimension(timeExp = -2f, lengthExp = 2f, tag = "Gray")
+            val absorbedDose =
+                PhysicalDimension(timeExp = -2f, lengthExp = 2f, tag = "Gray")
 
             /**
-             * Dose Equivalent (SI unit: sievert, Sv; m²·s⁻²)
+             * Dose Equivalent (SI
+             * unit: sievert, Sv; m²·s⁻²)
              */
-            val doseEquivalent = PhysicalDimension(timeExp = -2f, lengthExp = 2f, tag = "Sievert")
+            val doseEquivalent =
+                PhysicalDimension(timeExp = -2f, lengthExp = 2f, tag = "Sievert")
 
             /**
              * Catalytic Activity (SI unit: katal, kat; mol·s⁻¹)
              */
-            val catalyticActivity = PhysicalDimension(timeExp = -1f, amountOfSubstanceExp = 1f, tag = "Katal")
+            val catalyticActivity =
+                PhysicalDimension(timeExp = -1f, amountOfSubstanceExp = 1f, tag = "Katal")
 
             // alias
             val distance = length
