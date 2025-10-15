@@ -12,7 +12,6 @@
       <module name="tex-builder.math-geometry.math-geometry.main" target="17" />
       <module name="tex-builder.math-geometry.math-geometry.test" target="17" />
       <module name="tex-builder.math-geometry.test" target="17" />
-      <module name="tex-builder.units-base.jvmMain" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>
