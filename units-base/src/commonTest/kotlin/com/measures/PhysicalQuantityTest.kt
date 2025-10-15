@@ -5,6 +5,7 @@ import com.measures.PhysicalQuantity.Companion.force
 import com.measures.PhysicalQuantity.Companion.length
 import com.measures.PhysicalQuantity.Companion.mass
 import com.measures.PhysicalQuantity.Companion.time
+import com.measures.solidangle.Steradian
 import com.measures.time.Second
 import com.measures.volume.Liters
 import kotlin.test.Test
@@ -75,5 +76,16 @@ class PhysicalQuantityTest {
     fun `liters to physical quantity`() {
         val a = PhysicalQuantity.from(Liters(3.0)) / distance(1.0)
         println(a.asArea)
+    }
+
+    @Test
+    fun `radians work` () {
+        val a = PhysicalQuantity.from(Steradian(1.0))
+        println(a)
+    }
+    @Test
+    fun `angular velocity works` () {
+        val a = PhysicalQuantity.angularVelocity(2.0)
+        println(a)
     }
 }

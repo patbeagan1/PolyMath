@@ -99,7 +99,7 @@ data class PhysicalQuantity(
         val dimensionTarget: PhysicalDimension
     ) : Exception() {
         override val message: String?
-            get() = "Expected $dimensionGiven to be $dimensionTarget"
+            get() = "Expected '$dimensionGiven' to be '$dimensionTarget'"
     }
 
     val asLength: Meter
@@ -154,10 +154,10 @@ data class PhysicalQuantity(
         get() = convert(PhysicalDimension.charge) { Coulomb(magnitude) }
 
     val asPotential: Volt
-        get() = convert(PhysicalDimension.potential) { Volt(magnitude) }
+        get() = convert(PhysicalDimension.electricPotential) { Volt(magnitude) }
 
     val asResistance: Ohm
-        get() = convert(PhysicalDimension.resistance) { Ohm(magnitude) }
+        get() = convert(PhysicalDimension.electricResistance) { Ohm(magnitude) }
 
     val asCapacitance: Farad
         get() = convert(PhysicalDimension.capacitance) { Farad(magnitude) }
@@ -201,10 +201,37 @@ data class PhysicalQuantity(
     private fun <R> convert(
         givenDimension: PhysicalDimension,
         onConvert: () -> R
-    ): R = if (this.dimension == givenDimension) {
+    ): R = if (this.dimension.copy(tag = "") == givenDimension.copy(tag = "")) {
+        // we're giving users the benefit of the doubt here by having them determine the unit, ignoring the tag
+        // this is necessary because some units like becquerel and hertz have the same SI signature.
+        // both the unit and the physical quantity must be specified to be unambiguous.
         onConvert()
     } else {
         throw WrongUnitException(this.dimension, givenDimension)
+    }
+
+    data class Ratio(
+        val unit: SIUnit,
+        val power: Float,
+        val tag: String
+    ) {
+        enum class SIUnit {
+            None,
+            Time,
+            Length,
+            Mass,
+            ElectricCurrent,
+            AbsoluteTemperature,
+            AmountOfSubstance,
+            LuminousIntensity
+        }
+
+        companion object {
+            val radian = Ratio(SIUnit.Length, 1f, "Radian")
+            val steradian = Ratio(SIUnit.Length, 2f, "Steradian")
+            val perRadian = Ratio(SIUnit.Length, -1f, "PerRadian")
+            val perSteradian = Ratio(SIUnit.Length, -2f, "PerSteradian")
+        }
     }
 
     /**
@@ -218,6 +245,39 @@ data class PhysicalQuantity(
         val absoluteTemperatureExp: Float = 0f, // (Θ),
         val amountOfSubstanceExp: Float = 0f, // (N)
         val luminousIntensityExp: Float = 0f, // (J).
+        val ratio: Map<Ratio, Float> = emptyMap(),
+        /**
+         * It is important to emphasize that each physical quantity has only one coherent SI unit, even
+         * though this unit can be expressed in different forms by using some of the special names and
+         * symbols.
+         *
+         * The converse, however, is not true, because in general several different quantities may share
+         * the same SI unit. For example, for the quantity heat capacity as well as for the quantity
+         * entropy the SI unit is joule per kelvin. Similarly, for the base quantity electric current as well
+         * as the derived quantity magnetomotive force the SI unit is the ampere. It is therefore
+         * important not to use the unit alone to specify the quantity. This applies not only to technical
+         * texts, but also, for example, to measuring instruments (i.e. the instrument read-out needs to
+         * indicate both the unit and the quantity measured).
+         * In practice, with certain quantities, preference is given to the use of certain special unit names
+         * to facilitate the distinction between different quantities having the same dimension. When
+         * using this freedom, one may recall the process by which this quantity is defined. For example,
+         * the quantity torque is the cross product of a position vector and a force vector. The SI unit is
+         * newton metre. Even though torque has the same dimension as energy (SI unit joule), the joule
+         * is never used for expressing torque.
+         *
+         * The SI unit of frequency is hertz, the SI unit of angular velocity and angular frequency is
+         * radian per second. The SI unit of activity is becquerel, implying counts per second. The use
+         * of the different names emphasizes the different nature of the quantities concerned. It is
+         * especially important to carefully distinguish frequencies from angular frequencies, because
+         * by definition their numerical values differ by a factor1 of 2π. Ignoring this fact may cause an
+         * error of 2π. Note that in some countries, frequency values are conventionally expressed using
+         * “cycle/s” (“cps”) or “revolution/s” (“rev/s”) instead of the SI unit Hz, although “cycle”,
+         * “cps”, “revolution” and “rev” are not units in the SI. Note also that it is common, although
+         * not recommended, to use the term frequency for quantities expressed in rad/s. Because of
+         * this, it is recommended that quantities called “frequency”, “angular frequency”, and “angular
+         * velocity” always be given explicit units of Hz or rad/s and not s−1.
+         */
+        val tag: String
     ) {
         operator fun plus(other: PhysicalDimension): PhysicalDimension = PhysicalDimension(
             this.timeExp + other.timeExp,
@@ -227,6 +287,8 @@ data class PhysicalQuantity(
             this.absoluteTemperatureExp + other.absoluteTemperatureExp,
             this.amountOfSubstanceExp + other.amountOfSubstanceExp,
             this.luminousIntensityExp + other.luminousIntensityExp,
+            ratio.ratioOperation(other.ratio) { a, b -> a + b },
+            tag = "Unknown"
         )
 
         operator fun minus(other: PhysicalDimension): PhysicalDimension = PhysicalDimension(
@@ -237,7 +299,22 @@ data class PhysicalQuantity(
             this.absoluteTemperatureExp - other.absoluteTemperatureExp,
             this.amountOfSubstanceExp - other.amountOfSubstanceExp,
             this.luminousIntensityExp - other.luminousIntensityExp,
+            ratio.ratioOperation(other.ratio) { a, b -> a - b },
+            tag = "Unknown"
         )
+
+        fun Map<Ratio, Float>.ratioOperation(
+            other: Map<Ratio, Float>,
+            operation: (first: Float, second: Float) -> Float
+        ): Map<Ratio, Float> {
+            return this.toMutableMap().let { map ->
+                other.entries.forEach { (key, valueOther) ->
+                    val valuePrev = map.getOrPut(key) { 0f }
+                    map.put(key, operation(valuePrev, valueOther))
+                }
+                map
+            }
+        }
 
         fun representedInSIDimension() = buildString {
             if (timeExp != 0f) {
@@ -268,10 +345,14 @@ data class PhysicalQuantity(
                 append("J")
                 append(luminousIntensityExp)
             }
+            for (i in ratio) {
+                append(i.key.tag)
+                append(i.value)
+            }
         }
 
         override fun toString(): String {
-            fun inSI() = "SI(${representedInSIDimension()})"
+            fun inSI() = "SI(\"$tag\" ${representedInSIDimension()})"
             return when {
                 this == temperature -> "AbsoluteTemperature ${inSI()}"
                 this == amountOfSubstance -> "AmountOfSubstance ${inSI()}"
@@ -284,6 +365,7 @@ data class PhysicalQuantity(
                 this == mass -> "Mass ${inSI()}"
                 this == density -> "Density ${inSI()}"
                 this == velocity -> "Velocity ${inSI()}"
+                this == angularVelocity -> "AngularVelocity ${inSI()}"
                 this == power -> "Power ${inSI()}"
                 this == momentum -> "Momentum ${inSI()}"
                 this == acceleration -> "Acceleration ${inSI()}"
@@ -293,13 +375,13 @@ data class PhysicalQuantity(
                 this == flux -> "Flux ${inSI()}"
                 this == angle -> "Angle ${inSI()}"
                 this == charge -> "Charge ${inSI()}"
-                this == current -> "Current ${inSI()}"
+                this == electricCurrent -> "Current ${inSI()}"
                 this == distance -> "Distance ${inSI()}"
-                this == luminous -> "Luminous ${inSI()}"
+                this == luminousIntensity -> "LuminousIntensity ${inSI()}"
                 this == frequency -> "Frequency ${inSI()}"
-                this == potential -> "Potential ${inSI()}"
+                this == electricPotential -> "Potential ${inSI()}"
                 this == inductance -> "Inductance ${inSI()}"
-                this == resistance -> "Resistance ${inSI()}"
+                this == electricResistance -> "Resistance ${inSI()}"
                 this == solidAngle -> "SolidAngle ${inSI()}"
                 this == capacitance -> "Capacitance ${inSI()}"
                 this == fluxDensity -> "FluxDensity ${inSI()}"
@@ -321,182 +403,186 @@ data class PhysicalQuantity(
             /**
              * Acceleration (SI unit: meter per second squared, m·s⁻²)
              */
-            val acceleration = PhysicalDimension(timeExp = -2f, lengthExp = 1f)
+            val acceleration = PhysicalDimension(timeExp = -2f, lengthExp = 1f, tag = "Meter per Second Squared")
 
             /**
              * Amount of Substance (SI unit: mole, mol)
              */
-            val amountOfSubstance = PhysicalDimension(amountOfSubstanceExp = 1f)
+            val amountOfSubstance = PhysicalDimension(amountOfSubstanceExp = 1f, tag = "Mole")
 
             /**
              * Angle (SI unit: radian, rad; dimensionless)
              */
-            val angle: PhysicalDimension = TODO()
+            val angle: PhysicalDimension = PhysicalDimension(ratio = mapOf(Ratio.radian to 1f), tag = "Radian")
 
             /**
              * Area (SI unit: square meter, m²)
              */
-            val area = PhysicalDimension(lengthExp = 2f)
+            val area = PhysicalDimension(lengthExp = 2f, tag = "Square Meter")
 
             /**
              * Capacitance (SI unit: farad, F; m⁻²·kg⁻¹·s⁴·A²)
              */
-            val capacitance = PhysicalDimension(timeExp = 4f, lengthExp = -2f, massExp = -1f, electricCurrentExp = 2f)
+            val capacitance =
+                PhysicalDimension(timeExp = 4f, lengthExp = -2f, massExp = -1f, electricCurrentExp = 2f, tag = "Farad")
 
             /**
              * Electric Charge (SI unit: coulomb, C; s·A)
              */
-            val charge = PhysicalDimension(timeExp = 1f, electricCurrentExp = 1f)
-
-            /**
-             * Electric Current (SI unit: ampere, A)
-             */
-            val current = PhysicalDimension(electricCurrentExp = 1f)
+            val charge = PhysicalDimension(timeExp = 1f, electricCurrentExp = 1f, tag = "Coulomb")
 
             /**
              * Density (SI derived unit: kilogram per cubic meter, kg·m⁻³)
              */
-            val density = PhysicalDimension(massExp = 1f, lengthExp = -3f)
+            val density = PhysicalDimension(massExp = 1f, lengthExp = -3f, tag = "Kilogram per Cubic Meter")
 
             /**
              * Electric Current (alias, SI unit: ampere, A)
              */
-            val electricCurrent = PhysicalDimension(electricCurrentExp = 1f)
+            val electricCurrent = PhysicalDimension(electricCurrentExp = 1f, tag = "Ampere")
 
             /**
              * Energy (SI unit: joule, J; m²·kg·s⁻²)
              */
-            val energy = PhysicalDimension(timeExp = -2f, lengthExp = 2f, massExp = 1f)
+            val energy = PhysicalDimension(timeExp = -2f, lengthExp = 2f, massExp = 1f, tag = "Joule")
 
             /**
              * Magnetic Flux (SI unit: weber, Wb; m²·kg·s⁻²·A⁻¹)
              */
-            val flux = PhysicalDimension(timeExp = -2f, lengthExp = 2f, massExp = 1f, electricCurrentExp = -1f)
+            val flux =
+                PhysicalDimension(timeExp = -2f, lengthExp = 2f, massExp = 1f, electricCurrentExp = -1f, tag = "Weber")
 
             /**
              * Magnetic Flux Density (SI unit: tesla, T; kg·s⁻²·A⁻¹)
              */
-            val fluxDensity = PhysicalDimension(timeExp = -2f, massExp = 1f, electricCurrentExp = -1f)
+            val fluxDensity = PhysicalDimension(timeExp = -2f, massExp = 1f, electricCurrentExp = -1f, tag = "Tesla")
 
             /**
              * Force (SI unit: newton, N; m·kg·s⁻²)
              */
-            val force = PhysicalDimension(timeExp = -2f, lengthExp = 1f, massExp = 1f)
+            val force = PhysicalDimension(timeExp = -2f, lengthExp = 1f, massExp = 1f, tag = "Newton")
 
             /**
              * Frequency (SI unit: hertz, Hz; s⁻¹)
              */
-            val frequency = PhysicalDimension(timeExp = -1f)
+            val frequency = PhysicalDimension(timeExp = -1f, tag = "Hertz")
 
             /**
              * Inductance (SI unit: henry, H; m²·kg·s⁻²·A⁻²)
              */
-            val inductance = PhysicalDimension(timeExp = -2f, lengthExp = 2f, massExp = 1f, electricCurrentExp = -2f)
+            val inductance =
+                PhysicalDimension(timeExp = -2f, lengthExp = 2f, massExp = 1f, electricCurrentExp = -2f, tag = "Henry")
 
             /**
              * Length (SI unit: meter, m)
              */
-            val length = PhysicalDimension(lengthExp = 1f)
-
-            /**
-             * Luminous Intensity (SI unit: candela, cd)
-             */
-            val luminous = PhysicalDimension(luminousIntensityExp = 1f)
+            val length = PhysicalDimension(lengthExp = 1f, tag = "Meter")
 
             /**
              * Luminous Intensity (alias, SI unit: candela, cd)
              */
-            val luminousIntensity = PhysicalDimension(luminousIntensityExp = 1f)
+            val luminousIntensity = PhysicalDimension(luminousIntensityExp = 1f, tag = "Candela")
 
             /**
              * Mass (SI unit: kilogram, kg)
              */
-            val mass = PhysicalDimension(massExp = 1f)
+            val mass = PhysicalDimension(massExp = 1f, tag = "Kilogram")
 
             /**
              * Momentum (SI derived unit: kilogram meter per second, kg·m·s⁻¹)
              */
-            val momentum = PhysicalDimension(timeExp = -1f, lengthExp = 2f, massExp = 1f)
+            val momentum =
+                PhysicalDimension(timeExp = -1f, lengthExp = 2f, massExp = 1f, tag = "Kilogram Meter per Second")
 
             /**
              * Electric Potential (SI unit: volt, V; m²·kg·s⁻³·A⁻¹)
              */
-            val potential = PhysicalDimension(timeExp = -3f, lengthExp = 2f, massExp = 1f, electricCurrentExp = -1f)
+            val electricPotential =
+                PhysicalDimension(timeExp = -3f, lengthExp = 2f, massExp = 1f, electricCurrentExp = -1f, tag = "Volt")
 
             /**
              * Power (SI unit: watt, W; m²·kg·s⁻³)
              */
-            val power = PhysicalDimension(timeExp = -1f, lengthExp = 1f, massExp = 1f)
+            val power = PhysicalDimension(timeExp = -1f, lengthExp = 1f, massExp = 1f, tag = "Watt")
 
             /**
              * Pressure (SI unit: pascal, Pa; m⁻¹·kg·s⁻²)
              */
-            val pressure = PhysicalDimension(timeExp = -2f, lengthExp = -1f, massExp = 1f)
+            val pressure = PhysicalDimension(timeExp = -2f, lengthExp = -1f, massExp = 1f, tag = "Pascal")
 
             /**
              * Resistance (SI unit: ohm, Ω; m²·kg·s⁻³·A⁻²)
              */
-            val resistance = PhysicalDimension(timeExp = -3f, lengthExp = 2f, massExp = 1f, electricCurrentExp = -2f)
+            val electricResistance =
+                PhysicalDimension(timeExp = -3f, lengthExp = 2f, massExp = 1f, electricCurrentExp = -2f, tag = "Ohm")
 
             /**
              * Solid Angle (SI unit: steradian, sr; dimensionless)
              */
-            val solidAngle: PhysicalDimension = TODO()
+            val solidAngle: PhysicalDimension =
+                PhysicalDimension(ratio = mapOf(Ratio.steradian to 1f), tag = "Steradian")
 
             /**
              * Temperature (SI unit: kelvin, K)
              */
-            val temperature = PhysicalDimension(absoluteTemperatureExp = 1f)
+            val temperature = PhysicalDimension(absoluteTemperatureExp = 1f, tag = "Kelvin")
 
             /**
              * Time (SI unit: second, s)
              */
-            val time = PhysicalDimension(timeExp = 1f)
+            val time = PhysicalDimension(timeExp = 1f, tag = "Second")
 
             /**
              * Velocity (SI unit: meter per second, m·s⁻¹)
              */
-            val velocity = PhysicalDimension(timeExp = -1f, lengthExp = 1f)
+            val velocity = PhysicalDimension(timeExp = -1f, lengthExp = 1f, tag = "Meter per Second")
+
+            /**
+             * Velocity (SI unit: radian per second, rad·s⁻¹)
+             */
+            val angularVelocity =
+                PhysicalDimension(timeExp = -1f, ratio = mapOf(Ratio.radian to 1f), tag = "Radian per Second")
 
             /**
              * Volume (SI unit: cubic meter, m³)
              */
-            val volume = PhysicalDimension(lengthExp = 3f)
+            val volume = PhysicalDimension(lengthExp = 3f, tag = "Cubic Meter")
 
             /**
              * Conductance (SI unit: siemens, S; kg⁻¹·m⁻²·s³·A²)
              */
-            val conductance = PhysicalDimension(timeExp = 3f, lengthExp = -2f, massExp = -1f, electricCurrentExp = 2f)
+            val conductance =
+                PhysicalDimension(timeExp = 3f, lengthExp = -2f, massExp = -1f, electricCurrentExp = 2f, tag = "Siemen")
 
             /**
              * Luminous Flux (SI unit: lumen, lm; cd·sr)
              */
-            val luminousFlux = PhysicalDimension(luminousIntensityExp = 1f)
+            val luminousFlux = PhysicalDimension(luminousIntensityExp = 1f, tag = "Lumen")
 
             /**
              * Illuminance (SI unit: lux, lx; cd·sr·m⁻²)
              */
-            val illuminance = PhysicalDimension(lengthExp = -2f, luminousIntensityExp = 1f)
+            val illuminance = PhysicalDimension(lengthExp = -2f, luminousIntensityExp = 1f, tag = "Lux")
 
             /**
              * Activity (SI unit: becquerel, Bq; s⁻¹)
              */
-            val activity = PhysicalDimension(timeExp = -1f)
+            val activity = PhysicalDimension(timeExp = -1f, tag = "Becquerel")
 
             /**
              * Absorbed Dose (SI unit: gray, Gy; m²·s⁻²)
              */
-            val absorbedDose = PhysicalDimension(timeExp = -2f, lengthExp = 2f)
+            val absorbedDose = PhysicalDimension(timeExp = -2f, lengthExp = 2f, tag = "Gray")
 
             /**
              * Dose Equivalent (SI unit: sievert, Sv; m²·s⁻²)
              */
-            val doseEquivalent = PhysicalDimension(timeExp = -2f, lengthExp = 2f)
+            val doseEquivalent = PhysicalDimension(timeExp = -2f, lengthExp = 2f, tag = "Sievert")
 
             /**
              * Catalytic Activity (SI unit: katal, kat; mol·s⁻¹)
              */
-            val catalyticActivity = PhysicalDimension(timeExp = -1f, amountOfSubstanceExp = 1f)
+            val catalyticActivity = PhysicalDimension(timeExp = -1f, amountOfSubstanceExp = 1f, tag = "Katal")
 
             // alias
             val distance = length
@@ -520,7 +606,7 @@ data class PhysicalQuantity(
             PhysicalDimension.charge.of(unit.asBaseUnit().value)
 
         fun <T : DoubleBase> from(unit: UnitCurrent<T>) =
-            PhysicalDimension.current.of(unit.asBaseUnit().value)
+            PhysicalDimension.electricCurrent.of(unit.asBaseUnit().value)
 
         fun <T : DoubleBase> from(unit: UnitDistance<T>) =
             PhysicalDimension.distance.of(unit.asBaseUnit().value)
@@ -544,13 +630,13 @@ data class PhysicalQuantity(
             PhysicalDimension.inductance.of(unit.asBaseUnit().value)
 
         fun <T : DoubleBase> from(unit: UnitLuminous<T>) =
-            PhysicalDimension.luminous.of(unit.asBaseUnit().value)
+            PhysicalDimension.luminousIntensity.of(unit.asBaseUnit().value)
 
         fun <T : DoubleBase> from(unit: UnitMass<T>) =
             PhysicalDimension.mass.of(unit.asBaseUnit().value)
 
         fun <T : DoubleBase> from(unit: UnitPotential<T>) =
-            PhysicalDimension.potential.of(unit.asBaseUnit().value)
+            PhysicalDimension.electricPotential.of(unit.asBaseUnit().value)
 
         fun <T : DoubleBase> from(unit: UnitPower<T>) =
             PhysicalDimension.power.of(unit.asBaseUnit().value)
@@ -559,7 +645,7 @@ data class PhysicalQuantity(
             PhysicalDimension.pressure.of(unit.asBaseUnit().value)
 
         fun <T : DoubleBase> from(unit: UnitResistance<T>) =
-            PhysicalDimension.resistance.of(unit.asBaseUnit().value)
+            PhysicalDimension.electricResistance.of(unit.asBaseUnit().value)
 
         fun <T : DoubleBase> from(unit: UnitSolidAngle<T>) =
             PhysicalDimension.solidAngle.of(unit.asBaseUnit().value)
@@ -611,6 +697,7 @@ data class PhysicalQuantity(
         fun mass(magnitude: Double) = PhysicalDimension.mass.of(magnitude)
         fun density(magnitude: Double) = PhysicalDimension.density.of(magnitude)
         fun velocity(magnitude: Double) = PhysicalDimension.velocity.of(magnitude)
+        fun angularVelocity(magnitude: Double) = PhysicalDimension.angularVelocity.of(magnitude)
         fun power(magnitude: Double) = PhysicalDimension.power.of(magnitude)
         fun momentum(magnitude: Double) = PhysicalDimension.momentum.of(magnitude)
         fun acceleration(magnitude: Double) = PhysicalDimension.acceleration.of(magnitude)
@@ -620,13 +707,13 @@ data class PhysicalQuantity(
         fun flux(magnitude: Double) = PhysicalDimension.flux.of(magnitude)
         fun angle(magnitude: Double) = PhysicalDimension.angle.of(magnitude)
         fun charge(magnitude: Double) = PhysicalDimension.charge.of(magnitude)
-        fun current(magnitude: Double) = PhysicalDimension.current.of(magnitude)
+        fun current(magnitude: Double) = PhysicalDimension.electricCurrent.of(magnitude)
         fun distance(magnitude: Double) = PhysicalDimension.distance.of(magnitude)
-        fun luminous(magnitude: Double) = PhysicalDimension.luminous.of(magnitude)
+        fun luminous(magnitude: Double) = PhysicalDimension.luminousIntensity.of(magnitude)
         fun frequency(magnitude: Double) = PhysicalDimension.frequency.of(magnitude)
-        fun potential(magnitude: Double) = PhysicalDimension.potential.of(magnitude)
+        fun potential(magnitude: Double) = PhysicalDimension.electricPotential.of(magnitude)
         fun inductance(magnitude: Double) = PhysicalDimension.inductance.of(magnitude)
-        fun resistance(magnitude: Double) = PhysicalDimension.resistance.of(magnitude)
+        fun resistance(magnitude: Double) = PhysicalDimension.electricResistance.of(magnitude)
         fun solidAngle(magnitude: Double) = PhysicalDimension.solidAngle.of(magnitude)
         fun capacitance(magnitude: Double) = PhysicalDimension.capacitance.of(magnitude)
         fun fluxDensity(magnitude: Double) = PhysicalDimension.fluxDensity.of(magnitude)
