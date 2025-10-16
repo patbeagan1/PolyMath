@@ -1,4 +1,4 @@
-package com.measures
+﻿package com.measures
 
 import com.measures.PhysicalQuantity.Companion.distance
 import com.measures.PhysicalQuantity.Companion.force
@@ -96,24 +96,23 @@ class PhysicalQuantityTest {
         val a = PhysicalQuantity.angularAcceleration(2.0)
         println(a)
         val hertz = a / PhysicalQuantity.angularVelocity(1.0)
-        println(hertz)
+        println(hertz.castType("Hertz"))
     }
 
     @Test
     fun `people per square kilometer`() {
-        val person = PhysicalQuantity.fromEntity("People")
-        val squareKilometer = (Kilometer(1.0) * Kilometer(1.0)).let { PhysicalQuantity.from(it) }
+        val unit = Kilometer(1.0) * Kilometer(1.0)
+        val squareKilometer = PhysicalQuantity.from(unit)
+        val people = PhysicalQuantity.fromEntity("People")
 
-        val peoplePerSquareKilometer = person / squareKilometer
+        val peoplePerSquareKilometer = people / squareKilometer
 
         println(peoplePerSquareKilometer * 5)
     }
 
     @Test
     fun `parts per million`() {
-        val parts = PhysicalQuantity.fromEntity("Parts")
-        val ppm = parts / PhysicalQuantity.Million
-
-        println(ppm * 1000)
+        val ppm = PhysicalQuantity.partsPerMillion(1000.0)
+        println(ppm)
     }
 }

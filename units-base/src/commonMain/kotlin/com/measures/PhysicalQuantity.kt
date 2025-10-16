@@ -74,6 +74,15 @@ data class PhysicalQuantity(
     val magnitude: Double,
     val dimension: PhysicalDimension
 ) {
+    /**
+     * This is necessary for incompatible units which share a SI unit expression
+     * For example, becquerels and hertz
+     *
+     * When performing multiplication and division of quantities,
+     * we can tell the quantity's SI type but not the unit type.
+     * The type is erased when converting between types.
+     */
+    fun castType(tag: String) = this.copy(dimension = dimension.copy(tag = tag))
     fun isCommensurableTo(other: PhysicalQuantity) = dimension == other.dimension
 
     operator fun plus(other: PhysicalQuantity): PhysicalQuantity? = if (isCommensurableTo(other)) {
@@ -599,12 +608,11 @@ data class PhysicalQuantity(
             val angularVelocity =
                 PhysicalDimension(timeExp = -1f, unitOne = mapOf(UnitOne.Ratio.radian to 1f), tag = "Radian per Second")
 
-
             /**
              * Angular Acceleration (SI unit: radian per second, rad·s⁻2)
              */
             val angularAcceleration =
-                PhysicalDimension(timeExp = -2f, unitOne = mapOf(UnitOne.Ratio.radian to 1f), tag = "Radian per Second")
+                PhysicalDimension(timeExp = -2f, unitOne = mapOf(UnitOne.Ratio.radian to 1f), tag = "Radian per Second per Second")
 
             /**
              * Volume (SI unit: cubic meter, m³)
@@ -655,18 +663,75 @@ data class PhysicalQuantity(
             val catalyticActivity =
                 PhysicalDimension(timeExp = -1f, amountOfSubstanceExp = 1f, tag = "Katal")
 
+            val dynamicViscosity =
+                PhysicalDimension(timeExp = -1f, massExp = 1f, lengthExp = -1f, tag = "DynamicViscosity")
+            val torque = PhysicalDimension(timeExp = -2f, lengthExp = 2f, massExp = 1f, tag = "Torque")
+            val newtonMeter = PhysicalDimension(timeExp = -2f, lengthExp = 2f, massExp = 2f, tag = "NewtonMeter")
+            val surfaceTension = PhysicalDimension(timeExp = -2f, lengthExp = 2f, massExp = 1f, tag = "SurfaceTension")
+            val heatFluxDensity =
+                PhysicalDimension(timeExp = -3f, lengthExp = -2f, massExp = 1f, tag = "HeatFluxDensity")
+            val irradiance = PhysicalDimension(timeExp = -3f, lengthExp = -2f, massExp = 1f, tag = "irradiance")
+            val heatCapacity = PhysicalDimension(
+                timeExp = -2f,
+                lengthExp = 2f,
+                massExp = 1f,
+                absoluteTemperatureExp = -1f,
+                tag = "HeatCapacity"
+            )
+            val specificHeatCapacity = PhysicalDimension(
+                timeExp = -2f,
+                lengthExp = 2f,
+                absoluteTemperatureExp = -1f,
+                tag = "SpecificHeatCapacity"
+            )
+
+//            //, joule per kilogram kelvin J kg−1 K−1 m2 s−2 K−1
+//            val specificEntropy = PhysicalDimension()
+//
+//            //
+//            val specificEnergy = PhysicalDimension()
+//
+//            //joule per kilogram J kg−1 m2 s−2
+//            val thermalConductivity = PhysicalDimension()
+//
+//            //watt per metre kelvin W m−1 K−1 kg m s−3 K−1
+//            val energyDensity = PhysicalDimension()
+//
+//            //joule per cubic metre J m−3 kg m−1 s−2
+//            val electricFieldStrength = PhysicalDimension()
+//
+//            //volt per metre V m−1 kg m s−3 A−1
+//            val electricChargeDensity = PhysicalDimension()
+//
+//            //coulomb per cubic metre C m−3 A s m−3
+//            val surfaceChargeDensity = PhysicalDimension()
+//
+//            //coulomb per square metre C m−2 A s m−2
+//            val electricFluxDensity = PhysicalDimension()
+//
+//            //, coulomb per square metre C m−2 A s m−2
+//            val electricDisplacement = PhysicalDimension()
+//
+//            //
+//            val permittivity = PhysicalDimension()
+//
+//            //farad per metre F m−1 kg−1 m−3 s4 A2
+//            val permeability = PhysicalDimension()
+//
+//            //henry per metre H m−1 kg m s−2 A−2
+//            val molarEnergy = PhysicalDimension()
+//
+//            //joule per mole J mol−1 kg m2 s−2 mol−1
+//            //pascal second Pa s kg m−1 s−1
+//            val momentOfForce = PhysicalDimension(timee)
+
+
             // alias
             val distance = length
         }
     }
 
     companion object {
-
-        val One = fromCount(1)
-        val Cent = fromCount(100)
-        val Thousand = fromCount(1000)
-        val Million = fromCount(1_000_000)
-
         fun fromEntity(entity: String) = fromUnitOne(UnitOne.Entity(entity))
         fun fromCount(count: Long) = fromUnitOne(UnitOne.Count(count))
         fun fromRatio(ratio: UnitOne.Ratio) = fromUnitOne(ratio)
@@ -677,8 +742,6 @@ data class PhysicalQuantity(
                 tag = unitOne.tag
             )
         )
-
-        // ...
 
         fun <T : DoubleBase> from(unit: UnitAmount<T>): PhysicalQuantity =
             PhysicalDimension.amountOfSubstance.of(unit.asBaseUnit().value)
@@ -775,6 +838,19 @@ data class PhysicalQuantity(
 
         fun <T : DoubleBase> from(unit: UnitCatalyticActivity<T>) =
             PhysicalDimension.catalyticActivity.of(unit.asBaseUnit().value)
+
+        fun percent(magnitude: Double) = ((fromCount(1) / fromCount(100)) * magnitude).castType("percent")
+        fun perThousand(magnitude: Double) = ((fromCount(1) / fromCount(1000)) * magnitude).castType("perThousand")
+        fun perMillion(magnitude: Double) = ((fromCount(1) / fromCount(1_000_000)) * magnitude).castType("perMillion")
+
+        fun partsPerHundred(magnitude: Double) =
+            ((fromEntity("Parts") / fromCount(100)) * magnitude).castType("PartsPerHundred")
+
+        fun partsPerThousand(magnitude: Double) =
+            ((fromEntity("Parts") / fromCount(1000)) * magnitude).castType("PartsPerThousand")
+
+        fun partsPerMillion(magnitude: Double) =
+            ((fromEntity("Parts") / fromCount(1_000_000)) * magnitude).castType("PartsPerMillion")
 
         fun temperature(magnitude: Double) = PhysicalDimension.temperature.of(magnitude)
         fun amountOfSubstance(magnitude: Double) = PhysicalDimension.amountOfSubstance.of(magnitude)
