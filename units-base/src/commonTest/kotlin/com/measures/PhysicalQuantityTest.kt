@@ -5,6 +5,7 @@ import com.measures.PhysicalQuantity.Companion.force
 import com.measures.PhysicalQuantity.Companion.length
 import com.measures.PhysicalQuantity.Companion.mass
 import com.measures.PhysicalQuantity.Companion.time
+import com.measures.distance.metric.Kilometer
 import com.measures.solidangle.Steradian
 import com.measures.time.Second
 import com.measures.volume.Liters
@@ -79,13 +80,40 @@ class PhysicalQuantityTest {
     }
 
     @Test
-    fun `radians work` () {
+    fun `radians work`() {
         val a = PhysicalQuantity.from(Steradian(1.0))
         println(a)
     }
+
     @Test
-    fun `angular velocity works` () {
+    fun `angular velocity works`() {
         val a = PhysicalQuantity.angularVelocity(2.0)
         println(a)
+    }
+
+    @Test
+    fun `angular acceleration works`() {
+        val a = PhysicalQuantity.angularAcceleration(2.0)
+        println(a)
+        val hertz = a / PhysicalQuantity.angularVelocity(1.0)
+        println(hertz)
+    }
+
+    @Test
+    fun `people per square kilometer`() {
+        val person = PhysicalQuantity.fromEntity("People")
+        val squareKilometer = (Kilometer(1.0) * Kilometer(1.0)).let { PhysicalQuantity.from(it) }
+
+        val peoplePerSquareKilometer = person / squareKilometer
+
+        println(peoplePerSquareKilometer * 5)
+    }
+
+    @Test
+    fun `parts per million`() {
+        val parts = PhysicalQuantity.fromEntity("Parts")
+        val ppm = parts / PhysicalQuantity.Million
+
+        println(ppm * 1000)
     }
 }

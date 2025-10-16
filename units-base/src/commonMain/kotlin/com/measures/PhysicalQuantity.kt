@@ -85,13 +85,23 @@ data class PhysicalQuantity(
     } else null
 
     operator fun times(other: PhysicalQuantity): PhysicalQuantity = PhysicalQuantity(
-        magnitude * other.magnitude,
-        dimension + other.dimension
+        magnitude = magnitude * other.magnitude,
+        dimension = dimension + other.dimension
     )
 
     operator fun div(other: PhysicalQuantity): PhysicalQuantity = PhysicalQuantity(
-        magnitude * other.magnitude,
-        dimension - other.dimension
+        magnitude = magnitude / other.magnitude,
+        dimension = dimension - other.dimension
+    )
+
+    operator fun times(other: Number): PhysicalQuantity = PhysicalQuantity(
+        magnitude = magnitude * other.toDouble(),
+        dimension = dimension
+    )
+
+    operator fun div(other: Number): PhysicalQuantity = PhysicalQuantity(
+        magnitude = magnitude / other.toDouble(),
+        dimension = dimension
     )
 
     class WrongUnitException(
@@ -211,28 +221,29 @@ data class PhysicalQuantity(
         throw WrongUnitException(this.dimension, givenDimension)
     }
 
-    data class Ratio(
-        val unit: SIUnit,
-        val power: Float,
+    interface UnitOne {
         val tag: String
-    ) {
-        enum class SIUnit {
-            None,
-            Time,
-            Length,
-            Mass,
-            ElectricCurrent,
-            AbsoluteTemperature,
-            AmountOfSubstance,
-            LuminousIntensity
+
+        data class Ratio(
+            override val tag: String
+        ) : UnitOne {
+            companion object {
+                val radian = Ratio("Radian")
+                val steradian = Ratio("Steradian")
+                val perRadian = Ratio("PerRadian")
+                val perSteradian = Ratio("PerSteradian")
+            }
         }
 
-        companion object {
-            val radian = Ratio(SIUnit.Length, 1f, "Radian")
-            val steradian = Ratio(SIUnit.Length, 2f, "Steradian")
-            val perRadian = Ratio(SIUnit.Length, -1f, "PerRadian")
-            val perSteradian = Ratio(SIUnit.Length, -2f, "PerSteradian")
+        data class Count(
+            val count: Long
+        ) : UnitOne {
+            override val tag: String = "$count"
         }
+
+        data class Entity(
+            override val tag: String
+        ) : UnitOne
     }
 
     /**
@@ -246,7 +257,8 @@ data class PhysicalQuantity(
         val absoluteTemperatureExp: Float = 0f, // (Θ),
         val amountOfSubstanceExp: Float = 0f, // (N)
         val luminousIntensityExp: Float = 0f, // (J).
-        val ratio: Map<Ratio, Float> = emptyMap(),
+        val unitOne: Map<UnitOne, Float> = emptyMap(),
+
         /**
          * It is important to emphasize that each physical quantity has only one coherent SI unit, even
          * though this unit can be expressed in different forms by using some of the special names and
@@ -288,7 +300,7 @@ data class PhysicalQuantity(
             this.absoluteTemperatureExp + other.absoluteTemperatureExp,
             this.amountOfSubstanceExp + other.amountOfSubstanceExp,
             this.luminousIntensityExp + other.luminousIntensityExp,
-            ratio.ratioOperation(other.ratio) { a, b -> a + b },
+            unitOne.ratioOperation(other.unitOne) { a, b -> a + b }.filter { it.value != 0f },
             tag = "Unknown"
         )
 
@@ -300,14 +312,14 @@ data class PhysicalQuantity(
             this.absoluteTemperatureExp - other.absoluteTemperatureExp,
             this.amountOfSubstanceExp - other.amountOfSubstanceExp,
             this.luminousIntensityExp - other.luminousIntensityExp,
-            ratio.ratioOperation(other.ratio) { a, b -> a - b },
+            unitOne.ratioOperation(other.unitOne) { a, b -> a - b }.filter { it.value != 0f },
             tag = "Unknown"
         )
 
-        fun Map<Ratio, Float>.ratioOperation(
-            other: Map<Ratio, Float>,
+        fun Map<UnitOne, Float>.ratioOperation(
+            other: Map<UnitOne, Float>,
             operation: (first: Float, second: Float) -> Float
-        ): Map<Ratio, Float> {
+        ): Map<UnitOne, Float> {
             return this.toMutableMap().let { map ->
                 other.entries.forEach { (key, valueOther) ->
                     val valuePrev = map.getOrPut(key) { 0f }
@@ -346,8 +358,8 @@ data class PhysicalQuantity(
                 append("J")
                 append(luminousIntensityExp)
             }
-            for (i in ratio) {
-                append(i.key.tag)
+            for (i in unitOne) {
+                append("<${i.key.tag}>")
                 append(i.value)
             }
         }
@@ -367,6 +379,8 @@ data class PhysicalQuantity(
                 this == density -> "Density ${inSI()}"
                 this == velocity -> "Velocity ${inSI()}"
                 this == angularVelocity -> "AngularVelocity ${inSI()}"
+                this == angularAcceleration -> "AngularAcceleration ${inSI()}"
+                this == angularFrequency -> "AngularFrequency ${inSI()}"
                 this == power -> "Power ${inSI()}"
                 this == momentum -> "Momentum ${inSI()}"
                 this == acceleration -> "Acceleration ${inSI()}"
@@ -416,7 +430,8 @@ data class PhysicalQuantity(
             /**
              * Angle (SI unit: radian, rad; dimensionless)
              */
-            val angle: PhysicalDimension = PhysicalDimension(ratio = mapOf(Ratio.radian to 1f), tag = "Radian")
+            val angle: PhysicalDimension =
+                PhysicalDimension(unitOne = mapOf(UnitOne.Ratio.radian to 1f), tag = "Radian")
 
             /**
              * Area (SI unit: square meter, m²)
@@ -503,6 +518,18 @@ data class PhysicalQuantity(
                 PhysicalDimension(massExp = 1f, tag = "Kilogram")
 
             /**
+             * Angular Momentum (SI derived unit: radian kilogram meter per second, rad·kg·m·s⁻¹)
+             */
+            val angularMomentum =
+                PhysicalDimension(
+                    timeExp = -1f,
+                    lengthExp = 2f,
+                    massExp = 1f,
+                    unitOne = mapOf(UnitOne.Ratio.radian to 1f),
+                    tag = "Kilogram Meter per Second"
+                )
+
+            /**
              * Momentum (SI derived unit: kilogram meter per second, kg·m·s⁻¹)
              */
             val momentum =
@@ -536,7 +563,7 @@ data class PhysicalQuantity(
              * Solid Angle (SI unit: steradian, sr; dimensionless)
              */
             val solidAngle: PhysicalDimension =
-                PhysicalDimension(ratio = mapOf(Ratio.steradian to 1f), tag = "Steradian")
+                PhysicalDimension(unitOne = mapOf(UnitOne.Ratio.steradian to 1f), tag = "Steradian")
 
             /**
              * Temperature (SI unit: kelvin, K)
@@ -557,10 +584,27 @@ data class PhysicalQuantity(
                 PhysicalDimension(timeExp = -1f, lengthExp = 1f, tag = "Meter per Second")
 
             /**
-             * Velocity (SI unit: radian per second, rad·s⁻¹)
+             * Angular Frequency (SI unit: radian per second, rad·s⁻¹)
+             */
+            val angularFrequency =
+                PhysicalDimension(
+                    timeExp = -1f,
+                    unitOne = mapOf(UnitOne.Ratio.radian to 1f),
+                    tag = "Radian per Second (Frequency)"
+                )
+
+            /**
+             * Angular Velocity (SI unit: radian per second, rad·s⁻¹)
              */
             val angularVelocity =
-                PhysicalDimension(timeExp = -1f, ratio = mapOf(Ratio.radian to 1f), tag = "Radian per Second")
+                PhysicalDimension(timeExp = -1f, unitOne = mapOf(UnitOne.Ratio.radian to 1f), tag = "Radian per Second")
+
+
+            /**
+             * Angular Acceleration (SI unit: radian per second, rad·s⁻2)
+             */
+            val angularAcceleration =
+                PhysicalDimension(timeExp = -2f, unitOne = mapOf(UnitOne.Ratio.radian to 1f), tag = "Radian per Second")
 
             /**
              * Volume (SI unit: cubic meter, m³)
@@ -617,6 +661,25 @@ data class PhysicalQuantity(
     }
 
     companion object {
+
+        val One = fromCount(1)
+        val Cent = fromCount(100)
+        val Thousand = fromCount(1000)
+        val Million = fromCount(1_000_000)
+
+        fun fromEntity(entity: String) = fromUnitOne(UnitOne.Entity(entity))
+        fun fromCount(count: Long) = fromUnitOne(UnitOne.Count(count))
+        fun fromRatio(ratio: UnitOne.Ratio) = fromUnitOne(ratio)
+        fun fromUnitOne(unitOne: UnitOne): PhysicalQuantity = PhysicalQuantity(
+            1.0,
+            PhysicalDimension(
+                unitOne = mapOf(unitOne to 1f),
+                tag = unitOne.tag
+            )
+        )
+
+        // ...
+
         fun <T : DoubleBase> from(unit: UnitAmount<T>): PhysicalQuantity =
             PhysicalDimension.amountOfSubstance.of(unit.asBaseUnit().value)
 
@@ -725,7 +788,10 @@ data class PhysicalQuantity(
         fun density(magnitude: Double) = PhysicalDimension.density.of(magnitude)
         fun velocity(magnitude: Double) = PhysicalDimension.velocity.of(magnitude)
         fun angularVelocity(magnitude: Double) = PhysicalDimension.angularVelocity.of(magnitude)
+        fun angularFrequency(magnitude: Double) = PhysicalDimension.angularFrequency.of(magnitude)
+        fun angularAcceleration(magnitude: Double) = PhysicalDimension.angularAcceleration.of(magnitude)
         fun power(magnitude: Double) = PhysicalDimension.power.of(magnitude)
+        fun angularMomentum(magnitude: Double) = PhysicalDimension.angularMomentum.of(magnitude)
         fun momentum(magnitude: Double) = PhysicalDimension.momentum.of(magnitude)
         fun acceleration(magnitude: Double) = PhysicalDimension.acceleration.of(magnitude)
         fun force(magnitude: Double) = PhysicalDimension.force.of(magnitude)
