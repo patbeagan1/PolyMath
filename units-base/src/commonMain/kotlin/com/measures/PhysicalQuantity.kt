@@ -109,6 +109,7 @@ data class PhysicalQuantity(
         get() = convert(PhysicalDimension.area) { SquareMeter(magnitude) }
 
     val asVolume: Liters
+        // this is technically not correct, as the SI unit is cubic meters
         get() = convert(PhysicalDimension.volume) { Liters(magnitude * 1000) }
 
     val asTime: Second
