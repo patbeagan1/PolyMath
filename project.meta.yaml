@@ -46,9 +46,9 @@ scripts:
   run:
     command: ./gradlew run
   publish:
-    command: ./gradlew publishToMavenLocal
-  subtree-push:
-    command: ../monorepo subtree push git@github.com:patbeagan1/PolyMath.git PolyMath --branch develop
+    command: "../monorepo subtree push PolyMath"
+  pull:
+    command: "../monorepo subtree pull PolyMath"
 
   # Module-specific publishing scripts
   publish-units-base:
