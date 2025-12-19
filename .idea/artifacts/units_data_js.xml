@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="units-data-js">
+    <output-path>$PROJECT_DIR$/units-data/build/libs</output-path>
+    <root id="archive" name="units-data-js.jar" />
+  </artifact>
+</component>

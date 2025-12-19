@@ -5,12 +5,12 @@ import com.measures.force.Newton
 import com.measures.force.UnitForce
 import com.measures.area.UnitArea
 import com.measures.distance.UnitDistance
-import com.measures.weight.UnitMass
+import com.measures.mass.UnitMass
 import com.measures.acceleration.UnitAcceleration
 import com.measures.energy.Joule
 import com.measures.pressure.Pascal
 import com.measures.acceleration.MetersPerSecondPerSecond
-import com.measures.weight.KiloGram
+import com.measures.mass.Kilogram
 import kotlin.jvm.JvmInline
 
 @JvmInline
@@ -23,7 +23,7 @@ value class Dekanewton(override val value: Double) : UnitForce<Dekanewton> {
     override operator fun div(other: UnitArea<*>): Pascal = UnitForce.divUnit(this, other)
     override operator fun times(other: UnitDistance<*>): Joule = UnitForce.timesUnit(this, other)
     override operator fun div(other: UnitMass<*>): MetersPerSecondPerSecond = UnitForce.divUnit(this, other)
-    override operator fun div(other: UnitAcceleration<*>): KiloGram = UnitForce.divUnit(this, other)
+    override operator fun div(other: UnitAcceleration<*>): Kilogram = UnitForce.divUnit(this, other)
 }
 
 fun UnitForce<*>.toDekanewton() = toUnit(Dekanewton(1.0))

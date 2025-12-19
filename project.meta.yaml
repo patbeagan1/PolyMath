@@ -8,26 +8,26 @@ description: |
   unit conversion systems for metric, imperial, and specialized measurement systems.
 language: kotlin
 tags:
-  - kotlin
-  - mathematics
-  - dsl
-  - latex
-  - algebra
-  - calculus
-  - trigonometry
-  - unit-conversion
-  - typesafe
-  - library
-  - scientific-computing
-  - education
-  - research
-  - engineering
-  - physics
-  - statistics
-  - combinatorics
-  - boolean-logic
-  - rational-numbers
-  - graphviz
+- kotlin
+- mathematics
+- dsl
+- latex
+- algebra
+- calculus
+- trigonometry
+- unit-conversion
+- typesafe
+- library
+- scientific-computing
+- education
+- research
+- engineering
+- physics
+- statistics
+- combinatorics
+- boolean-logic
+- rational-numbers
+- graphviz
 
 release_branch: develop
 has_release_script: true
@@ -46,62 +46,106 @@ scripts:
   run:
     command: ./gradlew run
   publish:
-    command: ./gradlew publishToMavenLocal
-  subtree-push:
-    command: ../monorepo subtree push git@github.com:patbeagan1/PolyMath.git PolyMath --branch develop
+    command: "../monorepo subtree push PolyMath"
+  pull:
+    command: "../monorepo subtree pull PolyMath"
+
+  # Module-specific publishing scripts
+  publish-units-base:
+    command: ./gradlew :units-base:publishToMavenLocal
+  publish-units-common:
+    command: ./gradlew :units-common:publishToMavenLocal
+  publish-units-data:
+    command: ./gradlew :units-data:publishToMavenLocal
+  publish-math-base:
+    command: ./gradlew :math-base:publishToMavenLocal
+  publish-math-algebra:
+    command: ./gradlew :math-algebra:publishToMavenLocal
+  publish-math-geometry:
+    command: ./gradlew :math-geometry:publishToMavenLocal
+  publish-physics-classical:
+    command: ./gradlew :physics-classical:publishToMavenLocal
+  publish-latex-builder:
+    command: ./gradlew :latex-builder:publishToMavenLocal
+  publish-lib-graph:
+    command: ./gradlew :lib-graph:publishToMavenLocal
+
+  # Maven Central publishing scripts (requires proper credentials)
+  publish-units-base-central:
+    command: ./gradlew :units-base:publishAllPublicationsToMavenCentralRepository
+  publish-units-common-central:
+    command: ./gradlew :units-common:publishAllPublicationsToMavenCentralRepository
+  publish-units-data-central:
+    command: ./gradlew :units-data:publishAllPublicationsToMavenCentralRepository
+  publish-math-base-central:
+    command: ./gradlew :math-base:publishAllPublicationsToMavenCentralRepository
+  publish-math-algebra-central:
+    command: ./gradlew :math-algebra:publishAllPublicationsToMavenCentralRepository
+  publish-math-geometry-central:
+    command: ./gradlew :math-geometry:publishAllPublicationsToMavenCentralRepository
+  publish-physics-classical-central:
+    command: ./gradlew :physics-classical:publishAllPublicationsToMavenCentralRepository
+  publish-latex-builder-central:
+    command: ./gradlew :latex-builder:publishAllPublicationsToMavenCentralRepository
+  publish-lib-graph-central:
+    command: ./gradlew :lib-graph:publishAllPublicationsToMavenCentralRepository
 
 roadmap:
   todo:
-    - Add support for complex number arithmetic and operations
-    - Implement symbolic differentiation and integration
-    - Add support for matrix operations and linear algebra
-    - Create interactive Jupyter notebook examples
-    - Add support for statistical distributions and probability
-    - Implement graph theory algorithms and visualizations
-    - Add support for differential equations
-    - Create web-based mathematical expression editor
-    - Add support for 3D geometry and spatial mathematics
-    - Implement numerical methods and approximations
-    - Add support for mathematical optimization
-    - Create educational tutorials and interactive examples
-    - Add support for mathematical proof verification
-    - Implement advanced LaTeX rendering with custom styles
-    - Add support for mathematical notation input (MathML, AsciiMath)
-    - Create mobile applications for mathematical calculations
-    - Add support for mathematical modeling and simulation
-    - Implement collaborative mathematical document editing
-    - Add support for mathematical data visualization
-    - Create integration with popular mathematical software (Mathematica, MATLAB)
-    - Improving unit conversion system with more measurement units
-    - Enhancing LaTeX rendering capabilities
-    - Export to typst
-    - Adding more comprehensive test coverage
-    - Optimizing performance for large mathematical expressions
-    - Improving documentation and examples
+  - Add support for complex number arithmetic and operations
+  - Implement symbolic differentiation and integration
+  - Add support for matrix operations and linear algebra
+  - Create interactive Jupyter notebook examples
+  - Add support for statistical distributions and probability
+  - Implement graph theory algorithms and visualizations
+  - Add support for differential equations
+  - Create web-based mathematical expression editor
+  - Add support for 3D geometry and spatial mathematics
+  - Implement numerical methods and approximations
+  - Add support for mathematical optimization
+  - Create educational tutorials and interactive examples
+  - Add support for mathematical proof verification
+  - Implement advanced LaTeX rendering with custom styles
+  - Add support for mathematical notation input (MathML, AsciiMath)
+  - Create mobile applications for mathematical calculations
+  - Add support for mathematical modeling and simulation
+  - Implement collaborative mathematical document editing
+  - Add support for mathematical data visualization
+  - Create integration with popular mathematical software (Mathematica, MATLAB)
+  - Improving unit conversion system with more measurement units
+  - Enhancing LaTeX rendering capabilities
+  - Export to typst
+  - Adding more comprehensive test coverage
+  - Optimizing performance for large mathematical expressions
+  - Improving documentation and examples
 
   in_progress:
 
   done:
-    - Core mathematical DSL implementation with type-safe operations
-    - Basic arithmetic with proper order of operations (PEMDAS/BODMAS)
-    - Variable and equation support with dynamic and static variables
-    - Rational number arithmetic with exact fraction calculations
-    - Trigonometric functions (sin, cos, tan, arcsin, arccos, arctan)
-    - Logarithmic and exponential functions
-    - Summation and product notation (Sigma and Pi)
-    - Combinatorics (permutations, combinations, factorials)
-    - Boolean logic and propositional calculus
-    - LaTeX rendering for mathematical notation
-    - Unit conversion system with metric, imperial, and specialized units
-    - Mathematical domain dictionaries (algebra, calculus, statistics, physics)
-    - Expression simplification and evaluation
-    - Mathematical constants and physical constants
-    - Graphviz visualization for mathematical expressions
-    - Comprehensive test suite with mathematical verification
-    - Multi-platform Kotlin support (JVM, JS, Native)
-    - Modular architecture with separate modules for different mathematical domains
+  - Core mathematical DSL implementation with type-safe operations
+  - Basic arithmetic with proper order of operations (PEMDAS/BODMAS)
+  - Variable and equation support with dynamic and static variables
+  - Rational number arithmetic with exact fraction calculations
+  - Trigonometric functions (sin, cos, tan, arcsin, arccos, arctan)
+  - Logarithmic and exponential functions
+  - Summation and product notation (Sigma and Pi)
+  - Combinatorics (permutations, combinations, factorials)
+  - Boolean logic and propositional calculus
+  - LaTeX rendering for mathematical notation
+  - Unit conversion system with metric, imperial, and specialized units
+  - Mathematical domain dictionaries (algebra, calculus, statistics, physics)
+  - Expression simplification and evaluation
+  - Mathematical constants and physical constants
+  - Graphviz visualization for mathematical expressions
+  - Comprehensive test suite with mathematical verification
+  - Multi-platform Kotlin support (JVM, JS, Native)
+  - Modular architecture with separate modules for different mathematical domains
 
 related_projects:
-  - Legion
-  - CodeAtlas
-  - monorepo-cli
+- Legion
+- CodeAtlas
+- monorepo-cli
+isPubliclyDocumented: true
+publicGithubRepo: https://github.com/patbeagan1/PolyMath
+publishNameOnCargo:
+publishNameOnPip:

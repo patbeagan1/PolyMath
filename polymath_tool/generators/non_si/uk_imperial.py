@@ -6,7 +6,7 @@ UK Imperial unit generation.
 from ..base.base_distance_generator import BaseDistanceGenerator
 from ..base.base_area_generator import BaseAreaGenerator
 from ..base.base_volume_generator import BaseVolumeGenerator
-from ..base.base_weight_generator import BaseWeightGenerator
+from ..base.base_mass_generator import BaseMassGenerator
 
 
 class UkDistanceGenerator(BaseDistanceGenerator):
@@ -86,7 +86,7 @@ class UkVolumeGenerator(BaseVolumeGenerator):
             ("UKGill", "UKGallon(value / 32).asBaseUnit()"),  # 5 fl oz
             ("UKPint", "UKGallon(value / 8).asBaseUnit()"),  # 20 fl oz
             ("UKQuart", "UKGallon(value / 4).asBaseUnit()"),  # 40 fl oz
-            ("UKGallon", "Liter(value * 4.54609)"),  # Base unit for UK system
+            ("UKGallon", "Liters(value * 4.54609)"),  # Base unit for UK system
             # Imperial dry units (bushel system)
             ("UKPeck", "UKGallon(value * 2).asBaseUnit()"),  # 2 gallons
             ("UKBushel", "UKGallon(value * 8).asBaseUnit()"),  # 8 gallons
@@ -96,12 +96,12 @@ class UkVolumeGenerator(BaseVolumeGenerator):
             ("UKApothecaryFluidScruple", "UKApothecaryPint(value / 480).asBaseUnit()"),   # 1/480 pint
             ("UKApothecaryFluidDram", "UKApothecaryPint(value / 160).asBaseUnit()"),      # 1/160 pint
             ("UKApothecaryFluidOunce", "UKApothecaryPint(value / 20).asBaseUnit()"),  # 1/20 pint
-            ("UKApothecaryPint", "Liter(value / 1000 * 28.4130625).asBaseUnit()"),        # 1 pint (apothecary)
+            ("UKApothecaryPint", "Liters(value / 1000 * 28.4130625).asBaseUnit()"),        # 1 pint (apothecary)
             ("UKApothecaryQuart", "UKApothecaryPint(value * 2).asBaseUnit()"),   # 2 pints
             ("UKApothecaryGallon", "UKApothecaryPint(value * 8).asBaseUnit()"),  # 8 pints
         ]
 
-class UkWeightGenerator(BaseWeightGenerator):
+class UkWeightGenerator(BaseMassGenerator):
     """Generator for UK Imperial weight units."""
 
     def __init__(self):
@@ -116,12 +116,12 @@ class UkWeightGenerator(BaseWeightGenerator):
             ("UKGrain", "UKPound(value / 7000).asBaseUnit()"),  # 1/7000 pound
             ("UKDrachm", "UKPound(value / 256).asBaseUnit()"),  # 1/256 pound
             ("UKOunce", "UKPound(value / 16).asBaseUnit()"),    # 1/16 pound
-            ("UKPound", "KiloGram(value * 0.45359237)"),        # Base unit for UK system
+            ("UKPound", "Kilogram(value * 0.45359237)"),        # Base unit for UK system
             ("UKStone", "UKPound(value * 14).asBaseUnit()"),    # 14 pounds
             ("UKQuarter", "UKPound(value * 28).asBaseUnit()"),  # 28 pounds
             ("UKHundredweight", "UKPound(value * 112).asBaseUnit()"),  # 112 pounds
             ("UKLongTon", "UKPound(value * 2240).asBaseUnit()"),  # 2240 pounds
 
             # Other units
-            ("UKSlug", "KiloGram(value * 14.59390294).asBaseUnit()"),
+            ("UKSlug", "Kilogram(value * 14.59390294).asBaseUnit()"),
         ]

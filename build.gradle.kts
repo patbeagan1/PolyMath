@@ -9,6 +9,7 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version "1.23.8"
     id("org.jetbrains.kotlin.multiplatform") version "2.2.20" apply false
     id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.18.1" apply false
+    id("com.vanniktech.maven.publish") version "0.32.0" apply false
 }
 
 group = "dev.patbeagan"

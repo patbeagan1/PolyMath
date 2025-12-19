@@ -5,7 +5,7 @@ import com.measures.acceleration.UnitAcceleration
 import com.measures.area.UnitArea
 import com.measures.distance.UnitDistance
 import com.measures.energy.Joule
-import com.measures.weight.UnitMass
+import com.measures.mass.UnitMass
 import kotlin.jvm.JvmInline
 
 @JvmInline

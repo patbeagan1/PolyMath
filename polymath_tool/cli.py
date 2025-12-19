@@ -22,8 +22,8 @@ import sys
 from pathlib import Path
 from typing import Callable, Dict, Iterable, List, Sequence
 
-from . import generators
 from . import fixers
+from . import generators
 
 
 def get_repo_root() -> Path:
@@ -54,14 +54,21 @@ GENERATION_MAP: Dict[str, List[Callable[[], int]]] = {
     ],
 
     "metric": [
+        lambda: generators.MetricAbsorbedDoseGenerator().generate(),
         lambda: generators.MetricAccelerationGenerator().generate(),
+        lambda: generators.MetricActivityGenerator().generate(),
         lambda: generators.MetricAmountGenerator().generate(),
         lambda: generators.MetricAreaGenerator().generate(),
+        lambda: generators.MetricCatalyticActivityGenerator().generate(),
         lambda: generators.MetricChargeGenerator().generate(),
+        lambda: generators.MetricConductanceGenerator().generate(),
         lambda: generators.MetricCurrentGenerator().generate(),
         lambda: generators.MetricDistanceGenerator().generate(),
+        lambda: generators.MetricDoseEquivalentGenerator().generate(),
         lambda: generators.MetricEnergyGenerator().generate(),
         lambda: generators.MetricForceGenerator().generate(),
+        lambda: generators.MetricIlluminanceGenerator().generate(),
+        lambda: generators.MetricLuminousFluxGenerator().generate(),
         lambda: generators.MetricPowerGenerator().generate(),
         lambda: generators.MetricPressureGenerator().generate(),
         lambda: generators.MetricTimeGenerator().generate(),
@@ -69,41 +76,49 @@ GENERATION_MAP: Dict[str, List[Callable[[], int]]] = {
         lambda: generators.MetricVolumeGenerator().generate(),
         lambda: generators.MetricWeightGenerator().generate(),
     ],
-    "metric-acceleration": [ lambda: generators.MetricAccelerationGenerator().generate() ],
+    "metric-absorbeddose": [lambda: generators.MetricAbsorbedDoseGenerator().generate()],
+    "metric-acceleration": [lambda: generators.MetricAccelerationGenerator().generate()],
+    "metric-activity": [lambda: generators.MetricActivityGenerator().generate()],
     "metric-amount": [lambda: generators.MetricAmountGenerator().generate()],
     "metric-area": [lambda: generators.MetricAreaGenerator().generate()],
+    "metric-catalyticactivity": [lambda: generators.MetricCatalyticActivityGenerator().generate()],
     "metric-charge": [lambda: generators.MetricChargeGenerator().generate()],
+    "metric-conductance": [lambda: generators.MetricConductanceGenerator().generate()],
     "metric-current": [lambda: generators.MetricCurrentGenerator().generate()],
     "metric-distance": [lambda: generators.MetricDistanceGenerator().generate()],
+    "metric-doseequivalent": [lambda: generators.MetricDoseEquivalentGenerator().generate()],
     "metric-energy": [lambda: generators.MetricEnergyGenerator().generate()],
     "metric-force": [lambda: generators.MetricForceGenerator().generate()],
+    "metric-illuminance": [lambda: generators.MetricIlluminanceGenerator().generate()],
+    "metric-luminousflux": [lambda: generators.MetricLuminousFluxGenerator().generate()],
     "metric-power": [lambda: generators.MetricPowerGenerator().generate()],
     "metric-pressure": [lambda: generators.MetricPressureGenerator().generate()],
     "metric-time": [lambda: generators.MetricTimeGenerator().generate()],
     "metric-velocity": [lambda: generators.MetricVelocityGenerator().generate()],
     "metric-volume": [lambda: generators.MetricVolumeGenerator().generate()],
     "metric-weight": [lambda: generators.MetricWeightGenerator().generate()],
-   
-   "non-si-acceleration": [lambda: generators.NonSiAccelerationGenerator().generate()],
+
+    "non-si-acceleration": [lambda: generators.NonSiAccelerationGenerator().generate()],
     "non-si-charge": [lambda: generators.NonSiChargeGenerator().generate()],
     "non-si-distance": [lambda: generators.NonSiDistanceGenerator().generate()],
     "non-si-energy": [lambda: generators.NonSiEnergyGenerator().generate()],
     "non-si-force": [lambda: generators.NonSiForceGenerator().generate()],
     "non-si-power": [lambda: generators.NonSiPowerGenerator().generate()],
     "non-si-pressure": [lambda: generators.NonSiPressureGenerator().generate()],
+    "non-si-temperature": [lambda: generators.NonSiTemperatureGenerator().generate()],
     "non-si-time": [lambda: generators.NonSiTimeGenerator().generate()],
     "non-si-volume": [lambda: generators.NonSiVolumeGenerator().generate()],
     "non-si-weight": [lambda: generators.NonSiWeightGenerator().generate()],
-    
+
     "international-yard-distance": [lambda: generators.InternationalYardDistanceGenerator().generate()],
-    
+
     # US Customary generators
     "us-distance": [lambda: generators.UsDistanceGenerator().generate()],
     "us-area": [lambda: generators.UsAreaGenerator().generate()],
     "us-fluid-volume": [lambda: generators.UsFluidVolumeGenerator().generate()],
     "us-dry-volume": [lambda: generators.UsDryVolumeGenerator().generate()],
     "us-weight": [lambda: generators.UsWeightGenerator().generate()],
-    
+
     # UK Imperial generators
     "uk-distance": [lambda: generators.UkDistanceGenerator().generate()],
     "uk-area": [lambda: generators.UkAreaGenerator().generate()],
@@ -111,19 +126,28 @@ GENERATION_MAP: Dict[str, List[Callable[[], int]]] = {
     "uk-weight": [lambda: generators.UkWeightGenerator().generate()],
 
     "all": [
+        lambda: generators.CGSVolumeGenerator().generate(),
+        lambda: generators.CGSForceGenerator().generate(),
         lambda: generators.AstronomicalDistanceGenerator().generate(),
         lambda: generators.GForceAccelerationGenerator().generate(),
         lambda: generators.InternationalYardDistanceGenerator().generate(),
         lambda: generators.InternationalYardAreaGenerator().generate(),
         lambda: generators.InternationalYardVolumeGenerator().generate(),
+        lambda: generators.MetricAbsorbedDoseGenerator().generate(),
         lambda: generators.MetricAccelerationGenerator().generate(),
+        lambda: generators.MetricActivityGenerator().generate(),
         lambda: generators.MetricAmountGenerator().generate(),
         lambda: generators.MetricAreaGenerator().generate(),
+        lambda: generators.MetricCatalyticActivityGenerator().generate(),
         lambda: generators.MetricChargeGenerator().generate(),
+        lambda: generators.MetricConductanceGenerator().generate(),
         lambda: generators.MetricCurrentGenerator().generate(),
         lambda: generators.MetricDistanceGenerator().generate(),
+        lambda: generators.MetricDoseEquivalentGenerator().generate(),
         lambda: generators.MetricEnergyGenerator().generate(),
         lambda: generators.MetricForceGenerator().generate(),
+        lambda: generators.MetricIlluminanceGenerator().generate(),
+        lambda: generators.MetricLuminousFluxGenerator().generate(),
         lambda: generators.MetricPowerGenerator().generate(),
         lambda: generators.MetricPressureGenerator().generate(),
         lambda: generators.MetricTimeGenerator().generate(),
@@ -137,6 +161,7 @@ GENERATION_MAP: Dict[str, List[Callable[[], int]]] = {
         lambda: generators.NonSiForceGenerator().generate(),
         lambda: generators.NonSiPowerGenerator().generate(),
         lambda: generators.NonSiPressureGenerator().generate(),
+        lambda: generators.NonSiTemperatureGenerator().generate(),
         lambda: generators.NonSiTimeGenerator().generate(),
         lambda: generators.NonSiVolumeGenerator().generate(),
         lambda: generators.NonSiWeightGenerator().generate(),
@@ -151,7 +176,6 @@ GENERATION_MAP: Dict[str, List[Callable[[], int]]] = {
         lambda: generators.UkWeightGenerator().generate(),
     ],
 }
-
 
 FIX_MAP: Dict[str, List[Callable[[], int]]] = {
     "imports": [

@@ -6,7 +6,7 @@ US Customary unit generation.
 from ..base.base_distance_generator import BaseDistanceGenerator
 from ..base.base_area_generator import BaseAreaGenerator
 from ..base.base_volume_generator import BaseVolumeGenerator
-from ..base.base_weight_generator import BaseWeightGenerator
+from ..base.base_mass_generator import BaseMassGenerator
 
 
 class UsDistanceGenerator(BaseDistanceGenerator):
@@ -39,7 +39,7 @@ class UsDistanceGenerator(BaseDistanceGenerator):
  
             # Survey units (US Survey foot - obsolete as of 2023)
             ("USSurveyLink", "USSurveyFoot(value * 0.66).asBaseUnit()"),
-            ("USSurveyFoot", "Meter(value * (1200/3937))"),  # US Survey foot (obsolete as of 2023)
+            ("USSurveyFoot", "Meter(value * (1200.0/3937))"),  # US Survey foot (obsolete as of 2023)
             ("USSurveyRod", "USSurveyFoot(value * 16.5).asBaseUnit()"),
             ("USSurveyChain", "USSurveyFoot(value * 66).asBaseUnit()"),
             ("USSurveyFurlong", "USSurveyFoot(value * 660).asBaseUnit()"),
@@ -102,7 +102,7 @@ class UsFluidVolumeGenerator(BaseVolumeGenerator):
             ("USFluidPint", "USCup(value * 2).asBaseUnit()"),  # 2 US cups (liquid pint)
             ("USFluidQuart", "USFluidPint(value * 2).asBaseUnit()"),  # 2 US pints (liquid quart)
             ("USPottle", "USFluidQuart(value * 2).asBaseUnit()"),  # 2 US quarts (liquid pottle)
-            ("USFluidGallon", "Liter(value * 3.785411784)"),  # 1 US gallon (liquid), base unit
+            ("USFluidGallon", "Liters(value * 3.785411784)"),  # 1 US gallon (liquid), base unit
             ("USFluidBarrel", "USFluidGallon(value * 31.5).asBaseUnit()"),  # 31.5 US gallons (liquid barrel)
             ("USOilBarrel", "USFluidGallon(value * 42).asBaseUnit()"),  # 42 US gallons (oil barrel)
             ("USHogshead", "USFluidGallon(value * 63).asBaseUnit()"),  # 63 US gallons (hogshead)
@@ -122,7 +122,7 @@ class UsDryVolumeGenerator(BaseVolumeGenerator):
         """Get US Customary dry volume units."""
         return [
             # Dry volume units (based on Winchester measure)
-            ("USDryPint", "Liter(value * 0.5506104713575).asBaseUnit()"),  # Dry pint
+            ("USDryPint", "Liters(value * 0.5506104713575).asBaseUnit()"),  # Dry pint
             ("USDryQuart", "USDryPint(value * 2).asBaseUnit()"),  # Dry quart
             ("USDryGallon", "USDryPint(value * 8).asBaseUnit()"),  # Dry gallon
             ("USPeck", "USDryGallon(value * 2).asBaseUnit()"),  # Peck
@@ -131,7 +131,7 @@ class UsDryVolumeGenerator(BaseVolumeGenerator):
         ]
 
 
-class UsWeightGenerator(BaseWeightGenerator):
+class UsWeightGenerator(BaseMassGenerator):
     """Generator for US Customary weight units."""
 
     def __init__(self):
@@ -147,7 +147,7 @@ class UsWeightGenerator(BaseWeightGenerator):
             ("USGrain", "USPound(value / 7000).asBaseUnit()"),  # 1/7000 pound (grain)
             ("USDram", "USPound(value / 256).asBaseUnit()"),    # 1/256 pound (dram)
             ("USOunce", "USPound(value / 16).asBaseUnit()"),    # 1/16 pound (ounce)
-            ("USPound", "KiloGram(value * 0.45359237)"),        # 1 pound = 0.45359237 kg (base unit)
+            ("USPound", "Kilogram(value * 0.45359237)"),        # 1 pound = 0.45359237 kg (base unit)
             ("USShortHundredweight", "USPound(value * 100).asBaseUnit()"),  # 100 pounds (short hundredweight)
             ("USLongHundredweight", "USPound(value * 112).asBaseUnit()"),  # 100 pounds (short hundredweight)
             ("USShortTon", "USPound(value * 2000).asBaseUnit()"),      # 2000 pounds (short ton)

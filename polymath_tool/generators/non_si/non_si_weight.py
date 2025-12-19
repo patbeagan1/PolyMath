@@ -3,10 +3,10 @@
 Non-SI weight unit generation.
 """
 
-from ..base.base_weight_generator import BaseWeightGenerator
+from ..base.base_mass_generator import BaseMassGenerator
 
 
-class NonSiWeightGenerator(BaseWeightGenerator):
+class NonSiWeightGenerator(BaseMassGenerator):
     """Generator for non-SI weight units."""
     
     def __init__(self):
@@ -19,6 +19,6 @@ class NonSiWeightGenerator(BaseWeightGenerator):
     def _get_units(self):
         """Get non-SI weight units."""
         return [
-            ("Carat", "KiloGram(value * 0.0002)"),
+            ("Carat", "Kilogram(value * 0.0002)"),
         ]
 

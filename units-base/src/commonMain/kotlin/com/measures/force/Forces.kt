@@ -8,8 +8,8 @@ import com.measures.area.UnitArea
 import com.measures.distance.UnitDistance
 import com.measures.energy.Joule
 import com.measures.pressure.Pascal
-import com.measures.weight.KiloGram
-import com.measures.weight.UnitMass
+import com.measures.mass.Kilogram
+import com.measures.mass.UnitMass
 
 interface UnitForce<T : DoubleBase> : UnitType<T, Newton> {
     operator fun plus(other: UnitForce<*>): Newton
@@ -17,7 +17,7 @@ interface UnitForce<T : DoubleBase> : UnitType<T, Newton> {
     operator fun div(other: UnitArea<*>): Pascal
     operator fun times(other: UnitDistance<*>): Joule
     operator fun div(other: UnitMass<*>): MetersPerSecondPerSecond
-    operator fun div(other: UnitAcceleration<*>): KiloGram
+    operator fun div(other: UnitAcceleration<*>): Kilogram
 
     companion object {
         fun plusUnit(force: UnitForce<*>, other: UnitForce<*>): Newton =
@@ -38,7 +38,7 @@ interface UnitForce<T : DoubleBase> : UnitType<T, Newton> {
             MetersPerSecondPerSecond(force.asBaseUnit().value / other.asBaseUnit().value)
 
         // Force ÷ Acceleration = Mass
-        fun divUnit(force: UnitForce<*>, other: UnitAcceleration<*>): KiloGram =
-            KiloGram(force.asBaseUnit().value / other.asBaseUnit().value)
+        fun divUnit(force: UnitForce<*>, other: UnitAcceleration<*>): Kilogram =
+            Kilogram(force.asBaseUnit().value / other.asBaseUnit().value)
     }
 }
