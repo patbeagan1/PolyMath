@@ -40,6 +40,7 @@ from .non_si.non_si_pressure import NonSiPressureGenerator
 from .non_si.non_si_power import NonSiPowerGenerator
 from .non_si.non_si_time import NonSiTimeGenerator
 from .non_si.non_si_charge import NonSiChargeGenerator
+from .non_si.non_si_temperature import NonSiTemperatureGenerator
 from .non_si.non_si_distance import InternationalYardAreaGenerator
 # International yard and pound generators
 from .non_si.non_si_distance import InternationalYardDistanceGenerator
@@ -106,6 +107,7 @@ __all__ = [
     'NonSiPowerGenerator',
     'NonSiTimeGenerator',
     'NonSiChargeGenerator',
+    'NonSiTemperatureGenerator',
     'NonSiAccelerationGenerator',
 
     # International yard and pound generators

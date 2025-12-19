@@ -28,6 +28,8 @@ import com.measures.distance.uk_imperial.toUKHand
 import com.measures.distance.us_customary.*
 import com.measures.energy.Joule
 import com.measures.power.Watt
+import com.measures.temperature.non_si.Celsius
+import com.measures.temperature.non_si.toFahrenheit
 import com.measures.time.Second
 import com.measures.volume.Liters
 import com.measures.volume.metric.Attoliter
@@ -87,6 +89,16 @@ class SmokeTest {
         SquareMeter(4.0) * com.measures.distance.Meter(2.0),
         (USSurveyFurlong(1.0) * USSurveyFurlong(1.0) * USSurveyFurlong(1.0)).toMegaliter()
     ).map { it to it }
+
+    @Test
+    fun testTemperatures () {
+        val celsius = Celsius(100.0)
+        val fahrenheit = celsius.toFahrenheit()
+        assertEquals( 212.0, fahrenheit.value)
+
+        val kelvin = celsius.asBaseUnit()
+        assertEquals(373.15, kelvin.value, )
+    }
 
     @Test
     fun run() {
