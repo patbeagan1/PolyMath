@@ -5,6 +5,7 @@ import main.dsl.*
 import main.dsl.expressions.ScalarAlgebra.*
 import main.dsl.expressions.ScalarExpression
 import main.dsl.mathnum.*
+import main.dsl.mathnum.Scalar.RealNum
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

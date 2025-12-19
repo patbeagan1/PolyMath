@@ -6,6 +6,7 @@ import main.dsl.expressions.ScalarExpression
 import main.dsl.mathnum.MathNum
 import main.dsl.mathnum.Scalar
 import main.dsl.mathnum.Scalar.RealNum
+import main.dsl.mathnum.Scalar.Undefined.pow
 import main.dsl.mathnum.Variable
 import kotlin.math.abs
 
@@ -250,11 +251,32 @@ object TreeRewriter {
         }
         
         // Flatten nested additions: (a + b) + c = a + b + c
+        // Note: operands are already simplified by rewrite() calls at the start of rewriteBinary
         if (left is Add) {
-            return rewrite(Add(left.left, rewriteAdd(left.right, right)))
+            // Try to combine constants: if left.right and right are both constants, combine them
+            if (left.right is RealNum && right is RealNum) {
+                val combined = RealNum(left.right.value + right.value)
+                return Add(left.left, combined)
+            }
+            // Also check if left.left is a constant and right is a constant
+            if (left.left is RealNum && right is RealNum) {
+                val combined = RealNum(left.left.value + right.value)
+                return Add(combined, left.right)
+            }
+            return Add(left.left, Add(left.right, right))
         }
         if (right is Add) {
-            return rewrite(Add(rewriteAdd(left, right.left), right.right))
+            // Try to combine constants: if left and right.left are both constants, combine them
+            if (left is RealNum && right.left is RealNum) {
+                val combined = RealNum(left.value + right.left.value)
+                return Add(combined, right.right)
+            }
+            // Also check if left is a constant and right.right is a constant
+            if (left is RealNum && right.right is RealNum) {
+                val combined = RealNum(left.value + right.right.value)
+                return Add(combined, right.left)
+            }
+            return Add(Add(left, right.left), right.right)
         }
         
         return Add(left, right)
@@ -314,27 +336,53 @@ object TreeRewriter {
         // But this is more complex, so we'll handle it in a simpler way
         
         // Flatten nested multiplications: (a * b) * c = a * b * c
+        // Note: operands are already simplified by rewrite() calls at the start of rewriteBinary
         if (left is Multiply) {
-            return rewrite(Multiply(left.left, rewriteMultiply(left.right, right)))
+            // If right is a constant and left.right is a constant, evaluate them first
+            if (right is RealNum && left.right is RealNum) {
+                val newConstant = RealNum(left.right.value * right.value)
+                return Multiply(left.left, newConstant)
+            }
+            // If right is a constant and left.left is a constant, evaluate them first
+            if (right is RealNum && left.left is RealNum) {
+                val newConstant = RealNum(left.left.value * right.value)
+                return Multiply(left.right, newConstant)
+            }
+            return Multiply(left.left, Multiply(left.right, right))
         }
         if (right is Multiply) {
-            return rewrite(Multiply(rewriteMultiply(left, right.left), right.right))
+            // If left is a constant and right.left is a constant, evaluate them first
+            if (left is RealNum && right.left is RealNum) {
+                val newConstant = RealNum(left.value * right.left.value)
+                return Multiply(newConstant, right.right)
+            }
+            // If left is a constant and right.right is a constant, evaluate them first
+            if (left is RealNum && right.right is RealNum) {
+                val newConstant = RealNum(left.value * right.right.value)
+                return Multiply(newConstant, right.left)
+            }
+            return Multiply(Multiply(left, right.left), right.right)
         }
         
         // Distribute multiplication over addition: a * (b + c) = a*b + a*c
+        // Note: operands are already simplified, so we can construct the new structure directly
         if (right is Add) {
-            return rewrite(rewriteAdd(
-                rewriteMultiply(left, right.left),
-                rewriteMultiply(left, right.right)
-            ))
+            return Add(
+                Multiply(left, right.left),
+                Multiply(left, right.right)
+            )
         }
         if (left is Add) {
-            return rewrite(rewriteAdd(
-                rewriteMultiply(left.left, right),
-                rewriteMultiply(left.right, right)
-            ))
+            return Add(
+                Multiply(left.left, right),
+                Multiply(left.right, right)
+            )
         }
         
+        // Normalize: put constants on the left when possible
+        if (right is RealNum && left !is RealNum) {
+            return Multiply(right, left)
+        }
         return Multiply(left, right)
     }
     
@@ -389,7 +437,7 @@ object TreeRewriter {
         }
         // Both are constants
         if (left is RealNum && right is RealNum) {
-            return RealNum(kotlin.math.pow(left.value, right.value))
+            return RealNum(left.pow( right.value).evaluate())
         }
         // (x^a)^b = x^(a*b)
         if (left is Exponent) {
@@ -460,12 +508,14 @@ object TreeRewriter {
         fun extractCoefficientAndVariable(expr: ScalarExpression): Pair<ScalarExpression?, ScalarExpression?>? {
             return when (expr) {
                 is Multiply -> {
-                    val (coeff, varExpr) = when {
+                   val result =  when {
                         expr.left is RealNum -> expr.left to expr.right
                         expr.right is RealNum -> expr.right to expr.left
                         else -> null
                     }
-                    coeff to varExpr
+                    result?.let { (coeff, varExpr) ->
+                        coeff to varExpr
+                    }
                 }
                 is Variable -> RealNum(1.0) to expr
                 else -> null
