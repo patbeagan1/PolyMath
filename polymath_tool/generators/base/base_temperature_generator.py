@@ -23,22 +23,26 @@ class BaseTemperatureGenerator(ABC):
         self.package_name = package_name
         self.base_dir = get_measures_base() / "temperature" / subdirectory
     
-    def get_units(self) -> List[Tuple[str, str]]:
+    def get_units(self) -> List[Tuple[str, str, str]]:
         """
         Get the list of units to generate.
         
         Returns:
-            List of tuples containing (unit_name, base_conversion)
+            List of tuples containing (unit_name, base_conversion, inverse_conversion)
         """
         return self._get_units()
     
     @abstractmethod
-    def _get_units(self) -> List[Tuple[str, str]]:
+    def _get_units(self) -> List[Tuple[str, str, str]]:
         """
         Abstract method to define the units for this generator.
         
         Returns:
-            List of tuples containing (unit_name, base_conversion)
+            List of tuples containing (unit_name, base_conversion, inverse_conversion)
+            where:
+            - unit_name: Name of the unit class (e.g., "Celsius")
+            - base_conversion: Conversion to Kelvin (e.g., "Kelvin(value + 273.15)")
+            - inverse_conversion: Conversion from Kelvin (e.g., "kelvin - 273.15")
         """
     
     def get_additional_imports(self) -> List[str]:
@@ -72,7 +76,10 @@ value class {unit_name}(override val value: Double) : UnitTemperature<{unit_name
     operator fun minus(other: UnitTemperature<*>) = UnitTemperature.minusUnit(this, other)
 }}
 
-fun UnitTemperature<*>.to{unit_name}() = toUnit({unit_name}(1.0))
+fun UnitTemperature<*>.to{unit_name}(): {unit_name} {{
+    val kelvin = this.asBaseUnit().value
+    return {unit_name}({inverse_conversion})
+}}
 """
     
     def generate(self) -> int:
@@ -97,12 +104,13 @@ fun UnitTemperature<*>.to{unit_name}() = toUnit({unit_name}(1.0))
             imports_section = ""
         
         # Generate each unit file
-        for unit_name, base_conversion in units:
+        for unit_name, base_conversion, inverse_conversion in units:
             file_path = self.base_dir / f"{unit_name}.kt"
             content = template.format(
                 package_name=self.package_name,
                 unit_name=unit_name,
                 base_conversion=base_conversion,
+                inverse_conversion=inverse_conversion,
                 imports_section=imports_section
             )
             file_path.write_text(content)

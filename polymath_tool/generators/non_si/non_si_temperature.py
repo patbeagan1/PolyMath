@@ -18,10 +18,10 @@ class NonSiTemperatureGenerator(BaseTemperatureGenerator):
     def _get_units(self):
         """Get non-SI temperature units."""
         return [
-            # Celsius: K = C + 273.15
-            ("Celsius", "Kelvin(value + 273.15)"),
-            # Fahrenheit: K = (F - 32) * 5/9 + 273.15 = (F - 32) / 1.8 + 273.15
-            ("Fahrenheit", "Kelvin((value - 32.0) / 1.8 + 273.15)"),
+            # Celsius: K = C + 273.15, inverse: C = K - 273.15
+            ("Celsius", "Kelvin(value + 273.15)", "kelvin - 273.15"),
+            # Fahrenheit: K = (F - 32) / 1.8 + 273.15, inverse: F = (K - 273.15) * 1.8 + 32.0
+            ("Fahrenheit", "Kelvin((value - 32.0) / 1.8 + 273.15)", "(kelvin - 273.15) * 1.8 + 32.0"),
         ]
 
 
