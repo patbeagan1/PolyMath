@@ -17,11 +17,22 @@ import main.dsl.mathnum.Scalar.RealNum
  * - Simplifies nested operations
  * 
  * @param expression The expression to simplify
+ * @param logRules If true, prints the rules being applied during simplification
  * @return A simplified version of the expression
  */
 @ExperimentalMathDSL
-fun simplify(expression: ScalarExpression): ScalarExpression {
-    return TreeRewriter.rewrite(expression)
+fun simplify(expression: ScalarExpression, logRules: Boolean = false): ScalarExpression {
+    val wasLogging = TreeRewriter.isLoggingEnabled
+    if (logRules && !wasLogging) {
+        TreeRewriter.enableLogging()
+    }
+    try {
+        return TreeRewriter.rewrite(expression)
+    } finally {
+        if (logRules && !wasLogging) {
+            TreeRewriter.disableLogging()
+        }
+    }
 }
 
 /**
