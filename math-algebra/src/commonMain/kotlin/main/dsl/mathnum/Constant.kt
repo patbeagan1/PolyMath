@@ -12,6 +12,7 @@ data class Constant(
     constructor(glyph: String, value: Int, longName: String? = null) : this(glyph, mathNum(value), longName)
 
     override fun toLatex() = glyph
+    override fun toTypst() = glyph
     override fun evaluate(): Double = value.evaluate()
     override fun display() = buildString {
         if (value != Scalar.Undefined) {

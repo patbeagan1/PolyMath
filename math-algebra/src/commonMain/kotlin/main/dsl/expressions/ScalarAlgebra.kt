@@ -44,18 +44,21 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.Add
         override fun evaluate() = left.evaluate() + right.evaluate()
         override fun toLatex() = "${left.toLatexPriority(this)} + ${right.toLatexPriority(this)}"
+        override fun toTypst() = "${left.toTypstPriority(this)} + ${right.toTypstPriority(this)}"
     }
 
     data class Subtract(override val left: ScalarExpression, override val right: ScalarExpression) : BinaryOperation {
         override val priority: Priority = Priority.Subtract
         override fun evaluate() = left.evaluate() - right.evaluate()
         override fun toLatex() = "${left.toLatexPriority(this)} - ${right.toLatexPriority(this)}"
+        override fun toTypst() = "${left.toTypstPriority(this)} - ${right.toTypstPriority(this)}"
     }
 
     data class Multiply(override val left: ScalarExpression, override val right: ScalarExpression) : BinaryOperation {
         override val priority: Priority = Priority.Multiply
         override fun evaluate() = left.evaluate() * right.evaluate()
         override fun toLatex() = "${left.toLatexPriority(this)} $symCdot ${right.toLatexPriority(this)}"
+        override fun toTypst() = "${left.toTypstPriority(this)} * ${right.toTypstPriority(this)}"
     }
 
     data class Divide(override val left: ScalarExpression, override val right: ScalarExpression) : BinaryOperation {
@@ -66,6 +69,7 @@ interface ScalarAlgebra {
         }
 
         override fun toLatex() = "\\frac{${left.toLatexPriority(this)}}{${right.toLatexPriority(this)}}"
+        override fun toTypst() = "frac(${left.toTypstPriority(this)}, ${right.toTypstPriority(this)})"
     }
 
     data class Modulo(override val left: ScalarExpression, override val right: ScalarExpression) : BinaryOperation {
@@ -76,6 +80,7 @@ interface ScalarAlgebra {
         }
 
         override fun toLatex() = "${left.toLatexPriority(this)} mod ${right.toLatexPriority(this)}"
+        override fun toTypst() = "${left.toTypstPriority(this)} mod ${right.toTypstPriority(this)}"
     }
 
     data class Negate(override val operand: ScalarExpression) : UnaryOperation {
@@ -84,6 +89,7 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.Subtract
         override fun evaluate() = -operand.evaluate()
         override fun toLatex() = "-${operand.toLatexPriority(this)}"
+        override fun toTypst() = "-${operand.toTypstPriority(this)}"
     }
 
     data class Exponent(override val left: ScalarExpression, override val right: ScalarExpression) : BinaryOperation {
@@ -94,6 +100,11 @@ interface ScalarAlgebra {
         }^{${
             right.toLatexPriority(this, Position.Power)
         }}"
+        override fun toTypst() = "${
+            left.toTypstPriority(this, Position.Base)
+        }^${
+            right.toTypstPriority(this, Position.Power)
+        }"
 
     }
 
@@ -103,6 +114,7 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.Root
         override fun evaluate() = sqrt(operand.evaluate())
         override fun toLatex() = "\\sqrt{${operand.toLatexPriority(this)}}"
+        override fun toTypst() = "sqrt(${operand.toTypstPriority(this)})"
     }
 
     data class Sin(override val operand: ScalarExpression) : UnaryOperation {
@@ -111,6 +123,7 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate() = sin(operand.evaluate())
         override fun toLatex() = "\\sin(${operand.toLatexPriority(this)})"
+        override fun toTypst() = "sin(${operand.toTypstPriority(this)})"
     }
 
     data class Cos(override val operand: ScalarExpression) : UnaryOperation {
@@ -119,6 +132,7 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate() = cos(operand.evaluate())
         override fun toLatex() = "\\cos(${operand.toLatexPriority(this)})"
+        override fun toTypst() = "cos(${operand.toTypstPriority(this)})"
     }
 
     data class Tan(override val operand: ScalarExpression) : UnaryOperation {
@@ -127,12 +141,14 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate() = tan(operand.evaluate())
         override fun toLatex() = "\\tan(${operand.toLatexPriority(this)})"
+        override fun toTypst() = "tan(${operand.toTypstPriority(this)})"
     }
 
     data class Log(override val left: ScalarExpression, override val right: ScalarExpression) : BinaryOperation {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate() = log(right.evaluate(), left.evaluate())
         override fun toLatex() = "\\log_{${left.toLatexPriority(this)}}(${right.toLatexPriority(this)})"
+        override fun toTypst() = "log_(${left.toTypstPriority(this)})(${right.toTypstPriority(this)})"
     }
 
     data class Ln(override val operand: ScalarExpression) : UnaryOperation {
@@ -141,6 +157,7 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate() = ln(operand.evaluate())
         override fun toLatex() = "\\ln(${operand.toLatexPriority(this)})"
+        override fun toTypst() = "ln(${operand.toTypstPriority(this)})"
     }
 
     data class Exp(override val operand: ScalarExpression) : UnaryOperation {
@@ -149,6 +166,7 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate() = exp(operand.evaluate())
         override fun toLatex() = "e^{${operand.toLatexPriority(this)}}"
+        override fun toTypst() = "e^${operand.toTypstPriority(this)}"
     }
 
     data class Abs(override val operand: ScalarExpression) : UnaryOperation {
@@ -157,6 +175,7 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate() = abs(operand.evaluate())
         override fun toLatex() = "|${operand.toLatexPriority(this)}|"
+        override fun toTypst() = "abs(${operand.toTypstPriority(this)})"
     }
 
     data class ArcSin(override val operand: ScalarExpression) : UnaryOperation {
@@ -165,6 +184,7 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate() = asin(operand.evaluate())
         override fun toLatex() = "\\sin^{-1}(${operand.toLatexPriority(this)})"
+        override fun toTypst() = "asin(${operand.toTypstPriority(this)})"
     }
 
     data class ArcCos(override val operand: ScalarExpression) : UnaryOperation {
@@ -173,6 +193,7 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate() = acos(operand.evaluate())
         override fun toLatex() = "\\cos^{-1}(${operand.toLatexPriority(this)})"
+        override fun toTypst() = "acos(${operand.toTypstPriority(this)})"
     }
 
     data class ArcTan(override val operand: ScalarExpression) : UnaryOperation {
@@ -181,6 +202,7 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate() = atan(operand.evaluate())
         override fun toLatex() = "\\tan^{-1}(${operand.toLatexPriority(this)})"
+        override fun toTypst() = "atan(${operand.toTypstPriority(this)})"
     }
 
     data class Sum(
@@ -210,6 +232,16 @@ interface ScalarAlgebra {
             append("}{")
             append(expression(variable).toLatex())
             append("}")
+        }
+        override fun toTypst() = buildString {
+            append("sum_(")
+            append(variable.toTypst())
+            append("=")
+            append(lower.toTypst())
+            append(")^(")
+            append(upper.toTypst())
+            append(") ")
+            append(expression(variable).toTypst())
         }
     }
 
@@ -241,6 +273,16 @@ interface ScalarAlgebra {
             append(expression(variable).toLatex())
             append("}")
         }
+        override fun toTypst() = buildString {
+            append("prod_(")
+            append(variable.toTypst())
+            append("=")
+            append(lower.toTypst())
+            append(")^(")
+            append(upper.toTypst())
+            append(") ")
+            append(expression(variable).toTypst())
+        }
     }
 
     data class Factorial(override val operand: ScalarExpression) : UnaryOperation {
@@ -249,6 +291,7 @@ interface ScalarAlgebra {
         override val priority: Priority = Priority.ParensFunc
         override fun evaluate(): Double = factorial(operand.evaluate().toInt())
         override fun toLatex() = "${operand.toLatexPriority(this)}!"
+        override fun toTypst() = "${operand.toTypstPriority(this)}!"
 
         private fun factorial(n: Int): Double {
             require(n >= 0) { "Factorial is not defined for negative numbers." }
@@ -274,6 +317,7 @@ interface ScalarAlgebra {
         }
 
         override fun toLatex() = "{}^{${left.toLatexPriority(this)}}P_{${right.toLatexPriority(this)}}"
+        override fun toTypst() = "P(${left.toTypstPriority(this)}, ${right.toTypstPriority(this)})"
     }
 
 
@@ -298,5 +342,6 @@ interface ScalarAlgebra {
         }
 
         override fun toLatex() = "{}^{${left.toLatexPriority(this)}}C_{${right.toLatexPriority(this)}}"
+        override fun toTypst() = "C(${left.toTypstPriority(this)}, ${right.toTypstPriority(this)})"
     }
 }

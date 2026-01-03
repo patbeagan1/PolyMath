@@ -17,6 +17,11 @@ data class MathFunction(
         name != null -> asNamedFunctionSyntax()
         else -> asAnonymousFunctionSyntax()
     }
+    override fun toTypst(): String = when {
+        glyph != null -> asGlyphSyntaxTypst()
+        name != null -> asNamedFunctionSyntaxTypst()
+        else -> asAnonymousFunctionSyntaxTypst()
+    }
 
     override fun display(): String = listOfNotNull(
         glyph?.let { asGlyphSyntax() },
@@ -27,10 +32,20 @@ data class MathFunction(
     fun asGlyphSyntax() = "$glyph"
     fun asNamedFunctionSyntax() = "$name(${getCurrentVariablesForDisplay()}) = ${expression.toLatex()}"
     fun asAnonymousFunctionSyntax() = "(${getCurrentVariablesForDisplay()}) \\mapsto ${expression.toLatex()}"
+    
+    fun asGlyphSyntaxTypst() = "$glyph"
+    fun asNamedFunctionSyntaxTypst() = "$name(${getCurrentVariablesForDisplayTypst()}) = ${expression.toTypst()}"
+    fun asAnonymousFunctionSyntaxTypst() = "(${getCurrentVariablesForDisplayTypst()}) -> ${expression.toTypst()}"
 
     private fun getCurrentVariablesForDisplay() = expression
         .getOperandsExcept { it is MathFunction }
         .filterIsInstance<Variable>()
         .orderCanonically()
         .joinToString(",") { it.toLatex() }
+    
+    private fun getCurrentVariablesForDisplayTypst() = expression
+        .getOperandsExcept { it is MathFunction }
+        .filterIsInstance<Variable>()
+        .orderCanonically()
+        .joinToString(",") { it.toTypst() }
 }

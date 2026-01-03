@@ -25,6 +25,7 @@ sealed interface ScalarRelation<T> {
     val right: ScalarExpression
     fun isValid(): Boolean
     fun toLatex(): String
+    fun toTypst(): String
 
     fun _step(l: ScalarExpression, r: ScalarExpression): T
     fun applyOperation(action: (ScalarExpression) -> ScalarExpression) = _step(action(left), action(right))
@@ -64,6 +65,7 @@ sealed interface ScalarRelation<T> {
         override fun _step(l: ScalarExpression, r: ScalarExpression): LessThan = LessThan(l, r)
         override fun isValid(): Boolean = left.evaluate().compareTo(right.evaluate()) < 0
         override fun toLatex(): String = "${left.toLatex()} < ${right.toLatex()}"
+        override fun toTypst(): String = "${left.toTypst()} < ${right.toTypst()}"
     }
 
     data class GreaterThan(
@@ -73,6 +75,7 @@ sealed interface ScalarRelation<T> {
         override fun _step(l: ScalarExpression, r: ScalarExpression): GreaterThan = GreaterThan(l, r)
         override fun isValid(): Boolean = left.evaluate().compareTo(right.evaluate()) > 0
         override fun toLatex(): String = "${left.toLatex()} > ${right.toLatex()}"
+        override fun toTypst(): String = "${left.toTypst()} > ${right.toTypst()}"
     }
 
     data class LessThanOrEqual(
@@ -82,6 +85,7 @@ sealed interface ScalarRelation<T> {
         override fun _step(l: ScalarExpression, r: ScalarExpression): LessThanOrEqual = LessThanOrEqual(l, r)
         override fun isValid(): Boolean = left.evaluate().compareTo(right.evaluate()) <= 0
         override fun toLatex(): String = "${left.toLatex()} <= ${right.toLatex()}"
+        override fun toTypst(): String = "${left.toTypst()} <= ${right.toTypst()}"
     }
 
     data class GreaterThanOrEqual(
@@ -91,6 +95,7 @@ sealed interface ScalarRelation<T> {
         override fun _step(l: ScalarExpression, r: ScalarExpression): GreaterThanOrEqual = GreaterThanOrEqual(l, r)
         override fun isValid(): Boolean = left.evaluate().compareTo(right.evaluate()) >= 0
         override fun toLatex(): String = "${left.toLatex()} >= ${right.toLatex()}"
+        override fun toTypst(): String = "${left.toTypst()} >= ${right.toTypst()}"
     }
 
     data class Equation(
@@ -100,6 +105,7 @@ sealed interface ScalarRelation<T> {
         override fun _step(l: ScalarExpression, r: ScalarExpression): Equation = Equation(l, r)
         override fun isValid(): Boolean = left.evaluate().compareTo(right.evaluate()) == 0
         override fun toLatex(): String = "${left.toLatex()} = ${right.toLatex()}"
+        override fun toTypst(): String = "${left.toTypst()} = ${right.toTypst()}"
 
         /**
          * Accounts for a little bit of rounding when evaluating equations.

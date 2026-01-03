@@ -11,6 +11,7 @@ interface ScalarExpression : GenericSymbols {
     val priority: ScalarAlgebra.Priority
     fun evaluate(): Double
     fun toLatex(): String
+    fun toTypst(): String
     fun toGraphviz() = buildString {
         fun asNode(value: ScalarExpression): String = buildString {
             append("\"")
@@ -140,6 +141,48 @@ interface ScalarExpression : GenericSymbols {
         }
 
         else -> toLatex()
+    }
+
+    fun ScalarExpression.toTypstPriority(
+        parent: ScalarExpression,
+        position: Position = Position.NotApplicable
+    ): String = when {
+        this.priority < parent.priority -> {
+            // items listed here have inverted priorities
+            // they need to happen out of the standard PEMDAS order of operations.
+            // however, the typst for certain operations covers this inversion.
+            // the default case is to include parens around them - but sometimes this is not needed,
+            // like the content under a square root.
+            when (parent.priority) {
+                ScalarAlgebra.Priority.ParensFunc ->
+                    // these come with parens already included.
+                    toTypst()
+
+                ScalarAlgebra.Priority.Root ->
+                    // root symbols instead of parens
+                    toTypst()
+
+                ScalarAlgebra.Priority.Divide ->
+                    // the top and bottom of the bar don't need parens
+                    toTypst()
+
+                ScalarAlgebra.Priority.Power -> when (position) {
+                    Position.Power ->
+                        // superscript instead of parens
+                        toTypst()
+
+                    Position.Base ->
+                        // if this is a const, var or literal, we can drop the parens.
+                        if (this !is MathNum) "(${toTypst()})" else toTypst()
+
+                    else -> throw IllegalArgumentException()
+                }
+
+                else -> "(${toTypst()})"
+            }
+        }
+
+        else -> toTypst()
     }
 
     enum class Position {
