@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PolyMath Algebra REPL</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+        .input-section {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        button.secondary {
+            background-color: #2196F3;
+        }
+        button.secondary:hover {
+            background-color: #0b7dda;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+        }
+        .latex-output {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .help {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e3f2fd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .help h3 {
+            margin-top: 0;
+        }
+        .help code {
+            background-color: #fff;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>PolyMath Algebra REPL</h1>
+        
+        <div class="input-section">
+            <input type="text" id="input" placeholder="Enter expression (e.g., '1 + 1' or 'add 1 1') or command (e.g., ':help')" />
+            <div>
+                <button onclick="evaluate()">Evaluate</button>
+                <button class="secondary" onclick="simplify()">Simplify</button>
+                <button class="secondary" onclick="visualize()">Visualize</button>
+                <button class="secondary" onclick="showHelp()">Help</button>
+            </div>
+        </div>
+        
+        <div id="output" class="output" style="display: none;"></div>
+        <div id="latex-output" class="latex-output" style="display: none;"></div>
+        
+        <div id="help" class="help" style="display: none;">
+            <h3>Available Commands:</h3>
+            <ul>
+                <li><code>:help</code> - Show this help</li>
+                <li><code>:simplify</code> - Simplify the current expression</li>
+                <li><code>:visualize</code> - Show expression tree (Graphviz)</li>
+                <li><code>:latex</code> - Show LaTeX representation</li>
+                <li><code>:eval</code> - Evaluate the expression</li>
+                <li><code>:set &lt;var&gt; &lt;value&gt;</code> - Set a variable</li>
+                <li><code>:vars</code> - Show all variables</li>
+                <li><code>:tree</code> - Show text tree representation</li>
+            </ul>
+            <h3>Expression Formats:</h3>
+            <ul>
+                <li><strong>Infix:</strong> <code>1 + 1</code>, <code>2 * 3</code>, <code>x^2</code></li>
+                <li><strong>Command:</strong> <code>add 1 1</code>, <code>multiply 2 3</code></li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="repl-algebra.js"></script>
+    <script>
+        const input = document.getElementById('input');
+        const output = document.getElementById('output');
+        const latexOutput = document.getElementById('latex-output');
+        const help = document.getElementById('help');
+        
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                evaluate();
+            }
+        });
+        
+        function evaluate() {
+            const inputValue = input.value.trim();
+            if (!inputValue) return;
+            
+            try {
+                const result = ReplJs.evaluate(inputValue);
+                output.textContent = result;
+                output.style.display = 'block';
+                
+                // Try to render LaTeX if available
+                const latex = ReplJs.getCurrentLatex();
+                if (latex) {
+                    latexOutput.style.display = 'block';
+                    katex.render(latex, latexOutput, {
+                        throwOnError: false
+                    });
+                } else {
+                    latexOutput.style.display = 'none';
+                }
+            } catch (e) {
+                output.textContent = 'Error: ' + e.message;
+                output.style.display = 'block';
+            }
+        }
+        
+        function simplify() {
+            const result = ReplJs.simplify();
+            output.textContent = result;
+            output.style.display = 'block';
+            
+            const latex = ReplJs.getCurrentLatex();
+            if (latex) {
+                latexOutput.style.display = 'block';
+                katex.render(latex, latexOutput, {
+                    throwOnError: false
+                });
+            }
+        }
+        
+        function visualize() {
+            const graphviz = ReplJs.getCurrentGraphviz();
+            if (graphviz) {
+                output.textContent = graphviz;
+                output.style.display = 'block';
+            } else {
+                output.textContent = 'No expression to visualize';
+                output.style.display = 'block';
+            }
+        }
+        
+        function showHelp() {
+            help.style.display = help.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
