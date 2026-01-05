@@ -13,7 +13,7 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "tex-builder"
 
-// include(":lib-graph")  // Temporarily disabled due to configuration issues
+include(":lib-graph")
 include(":math-base")
 include(":math-algebra")
 include(":math-geometry")
