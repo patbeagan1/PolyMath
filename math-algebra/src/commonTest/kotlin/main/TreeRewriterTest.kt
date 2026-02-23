@@ -323,6 +323,7 @@ class TreeRewriterTest {
         val simplified = simplify(expr)
         assertEquals(0.0.num(), simplified)
     }
+<<<<<<< HEAD
 
     // ========== Tests for Rule Logging ==========
     
@@ -544,4 +545,6 @@ class TreeRewriterTest {
         val simplified = simplify(expr)
         assertEquals(0.0.num(), simplified)
     }
+=======
+>>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
 }
