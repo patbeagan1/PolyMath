@@ -1,11 +1,5 @@
 name: PolyMath
-description: |
-  PolyMath is a comprehensive mathematical DSL (Domain Specific Language) for Kotlin that lets you write 
-  mathematical expressions naturally and evaluate them or render them as LaTeX. PolyMath supports multiple 
-  fields of mathematics with an intuitive, type-safe API including arithmetic, algebra, calculus, 
-  trigonometry, combinatorics, boolean logic, unit conversions, and advanced mathematical domains. 
-  It features proper order of operations, rational number arithmetic, LaTeX rendering, and extensive 
-  unit conversion systems for metric, imperial, and specialized measurement systems.
+description: "PolyMath is a comprehensive mathematical DSL (Domain Specific Language) for Kotlin that lets you write \nmathematical expressions naturally and evaluate them or render them as LaTeX. PolyMath supports multiple \nfields of mathematics with an intuitive, type-safe API including arithmetic, algebra, calculus, \ntrigonometry, combinatorics, boolean logic, unit conversions, and advanced mathematical domains. \nIt features proper order of operations, rational number arithmetic, LaTeX rendering, and extensive \nunit conversion systems for metric, imperial, and specialized measurement systems.\n"
 language: kotlin
 tags:
 - kotlin
@@ -28,16 +22,10 @@ tags:
 - boolean-logic
 - rational-numbers
 - graphviz
-
-release_branch: develop
-has_release_script: true
-release_repo: patbeagan1/PolyMath
-
 subtree:
   repo: git@github.com:patbeagan1/PolyMath.git
   prefix: PolyMath
   branch: develop
-
 scripts:
   build:
     command: ./gradlew build
@@ -46,11 +34,9 @@ scripts:
   run:
     command: ./gradlew run
   publish:
-    command: "../monorepo subtree push PolyMath"
+    command: ../monorepo subtree push PolyMath
   pull:
-    command: "../monorepo subtree pull PolyMath"
-
-  # Module-specific publishing scripts
+    command: ../monorepo subtree pull PolyMath
   publish-units-base:
     command: ./gradlew :units-base:publishToMavenLocal
   publish-units-common:
@@ -69,8 +55,6 @@ scripts:
     command: ./gradlew :latex-builder:publishToMavenLocal
   publish-lib-graph:
     command: ./gradlew :lib-graph:publishToMavenLocal
-
-  # Maven Central publishing scripts (requires proper credentials)
   publish-units-base-central:
     command: ./gradlew :units-base:publishAllPublicationsToMavenCentralRepository
   publish-units-common-central:
@@ -89,7 +73,6 @@ scripts:
     command: ./gradlew :latex-builder:publishAllPublicationsToMavenCentralRepository
   publish-lib-graph-central:
     command: ./gradlew :lib-graph:publishAllPublicationsToMavenCentralRepository
-
 roadmap:
   todo:
   - Add support for complex number arithmetic and operations
@@ -118,9 +101,7 @@ roadmap:
   - Adding more comprehensive test coverage
   - Optimizing performance for large mathematical expressions
   - Improving documentation and examples
-
   in_progress:
-
   done:
   - Core mathematical DSL implementation with type-safe operations
   - Basic arithmetic with proper order of operations (PEMDAS/BODMAS)
@@ -140,15 +121,10 @@ roadmap:
   - Comprehensive test suite with mathematical verification
   - Multi-platform Kotlin support (JVM, JS, Native)
   - Modular architecture with separate modules for different mathematical domains
-
 related_projects:
 - Legion
 - CodeAtlas
 - monorepo-cli
-isPubliclyDocumented: true
-publicGithubRepo: https://github.com/patbeagan1/PolyMath
-publishNameOnCargo:
-publishNameOnPip:
 publishing:
 - target: github-projects
 - target: docs

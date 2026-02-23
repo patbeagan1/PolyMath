@@ -9,9 +9,9 @@ import main.dsl.mathnum.Scalar.RealNum
 import main.dsl.mathnum.Scalar.Undefined.pow
 import main.dsl.mathnum.Variable
 import kotlin.math.abs
+import kotlin.math.pow
 
 /**
-<<<<<<< HEAD
  * Represents a simplification rule that was applied during expression rewriting.
  */
 data class SimplificationRule(
@@ -23,9 +23,10 @@ data class SimplificationRule(
     override fun toString(): String = "$name: $description"
 }
 
+/** Callback function type for rule application logging. */
+private typealias RuleLogger = (SimplificationRule) -> Unit
+
 /**
-=======
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
  * Tree rewriting system for simplifying algebraic expressions.
  * 
  * This module provides a rule-based tree rewriting system that can apply
@@ -33,12 +34,6 @@ data class SimplificationRule(
  */
 @ExperimentalMathDSL
 object TreeRewriter {
-    
-    /**
-<<<<<<< HEAD
-     * Callback function type for rule application logging.
-     */
-    typealias RuleLogger = (SimplificationRule) -> Unit
     
     /**
      * Default rule logger that prints to standard output.
@@ -90,8 +85,6 @@ object TreeRewriter {
     }
     
     /**
-=======
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
      * Rewrites an expression tree by applying simplification rules.
      * This function recursively applies all available rewriting rules until
      * no more simplifications can be made.
@@ -171,7 +164,6 @@ object TreeRewriter {
     // ========== Unary Operation Rules ==========
     
     private fun rewriteNegate(operand: ScalarExpression): ScalarExpression {
-<<<<<<< HEAD
         val original = Negate(operand)
         // -(-x) = x
         if (operand is Negate) {
@@ -214,37 +206,10 @@ object TreeRewriter {
                 val result = RealNum(sqrtValue)
                 logRule("Perfect Square", "√${value.toInt()} = ${sqrtValue.toInt()}", original, result)
                 return result
-=======
-        // -(-x) = x
-        if (operand is Negate) {
-            return operand.operand
-        }
-        // -0 = 0
-        if (isZero(operand)) {
-            return RealNum(0.0)
-        }
-        // If operand is a constant, evaluate it
-        if (operand is RealNum) {
-            return RealNum(-operand.value)
-        }
-        return Negate(operand)
-    }
-    
-    private fun rewriteSqrt(operand: ScalarExpression): ScalarExpression {
-        if (operand is RealNum) {
-            val value = operand.value
-            if (value == 0.0) return RealNum(0.0)
-            if (value == 1.0) return RealNum(1.0)
-            // Check if it's a perfect square
-            val sqrtValue = kotlin.math.sqrt(value)
-            if (abs(sqrtValue - sqrtValue.toInt().toDouble()) < 1e-10) {
-                return RealNum(sqrtValue)
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
             }
         }
         // sqrt(x^2) = |x| (simplified to x for now, could be enhanced)
         if (operand is Exponent && isTwo(operand.right)) {
-<<<<<<< HEAD
             val result = Abs(operand.left)
             logRule("Sqrt of Square", "√(x²) = |x|", original, result)
             return result
@@ -439,135 +404,38 @@ object TreeRewriter {
                 return result
             }
             if (value < 0) return original // Undefined
-=======
-            return Abs(operand.left)
-        }
-        return Sqrt(operand)
-    }
-    
-    private fun rewriteSin(operand: ScalarExpression): ScalarExpression {
-        if (operand is RealNum) {
-            return RealNum(kotlin.math.sin(operand.value))
-        }
-        return Sin(operand)
-    }
-    
-    private fun rewriteCos(operand: ScalarExpression): ScalarExpression {
-        if (operand is RealNum) {
-            return RealNum(kotlin.math.cos(operand.value))
-        }
-        return Cos(operand)
-    }
-    
-    private fun rewriteTan(operand: ScalarExpression): ScalarExpression {
-        if (operand is RealNum) {
-            return RealNum(kotlin.math.tan(operand.value))
-        }
-        return Tan(operand)
-    }
-    
-    private fun rewriteLn(operand: ScalarExpression): ScalarExpression {
-        if (operand is RealNum) {
-            val value = operand.value
-            if (value == 1.0) return RealNum(0.0)
-            if (value <= 0.0) return operand // ln(0) or negative is undefined
-            return RealNum(kotlin.math.ln(value))
-        }
-        // ln(e^x) = x
-        if (operand is Exp) {
-            return rewrite(operand.operand)
-        }
-        return Ln(operand)
-    }
-    
-    private fun rewriteExp(operand: ScalarExpression): ScalarExpression {
-        if (operand is RealNum) {
-            return RealNum(kotlin.math.exp(operand.value))
-        }
-        return Exp(operand)
-    }
-    
-    private fun rewriteAbs(operand: ScalarExpression): ScalarExpression {
-        if (operand is RealNum) {
-            return RealNum(kotlin.math.abs(operand.value))
-        }
-        // |x| where x is always positive can be simplified
-        // This is a placeholder for more advanced analysis
-        return Abs(operand)
-    }
-    
-    private fun rewriteArcSin(operand: ScalarExpression): ScalarExpression {
-        if (operand is RealNum) {
-            return RealNum(kotlin.math.asin(operand.value))
-        }
-        return ArcSin(operand)
-    }
-    
-    private fun rewriteArcCos(operand: ScalarExpression): ScalarExpression {
-        if (operand is RealNum) {
-            return RealNum(kotlin.math.acos(operand.value))
-        }
-        return ArcCos(operand)
-    }
-    
-    private fun rewriteArcTan(operand: ScalarExpression): ScalarExpression {
-        if (operand is RealNum) {
-            return RealNum(kotlin.math.atan(operand.value))
-        }
-        return ArcTan(operand)
-    }
-    
-    private fun rewriteFactorial(operand: ScalarExpression): ScalarExpression {
-        if (operand is RealNum) {
-            val value = operand.value.toInt()
-            if (value == 0 || value == 1) return RealNum(1.0)
-            if (value < 0) return operand // Undefined
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
             // Calculate factorial
             var result = 1.0
             for (i in 2..value) {
                 result *= i
             }
-<<<<<<< HEAD
             val resultExpr = RealNum(result)
             logRule("Evaluate Factorial", "$value! = $result", original, resultExpr)
             return resultExpr
         }
         return original
-=======
-            return RealNum(result)
-        }
-        return Factorial(operand)
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
     }
     
     // ========== Binary Operation Rules ==========
     
     private fun rewriteAdd(left: ScalarExpression, right: ScalarExpression): ScalarExpression {
-<<<<<<< HEAD
         val original = Add(left, right)
         // x + 0 = x
         if (isZero(right)) {
             logRule("Additive Identity Right", "x + 0 = x", original, left)
-=======
-        // x + 0 = x
-        if (isZero(right)) {
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
             return left
         }
         // 0 + x = x
         if (isZero(left)) {
-<<<<<<< HEAD
             logRule("Additive Identity Left", "0 + x = x", original, right)
-=======
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
             return right
         }
-        // Both are constants
-        if (left is RealNum && right is RealNum) {
-<<<<<<< HEAD
-            val result = RealNum(left.value + right.value)
-            logRule("Evaluate Addition", "${left.value} + ${right.value} = ${result.value}", original, result)
+        // Both are constants (RealNum, IntegerNum, RationalNum)
+        val leftVal = constantValue(left)
+        val rightVal = constantValue(right)
+        if (leftVal != null && rightVal != null) {
+            val result = RealNum(leftVal + rightVal)
+            logRule("Evaluate Addition", "$leftVal + $rightVal = ${result.value}", original, result)
             return result
         }
         // Combine like terms: x + x = 2*x
@@ -583,6 +451,12 @@ object TreeRewriter {
             return combined
         }
         
+        // (-a) + (-b) = -(a + b) — must check both negate before single negate
+        if (left is Negate && right is Negate) {
+            val result = Negate(rewriteAdd(left.operand, right.operand))
+            logRule("Add Two Negations", "(-a) + (-b) = -(a + b)", original, result)
+            return result
+        }
         // Handle subtraction as addition of negation: a + (-b) = a - b
         if (right is Negate) {
             val result = rewriteSubtract(left, right.operand)
@@ -593,24 +467,6 @@ object TreeRewriter {
             val result = rewriteSubtract(right, left.operand)
             logRule("Add Negative", "(-a) + b = b - a", original, result)
             return result
-=======
-            return RealNum(left.value + right.value)
-        }
-        // Combine like terms: x + x = 2*x
-        if (left == right) {
-            return Multiply(RealNum(2.0), left)
-        }
-        // Combine numeric coefficients: (a*x) + (b*x) = (a+b)*x
-        val combined = combineLikeTerms(left, right) { l, r -> RealNum(l + r) }
-        if (combined != null) return combined
-        
-        // Handle subtraction as addition of negation: a + (-b) = a - b
-        if (right is Negate) {
-            return rewriteSubtract(left, right.operand)
-        }
-        if (left is Negate) {
-            return rewriteSubtract(right, left.operand)
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
         }
         
         // Flatten nested additions: (a + b) + c = a + b + c
@@ -619,18 +475,13 @@ object TreeRewriter {
             // Try to combine constants: if left.right and right are both constants, combine them
             if (left.right is RealNum && right is RealNum) {
                 val combined = RealNum(left.right.value + right.value)
-<<<<<<< HEAD
                 val result = Add(left.left, combined)
                 logRule("Flatten and Combine Constants", "(a + b) + c where b and c are constants", original, result)
                 return result
-=======
-                return Add(left.left, combined)
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
             }
             // Also check if left.left is a constant and right is a constant
             if (left.left is RealNum && right is RealNum) {
                 val combined = RealNum(left.left.value + right.value)
-<<<<<<< HEAD
                 val result = Add(combined, left.right)
                 logRule("Flatten and Combine Constants", "(a + b) + c where a and c are constants", original, result)
                 return result
@@ -638,28 +489,18 @@ object TreeRewriter {
             val result = Add(left.left, Add(left.right, right))
             logRule("Flatten Addition", "(a + b) + c = a + (b + c)", original, result)
             return result
-=======
-                return Add(combined, left.right)
-            }
-            return Add(left.left, Add(left.right, right))
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
         }
         if (right is Add) {
             // Try to combine constants: if left and right.left are both constants, combine them
             if (left is RealNum && right.left is RealNum) {
                 val combined = RealNum(left.value + right.left.value)
-<<<<<<< HEAD
                 val result = Add(combined, right.right)
                 logRule("Flatten and Combine Constants", "a + (b + c) where a and b are constants", original, result)
                 return result
-=======
-                return Add(combined, right.right)
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
             }
             // Also check if left is a constant and right.right is a constant
             if (left is RealNum && right.right is RealNum) {
                 val combined = RealNum(left.value + right.right.value)
-<<<<<<< HEAD
                 val result = Add(combined, right.left)
                 logRule("Flatten and Combine Constants", "a + (b + c) where a and c are constants", original, result)
                 return result
@@ -677,24 +518,10 @@ object TreeRewriter {
         // x - 0 = x
         if (isZero(right)) {
             logRule("Subtract Zero", "x - 0 = x", original, left)
-=======
-                return Add(combined, right.left)
-            }
-            return Add(Add(left, right.left), right.right)
-        }
-        
-        return Add(left, right)
-    }
-    
-    private fun rewriteSubtract(left: ScalarExpression, right: ScalarExpression): ScalarExpression {
-        // x - 0 = x
-        if (isZero(right)) {
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
             return left
         }
         // 0 - x = -x
         if (isZero(left)) {
-<<<<<<< HEAD
             val result = Negate(right)
             logRule("Zero Subtract", "0 - x = -x", original, result)
             return result
@@ -706,15 +533,23 @@ object TreeRewriter {
             return result
         }
         // Both are constants
-        if (left is RealNum && right is RealNum) {
-            val result = RealNum(left.value - right.value)
-            logRule("Evaluate Subtraction", "${left.value} - ${right.value} = ${result.value}", original, result)
+        val subLeftVal = constantValue(left)
+        val subRightVal = constantValue(right)
+        if (subLeftVal != null && subRightVal != null) {
+            val result = RealNum(subLeftVal - subRightVal)
+            logRule("Evaluate Subtraction", "$subLeftVal - $subRightVal = ${result.value}", original, result)
             return result
         }
         // x - (-y) = x + y
         if (right is Negate) {
             val result = rewriteAdd(left, right.operand)
             logRule("Subtract Negative", "x - (-y) = x + y", original, result)
+            return result
+        }
+        // a - (b + c) = (a - b) - c (distribute subtraction over addition on the right)
+        if (right is Add) {
+            val result = rewriteSubtract(rewriteSubtract(left, right.left), right.right)
+            logRule("Subtract Sum", "a - (b + c) = (a - b) - c", original, result)
             return result
         }
         // Combine like terms: (a*x) - (b*x) = (a-b)*x
@@ -739,52 +574,30 @@ object TreeRewriter {
         // x * 1 = x
         if (isOne(right)) {
             logRule("Multiplicative Identity Right", "x * 1 = x", original, left)
-=======
-            return Negate(right)
-        }
-        // x - x = 0
-        if (left == right) {
-            return RealNum(0.0)
-        }
-        // Both are constants
-        if (left is RealNum && right is RealNum) {
-            return RealNum(left.value - right.value)
-        }
-        // x - (-y) = x + y
-        if (right is Negate) {
-            return rewriteAdd(left, right.operand)
-        }
-        // Combine like terms: (a*x) - (b*x) = (a-b)*x
-        val combined = combineLikeTerms(left, right) { l, r -> RealNum(l - r) }
-        if (combined != null) return combined
-        // x - y = x + (-y)
-        // This can help with combining like terms
-        return Subtract(left, right)
-    }
-    
-    private fun rewriteMultiply(left: ScalarExpression, right: ScalarExpression): ScalarExpression {
-        // x * 0 = 0
-        if (isZero(left) || isZero(right)) {
-            return RealNum(0.0)
-        }
-        // x * 1 = x
-        if (isOne(right)) {
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
             return left
         }
         // 1 * x = x
         if (isOne(left)) {
-<<<<<<< HEAD
             logRule("Multiplicative Identity Left", "1 * x = x", original, right)
-=======
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
             return right
         }
+        // (-a)*b = -(a*b), a*(-b) = -(a*b) — factor negation out for further simplification
+        if (left is Negate) {
+            val result = Negate(rewriteMultiply(left.operand, right))
+            logRule("Factor Negation Left", "(-a)*b = -(a*b)", original, result)
+            return result
+        }
+        if (right is Negate) {
+            val result = Negate(rewriteMultiply(left, right.operand))
+            logRule("Factor Negation Right", "a*(-b) = -(a*b)", original, result)
+            return result
+        }
         // Both are constants
-        if (left is RealNum && right is RealNum) {
-<<<<<<< HEAD
-            val result = RealNum(left.value * right.value)
-            logRule("Evaluate Multiplication", "${left.value} * ${right.value} = ${result.value}", original, result)
+        val mulLeftVal = constantValue(left)
+        val mulRightVal = constantValue(right)
+        if (mulLeftVal != null && mulRightVal != null) {
+            val result = RealNum(mulLeftVal * mulRightVal)
+            logRule("Evaluate Multiplication", "$mulLeftVal * $mulRightVal = ${result.value}", original, result)
             return result
         }
         // Combine like terms: x * x = x^2
@@ -792,13 +605,6 @@ object TreeRewriter {
             val result = Exponent(left, RealNum(2.0))
             logRule("Square Same Term", "x * x = x²", original, result)
             return result
-=======
-            return RealNum(left.value * right.value)
-        }
-        // Combine like terms: x * x = x^2
-        if (left == right) {
-            return Exponent(left, RealNum(2.0))
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
         }
         // Combine numeric coefficients: (a*x) * (b*x) = (a*b)*x^2
         // But this is more complex, so we'll handle it in a simpler way
@@ -809,18 +615,13 @@ object TreeRewriter {
             // If right is a constant and left.right is a constant, evaluate them first
             if (right is RealNum && left.right is RealNum) {
                 val newConstant = RealNum(left.right.value * right.value)
-<<<<<<< HEAD
                 val result = Multiply(left.left, newConstant)
                 logRule("Flatten and Combine Constants", "(a * b) * c where b and c are constants", original, result)
                 return result
-=======
-                return Multiply(left.left, newConstant)
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
             }
             // If right is a constant and left.left is a constant, evaluate them first
             if (right is RealNum && left.left is RealNum) {
                 val newConstant = RealNum(left.left.value * right.value)
-<<<<<<< HEAD
                 val result = Multiply(left.right, newConstant)
                 logRule("Flatten and Combine Constants", "(a * b) * c where a and c are constants", original, result)
                 return result
@@ -828,28 +629,18 @@ object TreeRewriter {
             val result = Multiply(left.left, Multiply(left.right, right))
             logRule("Flatten Multiplication", "(a * b) * c = a * (b * c)", original, result)
             return result
-=======
-                return Multiply(left.right, newConstant)
-            }
-            return Multiply(left.left, Multiply(left.right, right))
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
         }
         if (right is Multiply) {
             // If left is a constant and right.left is a constant, evaluate them first
             if (left is RealNum && right.left is RealNum) {
                 val newConstant = RealNum(left.value * right.left.value)
-<<<<<<< HEAD
                 val result = Multiply(newConstant, right.right)
                 logRule("Flatten and Combine Constants", "a * (b * c) where a and b are constants", original, result)
                 return result
-=======
-                return Multiply(newConstant, right.right)
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
             }
             // If left is a constant and right.right is a constant, evaluate them first
             if (left is RealNum && right.right is RealNum) {
                 val newConstant = RealNum(left.value * right.right.value)
-<<<<<<< HEAD
                 val result = Multiply(newConstant, right.left)
                 logRule("Flatten and Combine Constants", "a * (b * c) where a and c are constants", original, result)
                 return result
@@ -857,17 +648,11 @@ object TreeRewriter {
             val result = Multiply(Multiply(left, right.left), right.right)
             logRule("Flatten Multiplication", "a * (b * c) = (a * b) * c", original, result)
             return result
-=======
-                return Multiply(newConstant, right.left)
-            }
-            return Multiply(Multiply(left, right.left), right.right)
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
         }
         
         // Distribute multiplication over addition: a * (b + c) = a*b + a*c
         // Note: operands are already simplified, so we can construct the new structure directly
         if (right is Add) {
-<<<<<<< HEAD
             val result = Add(
                 Multiply(left, right.left),
                 Multiply(left, right.right)
@@ -899,23 +684,10 @@ object TreeRewriter {
             )
             logRule("Distribute Multiplication Over Subtraction", "(a - b) * c = a*c - b*c", original, result)
             return result
-=======
-            return Add(
-                Multiply(left, right.left),
-                Multiply(left, right.right)
-            )
-        }
-        if (left is Add) {
-            return Add(
-                Multiply(left.left, right),
-                Multiply(left.right, right)
-            )
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
         }
         
         // Normalize: put constants on the left when possible
         if (right is RealNum && left !is RealNum) {
-<<<<<<< HEAD
             val result = Multiply(right, left)
             logRule("Normalize Constants", "Put constants on the left", original, result)
             return result
@@ -934,48 +706,26 @@ object TreeRewriter {
         // x / 1 = x
         if (isOne(right)) {
             logRule("Divide One", "x / 1 = x", original, left)
-=======
-            return Multiply(right, left)
-        }
-        return Multiply(left, right)
-    }
-    
-    private fun rewriteDivide(left: ScalarExpression, right: ScalarExpression): ScalarExpression {
-        // 0 / x = 0 (x != 0)
-        if (isZero(left) && !isZero(right)) {
-            return RealNum(0.0)
-        }
-        // x / 1 = x
-        if (isOne(right)) {
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
             return left
         }
         // x / x = 1
         if (left == right && !isZero(right)) {
-<<<<<<< HEAD
             val result = RealNum(1.0)
             logRule("Divide Same", "x / x = 1", original, result)
             return result
         }
         // Both are constants
-        if (left is RealNum && right is RealNum) {
-            if (right.value == 0.0) return original // Division by zero handled elsewhere
-            val result = RealNum(left.value / right.value)
-            logRule("Evaluate Division", "${left.value} / ${right.value} = ${result.value}", original, result)
+        val divLeftVal = constantValue(left)
+        val divRightVal = constantValue(right)
+        if (divLeftVal != null && divRightVal != null) {
+            if (divRightVal == 0.0) return original // Division by zero handled elsewhere
+            val result = RealNum(divLeftVal / divRightVal)
+            logRule("Evaluate Division", "$divLeftVal / $divRightVal = ${result.value}", original, result)
             return result
-=======
-            return RealNum(1.0)
-        }
-        // Both are constants
-        if (left is RealNum && right is RealNum) {
-            if (right.value == 0.0) return left // Division by zero handled elsewhere
-            return RealNum(left.value / right.value)
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
         }
         // (a * x) / (b * x) = a / b (if x != 0)
         // This is complex and would require pattern matching
         
-<<<<<<< HEAD
         // x / (-y) = -(x / y)
         if (right is Negate) {
             val result = Negate(Divide(left, right.operand))
@@ -988,16 +738,24 @@ object TreeRewriter {
             logRule("Divide Negative", "(-x) / y = -(x / y)", original, result)
             return result
         }
+        // x / (-k) = -(x / k) when k is positive (operand was simplified from Negate)
+        if (right is RealNum && right.value < 0) {
+            val result = Negate(Divide(left, RealNum(-right.value)))
+            logRule("Divide Negative (constant)", "x / (-k) = -(x / k)", original, result)
+            return result
+        }
         
         return original
     }
     
     private fun rewriteModulo(left: ScalarExpression, right: ScalarExpression): ScalarExpression {
         val original = Modulo(left, right)
-        if (left is RealNum && right is RealNum) {
-            if (right.value == 0.0) return original // Modulo by zero handled elsewhere
-            val result = RealNum(left.value % right.value)
-            logRule("Evaluate Modulo", "${left.value} mod ${right.value} = ${result.value}", original, result)
+        val modLeftVal = constantValue(left)
+        val modRightVal = constantValue(right)
+        if (modLeftVal != null && modRightVal != null) {
+            if (modRightVal == 0.0) return original // Modulo by zero handled elsewhere
+            val result = RealNum(modLeftVal % modRightVal)
+            logRule("Evaluate Modulo", "$modLeftVal mod $modRightVal = ${result.value}", original, result)
             return result
         }
         return original
@@ -1014,31 +772,10 @@ object TreeRewriter {
         // x^1 = x
         if (isOne(right)) {
             logRule("Exponent One", "x^1 = x", original, left)
-=======
-        return Divide(left, right)
-    }
-    
-    private fun rewriteModulo(left: ScalarExpression, right: ScalarExpression): ScalarExpression {
-        if (left is RealNum && right is RealNum) {
-            if (right.value == 0.0) return left // Modulo by zero handled elsewhere
-            return RealNum(left.value % right.value)
-        }
-        return Modulo(left, right)
-    }
-    
-    private fun rewriteExponent(left: ScalarExpression, right: ScalarExpression): ScalarExpression {
-        // x^0 = 1
-        if (isZero(right)) {
-            return RealNum(1.0)
-        }
-        // x^1 = x
-        if (isOne(right)) {
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
             return left
         }
         // 0^x = 0 (x > 0)
         if (isZero(left) && !isZero(right)) {
-<<<<<<< HEAD
             val result = RealNum(0.0)
             logRule("Zero Exponent", "0^x = 0 (x > 0)", original, result)
             return result
@@ -1049,10 +786,18 @@ object TreeRewriter {
             logRule("One Exponent", "1^x = 1", original, result)
             return result
         }
+        // x^(1/2) = sqrt(x), x^0.5 = sqrt(x)
+        val expRightVal = constantValue(right)
+        if (expRightVal != null && kotlin.math.abs(expRightVal - 0.5) < 1e-10) {
+            val result = Sqrt(left)
+            logRule("Half Exponent to Sqrt", "x^(1/2) = sqrt(x)", original, result)
+            return result
+        }
         // Both are constants
-        if (left is RealNum && right is RealNum) {
-            val result = RealNum(left.pow(right.value).evaluate())
-            logRule("Evaluate Exponent", "${left.value}^${right.value} = ${result.value}", original, result)
+        val expLeftVal = constantValue(left)
+        if (expLeftVal != null && expRightVal != null) {
+            val result = RealNum(expLeftVal.pow(expRightVal))
+            logRule("Evaluate Exponent", "$expLeftVal^$expRightVal = ${result.value}", original, result)
             return result
         }
         // (x^a)^b = x^(a*b)
@@ -1085,6 +830,12 @@ object TreeRewriter {
             logRule("Negative Exponent", "x^(-a) = 1 / x^a", original, result)
             return result
         }
+        // x^(-k) = 1 / x^k when k is a positive constant (operand was simplified from Negate)
+        if (right is RealNum && right.value < 0) {
+            val result = Divide(RealNum(1.0), Exponent(left, RealNum(-right.value)))
+            logRule("Negative Exponent (constant)", "x^(-k) = 1 / x^k", original, result)
+            return result
+        }
         // e^(ln(x)) = x (already handled in rewriteExp, but also handle e^(a*ln(x)) = x^a)
         // This is complex and would require pattern matching, skip for now
         
@@ -1093,34 +844,10 @@ object TreeRewriter {
     
     private fun rewriteLog(base: ScalarExpression, argument: ScalarExpression): ScalarExpression {
         val original = Log(base, argument)
-=======
-            return RealNum(0.0)
-        }
-        // 1^x = 1
-        if (isOne(left)) {
-            return RealNum(1.0)
-        }
-        // Both are constants
-        if (left is RealNum && right is RealNum) {
-            return RealNum(left.pow( right.value).evaluate())
-        }
-        // (x^a)^b = x^(a*b)
-        if (left is Exponent) {
-            return rewrite(Exponent(left.left, rewriteMultiply(left.right, right)))
-        }
-        // (a*b)^c = a^c * b^c (for some cases)
-        // This is complex and would require careful handling
-        
-        return Exponent(left, right)
-    }
-    
-    private fun rewriteLog(base: ScalarExpression, argument: ScalarExpression): ScalarExpression {
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
         if (base is RealNum && argument is RealNum) {
             val baseValue = base.value
             val argValue = argument.value
             if (baseValue > 0 && baseValue != 1.0 && argValue > 0) {
-<<<<<<< HEAD
                 val result = RealNum(kotlin.math.log(argValue, baseValue))
                 logRule("Evaluate Log", "log_${baseValue}($argValue) = ${result.value}", original, result)
                 return result
@@ -1139,15 +866,22 @@ object TreeRewriter {
             return result
         }
         return original
-=======
-                return RealNum(kotlin.math.log(argValue, baseValue))
-            }
-        }
-        return Log(base, argument)
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
     }
     
     // ========== Helper Functions ==========
+    
+    /**
+     * Returns the numeric value of a constant expression, or null if not a simple constant.
+     * Supports RealNum, IntegerNum, and RationalNum for constant folding.
+     */
+    private fun constantValue(expression: ScalarExpression): Double? {
+        return when (expression) {
+            is RealNum -> expression.value
+            is Scalar.IntegerNum -> expression.value.toDouble()
+            is Scalar.RationalNum -> expression.evaluate().takeIf { !it.isNaN() }
+            else -> null
+        }
+    }
     
     /**
      * Checks if an expression represents zero.
@@ -1156,7 +890,7 @@ object TreeRewriter {
         return when (expression) {
             is RealNum -> expression.value == 0.0
             is Scalar.IntegerNum -> expression.value == 0L
-            else -> false
+            else -> constantValue(expression)?.let { it == 0.0 } ?: false
         }
     }
     
@@ -1167,7 +901,7 @@ object TreeRewriter {
         return when (expression) {
             is RealNum -> expression.value == 1.0
             is Scalar.IntegerNum -> expression.value == 1L
-            else -> false
+            else -> constantValue(expression)?.let { kotlin.math.abs(it - 1.0) < 1e-10 } ?: false
         }
     }
     
@@ -1178,7 +912,7 @@ object TreeRewriter {
         return when (expression) {
             is RealNum -> expression.value == 2.0
             is Scalar.IntegerNum -> expression.value == 2L
-            else -> false
+            else -> constantValue(expression)?.let { kotlin.math.abs(it - 2.0) < 1e-10 } ?: false
         }
     }
     
@@ -1195,14 +929,12 @@ object TreeRewriter {
         fun extractCoefficientAndVariable(expr: ScalarExpression): Pair<ScalarExpression?, ScalarExpression?>? {
             return when (expr) {
                 is Multiply -> {
-                   val result =  when {
-                        expr.left is RealNum -> expr.left to expr.right
-                        expr.right is RealNum -> expr.right to expr.left
+                    val result = when {
+                        expr.left is RealNum || expr.left is Scalar.IntegerNum -> expr.left to expr.right
+                        expr.right is RealNum || expr.right is Scalar.IntegerNum -> expr.right to expr.left
                         else -> null
                     }
-                    result?.let { (coeff, varExpr) ->
-                        coeff to varExpr
-                    }
+                    result?.let { (coeff, varExpr) -> coeff to varExpr }
                 }
                 is Variable -> RealNum(1.0) to expr
                 else -> null

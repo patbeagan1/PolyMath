@@ -1,9 +1,11 @@
 package main
 
 import main.dsl.*
+import main.dsl.expressions.PropositionalCalculus
 import main.dsl.expressions.ScalarAlgebra.*
 import main.dsl.expressions.ScalarRelation.Equation
 import main.dsl.mathnum.*
+import main.dsl.mathnum.Scalar.RationalNum
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

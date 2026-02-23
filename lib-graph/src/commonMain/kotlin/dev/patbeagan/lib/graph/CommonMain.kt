@@ -1,5 +1,4 @@
 package dev.patbeagan.lib.graph
-<<<<<<< HEAD
 
 /**
  * PolyMath Graph Library
@@ -31,6 +30,3 @@ package dev.patbeagan.lib.graph
  * ```
  */
 fun main() = println("PolyMath Graph Library")
-=======
-fun main() = println("hello world")
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f

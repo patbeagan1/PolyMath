@@ -17,7 +17,6 @@ import main.dsl.mathnum.Scalar.RealNum
  * - Simplifies nested operations
  * 
  * @param expression The expression to simplify
-<<<<<<< HEAD
  * @param logRules If true, prints the rules being applied during simplification
  * @return A simplified version of the expression
  */
@@ -34,13 +33,6 @@ fun simplify(expression: ScalarExpression, logRules: Boolean = false): ScalarExp
             TreeRewriter.disableLogging()
         }
     }
-=======
- * @return A simplified version of the expression
- */
-@ExperimentalMathDSL
-fun simplify(expression: ScalarExpression): ScalarExpression {
-    return TreeRewriter.rewrite(expression)
->>>>>>> b3d087a7a68cda89bfa9b5959029c058b75dc42f
 }
 
 /**
