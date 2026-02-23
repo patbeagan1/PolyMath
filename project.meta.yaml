@@ -149,3 +149,6 @@ isPubliclyDocumented: true
 publicGithubRepo: https://github.com/patbeagan1/PolyMath
 publishNameOnCargo:
 publishNameOnPip:
+publishing:
+- target: github-projects
+- target: docs
