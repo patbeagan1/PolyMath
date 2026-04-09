@@ -6,8 +6,9 @@ import dev.patbeagan.math.geometry.geospatial.measure.GeodesicWgs84
 import dev.patbeagan.math.geometry.geospatial.spaces.GeometryBasis
 
 /**
- * Entry point for mapbox-turf-style geospatial measurements: planar 2D/3D Euclidean paths and
- * great-circle paths on the WGS84 mean sphere, all returning [com.measures.distance.Meter].
+ * Entry point for Mapbox / Turf-style geospatial work: planar Euclidean measurements, WGS84 geodesic
+ * distance and path operations (`destination`, `midpoint`, `along`, polygon `area`), plus supporting
+ * types under `dev.patbeagan.math.geometry.geospatial.model` and `.predicate`.
  */
 object Geospatial {
     val euclidean2D = Euclidean2D
