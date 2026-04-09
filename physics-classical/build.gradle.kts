@@ -26,6 +26,7 @@ kotlin {
             implementation(kotlin("test"))
             api(projects.unitsBase)
             api(projects.mathAlgebra)
+            api(projects.mathGeometry)
         }
     }
 }
