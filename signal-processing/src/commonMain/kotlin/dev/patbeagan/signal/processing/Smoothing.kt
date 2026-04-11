@@ -11,8 +11,8 @@ import dev.patbeagan.signal.domain.SampleCount
  */
 object MovingAverage {
     fun of(signal: DiscreteSignal, window: SampleCount): DiscreteSignal {
-        require(window.value <= signal.samples.size) {
-            "window (${window.value}) cannot exceed signal length (${signal.samples.size})"
+        require(window.value <= signal.sampleCount.value) {
+            "window (${window.value}) cannot exceed signal length (${signal.sampleCount.value})"
         }
         val x = signal.samples
         val w = window.value

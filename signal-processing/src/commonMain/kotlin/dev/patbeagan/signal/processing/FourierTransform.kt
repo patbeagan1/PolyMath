@@ -36,11 +36,12 @@ object FourierTransform {
      * Inverse DFT; for a spectrum produced from a real signal, the imaginary parts of time samples
      * should be negligible up to numerical error.
      */
-    fun inverseDiscreteFourierTransform(spectrum: DiscreteSpectrum): DoubleArray {
-        val n = spectrum.transformLength
+    fun inverseDiscreteFourierTransform(spectrum: DiscreteSpectrum): DiscreteSignal {
+        val n = spectrum.transformLength.value
         val re = DoubleArray(n) { spectrum.coefficients[it].real }
         val im = DoubleArray(n) { spectrum.coefficients[it].imaginary }
-        return inverseDft(re, im)
+        val time = inverseDft(re, im)
+        return DiscreteSignal(time, spectrum.schedule)
     }
 
     /** Right-pad with zeros to the next power of two (no-op if length already is one). */

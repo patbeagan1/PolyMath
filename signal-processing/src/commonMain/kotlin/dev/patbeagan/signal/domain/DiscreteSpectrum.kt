@@ -14,9 +14,15 @@ data class DiscreteSpectrum(
         require(coefficients.isNotEmpty()) { "coefficients must be non-empty" }
     }
 
-    val transformLength: Int get() = coefficients.size
+    val transformLength: TransformLength
+        get() = TransformLength(coefficients.size)
 
-    operator fun get(bin: FrequencyBinIndex): ComplexSample = coefficients[bin.value]
+    operator fun get(bin: FrequencyBinIndex): ComplexSample {
+        require(bin.value < coefficients.size) {
+            "bin ${bin.value} out of range for length ${coefficients.size}"
+        }
+        return coefficients[bin.value]
+    }
 
     fun magnitudeAt(bin: FrequencyBinIndex): Double = this[bin].magnitude
 

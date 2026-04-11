@@ -7,11 +7,17 @@ import dev.patbeagan.signal.domain.FrequencyBinIndex
 import dev.patbeagan.signal.domain.SampleCount
 import dev.patbeagan.signal.domain.SampleIndex
 import dev.patbeagan.signal.domain.SamplingSchedule
+import dev.patbeagan.signal.domain.TransformLength
 import dev.patbeagan.signal.processing.CrossCorrelation
 import dev.patbeagan.signal.processing.DiscreteConvolution
 import dev.patbeagan.signal.processing.EnergyAndRms
+import dev.patbeagan.signal.processing.EnvelopeDetection
 import dev.patbeagan.signal.processing.FourierTransform
 import dev.patbeagan.signal.processing.MovingAverage
+import dev.patbeagan.signal.processing.NumericalDerivative
+import dev.patbeagan.signal.processing.CumulativeSum
+import dev.patbeagan.signal.processing.SignalStatistics
+import dev.patbeagan.signal.processing.SpectralFiltering
 import dev.patbeagan.signal.processing.Windows
 import kotlin.math.abs
 import kotlin.random.Random
@@ -69,7 +75,7 @@ class SignalProcessingTest {
         val spec = FourierTransform.discreteFourierTransform(sig)
         val back = FourierTransform.inverseDiscreteFourierTransform(spec)
         for (i in raw.indices) {
-            assertClose(raw[i], back[i])
+            assertClose(raw[i], back.samples[i])
         }
     }
 
@@ -107,7 +113,7 @@ class SignalProcessingTest {
     @Test
     fun samplingSchedule_binCenterFrequency() {
         val sched = SamplingSchedule(Hertz(8000.0))
-        val f = sched.binCenterFrequency(FrequencyBinIndex(1), transformSize = 8)
+        val f = sched.binCenterFrequency(FrequencyBinIndex(1), TransformLength(8))
         assertClose(1000.0, f.value)
     }
 
@@ -122,20 +128,60 @@ class SignalProcessingTest {
     @Test
     fun hannWindow_endpoints() {
         val w = Windows.hann(SampleCount(5))
-        assertClose(0.0, w.first())
-        assertClose(0.0, w.last())
+        assertClose(0.0, w.values.first())
+        assertClose(0.0, w.values.last())
     }
 
     @Test
     fun rms_ofConstant() {
         val s = DiscreteSignal.of(doubleArrayOf(3.0, 3.0, 3.0), 1.0)
-        assertClose(3.0, EnergyAndRms.rootMeanSquare(s))
+        assertClose(3.0, EnergyAndRms.rootMeanSquare(s).value)
     }
 
     @Test
     fun energy_ofUnitPulse() {
         val e = EnergyAndRms.totalEnergy(doubleArrayOf(1.0, 0.0, 0.0))
-        assertClose(1.0, e)
+        assertClose(1.0, e.value)
+    }
+
+    @Test
+    fun numericalDerivative_linearRamp() {
+        val s = DiscreteSignal.of(doubleArrayOf(0.0, 1.0, 2.0, 3.0, 4.0), 1.0)
+        val d = NumericalDerivative.centralDifference(s)
+        assertClose(1.0, d.samples[2])
+        assertClose(1.0, d.samples[1])
+    }
+
+    @Test
+    fun idealHighPass_removesDc() {
+        val s = DiscreteSignal.of(doubleArrayOf(2.0, 2.0, 2.0, 2.0), 1.0)
+        val hp = SpectralFiltering.idealHighPass(s, FrequencyBinIndex(0))
+        for (v in hp.samples) {
+            assertClose(0.0, v, 1e-9)
+        }
+    }
+
+    @Test
+    fun envelope_movingAverageOfAbs_positive() {
+        val s = DiscreteSignal.of(doubleArrayOf(-4.0, 4.0, -4.0, 4.0), 1.0)
+        val env = EnvelopeDetection.movingAverageMagnitude(s, SampleCount(2))
+        assertTrue(env.samples.all { it >= 0.0 })
+        assertClose(4.0, env.samples.last(), 1e-10)
+    }
+
+    @Test
+    fun cumulativeSum_ofOnes() {
+        val s = DiscreteSignal.of(doubleArrayOf(1.0, 1.0, 1.0), 1.0)
+        val c = CumulativeSum.of(s)
+        assertClose(1.0, c.samples[0])
+        assertClose(2.0, c.samples[1])
+        assertClose(3.0, c.samples[2])
+    }
+
+    @Test
+    fun peakToPeak_matchesRange() {
+        val s = DiscreteSignal.of(doubleArrayOf(-2.0, 5.0, 1.0), 1.0)
+        assertClose(7.0, SignalStatistics.peakToPeak(s).value)
     }
 
     @Test

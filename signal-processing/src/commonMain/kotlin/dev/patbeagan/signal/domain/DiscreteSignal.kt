@@ -21,6 +21,9 @@ data class DiscreteSignal(
     fun copySamples(transform: (DoubleArray) -> DoubleArray): DiscreteSignal =
         DiscreteSignal(transform(samples.copyOf()), schedule)
 
+    fun mapSamples(transform: (Double) -> Double): DiscreteSignal =
+        copySamples { a -> DoubleArray(a.size) { i -> transform(a[i]) } }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || this::class != other::class) return false

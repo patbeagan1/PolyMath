@@ -34,12 +34,12 @@ data class SamplingSchedule(
     /**
      * Center frequency (Hz) of DFT bin [bin] for a transform of length [transformSize].
      */
-    fun binCenterFrequency(bin: FrequencyBinIndex, transformSize: Int): Hertz {
-        require(transformSize > 0) { "transformSize must be positive" }
-        require(bin.value < transformSize) {
-            "bin ${bin.value} out of range for transform size $transformSize"
+    fun binCenterFrequency(bin: FrequencyBinIndex, transformLength: TransformLength): Hertz {
+        val n = transformLength.value
+        require(bin.value < n) {
+            "bin ${bin.value} out of range for transform length $n"
         }
-        return Hertz(bin.value * sampleRate.value / transformSize)
+        return Hertz(bin.value * sampleRate.value / n)
     }
 
     companion object {
