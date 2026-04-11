@@ -1,5 +1,5 @@
 name: PolyMath
-description: "PolyMath is a comprehensive mathematical DSL (Domain Specific Language) for Kotlin that lets you write \nmathematical expressions naturally and evaluate them or render them as LaTeX. PolyMath supports multiple \nfields of mathematics with an intuitive, type-safe API including arithmetic, algebra, calculus, \ntrigonometry, combinatorics, boolean logic, unit conversions, and advanced mathematical domains. \nIt features proper order of operations, rational number arithmetic, LaTeX rendering, and extensive \nunit conversion systems for metric, imperial, and specialized measurement systems.\n"
+description: "PolyMath is a comprehensive mathematical DSL (Domain Specific Language) for Kotlin that lets you write \nmathematical expressions naturally and evaluate them or render them as LaTeX. PolyMath supports multiple \nfields of mathematics with an intuitive, type-safe API including arithmetic, algebra, calculus, \ntrigonometry, combinatorics, boolean logic, unit conversions, discrete signal processing with \ndomain-driven sampling types, and advanced mathematical domains. \nIt features proper order of operations, rational number arithmetic, LaTeX rendering, and extensive \nunit conversion systems for metric, imperial, and specialized measurement systems.\n"
 language: kotlin
 tags:
 - kotlin
@@ -12,7 +12,8 @@ tags:
 - unit-conversion
 - typesafe
 - library
-- scientific-computing
+  - scientific-computing
+  - signal-processing
 - education
 - research
 - engineering
@@ -51,6 +52,8 @@ scripts:
     command: ./gradlew :math-geometry:publishToMavenLocal
   publish-physics-classical:
     command: ./gradlew :physics-classical:publishToMavenLocal
+  publish-signal-processing:
+    command: ./gradlew :signal-processing:publishToMavenLocal
   publish-latex-builder:
     command: ./gradlew :latex-builder:publishToMavenLocal
   publish-lib-graph:
@@ -121,6 +124,7 @@ roadmap:
   - Comprehensive test suite with mathematical verification
   - Multi-platform Kotlin support (JVM, JS, Native)
   - Modular architecture with separate modules for different mathematical domains
+  - Discrete signal processing (convolution, correlation, DFT/FFT, windows, energy/RMS) with typed sampling
 related_projects:
 - Legion
 - CodeAtlas
