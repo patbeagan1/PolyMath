@@ -2,6 +2,10 @@
 
 A comprehensive mathematical DSL (Domain Specific Language) for Kotlin that lets you write mathematical expressions naturally and evaluate them or render them as LaTeX. PolyMath supports multiple fields of mathematics with an intuitive, type-safe API.
 
+## Roadmap and agent tasks
+
+Per-discipline, independently executable tasks (with acceptance checks) live under [docs/roadmap/README.md](docs/roadmap/README.md). Summary lines for monorepo tooling are listed in `project.meta.yaml` under `roadmap.todo`.
+
 ## 🚀 Quick Start
 
 ```kotlin

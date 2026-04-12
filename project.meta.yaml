@@ -12,8 +12,8 @@ tags:
 - unit-conversion
 - typesafe
 - library
-  - scientific-computing
-  - signal-processing
+- scientific-computing
+- signal-processing
 - education
 - research
 - engineering
@@ -78,38 +78,54 @@ scripts:
     command: ./gradlew :lib-graph:publishAllPublicationsToMavenCentralRepository
 roadmap:
   todo:
-  - Establish domain-driven design as the primary organizing principle for scientific coding—bounded contexts, ubiquitous language, aggregates, and anti-corruption layers between shared math kernels and domain-specific science code
-  - Make domain-centric scientific coding the default experience—APIs, types, and documentation should read in the vocabulary of each field so practitioners work with their own models, not generic math unless they choose to
-  - Cover all scientific domains systematically—grow first-class modules and examples across physics, chemistry, biology, earth and environmental science, astronomy, materials science, engineering disciplines, statistics, and emerging cross-disciplinary domains, not only classical mathematics
-  - Define repeatable patterns for new domains—scaffolding, naming, units, validation, and tests so each scientific area can evolve independently while staying consistent with shared physical and mathematical foundations
-  - Strengthen cross-domain consistency—dimensional analysis, unit algebra, and safe conversions when models combine quantities from multiple sciences in one program
-  - Ship reference domain models that showcase DDD layering (entities, value objects, domain services, factories) on top of PolyMath’s existing modular math and units stack
-  - Add support for complex number arithmetic and operations
-  - Implement symbolic differentiation and integration
-  - Add support for matrix operations and linear algebra
-  - Create interactive Jupyter notebook examples oriented toward domain workflows and reproducible science
-  - Add support for statistical distributions and probability
-  - Implement graph theory algorithms and visualizations
-  - Add support for differential equations
-  - Create web-based mathematical expression editor
-  - Add support for 3D geometry and spatial mathematics
-  - Implement numerical methods and approximations
-  - Add support for mathematical optimization
-  - Create educational tutorials and interactive examples
-  - Add support for mathematical proof verification
-  - Implement advanced LaTeX rendering with custom styles
-  - Add support for mathematical notation input (MathML, AsciiMath)
-  - Create mobile applications for mathematical calculations
-  - Add support for mathematical modeling and simulation
-  - Implement collaborative mathematical document editing
-  - Add support for mathematical data visualization
-  - Create integration with popular mathematical software (Mathematica, MATLAB)
-  - Improving unit conversion system with more measurement units
-  - Enhancing LaTeX rendering capabilities
-  - Export to typst
-  - Adding more comprehensive test coverage
-  - Optimizing performance for large mathematical expressions
-  - Improving documentation and examples with a domain-first narrative across scientific fields
+  - "Agent roadmap: per-discipline task subtrees under PolyMath/docs/roadmap/ — index PolyMath/docs/roadmap/README.md"
+  - "[FC-01] Document bounded-context map for each Gradle module (docs/architecture/bounded-contexts.md)"
+  - "[FC-02] Add ADR template and ADR 0002 on units/math boundary (docs/adr/)"
+  - "[FC-03] Add ubiquitous-language KDoc glossary for core DSL package (math-base)"
+  - "[FC-04] Add contributor checklist for new scientific domain module (CONTRIBUTING.md or docs/contributing/)"
+  - "[FC-05] Add DDD-style reference façade + tests in physics-classical"
+  - "[FC-06] Author dimensional-analysis sharp-edges doc with mitigations (docs/architecture/)"
+  - "[FC-07] Author new-domain scaffold pattern doc (docs/roadmap/patterns/new-domain-scaffold.md)"
+  - "[AC-01] Implement Complex type with core ops + tests (math-base or math-algebra)"
+  - "[AC-02] Implement symbolic derivative for agreed AST subset + tests (math-algebra)"
+  - "[AC-03] Implement symbolic antiderivative for same family + tests (math-algebra)"
+  - "[AC-04] Extend simplifier for one documented rule family + regression tests (math-algebra)"
+  - "[AC-05] Add rational arithmetic edge-case tests (math-base)"
+  - "[LN-01] Add Matrix2/Matrix3 (or fixed-size matrix) ops + tests (math-algebra)"
+  - "[LN-02] Add bisection root finder + tests (math-algebra or math-base util)"
+  - "[LN-03] Add golden-section 1D minimization + tests"
+  - "[LN-04] Add numeric derivative helper for tests or internal use"
+  - "[DE-01] Add scalar explicit Euler ODE step + exponential ODE test"
+  - "[DE-02] Add scalar RK4 step + error comparison vs Euler"
+  - "[ST-01] Add Normal distribution PDF (+ optional logPdf) + tests"
+  - "[ST-02] Add Bernoulli and Binomial PMF + tests"
+  - "[ST-03] Add DoubleArray descriptive stats helpers + tests (math-base)"
+  - "[GE-01] Add Vector3 with dot/cross/norm + tests (math-geometry)"
+  - "[GE-02] Add minimal quaternion or axis-angle rotation + tests (math-geometry)"
+  - "[GT-01] Re-enable lib-graph in settings.gradle.kts; fix configuration until :lib-graph:build passes"
+  - "[GT-02] Implement BFS shortest path on adjacency list + tests (lib-graph)"
+  - "[GT-03] Add Graphviz .dot string export for tiny graph + test (lib-graph)"
+  - "[UM-01] Run ./pm fix imports (or polymath_tool equivalent); verify units-common and units-data compile"
+  - "[UM-02] Add one new unit conversion pair + round-trip test (units-common)"
+  - "[UM-03] Audit units-data storage public API vs STORAGE_UNITS_SUMMARY.md"
+  - "[UM-04] Cross-link dimensional-analysis doc to key units interfaces"
+  - "[PH-01] Write next physics subdomain roadmap doc with agent-sized follow-ups"
+  - "[PH-02] Add one new closed-form physics formula type + tests (physics-classical)"
+  - "[PH-03] Author chemistry-module feasibility note (doc only)"
+  - "[SP-01] Add focused window-function tests (signal-processing)"
+  - "[SP-02] Add FFT round-trip smoke test or document deferral (signal-processing)"
+  - "[LX-01] Document LaTeX extension points (latex-builder README or docs)"
+  - "[LX-02] Add experimental Typst export for small expression subset + snapshot tests"
+  - "[LX-03] Add experimental MathML export for small subset + snapshot tests"
+  - "[NB-01] Add one Jupyter notebook section combining units + expressions"
+  - "[NB-02] Add domain-first workflow tutorial markdown under docs/tutorial/"
+  - "[NB-03] Add tutorial doc for stepwise explanation narrative (API or manual pattern)"
+  - "[PQ-01] Document test/build/pm commands in PolyMath README (Quality section)"
+  - "[PQ-02] Add non-flaky timing smoke test or benchmark note for deep expressions"
+  - "[PQ-03] Add static HTML KaTeX spike for rendered LaTeX under docs/spikes/"
+  - "[PQ-04] Author proof-verification scope note with property-test stepping stones"
+  - "[PQ-05] Add CAS export string formatter stub + tests (Kotlin or polymath_tool)"
+  - "[PQ-06] Produce test coverage triage doc for weakest packages"
   in_progress:
   done:
   - Core mathematical DSL implementation with type-safe operations
