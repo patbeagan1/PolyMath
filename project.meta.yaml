@@ -78,10 +78,16 @@ scripts:
     command: ./gradlew :lib-graph:publishAllPublicationsToMavenCentralRepository
 roadmap:
   todo:
+  - Establish domain-driven design as the primary organizing principle for scientific coding—bounded contexts, ubiquitous language, aggregates, and anti-corruption layers between shared math kernels and domain-specific science code
+  - Make domain-centric scientific coding the default experience—APIs, types, and documentation should read in the vocabulary of each field so practitioners work with their own models, not generic math unless they choose to
+  - Cover all scientific domains systematically—grow first-class modules and examples across physics, chemistry, biology, earth and environmental science, astronomy, materials science, engineering disciplines, statistics, and emerging cross-disciplinary domains, not only classical mathematics
+  - Define repeatable patterns for new domains—scaffolding, naming, units, validation, and tests so each scientific area can evolve independently while staying consistent with shared physical and mathematical foundations
+  - Strengthen cross-domain consistency—dimensional analysis, unit algebra, and safe conversions when models combine quantities from multiple sciences in one program
+  - Ship reference domain models that showcase DDD layering (entities, value objects, domain services, factories) on top of PolyMath’s existing modular math and units stack
   - Add support for complex number arithmetic and operations
   - Implement symbolic differentiation and integration
   - Add support for matrix operations and linear algebra
-  - Create interactive Jupyter notebook examples
+  - Create interactive Jupyter notebook examples oriented toward domain workflows and reproducible science
   - Add support for statistical distributions and probability
   - Implement graph theory algorithms and visualizations
   - Add support for differential equations
@@ -103,7 +109,7 @@ roadmap:
   - Export to typst
   - Adding more comprehensive test coverage
   - Optimizing performance for large mathematical expressions
-  - Improving documentation and examples
+  - Improving documentation and examples with a domain-first narrative across scientific fields
   in_progress:
   done:
   - Core mathematical DSL implementation with type-safe operations
