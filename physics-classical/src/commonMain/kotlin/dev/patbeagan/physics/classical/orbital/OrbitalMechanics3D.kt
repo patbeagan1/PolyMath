@@ -7,6 +7,9 @@ import kotlin.math.sqrt
 /**
  * Minimal 3D orbital mechanics primitives (two-body gravity + RK4 integration).
  *
+ * For mutual Newtonian attraction between multiple massive bodies (and optional massless tracers),
+ * see [ManyBodyGravity3D].
+ *
  * This intentionally keeps "geometry" as the source of positions ([Point3D]) and provides a small
  * vector type for velocities/accelerations.
  */
