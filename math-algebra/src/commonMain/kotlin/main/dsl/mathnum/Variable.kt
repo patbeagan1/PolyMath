@@ -29,7 +29,7 @@ data class Variable(
         if (value != Scalar.Undefined) {
             append(toLatex())
             append(" = ")
-            append(value.toString())
+            append(value.toLatex())
             if (name != null) {
                 append(" ($name)")
             }

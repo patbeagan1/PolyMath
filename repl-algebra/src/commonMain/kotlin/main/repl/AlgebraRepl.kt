@@ -1,11 +1,13 @@
 package main.repl
 
+import dev.patbeagan.math.base.ExperimentalMathDSL
 import main.dsl.expressions.ScalarExpression
 import main.dsl.simplify
 
 /**
  * REPL for polymath algebra that can visualize, modify, and simplify expressions.
  */
+@OptIn(ExperimentalMathDSL::class)
 class AlgebraRepl {
     private var currentExpression: ScalarExpression? = null
     private val variables = mutableMapOf<String, Double>()
@@ -199,25 +201,25 @@ class AlgebraRepl {
             }
             is main.dsl.expressions.ScalarAlgebra.Cos -> {
                 buildString {
-                    appendLine("$indentcos")
+                    appendLine("$indent cos")
                     appendLine(treeToString(expr.operand, "$indent  └─ "))
                 }
             }
             is main.dsl.expressions.ScalarAlgebra.Tan -> {
                 buildString {
-                    appendLine("$indenttan")
+                    appendLine("$indent tan")
                     appendLine(treeToString(expr.operand, "$indent  └─ "))
                 }
             }
             is main.dsl.expressions.ScalarAlgebra.Ln -> {
                 buildString {
-                    appendLine("$indentln")
+                    appendLine("$indent ln")
                     appendLine(treeToString(expr.operand, "$indent  └─ "))
                 }
             }
             is main.dsl.expressions.ScalarAlgebra.Exp -> {
                 buildString {
-                    appendLine("$indentexp")
+                    appendLine("$indent exp")
                     appendLine(treeToString(expr.operand, "$indent  └─ "))
                 }
             }

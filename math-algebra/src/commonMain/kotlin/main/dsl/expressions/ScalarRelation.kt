@@ -3,6 +3,19 @@ package main.dsl.expressions
 import main.dsl.expressions.ScalarAlgebra.*
 import main.dsl.orderCanonically
 import kotlin.math.abs
+import kotlin.math.round
+
+private fun Pair<Double, Double>.toExplainYieldString(): String {
+    fun fmt(d: Double): String = when {
+        d.isNaN() -> "NaN"
+        d.isInfinite() -> d.toString()
+        abs(d - round(d)) < 1e-9 && abs(d) < Long.MAX_VALUE.toDouble() ->
+            "${d.toLong()}.0"
+
+        else -> d.toString()
+    }
+    return "(${fmt(first)}, ${fmt(second)})"
+}
 
 fun ScalarRelation<*>.toGraphviz(): String {
     val eqLeft = left.toGraphviz()
@@ -49,7 +62,7 @@ sealed interface ScalarRelation<T> {
             append("\n\n")
             append(toLatex())
             append("\n\nyields ")
-            append("${evaluate()}")
+            append(evaluate().toExplainYieldString())
         }
     }
 

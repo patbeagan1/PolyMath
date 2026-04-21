@@ -56,7 +56,8 @@ class SignalProcessingTest {
         val y = doubleArrayOf(0.0, 1.0, 0.0)
         val r = CrossCorrelation.full(x, y)
         val maxIdx = r.indices.maxBy { r[it] }
-        assertEquals(3, maxIdx)
+        // Lag index k = (m-1) + ℓ with ℓ = -1 aligns x's impulse (index 2) with y's peak (index 1).
+        assertEquals(1, maxIdx)
     }
 
     @Test

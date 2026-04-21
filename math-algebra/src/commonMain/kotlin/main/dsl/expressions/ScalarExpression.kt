@@ -105,6 +105,11 @@ interface ScalarExpression : GenericSymbols {
         parent: ScalarExpression,
         position: Position = Position.NotApplicable
     ): String = when {
+        parent is ScalarAlgebra.Exponent &&
+            position == Position.Base &&
+            this is ScalarAlgebra.Exponent ->
+            "(${toLatex()})"
+
         this.priority < parent.priority -> {
             // items listed here have inverted priorities
             // they need to happen out of the standard PEMDAS order of operations.
@@ -147,6 +152,11 @@ interface ScalarExpression : GenericSymbols {
         parent: ScalarExpression,
         position: Position = Position.NotApplicable
     ): String = when {
+        parent is ScalarAlgebra.Exponent &&
+            position == Position.Base &&
+            this is ScalarAlgebra.Exponent ->
+            "(${toTypst()})"
+
         this.priority < parent.priority -> {
             // items listed here have inverted priorities
             // they need to happen out of the standard PEMDAS order of operations.

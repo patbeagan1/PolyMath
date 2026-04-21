@@ -29,13 +29,6 @@ kotlin {
             }
         }
         nodejs()
-        
-        compilations.all {
-            kotlinOptions {
-                moduleKind = "umd"
-                sourceMap = true
-            }
-        }
     }
     
     linuxX64()

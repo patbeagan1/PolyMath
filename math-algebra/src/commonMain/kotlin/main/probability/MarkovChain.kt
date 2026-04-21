@@ -31,7 +31,7 @@ class MarkovChain(
         requireProbabilityVector(initial)
         require(initial.size == size) { "initial length ${initial.size} != $size" }
         require(steps >= 0) { "steps must be non-negative" }
-        var mu = initial.clone()
+        var mu = initial.copyOf()
         repeat(steps) {
             mu = rowTimesMatrix(mu, transition)
         }

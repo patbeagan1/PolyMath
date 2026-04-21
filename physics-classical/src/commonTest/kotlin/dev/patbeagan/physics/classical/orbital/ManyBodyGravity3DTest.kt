@@ -157,7 +157,7 @@ class ManyBodyGravity3DTest {
         val dvz = sat.velocityMps.z - ref.velocityMps.z
         val velErr = sqrt(dvx * dvx + dvy * dvy + dvz * dvz)
 
-        assertTrue(posErr < 1_000.0, "Position vs two-body ref should match RK4; err=${"%.1f".format(posErr)} m")
-        assertTrue(velErr < 1.0, "Velocity vs two-body ref should match RK4; err=${"%.4f".format(velErr)} m/s")
+        assertTrue(posErr < 1_000.0, "Position vs two-body ref should match RK4; err=$posErr m")
+        assertTrue(velErr < 1.0, "Velocity vs two-body ref should match RK4; err=$velErr m/s")
     }
 }

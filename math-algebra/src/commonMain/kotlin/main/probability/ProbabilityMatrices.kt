@@ -70,7 +70,7 @@ internal fun matrixPower(p: Array<DoubleArray>, n: Int): Array<DoubleArray> {
     if (n == 0) {
         return Array(size) { i -> DoubleArray(size) { j -> if (i == j) 1.0 else 0.0 } }
     }
-    var result = Array(size) { i -> p[i].clone() }
+    var result = Array(size) { i -> p[i].copyOf() }
     repeat(n - 1) {
         result = matrixMultiply(result, p)
     }

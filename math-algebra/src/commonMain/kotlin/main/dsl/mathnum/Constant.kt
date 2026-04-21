@@ -18,7 +18,7 @@ data class Constant(
         if (value != Scalar.Undefined) {
             append(glyph)
             append(" = ")
-            append(value.toString())
+            append(value.toLatex())
             if (name != null) {
                 append(" ($name)")
             }
