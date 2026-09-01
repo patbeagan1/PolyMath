@@ -6,8 +6,8 @@ plugins {
     application
     id("com.github.ben-manes.versions") version "0.53.0"
     id("org.jlleitschuh.gradle.ktlint") version "13.1.0"
-    id("io.gitlab.arturbosch.detekt") version "1.23.8"
-    id("org.jetbrains.kotlin.multiplatform") version "2.1.21" apply false
+    id("dev.detekt") version "2.0.0-alpha.6"
+    id("org.jetbrains.kotlin.multiplatform") version "2.4.10" apply false
     id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.18.1" apply false
     id("com.vanniktech.maven.publish") version "0.32.0" apply false
 }
@@ -52,6 +52,7 @@ ktlint {
 
 // Detekt configuration
 detekt {
+    toolVersion = "2.0.0-alpha.6"
     buildUponDefaultConfig = true
     allRules = false
     config.setFrom("$projectDir/detekt.yml")

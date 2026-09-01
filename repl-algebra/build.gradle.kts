@@ -20,7 +20,7 @@ kotlin {
         }
     }
     
-    js(IR) {
+    js {
         browser {
             commonWebpackConfig {
                 cssSupport {
@@ -36,7 +36,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(kotlin("stdlib"))
-            api(projects.mathAlgebra)
+            api(project(":math-algebra"))
         }
         
         commonTest.dependencies {
