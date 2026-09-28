@@ -22,13 +22,14 @@ data class Variable(
     fun standsFor(expression: ScalarExpression) = setTo(expression.evaluate()) isEqualTo expression
 
     override fun toLatex() = if (instance == null) glyph else "${glyph}_${instance}"
+    override fun toTypst() = if (instance == null) glyph else "${glyph}_${instance}"
     override fun evaluate(): Double = value.evaluate()
 
     override fun display() = buildString {
         if (value != Scalar.Undefined) {
             append(toLatex())
             append(" = ")
-            append(value.toString())
+            append(value.toLatex())
             if (name != null) {
                 append(" ($name)")
             }

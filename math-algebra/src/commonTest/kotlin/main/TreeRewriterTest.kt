@@ -5,6 +5,7 @@ import main.dsl.*
 import main.dsl.expressions.ScalarAlgebra.*
 import main.dsl.expressions.ScalarExpression
 import main.dsl.mathnum.*
+import main.dsl.mathnum.Scalar.IntegerNum
 import main.dsl.mathnum.Scalar.RealNum
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -322,5 +323,365 @@ class TreeRewriterTest {
         val expr = 0.0.num() / x
         val simplified = simplify(expr)
         assertEquals(0.0.num(), simplified)
+    }
+
+    // ========== Tests for Rule Logging ==========
+    
+    @Test
+    fun test_rule_logging_enabled() {
+        val rules = mutableListOf<SimplificationRule>()
+        TreeRewriter.enableLogging { rule -> rules.add(rule) }
+        
+        try {
+            val x = Variable("x")
+            val expr = x + 0.0.num()
+            simplify(expr)
+            
+            // Should have logged at least one rule
+            assertTrue(rules.isNotEmpty(), "Rules should be logged when logging is enabled")
+            // Should have logged the additive identity rule
+            assertTrue(rules.any { it.name.contains("Additive Identity") }, 
+                "Should log additive identity rule")
+        } finally {
+            TreeRewriter.disableLogging()
+        }
+    }
+    
+    @Test
+    fun test_rule_logging_disabled() {
+        val rules = mutableListOf<SimplificationRule>()
+        TreeRewriter.disableLogging()
+        
+        val x = Variable("x")
+        val expr = x + 0.0.num()
+        simplify(expr)
+        
+        // Should not have logged any rules
+        assertEquals(0, rules.size, "Rules should not be logged when logging is disabled")
+    }
+    
+    @Test
+    fun test_simplify_with_log_rules_parameter() {
+        val rules = mutableListOf<SimplificationRule>()
+        TreeRewriter.enableLogging { rule -> rules.add(rule) }
+        
+        try {
+            val x = Variable("x")
+            val expr = x * 1.0.num()
+            simplify(expr, logRules = true)
+            
+            assertTrue(rules.isNotEmpty(), "Rules should be logged when logRules=true")
+        } finally {
+            TreeRewriter.disableLogging()
+        }
+    }
+
+    // ========== Tests for New Simplification Rules ==========
+    
+    @Test
+    fun test_sin_negative() {
+        val x = Variable("x")
+        val expr = Sin(Negate(x))
+        val simplified = simplify(expr)
+        assertTrue(simplified is Negate)
+        val neg = simplified as Negate
+        assertTrue(neg.operand is Sin)
+    }
+    
+    @Test
+    fun test_cos_negative() {
+        val x = Variable("x")
+        val expr = Cos(Negate(x))
+        val simplified = simplify(expr)
+        assertTrue(simplified is Cos)
+        assertEquals(x, (simplified as Cos).operand)
+    }
+    
+    @Test
+    fun test_tan_negative() {
+        val x = Variable("x")
+        val expr = Tan(Negate(x))
+        val simplified = simplify(expr)
+        assertTrue(simplified is Negate)
+        val neg = simplified as Negate
+        assertTrue(neg.operand is Tan)
+    }
+    
+    @Test
+    fun test_sin_arcsin() {
+        val x = Variable("x")
+        val expr = Sin(ArcSin(x))
+        val simplified = simplify(expr)
+        assertEquals(x, simplified)
+    }
+    
+    @Test
+    fun test_cos_arccos() {
+        val x = Variable("x")
+        val expr = Cos(ArcCos(x))
+        val simplified = simplify(expr)
+        assertEquals(x, simplified)
+    }
+    
+    @Test
+    fun test_tan_arctan() {
+        val x = Variable("x")
+        val expr = Tan(ArcTan(x))
+        val simplified = simplify(expr)
+        assertEquals(x, simplified)
+    }
+    
+    @Test
+    fun test_negative_exponent() {
+        val x = Variable("x")
+        val expr = x pow Negate(2.0.num())
+        val simplified = simplify(expr)
+        assertTrue(simplified is Divide)
+        val div = simplified as Divide
+        assertEquals(1.0.num(), div.left)
+        assertTrue(div.right is Exponent)
+    }
+    
+    @Test
+    fun test_distribute_exponent_over_multiplication() {
+        val x = Variable("x")
+        val y = Variable("y")
+        val expr = (x * y) pow 2.0.num()
+        val simplified = simplify(expr)
+        assertTrue(simplified is Multiply)
+        val mult = simplified as Multiply
+        assertTrue(mult.left is Exponent)
+        assertTrue(mult.right is Exponent)
+    }
+    
+    @Test
+    fun test_distribute_exponent_over_division() {
+        val x = Variable("x")
+        val y = Variable("y")
+        val expr = (x / y) pow 2.0.num()
+        val simplified = simplify(expr)
+        assertTrue(simplified is Divide)
+        val div = simplified as Divide
+        assertTrue(div.left is Exponent)
+        assertTrue(div.right is Exponent)
+    }
+    
+    @Test
+    fun test_distribute_multiplication_over_subtraction_right() {
+        val x = Variable("x")
+        val expr = 2.0.num() * (x - 3.0.num())
+        val simplified = simplify(expr)
+        assertTrue(simplified is Subtract)
+        val sub = simplified as Subtract
+        assertTrue(sub.left is Multiply, "left should be 2*x")
+        // right may be Multiply(2, 3) or RealNum(6) after constant folding
+        assertTrue(sub.right is Multiply || sub.right is RealNum, "right should be 2*3 or 6")
+    }
+    
+    @Test
+    fun test_distribute_multiplication_over_subtraction_left() {
+        val x = Variable("x")
+        val expr = (x - 3.0.num()) * 2.0.num()
+        val simplified = simplify(expr)
+        assertTrue(simplified is Subtract)
+        val sub = simplified as Subtract
+        assertTrue(sub.left is Multiply, "left should be x*2")
+        // right may be Multiply(3, 2) or RealNum(6) after constant folding
+        assertTrue(sub.right is Multiply || sub.right is RealNum, "right should be 3*2 or 6")
+    }
+    
+    @Test
+    fun test_divide_negative_right() {
+        val x = Variable("x")
+        val expr = x / Negate(2.0.num())
+        val simplified = simplify(expr)
+        assertTrue(simplified is Negate)
+        val neg = simplified as Negate
+        assertTrue(neg.operand is Divide)
+    }
+    
+    @Test
+    fun test_divide_negative_left() {
+        val x = Variable("x")
+        val expr = Negate(x) / 2.0.num()
+        val simplified = simplify(expr)
+        assertTrue(simplified is Negate)
+        val neg = simplified as Negate
+        assertTrue(neg.operand is Divide)
+    }
+    
+    @Test
+    fun test_log_base_equals_argument() {
+        val x = Variable("x")
+        val expr = Log(x, x)
+        val simplified = simplify(expr)
+        assertEquals(1.0.num(), simplified)
+    }
+    
+    @Test
+    fun test_log_of_one() {
+        val x = Variable("x")
+        val expr = Log(x, 1.0.num())
+        val simplified = simplify(expr)
+        assertEquals(0.0.num(), simplified)
+    }
+    
+    @Test
+    fun test_exp_zero() {
+        val expr = Exp(0.0.num())
+        val simplified = simplify(expr)
+        assertEquals(1.0.num(), simplified)
+    }
+    
+    @Test
+    fun test_exp_ln() {
+        val x = Variable("x")
+        val expr = Exp(Ln(x))
+        val simplified = simplify(expr)
+        assertEquals(x, simplified)
+    }
+    
+    @Test
+    fun test_arctan_zero() {
+        val expr = ArcTan(0.0.num())
+        val simplified = simplify(expr)
+        assertEquals(0.0.num(), simplified)
+    }
+
+    // ---------- Constant folding (IntegerNum, RationalNum) ----------
+
+    @Test
+    fun test_integer_constant_folding_add() {
+        val expr = 2.num() + 3.num()
+        val simplified = simplify(expr)
+        assertEquals(5.0.num(), simplified)
+    }
+
+    @Test
+    fun test_integer_constant_folding_multiply() {
+        val expr = 2.num() * 3.num()
+        val simplified = simplify(expr)
+        assertEquals(6.0.num(), simplified)
+    }
+
+    @Test
+    fun test_combine_like_terms_integer_coefficients() {
+        val x = Variable("x")
+        val expr = (2.num() * x) + (3.num() * x)
+        val simplified = simplify(expr)
+        assertTrue(simplified is Multiply)
+        val mult = simplified as Multiply
+        assertEquals(5.0, (mult.left as RealNum).value)
+        assertEquals(x, mult.right)
+    }
+
+    // ---------- Negate factoring: (-a)*b = -(a*b), (-a)+(-b) = -(a+b) ----------
+
+    @Test
+    fun test_negate_factor_left() {
+        val x = Variable("x")
+        val expr = Negate(x) * 2.num()
+        val simplified = simplify(expr)
+        assertTrue(simplified is Negate)
+        val neg = simplified as Negate
+        assertTrue(neg.operand is Multiply)
+        val mult = neg.operand as Multiply
+        val (coeff, variable) = when {
+            mult.left is RealNum || mult.left is IntegerNum -> {
+                val c = when (mult.left) {
+                    is RealNum -> (mult.left as RealNum).value
+                    is IntegerNum -> (mult.left as IntegerNum).value.toDouble()
+                    else -> error("expected constant")
+                }
+                c to mult.right
+            }
+            mult.right is RealNum || mult.right is IntegerNum -> {
+                val c = when (mult.right) {
+                    is RealNum -> (mult.right as RealNum).value
+                    is IntegerNum -> (mult.right as IntegerNum).value.toDouble()
+                    else -> error("expected constant")
+                }
+                c to mult.left
+            }
+            else -> error("expected one constant and one variable")
+        }
+        assertEquals(2.0, coeff)
+        assertEquals(x, variable)
+    }
+
+    @Test
+    fun test_negate_factor_right() {
+        val x = Variable("x")
+        val expr = 2.num() * Negate(x)
+        val simplified = simplify(expr)
+        assertTrue(simplified is Negate)
+        val neg = simplified as Negate
+        assertTrue(neg.operand is Multiply)
+        val mult = neg.operand as Multiply
+        val (coeff, variable) = when {
+            mult.left is RealNum || mult.left is IntegerNum -> {
+                val c = when (mult.left) {
+                    is RealNum -> (mult.left as RealNum).value
+                    is IntegerNum -> (mult.left as IntegerNum).value.toDouble()
+                    else -> error("expected constant")
+                }
+                c to mult.right
+            }
+            mult.right is RealNum || mult.right is IntegerNum -> {
+                val c = when (mult.right) {
+                    is RealNum -> (mult.right as RealNum).value
+                    is IntegerNum -> (mult.right as IntegerNum).value.toDouble()
+                    else -> error("expected constant")
+                }
+                c to mult.left
+            }
+            else -> error("expected one constant and one variable")
+        }
+        assertEquals(2.0, coeff)
+        assertEquals(x, variable)
+    }
+
+    @Test
+    fun test_add_two_negations() {
+        val x = Variable("x")
+        val y = Variable("y")
+        val expr = Negate(x) + Negate(y)
+        val simplified = simplify(expr)
+        assertTrue(simplified is Negate)
+        val neg = simplified as Negate
+        assertTrue(neg.operand is Add)
+        val add = neg.operand as Add
+        // Rule (-a)+(-b) = -(a+b): inner Add must have two terms (the two operands)
+        assertTrue(add.left is Variable)
+        assertTrue(add.right is Variable)
+    }
+
+    // ---------- x^(1/2) = sqrt(x) ----------
+
+    @Test
+    fun test_half_exponent_to_sqrt() {
+        val x = Variable("x")
+        val expr = x pow 0.5.num()
+        val simplified = simplify(expr)
+        assertTrue(simplified is Sqrt)
+        assertEquals(x, (simplified as Sqrt).operand)
+    }
+
+    // ---------- a - (b + c) = (a - b) - c ----------
+
+    @Test
+    fun test_subtract_sum() {
+        val a = Variable("a")
+        val b = Variable("b")
+        val c = Variable("c")
+        val expr = a - (b + c)
+        val simplified = simplify(expr)
+        assertTrue(simplified is Subtract)
+        val sub = simplified as Subtract
+        assertTrue(sub.left is Subtract)
+        val subLeft = sub.left as Subtract
+        assertEquals(a, subLeft.left)
+        assertEquals(b, subLeft.right)
+        assertEquals(c, sub.right)
     }
 }

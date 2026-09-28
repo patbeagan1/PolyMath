@@ -19,14 +19,14 @@ kotlin {
             useJUnitPlatform()
         }
     }
-    js(IR).nodejs()
+    js().nodejs()
     linuxX64()
 
     sourceSets {
         commonMain.dependencies {
             implementation(kotlin("stdlib"))
             implementation(kotlin("test"))
-            api(projects.mathBase)
+            api(project(":math-base"))
         }
     }
 }

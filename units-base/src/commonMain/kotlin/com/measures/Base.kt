@@ -5,7 +5,7 @@ interface DoubleBase {
 }
 
 interface BaseUnit : DoubleBase {
-    fun <D1 : DoubleBase, D2 : DoubleBase, U : UnitType<D1, D2>> toUnitInternal(unit: U): D1 =
+    fun <D1 : DoubleBase, D2 : BaseUnit, U : UnitType<D1, D2>> toUnitInternal(unit: U): D1 =
         unit.asType(this.value / unit.asBaseUnit().value)
 }
 
@@ -14,8 +14,8 @@ interface UnitType<T : DoubleBase, S : BaseUnit> : DoubleBase {
     fun asType(d: Double): T
     fun <
             D1 : DoubleBase,
-            D2 : DoubleBase,
-            U : UnitType<D1, D2>
+            D2 : BaseUnit,
+            U : UnitType<D1, D2>,
             > toUnit(unit: U): D1 = asBaseUnit().toUnitInternal(unit)
 }
 

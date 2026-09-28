@@ -7,12 +7,14 @@ sealed interface Scalar : MathNum {
     data object Undefined : Scalar {
         override fun evaluate(): Double = Double.NaN
         override fun toLatex(): String = "Undefined"
+        override fun toTypst(): String = "Undefined"
     }
 
     @JvmInline
     value class RealNum(val value: Double) : Scalar {
         override fun evaluate(): Double = value
         override fun toLatex(): String = if (value.toString().endsWith(".0")) "${value.toInt()}" else "$value"
+        override fun toTypst(): String = if (value.toString().endsWith(".0")) "${value.toInt()}" else "$value"
         override fun toString(): String = value.toString()
     }
 
@@ -56,6 +58,7 @@ sealed interface Scalar : MathNum {
 
         override fun evaluate(): Double = numerator.toDouble() / denominator
         override fun toLatex(): String = if (denominator == 1L) "$numerator" else "\\frac{$numerator}{$denominator}"
+        override fun toTypst(): String = if (denominator == 1L) "$numerator" else "frac($numerator, $denominator)"
         fun toLatexSimple(): String = if (denominator == 1L) "$numerator" else "$numerator/$denominator"
 
         override fun equals(other: Any?): Boolean = when (other) {
@@ -85,6 +88,7 @@ sealed interface Scalar : MathNum {
         operator fun div(other: IntegerNum): RationalNum = RationalNum(this.value, other.value)
         override fun evaluate(): Double = value.toDouble()
         override fun toLatex(): String = value.toString()
+        override fun toTypst(): String = value.toString()
         override fun toString(): String = value.toString()
     }
 }

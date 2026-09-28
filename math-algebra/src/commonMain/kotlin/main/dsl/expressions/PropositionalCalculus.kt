@@ -30,6 +30,7 @@ interface PropositionalCalculus {
         override val priority: Priority = Priority.And
         override fun evaluate(): Boolean = left.evaluate() && right.evaluate()
         override fun toLatex(): String = "${left.toLatexPriority(this)} \\land ${right.toLatexPriority(this)}"
+        override fun toTypst(): String = "${left.toTypstPriority(this)} and ${right.toTypstPriority(this)}"
     }
 
     class Not(
@@ -38,6 +39,7 @@ interface PropositionalCalculus {
         override val priority: Priority = Priority.Not
         override fun evaluate(): Boolean = operand.evaluate().not()
         override fun toLatex(): String = "\\neg ${operand.toLatexPriority(this)}"
+        override fun toTypst(): String = "not ${operand.toTypstPriority(this)}"
     }
 
     class Or(
@@ -47,6 +49,7 @@ interface PropositionalCalculus {
         override val priority: Priority = Priority.Or
         override fun evaluate(): Boolean = left.evaluate() || right.evaluate()
         override fun toLatex(): String = "${left.toLatexPriority(this)} \\lor ${right.toLatexPriority(this)}"
+        override fun toTypst(): String = "${left.toTypstPriority(this)} or ${right.toTypstPriority(this)}"
     }
 
     class Xor(
@@ -56,6 +59,7 @@ interface PropositionalCalculus {
         override val priority: Priority = Priority.Xor
         override fun evaluate(): Boolean = left.evaluate().xor(right.evaluate())
         override fun toLatex(): String = "${left.toLatexPriority(this)} \\oplus ${right.toLatexPriority(this)}"
+        override fun toTypst(): String = "${left.toTypstPriority(this)} xor ${right.toTypstPriority(this)}"
     }
 
     class Nand(
@@ -65,6 +69,7 @@ interface PropositionalCalculus {
         override val priority: Priority = Priority.Not
         override fun evaluate(): Boolean = left.evaluate().and(right.evaluate()).not()
         override fun toLatex(): String = "\neg (${left.toLatexPriority(this)} \\land ${right.toLatexPriority(this)})"
+        override fun toTypst(): String = "not (${left.toTypstPriority(this)} and ${right.toTypstPriority(this)})"
     }
 
     class Implies(
@@ -74,6 +79,7 @@ interface PropositionalCalculus {
         override val priority: Priority = Priority.Other
         override fun evaluate(): Boolean = left.evaluate().and(right.evaluate().not())
         override fun toLatex(): String = "${left.toLatexPriority(this)} \\implies ${right.toLatexPriority(this)}"
+        override fun toTypst(): String = "${left.toTypstPriority(this)} => ${right.toTypstPriority(this)}"
     }
    class Equivalence(
         override val left: BooleanExpression,
@@ -82,6 +88,7 @@ interface PropositionalCalculus {
         override val priority: Priority = Priority.Other
         override fun evaluate(): Boolean = left.evaluate()== right.evaluate()
         override fun toLatex(): String = "${left.toLatexPriority(this)} \\implies ${right.toLatexPriority(this)}"
+        override fun toTypst(): String = "${left.toTypstPriority(this)} <=> ${right.toTypstPriority(this)}"
     }
 
     class Fact(
@@ -92,12 +99,14 @@ interface PropositionalCalculus {
         override val priority: Priority = Priority.Value
         override fun evaluate(): Boolean = value
         override fun toLatex(): String = glyph
+        override fun toTypst(): String = glyph
     }
 
     sealed interface BooleanExpression : GenericSymbols {
         val priority: Priority
         fun evaluate(): Boolean
         fun toLatex(): String
+        fun toTypst(): String
 
         fun BooleanExpression.toLatexPriority(
             parent: BooleanExpression,
@@ -111,6 +120,20 @@ interface PropositionalCalculus {
             }
 
             else -> toLatex()
+        }
+        
+        fun BooleanExpression.toTypstPriority(
+            parent: BooleanExpression,
+            position: Position = Position.NotApplicable
+        ): String = when {
+            this.priority < parent.priority -> {
+                // items listed here have inverted priorities
+                when (parent.priority) {
+                    else -> "(${toTypst()})"
+                }
+            }
+
+            else -> toTypst()
         }
 
         enum class Position {

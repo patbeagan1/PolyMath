@@ -18,7 +18,7 @@ kotlin {
             useJUnitPlatform()
         }
     }
-    js(IR).nodejs()
+    js().nodejs()
     linuxX64()
 
     sourceSets {

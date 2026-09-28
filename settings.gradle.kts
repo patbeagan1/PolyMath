@@ -6,10 +6,8 @@ pluginManagement {
 }
 
 plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
-
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "tex-builder"
 
@@ -18,7 +16,9 @@ include(":math-base")
 include(":math-algebra")
 include(":math-geometry")
 include(":physics-classical")
+include(":signal-processing")
 include(":units-base")
 include(":units-common")
 include(":units-data")
 include(":latex-builder")
+include(":repl-algebra")

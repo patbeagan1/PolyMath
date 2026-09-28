@@ -106,7 +106,7 @@ class UnitConversionTests {
         val footBase = surveyFoot.asBaseUnit()
         val mileBase = surveyMile.asBaseUnit()
 
-        assertEquals(false, footBase.value > 0)
+        assertEquals(true, footBase.value > 0)
         assertEquals(true, mileBase.value > 0)
     }
 

@@ -17,16 +17,16 @@ kotlin {
             useJUnitPlatform()
         }
     }
-    js(IR).nodejs()
+    js().nodejs()
     linuxX64()
 
     sourceSets {
         commonMain.dependencies {
             implementation(kotlin("test"))
-            api(projects.unitsBase)
-            api(projects.mathAlgebra)
-            api(projects.mathGeometry)
-            api(projects.physicsClassical)
+            api(project(":units-base"))
+            api(project(":math-algebra"))
+            api(project(":math-geometry"))
+            api(project(":physics-classical"))
         }
     }
 }

@@ -201,7 +201,7 @@ class ArithmeticDSLTest : ColorPlaceholders {
 
     @Test
     fun equations_walk() {
-        val expr = Add(Multiply(mathNum(5), mathNum(3)), Subtract(mathNum(2.0), mathNum(1)))
+        val expr = Add(Multiply(mathNum(5), mathNum(3)), Subtract(mathNum(2), mathNum(1)))
         val e = Equation(Variable("x"), expr)
             .applyOperation { Add(it, mathNum(5)) }
             .applyOperation { Subtract(it, mathNum(5)) }
@@ -210,7 +210,7 @@ class ArithmeticDSLTest : ColorPlaceholders {
         e.walk { l.add(it.toString()) }
 
         assertEquals(
-            """[Subtract(left=Add(left=Variable(glyph=x, value=Undefined, name=null, instance=null, isBound=false), right=5), right=5), Add(left=Variable(glyph=x, value=Undefined, name=null, instance=null, isBound=false), right=5), Variable(glyph=x, value=Undefined, name=null, instance=null, isBound=false), 5, 5, Subtract(left=Add(left=Add(left=Multiply(left=5, right=3), right=Subtract(left=2.0, right=1)), right=5), right=5), Add(left=Add(left=Multiply(left=5, right=3), right=Subtract(left=2.0, right=1)), right=5), Add(left=Multiply(left=5, right=3), right=Subtract(left=2.0, right=1)), Multiply(left=5, right=3), 5, 3, Subtract(left=2.0, right=1), 2.0, 1, 5, 5]""",
+            """[Subtract(left=Add(left=Variable(glyph=x, value=Undefined, name=null, instance=null, isBound=false), right=5), right=5), Add(left=Variable(glyph=x, value=Undefined, name=null, instance=null, isBound=false), right=5), Variable(glyph=x, value=Undefined, name=null, instance=null, isBound=false), 5, 5, Subtract(left=Add(left=Add(left=Multiply(left=5, right=3), right=Subtract(left=2, right=1)), right=5), right=5), Add(left=Add(left=Multiply(left=5, right=3), right=Subtract(left=2, right=1)), right=5), Add(left=Multiply(left=5, right=3), right=Subtract(left=2, right=1)), Multiply(left=5, right=3), 5, 3, Subtract(left=2, right=1), 2, 1, 5, 5]""",
             l.toString()
         )
     }
@@ -323,7 +323,7 @@ yields (1296.0, 1296.0)""", equation.explain()
         val s = subject()
         assertEquals(
             """Given
-b = 10.0
+b = 10
 a is undefined
 
 a \cdot b^{2} = NaN
@@ -370,7 +370,7 @@ yields (200.0, 200.0)""", s.equate().explain()
             .let(::simplify)
             .also(::println)
 
-        assertEquals("6 + 5 \\cdot x + 1", s.toLatex())
+        assertEquals("8 + 5 \\cdot x - 1", s.toLatex())
     }
 
     @Test
@@ -404,10 +404,10 @@ yields (216.0, 216.0)""", e.explain()
 
         assertEquals(
             """Given
-T = -0.6973133301810529
-\phi = 3.0
 \pi = 3.14
 e = 2.71
+T = -0.6973133301810529
+\phi = 3
 
 T = \frac{1}{(\sqrt{\phi \cdot \sqrt{5}} - \phi) \cdot e^{\frac{2}{5} \cdot \pi}}
 
